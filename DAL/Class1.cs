@@ -1,7 +1,6 @@
 ﻿using System;
 
-namespace DAL
-{
+
     namespace IDAL
     {
         namespace DO
@@ -12,4 +11,4 @@ namespace DAL
             }
         }
     }
-}
+

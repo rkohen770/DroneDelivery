@@ -1,12 +1,20 @@
 ﻿using System;
-
+using IDAL.DO;
+using DalObject;
+using System.Collections.Generic;
 namespace ConsoleUI
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Menu();
+        }
+
+        private static void Menu()
+        {
+            
+            throw new NotImplementedException();
         }
     }
 }
