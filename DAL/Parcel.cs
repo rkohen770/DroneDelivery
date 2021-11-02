@@ -17,7 +17,7 @@ namespace IDAL
             public WeightCategories Weight { get; set; }
             public Priorities priority { get; set; }
             public DateTime Requested { get; set; }
-            public int DroneId { get { return DroneId; } set { DroneId = 0; } }
+            public int DroneId { get ; set; }
             public DateTime scheduled { get; set; }
             public DateTime PickedUp { get; set; }
             public DateTime Delivered { get; set; }

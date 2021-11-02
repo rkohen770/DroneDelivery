@@ -13,6 +13,7 @@ namespace DalObject
         {
             DO.DataSource.Initialize();
         }
+
         #region Add
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace DalObject
             };
             DO.DataSource.stations[DO.DataSource.Config.IndexStation] = s;//Adding the new station to the array
             Station[] result = new Station[DO.DataSource.Config.IndexStation++];//Create a new array of the desired size
-            DO.DataSource.stations.CopyTo(result, 0);//Copy the data from the previous array
+            result.CopyTo(DO.DataSource.stations,0);//Copy the data from the previous array
             return result;
         }
 
@@ -84,8 +85,8 @@ namespace DalObject
                 Longitude = longitude,
                 Lattitude = lattitude
             };
-            DO.DataSource.customers[DO.DataSource.Config.Indexcustomer] = c;//Adding the new customer to the array
-            Customer[] result = new Customer[DO.DataSource.Config.Indexcustomer++];//Create a new array of the desired size
+            DO.DataSource.customers[DO.DataSource.Config.IndexCustomer] = c;//Adding the new customer to the array
+            Customer[] result = new Customer[DO.DataSource.Config.IndexCustomer++];//Create a new array of the desired size
             DO.DataSource.customers.CopyTo(result, 0);//Copy the data from the previous array
             return result;
         }
@@ -97,10 +98,9 @@ namespace DalObject
         /// <param name="targetId"> Receiving customer ID</param>
         /// <param name="weight">Weight category (light, medium, heavy)</param>
         /// <param name="priority">Priority (Normal, fast, emergency)</param>
-        
         /// <returns>An array that contains all the packages</returns>
         public int AddParcel( int senderId, int targetId, WeightCategories weight, 
-            Priorities priority)
+            Priorities priority,int droneId=0)
         {
             Parcel p = new Parcel
             {
@@ -109,10 +109,11 @@ namespace DalObject
                 TargetId = targetId,
                 Weight = weight,
                 priority = priority,
-                Requested = DateTime.Now
+                Requested = DateTime.Now,
+                DroneId = droneId
             };
-            DO.DataSource.parcels[DO.DataSource.Config.Indexparcel] = p;//Adding the new parcel to the array
-            Parcel[] result = new Parcel[DO.DataSource.Config.Indexparcel++];//Create a new array of the desired size
+            DO.DataSource.parcels[DO.DataSource.Config.IndexParcel] = p;//Adding the new parcel to the array
+            Parcel[] result = new Parcel[DO.DataSource.Config.IndexParcel++];//Create a new array of the desired size
             DO.DataSource.parcels.CopyTo(result, 0);//Copy the data from the previous array
             return p.Id;
         }
@@ -145,7 +146,7 @@ namespace DalObject
         /// Package collection by drone
         /// </summary>
         /// <param name="parcelId">Package ID for collection</param>
-        public void PackagzCollectionByDrone(int parcelId)
+        public void PackagCollectionByDrone(int parcelId)
         {
             int pIndex = Array.FindIndex<Parcel>(DO.DataSource.parcels, p => p.Id == parcelId);//Obtain an index for the location where the package ID is located
             DO.DataSource.parcels[pIndex].PickedUp = DateTime.Now;//Update packet time pickeup field to now.
@@ -175,7 +176,12 @@ namespace DalObject
             DroneCharge droneCharge = new DroneCharge { DroneId = droneId, StationId = stationId };//Add a instance of an instance loading entity
             DO.DataSource.droneCharges[DO.DataSource.Config.IndexDroneCharge++] = droneCharge;//Add a load of drones to the array
         }
-            
+
+        /// <summary>
+        /// Release the UAV from a charge at the base station
+        /// </summary>
+        /// <param name="droneId">Drone ID for charging</param>
+        /// <param name="stationId">Charging station ID</param>
         public void ReleasDroneFromCharging(int droneId, int stationId)
         {
             int sIndex = Array.FindIndex<Station>(DO.DataSource.stations, s => s.Id == stationId);//We found the place of the station in the array of stations
@@ -183,10 +189,125 @@ namespace DalObject
             int dIndex = Array.FindIndex<Drone>(DO.DataSource.drones, d => d.Id == droneId);//We found the place of the drone in the array of drones
             DO.DataSource.drones[dIndex].Status = DroneStatuses.Available;//Changing the status drone
             int dcIndex = Array.FindIndex(DO.DataSource.droneCharges, dc => dc.DroneId == droneId && dc.StationId == stationId);
-            DO.DataSource.droneCharges[dcIndex] = null;//remove a load of drones to the array
-
+            //remove a load of drones to the array
+            DO.DataSource.droneCharges[dcIndex].DroneId = 0; 
+            DO.DataSource.droneCharges[dcIndex].StationId = 0;
         }
 
         #endregion
+
+        #region view item
+
+       
+        /// <summary>
+        /// return base station by station ID to print.
+        /// </summary>
+        /// <param name="stationId">station ID to print</param>
+        /// <returns>statoin to show</returns>
+        public Station BaseStationView(int stationId)
+        {   
+            //find the station in the array of stations and return it.
+            return Array.Find(DO.DataSource.stations, s => s.Id == stationId);
+        }
+
+        /// <summary>
+        /// return drone by drone ID to print
+        /// </summary>
+        /// <param name="droneId">drone ID to print</param>
+        /// <returns>drone to show</returns>
+        public Drone DroneView(int droneId)
+        {
+            //find the place of the drone in the array of drones
+            return Array.Find(DO.DataSource.drones, d => d.Id == droneId);
+        }
+
+        /// <summary>
+        /// return customer by customer ID to print.
+        /// </summary>
+        /// <param name="customerId">customer ID to print</param>
+        /// <returns>customer to show</returns>
+        public Customer CustomerView(int customerId)
+        {
+            //find the place of the customer in the array of customers
+            return Array.Find(DO.DataSource.customers, c => c.Id == customerId);
+        }
+
+        /// <summary>
+        /// return parcel by parcel ID to print.
+        /// </summary>
+        /// <param name="parcelId">parcel ID to print</param>
+        /// <returns>parcel to show</returns>
+        public Parcel ParcelView(int parcelId)
+        {
+            //find the place of the parcel in the array of parcels
+            return Array.Find(DO.DataSource.parcels, p => p.Id == parcelId);
+        }
+
+        #endregion
+
+        #region View list
+
+        /// <summary>
+        /// reurn a list of base stations to print
+        /// </summary>
+        /// <returns>list of station to show</returns>
+        public Station[] ListOfBaseStationsView()
+        {
+            //retorn all the list of stations
+            return DO.DataSource.stations;
+        }
+
+
+        /// <summary>
+        /// return a list of drones to print
+        /// </summary>
+        /// <returns>list of drone to show</returns>
+        public Drone[] ListOfDroneView()
+        {
+            //retorn all the list of drones
+            return DO.DataSource.drones;
+        }
+
+        /// <summary>
+        /// return a list of custpmer to print
+        /// </summary>
+        /// <returns>list of castomer to show</returns>
+        public Customer[] ListOfCustomerView()
+        {
+            //retorn all the list of drones
+            return DO.DataSource.customers;
+        }
+
+        /// <summary>
+        /// return a list of parcel to print
+        /// </summary>
+        /// <returns>list of parcel to show</returns>
+        public Parcel[] ListOfParcelView()
+        {
+            //retorn all the list of drones
+            return DO.DataSource.parcels;
+        }
+
+        /// <summary>
+        /// Displays a list of parcels that have not yet been assigned to the drone
+        /// </summary>
+        /// <returns>list of parcel without special dron</returns>
+        public Parcel[] ListOfParcelWithoutSpecialDron()
+        {
+            //retorn all the parcels without special dron
+            return Array.FindAll(DO.DataSource.parcels, p => p.DroneId == 0);
+        }
+
+        /// <summary>
+        /// View base stations with available charging stations
+        /// </summary>
+        /// <returns>list of station with availible charge station to print</returns>
+        public Station[] ListOfStationsWithAvailableChargingStations()
+        {
+            return Array.FindAll(DO.DataSource.stations, s => s.ChargeSlots > 0);
+        }
+
+        #endregion
+
     }
 }
