@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DalObject
 {
@@ -11,7 +9,7 @@ namespace DalObject
     {
         public DalObject()
         {
-            DO.DataSource.Initialize();
+            DataSource.Initialize();
         }
 
         #region Add
@@ -35,9 +33,9 @@ namespace DalObject
                 Lattitude = lattitude,
                 ChargeSlots = chargeSlots
             };
-            DO.DataSource.stations[DO.DataSource.Config.IndexStation] = s;//Adding the new station to the array
-            Station[] result = new Station[DO.DataSource.Config.IndexStation++];//Create a new array of the desired size
-            result.CopyTo(DO.DataSource.stations,0);//Copy the data from the previous array
+            DataSource.Stations[DataSource.Config.IndexStation] = s;//Adding the new station to the array
+            Station[] result = new Station[DataSource.Config.IndexStation++];//Create a new array of the desired size
+            result.CopyTo(DataSource.Stations, 0);//Copy the data from the previous array
             return result;
         }
 
@@ -60,9 +58,9 @@ namespace DalObject
                 Status = status,
                 Battery = battery
             };
-            DO.DataSource.drones[DO.DataSource.Config.IndexDrone] = d; //Adding the new drone to the array
-            Drone[] result = new Drone[DO.DataSource.Config.IndexDrone++];//Create a new array of the desired size
-            DO.DataSource.drones.CopyTo(result, 0);//Copy the data from the previous array
+            DataSource.drones[DataSource.Config.IndexDrone] = d; //Adding the new drone to the array
+            Drone[] result = new Drone[DataSource.Config.IndexDrone++];//Create a new array of the desired size
+            DataSource.drones.CopyTo(result, 0);//Copy the data from the previous array
             return result;
         }
 
@@ -85,9 +83,9 @@ namespace DalObject
                 Longitude = longitude,
                 Lattitude = lattitude
             };
-            DO.DataSource.customers[DO.DataSource.Config.IndexCustomer] = c;//Adding the new customer to the array
-            Customer[] result = new Customer[DO.DataSource.Config.IndexCustomer++];//Create a new array of the desired size
-            DO.DataSource.customers.CopyTo(result, 0);//Copy the data from the previous array
+            DataSource.customers[DataSource.Config.IndexCustomer] = c;//Adding the new customer to the array
+            Customer[] result = new Customer[DataSource.Config.IndexCustomer++];//Create a new array of the desired size
+            DataSource.customers.CopyTo(result, 0);//Copy the data from the previous array
             return result;
         }
 
@@ -99,12 +97,12 @@ namespace DalObject
         /// <param name="weight">Weight category (light, medium, heavy)</param>
         /// <param name="priority">Priority (Normal, fast, emergency)</param>
         /// <returns>An array that contains all the packages</returns>
-        public int AddParcel( int senderId, int targetId, WeightCategories weight, 
-            Priorities priority,int droneId=0)
+        public int AddParcel(int senderId, int targetId, WeightCategories weight,
+            Priorities priority, int droneId = 0)
         {
             Parcel p = new Parcel
             {
-                Id = DO.DataSource.Config.OrdinalNumber++,
+                Id = DataSource.Config.OrdinalParcelNumber++,
                 SenderId = senderId,
                 TargetId = targetId,
                 Weight = weight,
@@ -112,9 +110,9 @@ namespace DalObject
                 Requested = DateTime.Now,
                 DroneId = droneId
             };
-            DO.DataSource.parcels[DO.DataSource.Config.IndexParcel] = p;//Adding the new parcel to the array
-            Parcel[] result = new Parcel[DO.DataSource.Config.IndexParcel++];//Create a new array of the desired size
-            DO.DataSource.parcels.CopyTo(result, 0);//Copy the data from the previous array
+            DataSource.parcels[DataSource.Config.IndexParcel] = p;//Adding the new parcel to the array
+            Parcel[] result = new Parcel[DataSource.Config.IndexParcel++];//Create a new array of the desired size
+            DataSource.parcels.CopyTo(result, 0);//Copy the data from the previous array
             return p.Id;
         }
 
@@ -129,14 +127,14 @@ namespace DalObject
         public void AssigningParcelToDrone(int parcelId)
         {
             //We will go through the entire array of the drone, to find a available drone
-            for (int i=0; i<DO.DataSource.Config.IndexDrone; i++)
+            for (int i = 0; i < DataSource.Config.IndexDrone; i++)
             {
-                if( DO.DataSource.drones[i].Status == DroneStatuses.Available)
+                if (DataSource.drones[i].Status == DroneStatuses.Available)
                 {
-                    DO.DataSource.drones[i].Status = DroneStatuses.Shipping;//Update the status field in the drone found
-                    int pIndex = Array.FindIndex<Parcel>(DO.DataSource.parcels, p => p.Id == parcelId);//Obtain an index for the location where the package ID is located
-                    DO.DataSource.parcels[pIndex].DroneId = DO.DataSource.drones[i].Id;//Update the droneid field in the drone package found
-                    DO.DataSource.parcels[pIndex].scheduled = DateTime.Now;//Update packet time association field to now.
+                    DataSource.drones[i].Status = DroneStatuses.Shipping;//Update the status field in the drone found
+                    int pIndex = Array.FindIndex<Parcel>(DataSource.parcels, p => p.Id == parcelId);//Obtain an index for the location where the package ID is located
+                    DataSource.parcels[pIndex].DroneId = DataSource.drones[i].Id;//Update the droneid field in the drone package found
+                    DataSource.parcels[pIndex].scheduled = DateTime.Now;//Update packet time association field to now.
                     return;
                 }
             }
@@ -148,8 +146,8 @@ namespace DalObject
         /// <param name="parcelId">Package ID for collection</param>
         public void PackagCollectionByDrone(int parcelId)
         {
-            int pIndex = Array.FindIndex<Parcel>(DO.DataSource.parcels, p => p.Id == parcelId);//Obtain an index for the location where the package ID is located
-            DO.DataSource.parcels[pIndex].PickedUp = DateTime.Now;//Update packet time pickeup field to now.
+            int pIndex = Array.FindIndex<Parcel>(DataSource.parcels, p => p.Id == parcelId);//Obtain an index for the location where the package ID is located
+            DataSource.parcels[pIndex].PickedUp = DateTime.Now;//Update packet time pickeup field to now.
         }
 
         /// <summary>
@@ -158,8 +156,8 @@ namespace DalObject
         /// <param name="parcelId">Package ID for delivery</param>
         public void DeliveryPackageToCustomer(int parcelId)
         {
-            int pIndex = Array.FindIndex<Parcel>(DO.DataSource.parcels, p => p.Id == parcelId);//Obtain an index for the location where the package ID is located
-            DO.DataSource.parcels[pIndex].Delivered = DateTime.Now;//Update packet time delivered field to now.
+            int pIndex = Array.FindIndex<Parcel>(DataSource.parcels, p => p.Id == parcelId);//Obtain an index for the location where the package ID is located
+            DataSource.parcels[pIndex].Delivered = DateTime.Now;//Update packet time delivered field to now.
         }
 
         /// <summary>
@@ -169,12 +167,12 @@ namespace DalObject
         /// <param name="stationId">Charging station ID</param>
         public void SendingDroneForCharging(int droneId, int stationId)
         {
-            int sIndex = Array.FindIndex<Station>(DO.DataSource.stations, s => s.Id == stationId);//We found the place of the station in the array of stations
-            DO.DataSource.stations[stationId].ChargeSlots--;//We will update the number of loading locations
-            int dIndex = Array.FindIndex<Drone>(DO.DataSource.drones, d => d.Id == droneId);//We found the place of the drone in the array of drones
-            DO.DataSource.drones[dIndex].Status=DroneStatuses.Maintenance;//Changing the glider position
+            int sIndex = Array.FindIndex<Station>(DataSource.Stations, s => s.Id == stationId);//We found the place of the station in the array of stations
+            DataSource.Stations[stationId].ChargeSlots--;//We will update the number of loading locations
+            int dIndex = Array.FindIndex<Drone>(DataSource.drones, d => d.Id == droneId);//We found the place of the drone in the array of drones
+            DataSource.drones[dIndex].Status = DroneStatuses.Maintenance;//Changing the glider position
             DroneCharge droneCharge = new DroneCharge { DroneId = droneId, StationId = stationId };//Add a instance of an instance loading entity
-            DO.DataSource.droneCharges[DO.DataSource.Config.IndexDroneCharge++] = droneCharge;//Add a load of drones to the array
+            DataSource.droneCharges[DataSource.Config.IndexDroneCharge++] = droneCharge;//Add a load of drones to the array
         }
 
         /// <summary>
@@ -184,30 +182,30 @@ namespace DalObject
         /// <param name="stationId">Charging station ID</param>
         public void ReleasDroneFromCharging(int droneId, int stationId)
         {
-            int sIndex = Array.FindIndex<Station>(DO.DataSource.stations, s => s.Id == stationId);//We found the place of the station in the array of stations
-            DO.DataSource.stations[stationId].ChargeSlots++;//We will update the number of loading locations
-            int dIndex = Array.FindIndex<Drone>(DO.DataSource.drones, d => d.Id == droneId);//We found the place of the drone in the array of drones
-            DO.DataSource.drones[dIndex].Status = DroneStatuses.Available;//Changing the status drone
-            int dcIndex = Array.FindIndex(DO.DataSource.droneCharges, dc => dc.DroneId == droneId && dc.StationId == stationId);
+            int sIndex = Array.FindIndex<Station>(DataSource.Stations, s => s.Id == stationId);//We found the place of the station in the array of stations
+            DataSource.Stations[stationId].ChargeSlots++;//We will update the number of loading locations
+            int dIndex = Array.FindIndex<Drone>(DataSource.drones, d => d.Id == droneId);//We found the place of the drone in the array of drones
+            DataSource.drones[dIndex].Status = DroneStatuses.Available;//Changing the status drone
+            int dcIndex = Array.FindIndex(DataSource.droneCharges, dc => dc.DroneId == droneId && dc.StationId == stationId);
             //remove a load of drones to the array
-            DO.DataSource.droneCharges[dcIndex].DroneId = 0; 
-            DO.DataSource.droneCharges[dcIndex].StationId = 0;
+            DataSource.droneCharges[dcIndex].DroneId = 0;
+            DataSource.droneCharges[dcIndex].StationId = 0;
         }
 
         #endregion
 
         #region view item
 
-       
+
         /// <summary>
         /// return base station by station ID to print.
         /// </summary>
         /// <param name="stationId">station ID to print</param>
         /// <returns>statoin to show</returns>
         public Station BaseStationView(int stationId)
-        {   
+        {
             //find the station in the array of stations and return it.
-            return Array.Find(DO.DataSource.stations, s => s.Id == stationId);
+            return Array.Find(DataSource.Stations, s => s.Id == stationId);
         }
 
         /// <summary>
@@ -218,7 +216,7 @@ namespace DalObject
         public Drone DroneView(int droneId)
         {
             //find the place of the drone in the array of drones
-            return Array.Find(DO.DataSource.drones, d => d.Id == droneId);
+            return Array.Find(DataSource.drones, d => d.Id == droneId);
         }
 
         /// <summary>
@@ -229,7 +227,7 @@ namespace DalObject
         public Customer CustomerView(int customerId)
         {
             //find the place of the customer in the array of customers
-            return Array.Find(DO.DataSource.customers, c => c.Id == customerId);
+            return Array.Find(DataSource.customers, c => c.Id == customerId);
         }
 
         /// <summary>
@@ -240,23 +238,23 @@ namespace DalObject
         public Parcel ParcelView(int parcelId)
         {
             //find the place of the parcel in the array of parcels
-            return Array.Find(DO.DataSource.parcels, p => p.Id == parcelId);
+            return Array.Find(DataSource.parcels, p => p.Id == parcelId);
         }
 
         #endregion
 
-        #region View list
+        #region Get lists
 
         /// <summary>
-        /// reurn a list of base stations to print
+        /// return a list of actual base stations
         /// </summary>
-        /// <returns>list of station to show</returns>
-        public Station[] ListOfBaseStationsView()
+        /// <returns>list of base stations</returns>
+        public Station[] GetAllBaseStations()
         {
-            //retorn all the list of stations
-            return DO.DataSource.stations;
+            Station[] stations = new Station[DataSource.Config.IndexStation];
+            Array.Copy(DataSource.Stations, stations, DataSource.Config.IndexStation);
+            return stations;
         }
-
 
         /// <summary>
         /// return a list of drones to print
@@ -264,8 +262,8 @@ namespace DalObject
         /// <returns>list of drone to show</returns>
         public Drone[] ListOfDroneView()
         {
-            //retorn all the list of drones
-            return DO.DataSource.drones;
+            //return all the list of drones
+            return DataSource.drones;
         }
 
         /// <summary>
@@ -274,8 +272,8 @@ namespace DalObject
         /// <returns>list of castomer to show</returns>
         public Customer[] ListOfCustomerView()
         {
-            //retorn all the list of drones
-            return DO.DataSource.customers;
+            //return all the list of drones
+            return DataSource.customers;
         }
 
         /// <summary>
@@ -284,8 +282,8 @@ namespace DalObject
         /// <returns>list of parcel to show</returns>
         public Parcel[] ListOfParcelView()
         {
-            //retorn all the list of drones
-            return DO.DataSource.parcels;
+            //return all the list of drones
+            return DataSource.parcels;
         }
 
         /// <summary>
@@ -294,8 +292,8 @@ namespace DalObject
         /// <returns>list of parcel without special dron</returns>
         public Parcel[] ListOfParcelWithoutSpecialDron()
         {
-            //retorn all the parcels without special dron
-            return Array.FindAll(DO.DataSource.parcels, p => p.DroneId == 0);
+            //return all the parcels without special dron
+            return Array.FindAll(DataSource.parcels, p => p.DroneId == 0);
         }
 
         /// <summary>
@@ -304,7 +302,7 @@ namespace DalObject
         /// <returns>list of station with availible charge station to print</returns>
         public Station[] ListOfStationsWithAvailableChargingStations()
         {
-            return Array.FindAll(DO.DataSource.stations, s => s.ChargeSlots > 0);
+            return Array.FindAll(DataSource.Stations, s => s.ChargeSlots > 0);
         }
 
         #endregion
