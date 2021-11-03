@@ -262,8 +262,8 @@ namespace DalObject
         /// <returns>list of drone to show</returns>
         public Drone[] ListOfDroneView()
         {
-            //retorn all the list of drones
-            return DO.DataSource.drones;
+            //return all the list of drones
+            return DataSource.drones;
         }
 
         /// <summary>
@@ -272,8 +272,8 @@ namespace DalObject
         /// <returns>list of castomer to show</returns>
         public Customer[] ListOfCustomerView()
         {
-            //retorn all the list of drones
-            return DO.DataSource.customers;
+            //return all the list of drones
+            return DataSource.customers;
         }
 
         /// <summary>
@@ -282,8 +282,8 @@ namespace DalObject
         /// <returns>list of parcel to show</returns>
         public Parcel[] ListOfParcelView()
         {
-            //retorn all the list of drones
-            return DO.DataSource.parcels;
+            //return all the list of drones
+            return DataSource.parcels;
         }
 
         /// <summary>

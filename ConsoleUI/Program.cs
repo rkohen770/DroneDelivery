@@ -8,7 +8,18 @@ namespace ConsoleUI
     {
 
         public enum Menu { EXIT, ADD, UPDATE, DISPLAY, VIEW_ITEM_LIST }
-        public enum Add { ADD_STATION, ADD_DRONE, ADD_CUSTOMER, ADD_PARCEL}
+        public enum Add { ADD_STATION, ADD_DRONE, ADD_CUSTOMER, ADD_PARCEL }
+        public enum Update
+        {
+            ASSIGNING_PARCEL_TO_DRONE, PARCEL_COLLECTION_BY_DRONE, DELIVERY_PARCEL_TO_CUSTOM,
+            SENDING_DRONE_FOR_CHARGING, RELEAS_DRONE_FROME_CHARGING
+        }
+        public enum Display { PRINT_STATION, PRINT_DRONE, PRINT_CUSTOMER, PRINT_PARCEL }
+        public enum viewItemList
+        {
+            GEt_ALL_BASE_STATIONS, LIST_OF_DRONE_VIEW, LIST_OF_CUSTOMER_VIEW, LIST_OF_PARCEL_VIEW,
+            LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE, LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION
+        }
         static void Main(string[] args)
         {
             DalObject.DalObject dal = new DalObject.DalObject();
@@ -25,25 +36,26 @@ namespace ConsoleUI
                         MenuAdd();
                         choice = int.Parse(Console.ReadLine());
                         switch (choice)
-                            {
-                            case 0:
+                        {
+                            case (int)Add.ADD_STATION:
                                 addStation(dal);
                                 break;
 
-                            case 1:
+                            case (int)Add.ADD_DRONE:
                                 addDrone(dal);
                                 break;
 
-                            case 2:
+                            case (int)Add.ADD_CUSTOMER:
                                 addCustomer(dal);
                                 break;
 
-                            case 3:
+                            case (int)Add.ADD_PARCEL:
                                 addParcel(dal);
                                 break;
                             default:
-                                    break;
-                            }
+                                break;
+                        }
+
                         break;
                     #endregion
 
@@ -53,23 +65,23 @@ namespace ConsoleUI
                         choice = int.Parse(Console.ReadLine());
                         switch (choice)
                         {
-                            case 0:
+                            case (int)Update.ASSIGNING_PARCEL_TO_DRONE:
                                 assigningParcelToDrone(dal);
                                 break;
 
-                            case 1:
-                                packagCollectionByDrone(dal);
+                            case (int)Update.PARCEL_COLLECTION_BY_DRONE:
+                                parcelCollectionByDrone(dal);
                                 break;
 
-                            case 2:
+                            case (int)Update.DELIVERY_PARCEL_TO_CUSTOM:
                                 deliveryPackageToCustomer(dal);
                                 break;
 
-                            case 3:
+                            case (int)Update.SENDING_DRONE_FOR_CHARGING:
                                 sendingDroneForCharging(dal);
                                 break;
 
-                            case 4:
+                            case (int)Update.RELEAS_DRONE_FROME_CHARGING:
                                 releasDroneFromCharging(dal);
                                 break;
                             default:
@@ -84,19 +96,20 @@ namespace ConsoleUI
                         choice = int.Parse(Console.ReadLine());
                         switch (choice)
                         {
-                            case 0:
+                            case (int)Display.PRINT_STATION:
                                 prinStation(dal);
                                 break;
 
-                            case 1:
-                                pruntDrone(dal);
+                            case (int)Display.PRINT_DRONE:
+                                printDrone(dal);
                                 break;
 
-                            case 2:
+                            case (int)Display.PRINT_CUSTOMER:
+
                                 printCustomer(dal);
                                 break;
 
-                            case 3:
+                            case (int)Display.PRINT_PARCEL:
                                 printParcel(dal);
                                 break;
                             default:
@@ -111,38 +124,43 @@ namespace ConsoleUI
                         choice = int.Parse(Console.ReadLine());
                         switch (choice)
                         {
-                            case 0:
+                            case (int)viewItemList.GEt_ALL_BASE_STATIONS:
                                 foreach (var temp in dal.GetAllBaseStations())
                                     Console.WriteLine(temp);
                                 break;
 
-                            case 1:
-                                Console.WriteLine(dal.ListOfDroneView());
+                            case (int)viewItemList.LIST_OF_DRONE_VIEW:
+                                foreach (var temp in dal.ListOfDroneView())
+                                    Console.WriteLine(temp);
                                 break;
 
-                            case 2:
-                                Console.WriteLine(dal.ListOfCustomerView());
+                            case (int)viewItemList.LIST_OF_CUSTOMER_VIEW:
+                                foreach (var temp in dal.ListOfCustomerView())
+                                    Console.WriteLine(temp);
                                 break;
-                            case 3:
-                                Console.WriteLine(dal.ListOfParcelView());
-                                break;
-
-                            case 4:
-                                Console.WriteLine(dal.ListOfParcelWithoutSpecialDron ());
+                            case (int)viewItemList.LIST_OF_PARCEL_VIEW:
+                                foreach (var temp in dal.ListOfParcelView())
+                                    Console.WriteLine(temp);
                                 break;
 
-                            case 5:
-                                Console.WriteLine(dal.ListOfStationsWithAvailableChargingStations());
+                            case (int)viewItemList.LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE:
+                                foreach (var temp in dal.ListOfParcelWithoutSpecialDron())
+                                    Console.WriteLine(temp);
+                                break;
+                            case (int)viewItemList.LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION:
+                                foreach (var temp in dal.ListOfStationsWithAvailableChargingStations())
+                                    Console.WriteLine(temp);
                                 break;
                             default:
                                 break;
                         }
                         break;
                         #endregion
-                       
+
                 }
+                MenuMessages();
                 while (!int.TryParse(Console.ReadLine(), out choice))
-                            Console.Write("ERROR, please enter a number again");
+                    Console.Write("ERROR, please enter a number again");
             }
         }
 
@@ -240,7 +258,7 @@ namespace ConsoleUI
 
         #region update method
 
-private static void releasDroneFromCharging(DalObject.DalObject dal)
+        private static void releasDroneFromCharging(DalObject.DalObject dal)
         {
             Console.WriteLine("Enter the releas drone from charging: droneId, stationId");
             int droneId = int.Parse(Console.ReadLine());
@@ -263,7 +281,7 @@ private static void releasDroneFromCharging(DalObject.DalObject dal)
             dal.DeliveryPackageToCustomer(parceleId);
         }
 
-        private static void packagCollectionByDrone(DalObject.DalObject dal)
+        private static void parcelCollectionByDrone(DalObject.DalObject dal)
         {
             Console.WriteLine("Enter the packag collection by drone: parcelId");
             int parceleId = int.Parse(Console.ReadLine());
@@ -279,7 +297,7 @@ private static void releasDroneFromCharging(DalObject.DalObject dal)
         #endregion
 
         #region display method
-        
+
         private static void printParcel(DalObject.DalObject dal)
         {
             Console.WriteLine("Enter the parcel view: stationId");
@@ -294,7 +312,7 @@ private static void releasDroneFromCharging(DalObject.DalObject dal)
             Console.WriteLine(dal.CustomerView(stationId));
         }
 
-        private static void pruntDrone(DalObject.DalObject dal)
+        private static void printDrone(DalObject.DalObject dal)
         {
             Console.WriteLine("Enter the drone view: stationId");
             int stationId = int.Parse(Console.ReadLine());
