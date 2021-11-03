@@ -253,7 +253,7 @@ namespace DalObject
         /// <returns>list of station to show</returns>
         public Station[] ListOfBaseStationsView()
         {
-            //retorn all the list of stations
+            //return all the list of stations
             return DO.DataSource.stations;
         }
 
@@ -264,7 +264,7 @@ namespace DalObject
         /// <returns>list of drone to show</returns>
         public Drone[] ListOfDroneView()
         {
-            //retorn all the list of drones
+            //return all the list of drones
             return DO.DataSource.drones;
         }
 
@@ -274,7 +274,7 @@ namespace DalObject
         /// <returns>list of castomer to show</returns>
         public Customer[] ListOfCustomerView()
         {
-            //retorn all the list of drones
+            //return all the list of drones
             return DO.DataSource.customers;
         }
 
@@ -284,7 +284,7 @@ namespace DalObject
         /// <returns>list of parcel to show</returns>
         public Parcel[] ListOfParcelView()
         {
-            //retorn all the list of drones
+            //return all the list of drones
             return DO.DataSource.parcels;
         }
 
