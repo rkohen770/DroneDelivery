@@ -25,10 +25,9 @@ namespace IDAL
 
             public override string ToString()
             {
-                string Parcel = $"Id: {Id} \nSenderId: {SenderId} \nTargetId {TargetId} \n" +
+                return $"Id: {Id} \nSenderId: {SenderId} \nTargetId {TargetId} \n" +
                     $"Weight {Weight} \npriority {priority} \nRequested {Requested} \n" +
-                    $"DroneId {DroneId} \nscheduled {scheduled} \nPickedUp {PickedUp} \nDelivered {Delivered}";
-                return Parcel;
+                    $"DroneId {DroneId} \nscheduled {scheduled} \nPickedUp {PickedUp} \nDelivered {Delivered}\n";
             }
         }
     }

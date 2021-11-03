@@ -19,9 +19,8 @@ namespace IDAL
 
             public override string ToString()
             {
-                string Drone = $"Id: {Id} \nModel: {Model} \nMaxWeight: {MaxWeight} \n" +
-                    $"Status: {Status} \nBattery: {Battery}";
-                return Drone;
+                return $"Id: {Id} \nModel: {Model} \nMaxWeight: {MaxWeight} \n" +
+                    $"Status: {Status} \nBattery: {Battery}\n";
             }
         }
     }

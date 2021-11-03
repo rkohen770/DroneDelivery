@@ -6,7 +6,7 @@ namespace ConsoleUI
 {
     class Program
     {
-
+        #region enum
         public enum Menu { EXIT, ADD, UPDATE, DISPLAY, VIEW_ITEM_LIST }
         public enum Add { ADD_STATION, ADD_DRONE, ADD_CUSTOMER, ADD_PARCEL }
         public enum Update
@@ -20,6 +20,8 @@ namespace ConsoleUI
             GEt_ALL_BASE_STATIONS, LIST_OF_DRONE_VIEW, LIST_OF_CUSTOMER_VIEW, LIST_OF_PARCEL_VIEW,
             LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE, LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION
         }
+        #endregion
+
         static void Main(string[] args)
         {
             DalObject.DalObject dal = new DalObject.DalObject();
@@ -130,25 +132,25 @@ namespace ConsoleUI
                                 break;
 
                             case (int)viewItemList.LIST_OF_DRONE_VIEW:
-                                foreach (var temp in dal.ListOfDroneView())
+                                foreach (var temp in dal.GetAllDrones())
                                     Console.WriteLine(temp);
                                 break;
 
                             case (int)viewItemList.LIST_OF_CUSTOMER_VIEW:
-                                foreach (var temp in dal.ListOfCustomerView())
+                                foreach (var temp in dal.GetAllCustomers())
                                     Console.WriteLine(temp);
                                 break;
                             case (int)viewItemList.LIST_OF_PARCEL_VIEW:
-                                foreach (var temp in dal.ListOfParcelView())
+                                foreach (var temp in dal.GetAllParcels())
                                     Console.WriteLine(temp);
                                 break;
 
                             case (int)viewItemList.LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE:
-                                foreach (var temp in dal.ListOfParcelWithoutSpecialDron())
+                                foreach (var temp in dal.GetAllParcelsWithoutSpecialDron())
                                     Console.WriteLine(temp);
                                 break;
                             case (int)viewItemList.LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION:
-                                foreach (var temp in dal.ListOfStationsWithAvailableChargingStations())
+                                foreach (var temp in dal.GetAllStationsWithAvailableChargingStations())
                                     Console.WriteLine(temp);
                                 break;
                             default:

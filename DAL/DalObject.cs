@@ -33,9 +33,9 @@ namespace DalObject
                 Lattitude = lattitude,
                 ChargeSlots = chargeSlots
             };
-            DataSource.Stations[DataSource.Config.IndexStation] = s;//Adding the new station to the array
-            Station[] result = new Station[DataSource.Config.IndexStation++];//Create a new array of the desired size
-            result.CopyTo(DataSource.Stations, 0);//Copy the data from the previous array
+            DataSource.Stations[DataSource.Config.IndexStation++] = s;//Adding the new station to the array
+            Station[] result = new Station[DataSource.Config.IndexStation];//Create a new array of the desired size
+            Array.Copy(DataSource.Stations,result, DataSource.Config.IndexStation);//Copy the data from the previous array
             return result;
         }
 
@@ -58,9 +58,9 @@ namespace DalObject
                 Status = status,
                 Battery = battery
             };
-            DataSource.drones[DataSource.Config.IndexDrone] = d; //Adding the new drone to the array
-            Drone[] result = new Drone[DataSource.Config.IndexDrone++];//Create a new array of the desired size
-            DataSource.drones.CopyTo(result, 0);//Copy the data from the previous array
+            DataSource.drones[DataSource.Config.IndexDrone++] = d; //Adding the new drone to the array
+            Drone[] result = new Drone[DataSource.Config.IndexDrone];//Create a new array of the desired size
+            Array.Copy(DataSource.drones, result, DataSource.Config.IndexDrone);//Copy the data from the previous array
             return result;
         }
 
@@ -83,9 +83,9 @@ namespace DalObject
                 Longitude = longitude,
                 Lattitude = lattitude
             };
-            DataSource.customers[DataSource.Config.IndexCustomer] = c;//Adding the new customer to the array
-            Customer[] result = new Customer[DataSource.Config.IndexCustomer++];//Create a new array of the desired size
-            DataSource.customers.CopyTo(result, 0);//Copy the data from the previous array
+            DataSource.customers[DataSource.Config.IndexCustomer++] = c;//Adding the new customer to the array
+            Customer[] result = new Customer[DataSource.Config.IndexCustomer];//Create a new array of the desired size
+            Array.Copy(DataSource.customers, result, DataSource.Config.IndexCustomer);//Copy the data from the previous array
             return result;
         }
 
@@ -110,9 +110,9 @@ namespace DalObject
                 Requested = DateTime.Now,
                 DroneId = droneId
             };
-            DataSource.parcels[DataSource.Config.IndexParcel] = p;//Adding the new parcel to the array
-            Parcel[] result = new Parcel[DataSource.Config.IndexParcel++];//Create a new array of the desired size
-            DataSource.parcels.CopyTo(result, 0);//Copy the data from the previous array
+            DataSource.parcels[DataSource.Config.IndexParcel++] = p;//Adding the new parcel to the array
+            Parcel[] result = new Parcel[DataSource.Config.IndexParcel];//Create a new array of the desired size
+            Array.Copy(DataSource.parcels, result, DataSource.Config.IndexParcel);//Copy the data from the previous array
             return p.Id;
         }
 
@@ -194,7 +194,7 @@ namespace DalObject
 
         #endregion
 
-        #region view item
+        #region Get item
 
 
         /// <summary>
@@ -257,50 +257,53 @@ namespace DalObject
         }
 
         /// <summary>
-        /// return a list of drones to print
+        /// return a list of actual drones
         /// </summary>
-        /// <returns>list of drone to show</returns>
-        public Drone[] ListOfDroneView()
+        /// <returns>list of drones</returns>
+        public Drone[] GetAllDrones()
         {
-            //return all the list of drones
-            return DataSource.drones;
+            Drone[] drones = new Drone[DataSource.Config.IndexDrone];
+            Array.Copy(DataSource.drones, drones, DataSource.Config.IndexDrone);
+            return drones;
         }
 
         /// <summary>
-        /// return a list of custpmer to print
+        /// return a list of actual custpmer
         /// </summary>
-        /// <returns>list of castomer to show</returns>
-        public Customer[] ListOfCustomerView()
+        /// <returns>list of castomers</returns>
+        public Customer[] GetAllCustomers()
         {
-            //return all the list of drones
-            return DataSource.customers;
+            Customer[] customers = new Customer[DataSource.Config.IndexCustomer];
+            Array.Copy(DataSource.customers, customers, DataSource.Config.IndexCustomer);
+            return customers;
         }
 
         /// <summary>
-        /// return a list of parcel to print
+        /// return a list of actual parcel
         /// </summary>
-        /// <returns>list of parcel to show</returns>
-        public Parcel[] ListOfParcelView()
+        /// <returns>list of parcels</returns>
+        public Parcel[] GetAllParcels()
         {
-            //return all the list of drones
-            return DataSource.parcels;
+            Parcel[] parcel = new Parcel[DataSource.Config.IndexParcel];
+            Array.Copy(DataSource.parcels, parcel, DataSource.Config.IndexParcel);
+            return parcel;
         }
 
         /// <summary>
         /// Displays a list of parcels that have not yet been assigned to the drone
         /// </summary>
         /// <returns>list of parcel without special dron</returns>
-        public Parcel[] ListOfParcelWithoutSpecialDron()
+        public Parcel[] GetAllParcelsWithoutSpecialDron()
         {
             //return all the parcels without special dron
             return Array.FindAll(DataSource.parcels, p => p.DroneId == 0);
         }
 
         /// <summary>
-        /// View base stations with available charging stations
+        /// return base stations with available charging stations
         /// </summary>
-        /// <returns>list of station with availible charge station to print</returns>
-        public Station[] ListOfStationsWithAvailableChargingStations()
+        /// <returns>list of station with availible charge station</returns>
+        public Station[] GetAllStationsWithAvailableChargingStations()
         {
             return Array.FindAll(DataSource.Stations, s => s.ChargeSlots > 0);
         }

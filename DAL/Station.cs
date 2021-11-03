@@ -18,10 +18,8 @@ namespace IDAL
 
             public override string ToString()
             {
-                string Station = $"Id: {Id} \nName: {Name} \nLongitude: {Longitude} \n" +
+                return $"Id: {Id} \nName: {Name} \nLongitude: {Longitude} \n" + 
                     $"Lattitude: {Lattitude} \nChargeSlots: {ChargeSlots}";
-
-                return Station;
             }
         }
 
