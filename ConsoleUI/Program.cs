@@ -204,7 +204,7 @@ namespace ConsoleUI
 
         private static void MenuViewItemList()
         {
-            Console.WriteLine("Enter 0 for displays the list of drone");
+            Console.WriteLine("Enter 0 for get all bus station");
             Console.WriteLine("Enter 1 for displays the list of drone");
             Console.WriteLine("Enter 2 for view the customer list");
             Console.WriteLine("Enter 3 for displays the list of packages");
