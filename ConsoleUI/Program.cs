@@ -205,10 +205,11 @@ namespace ConsoleUI
         private static void MenuViewItemList()
         {
             Console.WriteLine("Enter 0 for displays the list of drone");
-            Console.WriteLine("Enter 1 for view the customer list");
-            Console.WriteLine("Enter 2 for displays the list of packages");
-            Console.WriteLine("Enter 3 for displays a list of packages that have not yet been assigned to a drone");
-            Console.WriteLine("Enter 4 for display base stations with available charging stations");
+            Console.WriteLine("Enter 1 for displays the list of drone");
+            Console.WriteLine("Enter 2 for view the customer list");
+            Console.WriteLine("Enter 3 for displays the list of packages");
+            Console.WriteLine("Enter 4 for displays a list of packages that have not yet been assigned to a drone");
+            Console.WriteLine("Enter 5 for display base stations with available charging stations");
         }
         #endregion
 

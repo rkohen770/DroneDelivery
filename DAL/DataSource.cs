@@ -199,7 +199,7 @@ namespace DalObject
             #region parcels
             parcels[Config.IndexParcel] = new Parcel
             {
-                Id = ++Config.OrdinalParcelNumber, //serial number
+                Id = Config.OrdinalParcelNumber++, //serial number
                 SenderId = 123456789,
                 TargetId = 987654321,
                 Weight = (WeightCategories)rand.Next(3),
@@ -213,7 +213,7 @@ namespace DalObject
 
             parcels[Config.IndexParcel] = new Parcel
             {
-                Id = ++Config.OrdinalParcelNumber, //serial number
+                Id = Config.OrdinalParcelNumber++, //serial number
                 SenderId = 987654321,
                 TargetId = 234567891,
                 Weight = (WeightCategories)rand.Next(3),
@@ -227,7 +227,7 @@ namespace DalObject
 
             parcels[Config.IndexParcel] = new Parcel
             {
-                Id = ++Config.OrdinalParcelNumber, //serial number
+                Id = Config.OrdinalParcelNumber++, //serial number
                 SenderId = 345678912,
                 TargetId = 456789123,
                 Weight = (WeightCategories)rand.Next(3),
@@ -241,7 +241,7 @@ namespace DalObject
 
             parcels[Config.IndexParcel] = new Parcel
             {
-                Id = ++Config.OrdinalParcelNumber, //serial number
+                Id = Config.OrdinalParcelNumber++, //serial number
                 SenderId = 456789123,
                 TargetId = 567891234,
                 Weight = (WeightCategories)rand.Next(3),
@@ -255,7 +255,7 @@ namespace DalObject
 
             parcels[Config.IndexParcel] = new Parcel
             {
-                Id = ++Config.OrdinalParcelNumber, //serial number
+                Id = Config.OrdinalParcelNumber++, //serial number
                 SenderId = 567891234,
                 TargetId = 678912345,
                 Weight = (WeightCategories)rand.Next(3),
@@ -269,7 +269,7 @@ namespace DalObject
 
             parcels[Config.IndexParcel] = new Parcel
             {
-                Id = ++Config.OrdinalParcelNumber, //serial number
+                Id = Config.OrdinalParcelNumber++, //serial number
                 SenderId = 678912345,
                 TargetId = 789123456,
                 Weight = (WeightCategories)rand.Next(3),
@@ -283,7 +283,7 @@ namespace DalObject
 
             parcels[Config.IndexParcel] = new Parcel
             {
-                Id = ++Config.OrdinalParcelNumber, //serial number
+                Id = Config.OrdinalParcelNumber++, //serial number
                 SenderId = 789123456,
                 TargetId = 123456789,
                 Weight = (WeightCategories)rand.Next(3),
@@ -297,7 +297,7 @@ namespace DalObject
 
             parcels[Config.IndexParcel] = new Parcel
             {
-                Id = ++Config.OrdinalParcelNumber, //serial number
+                Id = Config.OrdinalParcelNumber++, //serial number
                 SenderId = 456789123,
                 TargetId = 123456789,
                 Weight = (WeightCategories)rand.Next(3),
@@ -311,7 +311,7 @@ namespace DalObject
 
             parcels[Config.IndexParcel] = new Parcel
             {
-                Id = ++Config.OrdinalParcelNumber, //serial number
+                Id = Config.OrdinalParcelNumber++, //serial number
                 SenderId = 234567891,
                 TargetId = 891234567,
                 Weight = (WeightCategories)rand.Next(3),
@@ -325,13 +325,13 @@ namespace DalObject
 
             parcels[Config.IndexParcel] = new Parcel
             {
-                Id = ++Config.OrdinalParcelNumber, //serial number
+                Id = Config.OrdinalParcelNumber++, //serial number
                 SenderId = 101123556,
                 TargetId = 567891234,
                 Weight = (WeightCategories)rand.Next(3),
                 priority = (Priorities)rand.Next(3),
                 Requested = new DateTime(2021, rand.Next(1, 13), rand.Next(1, 29)),
-                DroneId = 7945,
+                DroneId = 0,
                 scheduled = parcels[Config.IndexParcel].Requested + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
                 PickedUp = parcels[Config.IndexParcel].scheduled + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
                 Delivered = parcels[Config.IndexParcel++].PickedUp + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),

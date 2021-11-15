@@ -296,7 +296,9 @@ namespace DalObject
         public Parcel[] GetAllParcelsWithoutSpecialDron()
         {
             //return all the parcels without special dron
-            return Array.FindAll(DataSource.parcels, p => p.DroneId == 0);
+            Parcel[] parcel = new Parcel[DataSource.Config.IndexParcel];
+            parcel= Array.FindAll(DataSource.parcels, p => p.Id != 0 && p.DroneId == 0 );
+            return parcel;
         }
 
         /// <summary>
