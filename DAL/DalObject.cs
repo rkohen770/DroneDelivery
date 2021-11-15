@@ -183,7 +183,7 @@ namespace DalObject
         public void ReleasDroneFromCharging(int droneId, int stationId)
         {
             int sIndex = Array.FindIndex<Station>(DataSource.Stations, s => s.Id == stationId);//We found the place of the station in the array of stations
-            DataSource.Stations[stationId].ChargeSlots++;//We will update the number of loading locations
+            DataSource.Stations[sIndex].ChargeSlots++;//We will update the number of loading locations
             int dIndex = Array.FindIndex<Drone>(DataSource.drones, d => d.Id == droneId);//We found the place of the drone in the array of drones
             DataSource.drones[dIndex].Status = DroneStatuses.Available;//Changing the status drone
             DataSource.drones[dIndex].Battery = 100;
