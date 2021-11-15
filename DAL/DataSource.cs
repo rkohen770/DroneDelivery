@@ -42,7 +42,7 @@ namespace DalObject
                 //Grills values that are within the borders of the State of Israel
                 Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                 Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                ChargeSlots = 8,
+                ChargeSlots = 3,
             };
             #endregion
 
@@ -204,11 +204,11 @@ namespace DalObject
                 TargetId = 987654321,
                 Weight = (WeightCategories)rand.Next(3),
                 priority = (Priorities)rand.Next(3),
-                Requested = new DateTime(2021, rand.Next(1, 13), rand.Next(1, 29)),
+                Requested = new DateTime(2021, 8,27,8,30,11),
                 DroneId = 7486,
-                scheduled = parcels[Config.IndexParcel].Requested + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                PickedUp = parcels[Config.IndexParcel].scheduled + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                Delivered = parcels[Config.IndexParcel++].PickedUp + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
+                scheduled = new DateTime(2021, 8, 27, 13, 39, 53),
+                PickedUp = new DateTime(2021, 8, 27, 15, 30, 26),
+                Delivered = new DateTime(2021, 8, 27, 21, 46, 11),
             };
 
             parcels[Config.IndexParcel] = new Parcel
@@ -218,11 +218,11 @@ namespace DalObject
                 TargetId = 234567891,
                 Weight = (WeightCategories)rand.Next(3),
                 priority = (Priorities)rand.Next(3),
-                Requested = new DateTime(2021, rand.Next(1, 13), rand.Next(1, 29)),
+                Requested = new DateTime(2021, 8, 25, 7, 11, 26),
                 DroneId = 7486,
-                scheduled = parcels[Config.IndexParcel].Requested + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                PickedUp = parcels[Config.IndexParcel].scheduled + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                Delivered = parcels[Config.IndexParcel++].PickedUp + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
+                scheduled = new DateTime(2021, 8, 25, 8, 30, 11),
+                PickedUp = new DateTime(2021, 8, 25, 13, 25, 15),
+                Delivered = new DateTime(2021, 8, 25, 18, 8, 6),
             };
 
             parcels[Config.IndexParcel] = new Parcel
@@ -232,11 +232,11 @@ namespace DalObject
                 TargetId = 456789123,
                 Weight = (WeightCategories)rand.Next(3),
                 priority = (Priorities)rand.Next(3),
-                Requested = new DateTime(2021, rand.Next(1, 13), rand.Next(1, 29)),
+                Requested = new DateTime(2021, 8, 8, 5, 30, 11),
                 DroneId = 7686,
-                scheduled = parcels[Config.IndexParcel].Requested + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                PickedUp = parcels[Config.IndexParcel].scheduled + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                Delivered = parcels[Config.IndexParcel++].PickedUp + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
+                scheduled = new DateTime(2021, 8, 8, 5, 56, 54),
+                PickedUp = new DateTime(2021, 8, 8, 7, 45, 18),
+                Delivered = new DateTime(2021, 8, 8, 15, 25, 48),
             };
 
             parcels[Config.IndexParcel] = new Parcel
@@ -246,11 +246,11 @@ namespace DalObject
                 TargetId = 567891234,
                 Weight = (WeightCategories)rand.Next(3),
                 priority = (Priorities)rand.Next(3),
-                Requested = new DateTime(2021, rand.Next(1, 13), rand.Next(1, 29)),
+                Requested = new DateTime(2021, 10, 15, 12, 28, 36),
                 DroneId = 7686,
-                scheduled = parcels[Config.IndexParcel].Requested + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                PickedUp = parcels[Config.IndexParcel].scheduled + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                Delivered = parcels[Config.IndexParcel++].PickedUp + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
+                scheduled = new DateTime(2021, 10, 15, 13, 47, 16),
+                PickedUp = new DateTime(2021, 10, 15, 16, 25, 5),
+                Delivered = new DateTime(2021, 10, 15, 23, 53, 14),
             };
 
             parcels[Config.IndexParcel] = new Parcel
@@ -260,11 +260,11 @@ namespace DalObject
                 TargetId = 678912345,
                 Weight = (WeightCategories)rand.Next(3),
                 priority = (Priorities)rand.Next(3),
-                Requested = new DateTime(2021, rand.Next(1, 13), rand.Next(1, 29)),
+                Requested = new DateTime(2021, 10, 2, 15, 26, 16),
                 DroneId = 7686,
-                scheduled = parcels[Config.IndexParcel].Requested + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                PickedUp = parcels[Config.IndexParcel].scheduled + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                Delivered = parcels[Config.IndexParcel++].PickedUp + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
+                scheduled = new DateTime(2021, 10, 2, 16, 47, 45),
+                PickedUp = new DateTime(2021, 10, 2, 21, 54, 13),
+                Delivered = new DateTime(2021, 10, 2, 22, 47, 25),
             };
 
             parcels[Config.IndexParcel] = new Parcel
@@ -274,11 +274,11 @@ namespace DalObject
                 TargetId = 789123456,
                 Weight = (WeightCategories)rand.Next(3),
                 priority = (Priorities)rand.Next(3),
-                Requested = new DateTime(2021, rand.Next(1, 13), rand.Next(1, 29)),
+                Requested = new DateTime(2021, 5, 4, 3, 36, 35),
                 DroneId = 7916,
-                scheduled = parcels[Config.IndexParcel].Requested + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                PickedUp = parcels[Config.IndexParcel].scheduled + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                Delivered = parcels[Config.IndexParcel++].PickedUp + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
+                scheduled = new DateTime(2021, 5, 4, 6, 45, 12),
+                PickedUp = new DateTime(2021, 5, 4, 8, 52, 15),
+                Delivered = new DateTime(2021, 5, 4, 3, 36, 35),
             };
 
             parcels[Config.IndexParcel] = new Parcel
@@ -288,11 +288,11 @@ namespace DalObject
                 TargetId = 123456789,
                 Weight = (WeightCategories)rand.Next(3),
                 priority = (Priorities)rand.Next(3),
-                Requested = new DateTime(2021, rand.Next(1, 13), rand.Next(1, 29)),
+                Requested = new DateTime(2021, 12, 21, 12, 25, 35),
                 DroneId = 7916,
-                scheduled = parcels[Config.IndexParcel].Requested + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                PickedUp = parcels[Config.IndexParcel].scheduled + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                Delivered = parcels[Config.IndexParcel++].PickedUp + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
+                scheduled = new DateTime(2021, 12, 21, 14, 25, 32),
+                PickedUp = new DateTime(2021, 12, 21, 16, 31, 35),
+                Delivered = new DateTime(2021, 12, 21, 14, 56, 23),
             };
 
             parcels[Config.IndexParcel] = new Parcel
@@ -302,11 +302,11 @@ namespace DalObject
                 TargetId = 123456789,
                 Weight = (WeightCategories)rand.Next(3),
                 priority = (Priorities)rand.Next(3),
-                Requested = new DateTime(2021, rand.Next(1, 13), rand.Next(1, 29)),
+                Requested = new DateTime(2021, 6, 29, 16, 25, 35),
                 DroneId = 7216,
-                scheduled = parcels[Config.IndexParcel].Requested + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                PickedUp = parcels[Config.IndexParcel].scheduled + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                Delivered = parcels[Config.IndexParcel++].PickedUp + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
+                scheduled = new DateTime(2021, 6, 29, 18, 36, 35),
+                PickedUp = new DateTime(2021, 6, 29, 19, 25, 54),
+                Delivered = new DateTime(2021, 6, 29, 20, 12, 20),
             };
 
             parcels[Config.IndexParcel] = new Parcel
@@ -316,11 +316,11 @@ namespace DalObject
                 TargetId = 891234567,
                 Weight = (WeightCategories)rand.Next(3),
                 priority = (Priorities)rand.Next(3),
-                Requested = new DateTime(2021, rand.Next(1, 13), rand.Next(1, 29)),
+                Requested = new DateTime(2021, 4, 21, 11, 25, 45),
                 DroneId = 7216,
-                scheduled = parcels[Config.IndexParcel].Requested + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                PickedUp = parcels[Config.IndexParcel].scheduled + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                Delivered = parcels[Config.IndexParcel++].PickedUp + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
+                scheduled = new DateTime(2021, 4, 21, 11, 58, 45),
+                PickedUp = new DateTime(2021, 4, 21, 14, 12, 11),
+                Delivered = new DateTime(2021, 4, 21, 16, 10, 17),
             };
 
             parcels[Config.IndexParcel] = new Parcel
@@ -330,11 +330,11 @@ namespace DalObject
                 TargetId = 567891234,
                 Weight = (WeightCategories)rand.Next(3),
                 priority = (Priorities)rand.Next(3),
-                Requested = new DateTime(2021, rand.Next(1, 13), rand.Next(1, 29)),
+                Requested = new DateTime(2021, 2, 2, 19, 52, 21),
                 DroneId = 0,
-                scheduled = parcels[Config.IndexParcel].Requested + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                PickedUp = parcels[Config.IndexParcel].scheduled + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
-                Delivered = parcels[Config.IndexParcel++].PickedUp + new TimeSpan(rand.Next(24), rand.Next(60), rand.Next(60)),
+                scheduled = new DateTime(2021, 2, 2, 20, 20, 12),
+                PickedUp = new DateTime(2021, 2, 2, 21, 45, 21),
+                Delivered = new DateTime(2021, 2, 2, 23, 56, 13),
             };
 
             #endregion
