@@ -1,6 +1,7 @@
 ﻿using IDAL.DO;
 using System;
 using System.Collections.Generic;
+
 namespace DalObject
 {
     class DataSource
@@ -25,7 +26,7 @@ namespace DalObject
         public static void Initialize()
         {
             #region stations
-            Stations[Config.IndexStation++] = new Station
+            stations = new List<Station>
             {
                 Id = 11212,
                 Name = 11,
@@ -43,55 +44,71 @@ namespace DalObject
                 Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                 Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
                 ChargeSlots = 2,
+                new Station
+                {
+                    Id = 11212,
+                    Name = 11,
+                    //Grills values that are within the borders of the State of Israel
+                    Longitude = rand.NextDouble() * (31 + 33.3) - 31,
+                    Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
+                    ChargeSlots = 5
+                },
+                new Station
+                {
+                    Id = 22212,
+                    Name = 22,
+                    //Grills values that are within the borders of the State of Israel
+                    Longitude = rand.NextDouble() * (31 + 33.3) - 31,
+                    Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
+                    ChargeSlots = 3
+                }
             };
             #endregion
 
             #region drones
-            drones[Config.IndexDrone++] = new Drone
+            drones = new List<Drone> 
             {
-                Id = 7486,
-                Model = "EG-574",
-                MaxWeight = (WeightCategories)rand.Next(3),
-                Status = (DroneStatuses)rand.Next(3),
-                Battery = 94.3,
+                new Drone
+                {
+                    Id = 7486,
+                    Model = "EG-574",
+                    MaxWeight = (WeightCategories)rand.Next(3),
+                    Status = (DroneStatuses)rand.Next(3),
+                    Battery = 94.3
+                },
+                new Drone
+                {
+                    Id = 7686,
+                    Model = "EG-574",
+                    MaxWeight = (WeightCategories)rand.Next(3),
+                    Status = (DroneStatuses)rand.Next(3),
+                    Battery = 36
+                },
+                new Drone
+                {
+                    Id = 7916,
+                    Model = "EG-474",
+                    MaxWeight = (WeightCategories)rand.Next(3),
+                    Status = (DroneStatuses)rand.Next(3),
+                    Battery = 84.8
+                },
+                new Drone
+                {
+                    Id = 7216,
+                    Model = "EG-474",
+                    MaxWeight = (WeightCategories)rand.Next(3),
+                    Status = (DroneStatuses)rand.Next(3),
+                    Battery = 75
+                },
+                new Drone
+                {
+                    Id = 7945,
+                    Model = "EG-474",
+                    MaxWeight = (WeightCategories)rand.Next(3),
+                    Status = (DroneStatuses)rand.Next(3),
+                    Battery = 98.9
+                }
             };
-
-            drones[Config.IndexDrone++] = new Drone
-            {
-                Id = 7686,
-                Model = "EG-574",
-                MaxWeight = (WeightCategories)rand.Next(3),
-                Status = (DroneStatuses)rand.Next(3),
-                Battery = 36,
-            };
-
-            drones[Config.IndexDrone++] = new Drone
-            {
-                Id = 7916,
-                Model = "EG-474",
-                MaxWeight = (WeightCategories)rand.Next(3),
-                Status = (DroneStatuses)rand.Next(3),
-                Battery = 84.8,
-            };
-
-            drones[Config.IndexDrone++] = new Drone
-            {
-                Id = 7216,
-                Model = "EG-474",
-                MaxWeight = (WeightCategories)rand.Next(3),
-                Status = (DroneStatuses)rand.Next(3),
-                Battery = 75,
-            };
-
-            drones[Config.IndexDrone++] = new Drone
-            {
-                Id = 7945,
-                Model = "EG-474",
-                MaxWeight = (WeightCategories)rand.Next(3),
-                Status = (DroneStatuses)rand.Next(3),
-                Battery = 98.9,
-            };
-
             #endregion
 
             #region customer
@@ -251,6 +268,18 @@ namespace DalObject
                    PickedUp = new DateTime(2021, 8, 27, 15, 30, 26),
                    Delivered = new DateTime(2021, 8, 27, 21, 46, 11),
                 }
+            parcels[Config.IndexParcel] = new Parcel
+            {
+                Id = Config.OrdinalParcelNumber++, //serial number
+                SenderId = 123456789,
+                TargetId = 987654321,
+                Weight = (WeightCategories)rand.Next(3),
+                priority = (Priorities)rand.Next(3),
+                Requested = new DateTime(2021, 8, 27, 8, 30, 11),
+                DroneId = 7486,
+                scheduled = new DateTime(2021, 8, 27, 13, 39, 53),
+                PickedUp = new DateTime(2021, 8, 27, 15, 30, 26),
+                Delivered = new DateTime(2021, 8, 27, 21, 46, 11),
             };
 
             parcels = new List<Parcel>
