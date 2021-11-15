@@ -1,15 +1,16 @@
 ﻿using IDAL.DO;
 using System;
+using System.Collections.Generic;
 
 namespace DalObject
 {
     class DataSource
     {
-        internal static Drone[] drones = new Drone[10];
-        internal static Station[] Stations = new Station[5];
-        internal static Customer[] customers = new Customer[100];
-        internal static Parcel[] parcels = new Parcel[1000];
-        internal static DroneCharge[] droneCharges = new DroneCharge[5];
+        internal static List<Drone> drones = new List<Drone>(10);
+        internal static List<Station> stations = new List<Station>(5);
+        internal static List<Customer> customers = new List<Customer>(100);
+        internal static List<Parcel> parcels = new List<Parcel>(1000);
+        internal static List<DroneCharge> droneCharges = new List<DroneCharge>(5);
         static Random rand = new();
 
         internal class Config
@@ -25,73 +26,73 @@ namespace DalObject
         public static void Initialize()
         {
             #region stations
-            Stations[Config.IndexStation++] = new Station
+            stations = new List<Station>
             {
-                Id = 11212,
-                Name = 11,
-                //Grills values that are within the borders of the State of Israel
-                Longitude = rand.NextDouble() * (31 + 33.3) - 31,
-                Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                ChargeSlots = 5,
-            };
-
-            Stations[Config.IndexStation++] = new Station
-            {
-                Id = 22212,
-                Name = 22,
-                //Grills values that are within the borders of the State of Israel
-                Longitude = rand.NextDouble() * (31 + 33.3) - 31,
-                Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                ChargeSlots = 3,
+                new Station
+                {
+                    Id = 11212,
+                    Name = 11,
+                    //Grills values that are within the borders of the State of Israel
+                    Longitude = rand.NextDouble() * (31 + 33.3) - 31,
+                    Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
+                    ChargeSlots = 5
+                },
+                new Station
+                {
+                    Id = 22212,
+                    Name = 22,
+                    //Grills values that are within the borders of the State of Israel
+                    Longitude = rand.NextDouble() * (31 + 33.3) - 31,
+                    Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
+                    ChargeSlots = 3
+                }
             };
             #endregion
 
             #region drones
-            drones[Config.IndexDrone++] = new Drone
+            drones = new List<Drone> 
             {
-                Id = 7486,
-                Model = "EG-574",
-                MaxWeight = (WeightCategories)rand.Next(3),
-                Status = (DroneStatuses)rand.Next(3),
-                Battery = 94.3,
+                new Drone
+                {
+                    Id = 7486,
+                    Model = "EG-574",
+                    MaxWeight = (WeightCategories)rand.Next(3),
+                    Status = (DroneStatuses)rand.Next(3),
+                    Battery = 94.3
+                },
+                new Drone
+                {
+                    Id = 7686,
+                    Model = "EG-574",
+                    MaxWeight = (WeightCategories)rand.Next(3),
+                    Status = (DroneStatuses)rand.Next(3),
+                    Battery = 36
+                },
+                new Drone
+                {
+                    Id = 7916,
+                    Model = "EG-474",
+                    MaxWeight = (WeightCategories)rand.Next(3),
+                    Status = (DroneStatuses)rand.Next(3),
+                    Battery = 84.8
+                },
+                new Drone
+                {
+                    Id = 7216,
+                    Model = "EG-474",
+                    MaxWeight = (WeightCategories)rand.Next(3),
+                    Status = (DroneStatuses)rand.Next(3),
+                    Battery = 75
+                },
+                new Drone
+                {
+                    Id = 7945,
+                    Model = "EG-474",
+                    MaxWeight = (WeightCategories)rand.Next(3),
+                    Status = (DroneStatuses)rand.Next(3),
+                    Battery = 98.9
+                }
             };
-
-            drones[Config.IndexDrone++] = new Drone
-            {
-                Id = 7686,
-                Model = "EG-574",
-                MaxWeight = (WeightCategories)rand.Next(3),
-                Status = (DroneStatuses)rand.Next(3),
-                Battery = 36,
-            };
-
-            drones[Config.IndexDrone++] = new Drone
-            {
-                Id = 7916,
-                Model = "EG-474",
-                MaxWeight = (WeightCategories)rand.Next(3),
-                Status = (DroneStatuses)rand.Next(3),
-                Battery = 84.8,
-            };
-
-            drones[Config.IndexDrone++] = new Drone
-            {
-                Id = 7216,
-                Model = "EG-474",
-                MaxWeight = (WeightCategories)rand.Next(3),
-                Status = (DroneStatuses)rand.Next(3),
-                Battery = 75,
-            };
-
-            drones[Config.IndexDrone++] = new Drone
-            {
-                Id = 7945,
-                Model = "EG-474",
-                MaxWeight = (WeightCategories)rand.Next(3),
-                Status = (DroneStatuses)rand.Next(3),
-                Battery = 98.9,
-            };
-
             #endregion
 
             #region customer
@@ -204,7 +205,7 @@ namespace DalObject
                 TargetId = 987654321,
                 Weight = (WeightCategories)rand.Next(3),
                 priority = (Priorities)rand.Next(3),
-                Requested = new DateTime(2021, 8,27,8,30,11),
+                Requested = new DateTime(2021, 8, 27, 8, 30, 11),
                 DroneId = 7486,
                 scheduled = new DateTime(2021, 8, 27, 13, 39, 53),
                 PickedUp = new DateTime(2021, 8, 27, 15, 30, 26),
