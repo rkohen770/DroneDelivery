@@ -28,22 +28,6 @@ namespace DalObject
             #region stations
             stations = new List<Station>
             {
-                Id = 11212,
-                Name = 11,
-                //Grills values that are within the borders of the State of Israel
-                Longitude = rand.NextDouble() * (31 + 33.3) - 31,
-                Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                ChargeSlots = 5,
-            };
-
-            Stations[Config.IndexStation++] = new Station
-            {
-                Id = 22212,
-                Name = 22,
-                //Grills values that are within the borders of the State of Israel
-                Longitude = rand.NextDouble() * (31 + 33.3) - 31,
-                Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                ChargeSlots = 2,
                 new Station
                 {
                     Id = 11212,
