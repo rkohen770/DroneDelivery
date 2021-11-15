@@ -168,7 +168,7 @@ namespace DalObject
         public void SendingDroneForCharging(int droneId, int stationId)
         {
             int sIndex = Array.FindIndex<Station>(DataSource.Stations, s => s.Id == stationId);//We found the place of the station in the array of stations
-            DataSource.Stations[stationId].ChargeSlots--;//We will update the number of loading locations
+            DataSource.Stations[sIndex].ChargeSlots--;//We will update the number of loading locations
             int dIndex = Array.FindIndex<Drone>(DataSource.drones, d => d.Id == droneId);//We found the place of the drone in the array of drones
             DataSource.drones[dIndex].Status = DroneStatuses.Maintenance;//Changing the glider position
             DroneCharge droneCharge = new DroneCharge { DroneId = droneId, StationId = stationId };//Add a instance of an instance loading entity
@@ -186,6 +186,7 @@ namespace DalObject
             DataSource.Stations[stationId].ChargeSlots++;//We will update the number of loading locations
             int dIndex = Array.FindIndex<Drone>(DataSource.drones, d => d.Id == droneId);//We found the place of the drone in the array of drones
             DataSource.drones[dIndex].Status = DroneStatuses.Available;//Changing the status drone
+            DataSource.drones[dIndex].Battery = 100;
             int dcIndex = Array.FindIndex(DataSource.droneCharges, dc => dc.DroneId == droneId && dc.StationId == stationId);
             //remove a load of drones to the array
             DataSource.droneCharges[dcIndex].DroneId = 0;
@@ -295,10 +296,8 @@ namespace DalObject
         /// <returns>list of parcel without special dron</returns>
         public Parcel[] GetAllParcelsWithoutSpecialDron()
         {
-            //return all the parcels without special dron
-            Parcel[] parcel = new Parcel[DataSource.Config.IndexParcel];
-            parcel= Array.FindAll(DataSource.parcels, p => p.Id != 0 && p.DroneId == 0 );
-            return parcel;
+            //return all the parcels without special drone
+            return Array.FindAll(DataSource.parcels, p => p.Id > 0 && p.DroneId == 0 );
         }
 
         /// <summary>

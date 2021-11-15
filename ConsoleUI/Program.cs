@@ -303,21 +303,21 @@ namespace ConsoleUI
 
         private static void printParcel(DalObject.DalObject dal)
         {
-            Console.WriteLine("Enter the parcel view: stationId");
+            Console.WriteLine("Enter the parcel view: parcelId");
             int stationId = int.Parse(Console.ReadLine());
             Console.WriteLine(dal.ParcelView(stationId));
         }
 
         private static void printCustomer(DalObject.DalObject dal)
         {
-            Console.WriteLine("Enter the customer view: stationId");
+            Console.WriteLine("Enter the customer view: customerId");
             int stationId = int.Parse(Console.ReadLine());
             Console.WriteLine(dal.CustomerView(stationId));
         }
 
         private static void printDrone(DalObject.DalObject dal)
         {
-            Console.WriteLine("Enter the drone view: stationId");
+            Console.WriteLine("Enter the drone view: droneId");
             int stationId = int.Parse(Console.ReadLine());
             Console.WriteLine(dal.DroneView(stationId));
         }
