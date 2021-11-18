@@ -242,9 +242,9 @@ namespace ConsoleUI
             int id = int.Parse(Console.ReadLine());
             string model = Console.ReadLine();
             WeightCategories maxWeight = (WeightCategories)int.Parse(Console.ReadLine());
-            DroneStatuses status = (DroneStatuses)int.Parse(Console.ReadLine());
-            double battery = double.Parse(Console.ReadLine());
-            dal.AddDrone(id, model, maxWeight, status, battery);
+            //DroneStatuses status = (DroneStatuses)int.Parse(Console.ReadLine());
+            //double battery = double.Parse(Console.ReadLine());
+            dal.AddDrone(id, model, maxWeight/*, status,  battery*/);
         }
 
         private static void addStation(DalObject.DalObject dal)
@@ -293,9 +293,10 @@ namespace ConsoleUI
 
         private static void assigningParcelToDrone(DalObject.DalObject dal)
         {
-            Console.WriteLine("Enter the parcel id for assigning to drone: parcelId");
+            Console.WriteLine("Enter the parcel id for assigning to drone: parcelId , droneId");
             int parceleId = int.Parse(Console.ReadLine());
-            dal.AssigningParcelToDrone(parceleId);
+            int droneID = int.Parse(Console.ReadLine());
+            dal.AssigningParcelToDrone(parceleId,droneID);
         }
         #endregion
 

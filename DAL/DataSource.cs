@@ -15,12 +15,13 @@ namespace DalObject
 
         internal class Config
         {
-            internal static int IndexDrone = 0;
-            internal static int IndexStation = 0;
-            internal static int IndexCustomer = 0;
-            internal static int IndexParcel = 0;
-            internal static int IndexDroneCharge = 0;
             public static int OrdinalParcelNumber = 10000;
+
+            public static double vacant { get; set; }
+            public static double CarriesLightWeight { get; set; }
+            public static double CarriesMediumWeight { get; set; }
+            public static double CarriesHeavyWeight { get; set; }
+            public static double DroneChargingRate { get; set; }
         }
 
         public static void Initialize()
@@ -57,40 +58,40 @@ namespace DalObject
                     Id = 7486,
                     Model = "EG-574",
                     MaxWeight = (WeightCategories)rand.Next(3),
-                    Status = (DroneStatuses)rand.Next(3),
-                    Battery = 94.3
+                    //Status = (DroneStatuses)rand.Next(3),
+                    //Battery = 94.3
                 },
                 new Drone
                 {
                     Id = 7686,
                     Model = "EG-574",
                     MaxWeight = (WeightCategories)rand.Next(3),
-                    Status = (DroneStatuses)rand.Next(3),
-                    Battery = 36
+                    //Status = (DroneStatuses)rand.Next(3),
+                    //Battery = 36
                 },
                 new Drone
                 {
                     Id = 7916,
                     Model = "EG-474",
                     MaxWeight = (WeightCategories)rand.Next(3),
-                    Status = (DroneStatuses)rand.Next(3),
-                    Battery = 84.8
+                    //Status = (DroneStatuses)rand.Next(3),
+                    //Battery = 84.8
                 },
                 new Drone
                 {
                     Id = 7216,
                     Model = "EG-474",
                     MaxWeight = (WeightCategories)rand.Next(3),
-                    Status = (DroneStatuses)rand.Next(3),
-                    Battery = 75
+                    //Status = (DroneStatuses)rand.Next(3),
+                    //Battery = 75
                 },
                 new Drone
                 {
                     Id = 7945,
                     Model = "EG-474",
                     MaxWeight = (WeightCategories)rand.Next(3),
-                    Status = (DroneStatuses)rand.Next(3),
-                    Battery = 98.9
+                    //Status = (DroneStatuses)rand.Next(3),
+                    //Battery = 98.9
                 }
             };
             #endregion
@@ -106,12 +107,7 @@ namespace DalObject
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                   Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                }
-                
-            };
-
-            customers = new List<Customer>
-            {
+                },
                 new Customer
                 {
                   Id = 987654321,
@@ -120,12 +116,8 @@ namespace DalObject
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                   Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                }
-                
-            };
+                },
 
-            customers = new List<Customer>
-            {
                 new Customer
                 {
                   Id = 234567891,
@@ -134,12 +126,8 @@ namespace DalObject
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                   Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                }
-                
-            };
+                },
 
-            customers = new List<Customer>
-            {
                 new Customer
                 {
                   Id = 345678912,
@@ -148,12 +136,8 @@ namespace DalObject
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                   Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                }
-               
-            };
+                },
 
-            customers = new List<Customer>
-            {
                 new Customer
                 {
                   Id = 456789123,
@@ -162,12 +146,8 @@ namespace DalObject
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                   Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                }
-                
-            };
+                },
 
-            customers = new List<Customer>
-            {
                 new Customer
                 {
                   Id = 567891234,
@@ -176,11 +156,8 @@ namespace DalObject
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                   Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                }
-            };
+                },
 
-            customers = new List<Customer>
-            {
                 new Customer
                 {
                    Id = 678912345,
@@ -189,12 +166,8 @@ namespace DalObject
                    //Grills values that are within the borders of the State of Israel
                    Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                    Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                }
-                
-            };
+                },
 
-            customers = new List<Customer>
-            {
                 new Customer
                 {
                   Id = 789123456,
@@ -203,12 +176,8 @@ namespace DalObject
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                   Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                }
-              
-            };
+                },
 
-            customers = new List<Customer>
-            {
                 new Customer
                 {
                   Id = 891234567,
@@ -217,12 +186,8 @@ namespace DalObject
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                   Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                }
-               
-            };
+                },
 
-            customers = new List<Customer>
-            {
                 new Customer
                 {
                   Id = 101123556,
@@ -251,23 +216,8 @@ namespace DalObject
                    scheduled = new DateTime(2021, 8, 27, 13, 39, 53),
                    PickedUp = new DateTime(2021, 8, 27, 15, 30, 26),
                    Delivered = new DateTime(2021, 8, 27, 21, 46, 11),
-                }
-            parcels[Config.IndexParcel] = new Parcel
-            {
-                Id = Config.OrdinalParcelNumber++, //serial number
-                SenderId = 123456789,
-                TargetId = 987654321,
-                Weight = (WeightCategories)rand.Next(3),
-                priority = (Priorities)rand.Next(3),
-                Requested = new DateTime(2021, 8, 27, 8, 30, 11),
-                DroneId = 7486,
-                scheduled = new DateTime(2021, 8, 27, 13, 39, 53),
-                PickedUp = new DateTime(2021, 8, 27, 15, 30, 26),
-                Delivered = new DateTime(2021, 8, 27, 21, 46, 11),
-            };
+                },
 
-            parcels = new List<Parcel>
-            {
                 new Parcel
                 {
                    Id = Config.OrdinalParcelNumber++, //serial number
@@ -280,11 +230,8 @@ namespace DalObject
                    scheduled = new DateTime(2021, 8, 25, 8, 30, 11),
                    PickedUp = new DateTime(2021, 8, 25, 13, 25, 15),
                    Delivered = new DateTime(2021, 8, 25, 18, 8, 6),
-                }
-            };
+                },
 
-            parcels = new List<Parcel>
-            {
                 new Parcel
                 {
                   Id = Config.OrdinalParcelNumber++, //serial number
@@ -297,12 +244,8 @@ namespace DalObject
                   scheduled = new DateTime(2021, 8, 8, 5, 56, 54),
                   PickedUp = new DateTime(2021, 8, 8, 7, 45, 18),
                   Delivered = new DateTime(2021, 8, 8, 15, 25, 48),
-                }
+                },
 
-            };
-
-            parcels = new List<Parcel>
-            {
                 new Parcel
                 {
                   Id = Config.OrdinalParcelNumber++, //serial number
@@ -315,11 +258,8 @@ namespace DalObject
                   scheduled = new DateTime(2021, 10, 15, 13, 47, 16),
                   PickedUp = new DateTime(2021, 10, 15, 16, 25, 5),
                   Delivered = new DateTime(2021, 10, 15, 23, 53, 14),
-                }
-            };
+                },
 
-            parcels = new List<Parcel>
-            {
                 new Parcel
                 {
                   Id = Config.OrdinalParcelNumber++, //serial number
@@ -332,11 +272,8 @@ namespace DalObject
                   scheduled = new DateTime(2021, 10, 2, 16, 47, 45),
                   PickedUp = new DateTime(2021, 10, 2, 21, 54, 13),
                   Delivered = new DateTime(2021, 10, 2, 22, 47, 25),
-                }
-            };
+                },
 
-            parcels = new List<Parcel>
-            {
                 new Parcel
                 {
                    Id = Config.OrdinalParcelNumber++, //serial number
@@ -349,11 +286,8 @@ namespace DalObject
                    scheduled = new DateTime(2021, 5, 4, 6, 45, 12),
                    PickedUp = new DateTime(2021, 5, 4, 8, 52, 15),
                    Delivered = new DateTime(2021, 5, 4, 3, 36, 35),
-                }
-            };
+                },
 
-            parcels = new List<Parcel>
-            {
                 new Parcel
                 {
                    Id = Config.OrdinalParcelNumber++, //serial number
@@ -366,11 +300,8 @@ namespace DalObject
                    scheduled = new DateTime(2021, 12, 21, 14, 25, 32),
                    PickedUp = new DateTime(2021, 12, 21, 16, 31, 35),
                    Delivered = new DateTime(2021, 12, 21, 14, 56, 23),
-                }
-            };
+                },
 
-            parcels = new List<Parcel>
-            {
                 new Parcel
                 {
                    Id = Config.OrdinalParcelNumber++, //serial number
@@ -383,11 +314,8 @@ namespace DalObject
                    scheduled = new DateTime(2021, 6, 29, 18, 36, 35),
                    PickedUp = new DateTime(2021, 6, 29, 19, 25, 54),
                    Delivered = new DateTime(2021, 6, 29, 20, 12, 20),
-                }
-            };
+                },
 
-            parcels = new List<Parcel>
-            {
                 new Parcel
                 {
                   Id = Config.OrdinalParcelNumber++, //serial number
@@ -400,12 +328,8 @@ namespace DalObject
                   scheduled = new DateTime(2021, 4, 21, 11, 58, 45),
                   PickedUp = new DateTime(2021, 4, 21, 14, 12, 11),
                   Delivered = new DateTime(2021, 4, 21, 16, 10, 17),
-                }
-               
-            };
+                },
 
-            parcels = new List<Parcel>
-            {
                 new Parcel
                 {
                   Id = Config.OrdinalParcelNumber++, //serial number
@@ -419,7 +343,6 @@ namespace DalObject
                   PickedUp = new DateTime(2021, 2, 2, 21, 45, 21),
                   Delivered = new DateTime(2021, 2, 2, 23, 56, 13),
                 }
-                
             };
 
             #endregion
