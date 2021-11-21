@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class ParcelAtCustomer
+    class ParcelForList
     {
         public int Id;
+        public string CustomerNameSend;
+        public string CustomerNameGetting;
         public Enums.WeightCategories Weight;
         public Enums.Priorities Priorities;
         public Enums.ParcelStatus ParcelStatus;
-        public CustomerInParcel Source;
-        public CustomerInParcel Target;
 
         public override string ToString()
         {
-            return $"Id: {Id} \nWeight {Weight} \nPriorities {Priorities} \nParcelStatus {ParcelStatus}" +
-                $"\nSource {Source} \nTarget {Target}";
+            return $"Id: {Id} \nCustomerNameSend: {CustomerNameSend} \nCustomerNameGetting {CustomerNameGetting}" +
+                $" \nWeight {Weight} \nPriorities {Priorities} \nParcelStatus {ParcelStatus}";
         }
 
     }
