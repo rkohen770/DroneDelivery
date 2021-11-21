@@ -11,6 +11,7 @@ namespace BL
     public partial class BL :IBL.IBL
     {
         IDal dAL = new DalObject.DalObject();
+
         //public List<DroneForList> droneForLists=new List<DroneForList>();
         public BL()
         {
