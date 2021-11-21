@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL.BL
+namespace IBL.BO
 {
-    class Client
+    class CustomerForParcel
     {
+       
     }
 }
