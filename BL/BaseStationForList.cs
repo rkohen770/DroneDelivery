@@ -8,5 +8,17 @@ namespace IBL.BO
 {
     class BaseStationForList
     {
+        public int Id;
+        public string NameBaseStation;
+        public int NumOfAvailableChargingPositions;
+        public int NumOfBusyChargingPositions;
+
+        public override string ToString()
+        {
+            return $"Id: {Id} \nNameBaseStation {NameBaseStation} " +
+                $"\nNumOfAvailableChargingPositions {NumOfAvailableChargingPositions}" +
+                $"\nNumOfBusyChargingPositions {NumOfBusyChargingPositions}";
+        }
+
     }
 }
