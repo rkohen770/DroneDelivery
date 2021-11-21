@@ -8,5 +8,13 @@ namespace IBL.BO
 {
     class DroneInParcel
     {
+        public int Id;
+        public double Battery;
+        public Location CurrentLocation;
+
+        public override string ToString()
+        {
+            return $"Id: {Id} \nBattery {Battery} \nCurrentLocation{CurrentLocation}"; 
+        }
     }
 }
