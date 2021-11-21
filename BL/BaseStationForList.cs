@@ -8,10 +8,10 @@ namespace IBL.BO
 {
     class BaseStationForList
     {
-        public int Id;
-        public string NameBaseStation;
-        public int NumOfAvailableChargingPositions;
-        public int NumOfBusyChargingPositions;
+        public int Id { get; set; }
+        public string NameBaseStation { get; set; }
+        public int NumOfAvailableChargingPositions { get; set; }
+        public int NumOfBusyChargingPositions { get; set; }
 
         public override string ToString()
         {

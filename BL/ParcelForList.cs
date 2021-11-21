@@ -8,12 +8,12 @@ namespace IBL.BO
 {
     class ParcelForList
     {
-        public int Id;
-        public string CustomerNameSend;
-        public string CustomerNameGetting;
-        public Enums.WeightCategories Weight;
-        public Enums.Priorities Priorities;
-        public Enums.ParcelStatus ParcelStatus;
+        public int Id { get; set; }
+        public string CustomerNameSend { get; set; }
+        public string CustomerNameGetting { get; set; }
+        public Enums.WeightCategories Weight { get; set; }
+        public Enums.Priorities Priorities { get; set; }
+        public Enums.ParcelStatus ParcelStatus { get; set; }
 
         public override string ToString()
         {

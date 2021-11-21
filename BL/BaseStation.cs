@@ -8,11 +8,11 @@ namespace IBL.BO
 {
     class BaseStation
     {
-        public int Id;
-        public string NameBaseStation;
-        public Location Location;
-        public int NumOfAvailableChargingPositions;
-        public List<DroneInCharging> DroneInChargings;
+        public int Id { get; set; }
+        public string NameBaseStation { get; set; }
+        public Location Location { get; set; }
+        public int NumOfAvailableChargingPositions { get; set; }
+        public List<DroneInCharging> DroneInChargings = new List<DroneInCharging>();//list of drones in charging
 
 
         public override string ToString()

@@ -9,13 +9,13 @@ using IDAL;
 using IDAL.DO;
 namespace BL
 {
-    public partial class BlObject : IBL.IBL
+    public partial class BlObject :IBL.IBL
     {
         IDal dal = new DalObject.DalObject();
         //public List<DroneForList> droneForLists=new List<DroneForList>();
         public BlObject()
         {
-
+            
         }
 
         public void AddBaseStation(int id, string nameBaseStation, Location location, int numOfAvailableChargingPositions)
@@ -29,7 +29,7 @@ namespace BL
         }
 
 
-        public void AddDrone(int droneId, string model, IBL.BO.WeightCategories maxWeight, int stationId)
+        public void AddDrone(int droneId,  string model, WeightCategories maxWeight, int stationId )
         {
             throw new NotImplementedException();
         }
@@ -40,7 +40,7 @@ namespace BL
             throw new NotImplementedException();
         }
 
-
+        
 
         public int AddParcel(int senderId, int targetId, WeightCategories weight, Enums.Priorities priority, int droneId = 0)
         {

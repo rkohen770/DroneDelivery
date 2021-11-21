@@ -9,6 +9,6 @@ namespace IBL.BO
     public enum WeightCategories { Easy, Intermediate, Liver };
     public enum Priorities { Normal, Fast, Emergency };
     public enum ParcelStatus { Defined, Associated, WasCollected, Provided };
-    public enum ParcelStatusInTransfer { AwaitingCollection, OnTheWayToDestination }
-    public enum DroneStatus { Available, Maintenance, Delivery }
+    public enum ParcelStatusInTransfer { AwaitingCollection, OnTheWayToDestination };
+    public enum DroneStatus { Available, Maintenance, Delivery };
 }
