@@ -8,13 +8,13 @@ namespace IBL.BO
 {
     class Drone
     {
-        public int Id;
-        public string Model;
-        public Enums.WeightCategories Weight;
-        public double Battery;
-        public Enums.DroneStatus DroneStatus;
-        public ParcelInTransfer ParcelInTransfer;
-        public Location CurrentLocation;
+        public int Id { get; set; }
+        public string Model { get; set; }
+        public Enums.WeightCategories Weight { get; set; }
+        public double Battery { get; set; }
+        public Enums.DroneStatus DroneStatus { get; set; }
+        public ParcelInTransfer ParcelInTransfer { get; set; }
+        public Location CurrentLocation { get; set; }
 
         public override string ToString()
         {

@@ -8,15 +8,15 @@ namespace IBL.BO
 {
     class ParcelInTransfer
     {
-        public int Id;
-        public Enums.ParcelStatusInTransfer ParcelStatusInTransfer;
-        public Enums.Priorities Priorities;
-        public Enums.WeightCategories Weight;
-        public CustomerInParcel Sender;
-        public CustomerInParcel Getting;
-        public Location Collection;
-        public Location DeliveryDestination;
-        public double TransportDistance;
+        public int Id { get; set; }
+        public Enums.ParcelStatusInTransfer ParcelStatusInTransfer { get; set; }
+        public Enums.Priorities Priorities { get; set; }
+        public Enums.WeightCategories Weight { get; set; }
+        public CustomerInParcel Sender { get; set; }
+        public CustomerInParcel Getting { get; set; }
+        public Location Collection { get; set; }
+        public Location DeliveryDestination { get; set; }
+        public double TransportDistance { get; set; }
 
         public override string ToString()
         {
