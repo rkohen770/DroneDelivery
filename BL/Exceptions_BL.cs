@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL
+namespace BL
 {
-    public interface IBL
+    class Exceptions_BL:Exception
     {
     }
 }
