@@ -88,12 +88,86 @@ namespace ConsoleUI_BL
                             case (int)Update.RELEAS_DRONE_FROME_CHARGING:
                                 releasDroneFromCharging(bl);
                                 break;
+
+                            case (int)Update.ASSIGN_PARCEL_TO_DRONE:
+                                assignParcelToDrone(bl);
+                                break;
+
+                            case (int)Update.COLLECTION_PARCEL_BY_DRONE:
+                                collectionParcelByDrone(bl);
+                                break;
+
+                            case (int)Update.DELIVERY_PARCEL_BY_DRONE:
+                                deliveryParcelByDrone(bl);
+                                break;
                             default:
                                 break;
                         }
                         break;
-                        #endregion
+                    #endregion
 
+                    #region display method
+                    case Menu.DISPLAY:
+                        MenuUpdate();
+                        choice = int.Parse(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case (int)Display.DISPLAY_STATION:
+                                displayStation(bl);
+                                break;
+
+                            case (int)Display.DISPLAY_DRONE:
+                                displayDrone(bl);
+                                break;
+
+                            case (int)Display.DISPLAY_CUSTOMER:
+                                displayCustomer(bl);
+                                break;
+
+                            case (int)Display.DISPLAY_PARCEL:
+                                displayParcel(bl);
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    #endregion
+
+                    //#region viewItemList
+                    //case Menu.VIEW_ITEM_LIST:
+                    //    MenuViewItemList();
+                    //    choice = int.Parse(Console.ReadLine());
+                    //    switch (choice)
+                    //    {
+                    //        case (int)viewItemList.LIST_OF_BASE_STATIONS:
+                    //            foreach (var temp in bl.GetAllBaseStationsBo()) ;
+                    //                Console.WriteLine(temp);
+                    //            break;
+
+                    //        case (int)viewItemList.LIST_OF_DRONE_VIEW:
+                    //            foreach (var temp in dal.GetAllDrones())
+                    //                Console.WriteLine(temp);
+                    //            break;
+
+                    //        case (int)viewItemList.LIST_OF_CUSTOMER_VIEW:
+                    //            foreach (var temp in dal.GetAllCustomers())
+                    //                Console.WriteLine(temp);
+                    //            break;
+                    //        case (int)viewItemList.LIST_OF_PARCEL_VIEW:
+                    //            foreach (var temp in dal.GetAllParcels())
+                    //                Console.WriteLine(temp);
+                    //            break;
+
+                    //        case (int)viewItemList.LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE:
+                    //            foreach (var temp in dal.GetAllParcelsWithoutSpecialDron())
+                    //                Console.WriteLine(temp);
+                    //            break;
+                    //        case (int)viewItemList.LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION:
+                    //            foreach (var temp in dal.GetAllStationsWithAvailableChargingStations())
+                    //                Console.WriteLine(temp);
+                    //            break;
+                            default:
+                        break;
 
                 }
                 MenuMessages();
@@ -126,9 +200,29 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter 1 for update the base station data");
             Console.WriteLine("Enter 2 for update the customer data");
             Console.WriteLine("Enter 3 for sending a drone for charging at a base station");
-            Console.WriteLine("Enter 4 for release drone from charging at base station");
+            Console.WriteLine("Enter 4 for release the drone from charging");
+            Console.WriteLine("Enter 5 for association of the package to the drone");
+            Console.WriteLine("Enter 6 for Collection of a parcel by drone");
+            Console.WriteLine("Enter 7 for delivery parcel by drone");
         }
 
+        private static void MenuDisplay()
+        {
+            Console.WriteLine("Enter 0 for base Station View");
+            Console.WriteLine("Enter 1 for drone view");
+            Console.WriteLine("Enter 2 for customer view");
+            Console.WriteLine("Enter 3 for parcel view");
+        }
+
+        private static void MenuViewItemList()
+        {
+            Console.WriteLine("Enter 0 for displays a list of base stations");
+            Console.WriteLine("Enter 1 for displays a list of drones");
+            Console.WriteLine("Enter 2 for displays a list of customers");
+            Console.WriteLine("Enter 3 for displays a list of parcels");
+            Console.WriteLine("Enter 4 for displays a list of parcels that have not yet been assigned to the drone");
+            Console.WriteLine("Enter 5 for display of base stations with available charging stations");
+        }
         #endregion
 
         #region add item method
@@ -145,7 +239,7 @@ namespace ConsoleUI_BL
             double lattitude = double.Parse(Console.ReadLine());
             Location location = new Location() { Latitude = lattitude, Longitude = longitude };
             int chargeSlots = int.Parse(Console.ReadLine());
-            bl.AddBaseStationBo(id, name,location, chargeSlots);
+            bl.AddBaseStationBo(id, name, location, chargeSlots);
         }
 
         private static void addDrone(BlObject bl)
@@ -196,7 +290,7 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter the base station details: id,name, num charging");
             int stationId = int.Parse(Console.ReadLine());
-            int nameBaseStation= int.Parse(Console.ReadLine());
+            int nameBaseStation = int.Parse(Console.ReadLine());
             int totalAmountOfChargingStations = int.Parse(Console.ReadLine());
             bl.UpdateBaseStationData(id: stationId, nameBaseStation: nameBaseStation, totalAmountOfChargingStations: totalAmountOfChargingStations);
 
@@ -204,7 +298,7 @@ namespace ConsoleUI_BL
 
         public static void updateCustomer(BlObject bl)
         {
-            Console.WriteLine("Enter the base station details: id,name, phone");
+            Console.WriteLine("Enter the base customer details: id,name, phone");
             int id = int.Parse(Console.ReadLine());
             string newName = Console.ReadLine();
             string newPhone = Console.ReadLine();
@@ -213,18 +307,72 @@ namespace ConsoleUI_BL
 
         public static void sendingDroneForCharging(BlObject bl)
         {
-            Console.WriteLine("Enter the sending drone for charging: droneId, stationId");
+            Console.WriteLine("Enter the drone id: droneId");
             int id = int.Parse(Console.ReadLine());
             bl.UpdateSendingDroneForCharging(id);
         }
 
         private static void releasDroneFromCharging(BlObject bl)
         {
-            Console.WriteLine("Enter the releas drone from charging: droneId, stationId");
+            Console.WriteLine("Enter the drone details: droneId, stationId");
             int id = int.Parse(Console.ReadLine());
-            DateTime chargingTime = int.Parse(Console.ReadLine());
-            bl.UpdateReleaseDroneFromCharging(id,chargingTime)
+            double chargingTime = double.Parse(Console.ReadLine());
+            bl.UpdateReleaseDroneFromCharging(id, chargingTime);
+        }
+
+        private static void assignParcelToDrone(BlObject bl)
+        {
+            Console.WriteLine("Enter the drone id: id");
+            int id = int.Parse(Console.ReadLine());
+            bl.UpdateAssignParcelToDrone(id);
+        }
+
+        private static void collectionParcelByDrone(BlObject bl)
+        {
+            Console.WriteLine("Enter the drone id: id");
+            int id = int.Parse(Console.ReadLine());
+            bl.UpdateCollectionParcelByDrone(id);
+        }
+
+        private static void deliveryParcelByDrone(BlObject bl)
+        {
+            Console.WriteLine("Enter the drone id: id");
+            int id = int.Parse(Console.ReadLine());
+            bl.UpdateDeliveryParcelByDrone(id);
+        }
+
+
+        #endregion
+
+        #region display method
+        private static void displayStation(BlObject bl)
+        {
+            Console.WriteLine("Enter the station view: stationId");
+            int stationId = int.Parse(Console.ReadLine());
+            Console.WriteLine(bl.BaseStationViewBl(stationId));
+        }
+
+        private static void displayDrone(BlObject bl)
+        {
+            Console.WriteLine("Enter the drone view: droneId");
+            int droneId = int.Parse(Console.ReadLine());
+            Console.WriteLine(bl.DroneViewBl(droneId));
+        }
+
+        private static void displayCustomer(BlObject bl)
+        {
+            Console.WriteLine("Enter the customer view: customerId");
+            int customerId = int.Parse(Console.ReadLine());
+            Console.WriteLine(bl.CustomerViewBl(customerId));
+        }
+
+        private static void displayParcel(BlObject bl)
+        {
+            Console.WriteLine("Enter the parcel view: parcelId");
+            int parcelId = int.Parse(Console.ReadLine());
+            Console.WriteLine(bl.ParcelViewBl(parcelId));
         }
         #endregion
+
     }
 }

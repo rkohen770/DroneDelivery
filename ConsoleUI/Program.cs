@@ -99,20 +99,20 @@ namespace ConsoleUI
                         switch (choice)
                         {
                             case (int)Display.DISPLAY_STATION:
-                                prinStation(dal);
+                                displayStation(dal);
                                 break;
 
                             case (int)Display.DISPLAY_DRONE:
-                                printDrone(dal);
+                                displayDrone(dal);
                                 break;
 
                             case (int)Display.DISPLAY_CUSTOMER:
 
-                                printCustomer(dal);
+                                displayCustomer(dal);
                                 break;
 
                             case (int)Display.DISPLAY_PARCEL:
-                                printParcel(dal);
+                                displayParcel(dal);
                                 break;
                             default:
                                 break;
@@ -200,19 +200,19 @@ namespace ConsoleUI
         private static void MenuDisplay()
         {
             Console.WriteLine("Enter 0 for base Station View");
-            Console.WriteLine("Enter 1 for drone displaye");
+            Console.WriteLine("Enter 1 for drone view");
             Console.WriteLine("Enter 2 for customer view");
-            Console.WriteLine("Enter 3 for package view");
+            Console.WriteLine("Enter 3 for parcel view");
         }
 
         private static void MenuViewItemList()
         {
-            Console.WriteLine("Enter 0 for get all bus station");
-            Console.WriteLine("Enter 1 for displays the list of drone");
-            Console.WriteLine("Enter 2 for view the customer list");
-            Console.WriteLine("Enter 3 for displays the list of packages");
-            Console.WriteLine("Enter 4 for displays a list of packages that have not yet been assigned to a drone");
-            Console.WriteLine("Enter 5 for display base stations with available charging stations");
+            Console.WriteLine("Enter 0 for displays a list of base stations");
+            Console.WriteLine("Enter 1 for displays a list of drones");
+            Console.WriteLine("Enter 2 for displays a list of customers");
+            Console.WriteLine("Enter 3 for displays a list of parcels");
+            Console.WriteLine("Enter 4 for displays a list of parcels that have not yet been assigned to the drone");
+            Console.WriteLine("Enter 5 for display of base stations with available charging stations");
         }
         #endregion
 
@@ -309,33 +309,34 @@ namespace ConsoleUI
 
         #region display method
 
-        private static void printParcel(DalObject.DalObject dal)
+        private static void displayParcel(DalObject.DalObject dal)
         {
             Console.WriteLine("Enter the parcel view: parcelId");
-            int stationId = int.Parse(Console.ReadLine());
-            Console.WriteLine(dal.ParcelView(stationId));
+            int parcelId = int.Parse(Console.ReadLine());
+            Console.WriteLine(dal.ParcelView(parcelId));
         }
 
-        private static void printCustomer(DalObject.DalObject dal)
+        private static void displayCustomer(DalObject.DalObject dal)
         {
             Console.WriteLine("Enter the customer view: customerId");
-            int stationId = int.Parse(Console.ReadLine());
-            Console.WriteLine(dal.CustomerView(stationId));
+            int customerId = int.Parse(Console.ReadLine());
+            Console.WriteLine(dal.CustomerView(customerId));
         }
 
-        private static void printDrone(DalObject.DalObject dal)
+        private static void displayDrone(DalObject.DalObject dal)
         {
             Console.WriteLine("Enter the drone view: droneId");
-            int stationId = int.Parse(Console.ReadLine());
-            Console.WriteLine(dal.DroneView(stationId));
+            int droneId = int.Parse(Console.ReadLine());
+            Console.WriteLine(dal.DroneView(droneId));
         }
 
-        private static void prinStation(DalObject.DalObject dal)
+        private static void displayStation(DalObject.DalObject dal)
         {
             Console.WriteLine("Enter the base station view: stationId");
             int stationId = int.Parse(Console.ReadLine());
             Console.WriteLine(dal.BaseStationView(stationId));
         }
+
 
         #endregion
 

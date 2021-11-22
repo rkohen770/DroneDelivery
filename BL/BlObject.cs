@@ -194,10 +194,42 @@ namespace BL
         /// </summary>
         /// <param name="id">Id drone</param>
         /// <param name="chargingtime">Charging time</param>
-        public void UpdateReleaseDroneFromCharging(int id, DateTime chargingtime)
+        public void UpdateReleaseDroneFromCharging(int id, double chargingtime)
         {
 
         }
+
+        /// <summary>
+        /// Assign parcel to drone
+        /// </summary>
+        /// <param name="id">Id drone</param>
+        /// <param name="chargingtime">Charging time</param>
+        public void UpdateAssignParcelToDrone(int id)
+        {
+
+        }
+
+        /// <summary>
+        /// Collection of a parcek by drone
+        /// </summary>
+        /// <param name="id">Id drone</param>
+        /// <param name="chargingtime">Charging time</param>
+        public void UpdateCollectionParcelByDrone(int id)
+        {
+
+        }
+
+        /// <summary>
+        /// Delivery parcel by drone
+        /// </summary>
+        /// <param name="id">Id drone</param>
+        /// <param name="chargingtime">Charging time</param>
+        public void UpdateDeliveryParcelByDrone(int id)
+        {
+
+        }
+
+
         #endregion
 
 
@@ -218,7 +250,7 @@ namespace BL
                 NameBaseStation = station.Name,
                 Location = new() { Latitude = station.Lattitude, Longitude = station.Longitude },
                 DroneInChargings = dal.GetDronesInChargingsAtStation(baseStationId).ToList();
-                NumOfAvailableChargingPositions=station.ChargeSlots+
+            NumOfAvailableChargingPositions = station.ChargeSlots +
             };
 
             //find the station in the array of stations and return it.

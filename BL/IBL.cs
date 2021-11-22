@@ -81,7 +81,7 @@ namespace IBL
         /// </summary>
         /// <param name="id">Id drone</param>
         /// <param name="chargingtime">Charging time</param>
-        public void UpdateReleaseDroneFromCharging(int id, DateTime chargingTime);
+        public void UpdateReleaseDroneFromCharging(int id, double chargingTime);
 
         /// <summary>
         /// Assign a package to a drone
@@ -117,21 +117,21 @@ namespace IBL
         /// </summary>
         /// <param name="droneId"></param>
         /// <returns>Drone show</returns>
-        public Drone DroneView(int droneId);
+        public Drone DroneViewBl(int droneId);
 
         /// <summary>
         /// Customer view
         /// </summary>
         /// <param name="customerId"></param>
         /// <returns>Customer show</returns>
-        public Customer CustomerView(int customerId);
+        public Customer CustomerViewBl(int customerId);
 
         /// <summary>
         /// Parcel view
         /// </summary>
         /// <param name="parcelId"></param>
         /// <returns>Parcel show</returns>
-        public Parcel ParcelView(int parcelId);
+        public Parcel ParcelViewBl(int parcelId);
         #endregion
 
         #region GET LISTS
