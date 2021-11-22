@@ -34,7 +34,7 @@ namespace IBL
         /// <param name="name">The customer's name</param>
         /// <param name="phone">Phone Number</param>
         /// <param name="location">Customer location</param>
-        public void AddCustomer(int id, string name, string phone, Location location);
+        public void AddCustomerBo(int id, string name, string phone, Location location);
 
         /// <summary>
         /// Receipt of parcel for delivery
@@ -43,7 +43,7 @@ namespace IBL
         /// <param name="targetId">Customer ID card</param>
         /// <param name="weight">Parcel weight</param>
         /// <param name="priority">Priority(Normal, Fast, Emergency)</param>
-        public void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority);
+        public void AddParcelBo(int senderId, int targetId, WeightCategories weight, Priorities priority);
         #endregion
 
         #region UPDATE
