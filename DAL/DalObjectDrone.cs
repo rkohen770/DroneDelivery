@@ -159,6 +159,18 @@ namespace DalObject
             return from drone in DataSource.drones
                    select drone.Clone();
         }
+
+        /// <summary>
+        /// List of drones loaded at a specific station
+        /// </summary>
+        /// <param name="stationId">base station Id</param>
+        /// <returns>List of drones loaded at a specific station</returns>
+        public IEnumerable<int> GetDronesInChargingsAtStation(int stationId)
+        {
+            return from droneCharge in DataSource.droneCharges
+                   where droneCharge.StationId == stationId
+                   select droneCharge.DroneId;
+        }
         #endregion
 
         /// <summary>

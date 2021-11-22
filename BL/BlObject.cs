@@ -13,11 +13,11 @@ namespace BL
     {
         Random random = new Random();
         IDal dal = new DalObject.DalObject();
-        List<DroneForList> droneForLists=new List<DroneForList>();
-        IEnumerable<IDAL.DO.Drone> drones = new IEnumerable<IDAL.DO.Drone>();
-        public BlObject() 
+        List<DroneForList> droneForLists = new List<DroneForList>();
+        List<IDAL.DO.Drone> drones;
+        public BlObject()
         {
-             drones = dal.GetAllDrones();
+            drones = dal.GetAllDrones().ToList();
         }
 
         #region ADD
@@ -77,7 +77,7 @@ namespace BL
         /// <param name="name">The customer's name</param>
         /// <param name="phone">Phone Number</param>
         /// <param name="location">Customer location</param>
-        public void AddCustomerBo(int id, string name, string phone,Location location)
+        public void AddCustomerBo(int id, string name, string phone, Location location)
         {
             //add customer fields in BL.
             IBL.BO.Customer customer = new IBL.BO.Customer()
@@ -87,9 +87,9 @@ namespace BL
                 Phone = phone,
                 Location = location
             };
-           
+
             //Add customer in DAL to data source.
-            dal.AddCustomer(id, name, phone,location.Longitude,location.Latitude);
+            dal.AddCustomer(id, name, phone, location.Longitude, location.Latitude);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace BL
                 CreateParcel = DateTime.Now,
                 ParcelAssociation = DateTime.MinValue,
                 ParcelCollection = DateTime.MinValue,
-                ParcelDelivery= DateTime.MinValue
+                ParcelDelivery = DateTime.MinValue
             };
         }
 
@@ -143,7 +143,19 @@ namespace BL
             dal.UpdateDroneModle(id, model);
 
             //update in BL
-            
+            for (int i = 0; i < drones.Count; i++)
+            {
+                if (drones[i].Id == id)//Obtain an index for the location where the package ID is located
+                {
+                    if (drones[i].Model != model)
+                    {
+                        IDAL.DO.Drone drone = drones[i];
+                        drone.Model = model;
+                        drones[i] = drone;
+                        return;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -152,9 +164,9 @@ namespace BL
         /// <param name="id">Base station id</param>
         /// <param name="nameBaseStation">Base station name</param>
         /// <param name="totalAmountOfChargingStations">Total amount of charging stations</param>
-        public void UpdateBaseStationData(int id, int nameBaseStation=0, int totalAmountOfChargingStations=0)
+        public void UpdateBaseStationData(int id, int nameBaseStation = 0, int totalAmountOfChargingStations = 0)
         {
-            
+
         }
 
         /// <summary>
@@ -183,6 +195,62 @@ namespace BL
         /// <param name="id">Id drone</param>
         /// <param name="chargingtime">Charging time</param>
         public void UpdateReleaseDroneFromCharging(int id, DateTime chargingtime)
+        {
+
+        }
+        #endregion
+
+
+        #region GET ITEM
+        /// <summary>
+        /// Base station view
+        /// </summary>
+        /// <param name="baseStationId"></param>
+        /// <returns>Base station show</returns>
+        public BaseStation BaseStationViewBl(int baseStationId)
+        {
+            Station station = dal.BaseStationView(baseStationId);
+            List<int> dronesId = dal.GetDronesInChargingsAtStation(baseStationId).ToList();
+            List<DroneInCharging> dronesInCarging =
+            BaseStation baseStation = new BaseStation()
+            {
+                Id = baseStationId,
+                NameBaseStation = station.Name,
+                Location = new() { Latitude = station.Lattitude, Longitude = station.Longitude },
+                DroneInChargings = dal.GetDronesInChargingsAtStation(baseStationId).ToList();
+                NumOfAvailableChargingPositions=station.ChargeSlots+
+            };
+
+            //find the station in the array of stations and return it.
+            return stations.Find(s => s.Id == stationId);
+        }
+
+        /// <summary>
+        /// Drone view
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns>Drone show</returns>
+        public Drone DroneView(int droneId)
+        {
+
+        }
+
+        /// <summary>
+        /// Customer view
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns>Customer show</returns>
+        public Customer CustomerView(int customerId)
+        {
+
+        }
+
+        /// <summary>
+        /// Parcel view
+        /// </summary>
+        /// <param name="parcelId"></param>
+        /// <returns>Parcel show</returns>
+        public Parcel ParcelView(int parcelId)
         {
 
         }
