@@ -101,6 +101,35 @@ namespace DalObject
                 }
             }
         }
+
+        /// <summary>
+        /// Update Drone Modle at a base station
+        /// </summary>
+        /// <param name="droneId">drone id to update</param>
+        /// <param name="model">new model</param>
+        public void UpdateDroneModle(int droneId, string model)
+        {
+            if (!DataSource.drones.Exists(drone => drone.Id == droneId))
+            {
+                throw new NoDataExistsException("the drone not exists in the list of drones");
+            }
+            else
+            {
+                for (int i = 0; i < DataSource.drones.Count; i++)
+                {
+                    if (DataSource.drones[i].Id == droneId)//Obtain an index for the location where the package ID is located
+                    {
+                        if (DataSource.drones[i].Model!=model)
+                        {
+                            Drone drone = DataSource.drones[i];
+                            drone.Model = model;
+                            DataSource.drones[i] = drone;
+                            return;
+                        }
+                    }
+                }
+            }
+        }
         #endregion
 
         #region Get item

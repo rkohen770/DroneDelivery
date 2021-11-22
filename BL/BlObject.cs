@@ -13,8 +13,12 @@ namespace BL
     {
         Random random = new Random();
         IDal dal = new DalObject.DalObject();
-        //public List<DroneForList> droneForLists=new List<DroneForList>();
-        public BlObject() { }
+        List<DroneForList> droneForLists=new List<DroneForList>();
+        IEnumerable<IDAL.DO.Drone> drones = new IEnumerable<IDAL.DO.Drone>();
+        public BlObject() 
+        {
+             drones = dal.GetAllDrones();
+        }
 
         #region ADD
 
@@ -73,7 +77,7 @@ namespace BL
         /// <param name="name">The customer's name</param>
         /// <param name="phone">Phone Number</param>
         /// <param name="location">Customer location</param>
-        public void AddCustomer(int id, string name, string phone, double longitude, double lattitude)
+        public void AddCustomerBo(int id, string name, string phone, double longitude, double lattitude)
         {
             //add customer fields in BL.
             IBL.BO.Customer customer = new IBL.BO.Customer()
@@ -95,7 +99,7 @@ namespace BL
         /// <param name="targetId">Customer ID card</param>
         /// <param name="weight">Parcel weight</param>
         /// <param name="priority">Priority(Normal, Fast, Emergency)</param>
-        public void AddParcel(int senderId, int targetId, IBL.BO.WeightCategories weight, IBL.BO.Priorities priority)
+        public void AddParcelBo(int senderId, int targetId, IBL.BO.WeightCategories weight, IBL.BO.Priorities priority)
         {
             //Add parcel in DAL to data source and get the parcel id that was created.
             int parcelId = dal.AddParcel(senderId, targetId, (IDAL.DO.WeightCategories)weight, (IDAL.DO.Priorities)priority);
@@ -135,6 +139,10 @@ namespace BL
         /// <param name="model">Drone model</param>
         public void UpdateNameOfDrone(int id, string model)
         {
+            //update in dal
+            dal.UpdateDroneModle(id, model);
+
+            //update in BL
             
         }
 
@@ -144,9 +152,9 @@ namespace BL
         /// <param name="id">Base station id</param>
         /// <param name="nameBaseStation">Base station name</param>
         /// <param name="totalAmountOfChargingStations">Total amount of charging stations</param>
-        public void UpdateBaseStationData(int id, int nameBaseStation, int totalAmountOfChargingStations)
+        public void UpdateBaseStationData(int id, int nameBaseStation=0, int totalAmountOfChargingStations=0)
         {
-
+            
         }
 
         /// <summary>

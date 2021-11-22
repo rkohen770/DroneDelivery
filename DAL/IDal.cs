@@ -83,6 +83,13 @@ namespace IDAL
         /// <param name="droneId">Drone id</param>
         /// <param name="stationId">Station id</param>
         public void ReleasDroneFromCharging(int droneId, int stationId);
+
+        /// <summary>
+        /// Update Drone Modle at a base station
+        /// </summary>
+        /// <param name="droneId">drone id to update</param>
+        /// <param name="model">new model</param>
+        public void UpdateDroneModle(int droneId, string model);
         #endregion
 
         #region GET ITEM
