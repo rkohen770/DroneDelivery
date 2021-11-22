@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace IBL
 {
     public interface IBL
@@ -83,6 +82,56 @@ namespace IBL
         /// <param name="id">Id drone</param>
         /// <param name="chargingtime">Charging time</param>
         public void UpdateReleaseDroneFromCharging(int id, DateTime chargingtime);
+
+        /// <summary>
+        /// Assign a package to a drone
+        /// </summary>
+        /// <param name="id">Id drone</param>
+        public void UpdateAssignParcelToDrone(int id);
+        
+        /// <summary>
+        /// Collection of a package by drone
+        /// </summary>
+        /// <param name="id">Id drone</param>
+        public void UpdateCollectionParcelByDrone(int id);
+
+
+        /// <summary>
+        /// Delivery of a package by skimmer
+        /// </summary>
+        /// <param name="id">Id drone</param>
+        public void UpdateDeliveryParcelByDrone(int id);
+
+        #endregion
+
+        #region GET ITEM
+        /// <summary>
+        /// Base station view
+        /// </summary>
+        /// <param name="baseStationId"></param>
+        /// <returns>Base station show</returns>
+        public BaseStation BaseStationViewBl(int baseStationId);
+
+        /// <summary>
+        /// Drone view
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns>Drone show</returns>
+        public Drone DroneView(int droneId);
+
+        /// <summary>
+        /// Customer view
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns>Customer show</returns>
+        public Customer CustomerView(int customerId);
+
+        /// <summary>
+        /// Parcel view
+        /// </summary>
+        /// <param name="parcelId"></param>
+        /// <returns>Parcel show</returns>
+        public Parcel ParcelView(int parcelId);
         #endregion
 
     }
