@@ -14,10 +14,10 @@ namespace ConsoleUI
             ASSIGNING_PARCEL_TO_DRONE, PARCEL_COLLECTION_BY_DRONE, DELIVERY_PARCEL_TO_CUSTOM,
             SENDING_DRONE_FOR_CHARGING, RELEAS_DRONE_FROME_CHARGING
         }
-        public enum Display { PRINT_STATION, PRINT_DRONE, PRINT_CUSTOMER, PRINT_PARCEL }
+        public enum Display { DISPLAY_STATION, DISPLAY_DRONE, DISPLAY_CUSTOMER, DISPLAY_PARCEL }
         public enum viewItemList
         {
-            GEt_ALL_BASE_STATIONS, LIST_OF_DRONE_VIEW, LIST_OF_CUSTOMER_VIEW, LIST_OF_PARCEL_VIEW,
+            LIST_OF_BASE_STATIONS, LIST_OF_DRONE_VIEW, LIST_OF_CUSTOMER_VIEW, LIST_OF_PARCEL_VIEW,
             LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE, LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION
         }
         #endregion
@@ -98,20 +98,20 @@ namespace ConsoleUI
                         choice = int.Parse(Console.ReadLine());
                         switch (choice)
                         {
-                            case (int)Display.PRINT_STATION:
+                            case (int)Display.DISPLAY_STATION:
                                 prinStation(dal);
                                 break;
 
-                            case (int)Display.PRINT_DRONE:
+                            case (int)Display.DISPLAY_DRONE:
                                 printDrone(dal);
                                 break;
 
-                            case (int)Display.PRINT_CUSTOMER:
+                            case (int)Display.DISPLAY_CUSTOMER:
 
                                 printCustomer(dal);
                                 break;
 
-                            case (int)Display.PRINT_PARCEL:
+                            case (int)Display.DISPLAY_PARCEL:
                                 printParcel(dal);
                                 break;
                             default:
@@ -126,7 +126,7 @@ namespace ConsoleUI
                         choice = int.Parse(Console.ReadLine());
                         switch (choice)
                         {
-                            case (int)viewItemList.GEt_ALL_BASE_STATIONS:
+                            case (int)viewItemList.LIST_OF_BASE_STATIONS:
                                 foreach (var temp in dal.GetAllBaseStations())
                                     Console.WriteLine(temp);
                                 break;
@@ -166,8 +166,11 @@ namespace ConsoleUI
             }
         }
 
-        #region menu
 
+        #region menu
+        /// <summary>
+        /// User messages
+        /// </summary>
         private static void MenuMessages()
         {
             Console.WriteLine("Enter 1 for add");
@@ -214,6 +217,10 @@ namespace ConsoleUI
         #endregion
 
         #region add item method
+        /// <summary>
+        /// Receives input and activates the functions of the dal layer
+        /// </summary>
+        /// <param name="dal">On this standby the functions are activated</param>
         private static void addParcel(DalObject.DalObject dal)
         {
             Console.WriteLine("Enter the parcel details: senderId, targetId, maxWeight, priority, droneId)");

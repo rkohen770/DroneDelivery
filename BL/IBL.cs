@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace IBL
 {
     public interface IBL
@@ -35,7 +34,7 @@ namespace IBL
         /// <param name="name">The customer's name</param>
         /// <param name="phone">Phone Number</param>
         /// <param name="location">Customer location</param>
-        public void AddCustomer(int id, string name, string phone, Location location);
+        public void AddCustomerBo(int id, string name, string phone, Location location);
 
         /// <summary>
         /// Receipt of parcel for delivery
@@ -44,7 +43,7 @@ namespace IBL
         /// <param name="targetId">Customer ID card</param>
         /// <param name="weight">Parcel weight</param>
         /// <param name="priority">Priority(Normal, Fast, Emergency)</param>
-        public void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority);
+        public void AddParcelBo(int senderId, int targetId, WeightCategories weight, Priorities priority);
         #endregion
 
         #region UPDATE
@@ -83,6 +82,95 @@ namespace IBL
         /// <param name="id">Id drone</param>
         /// <param name="chargingtime">Charging time</param>
         public void UpdateReleaseDroneFromCharging(int id, DateTime chargingtime);
+
+        /// <summary>
+        /// Assign a package to a drone
+        /// </summary>
+        /// <param name="id">Id drone</param>
+        public void UpdateAssignParcelToDrone(int id);
+        
+        /// <summary>
+        /// Collection of a package by drone
+        /// </summary>
+        /// <param name="id">Id drone</param>
+        public void UpdateCollectionParcelByDrone(int id);
+
+
+        /// <summary>
+        /// Delivery of a package by skimmer
+        /// </summary>
+        /// <param name="id">Id drone</param>
+        public void UpdateDeliveryParcelByDrone(int id);
+
+        #endregion
+
+        #region GET ITEM
+        /// <summary>
+        /// Base station view
+        /// </summary>
+        /// <param name="baseStationId"></param>
+        /// <returns>Base station show</returns>
+        public BaseStation BaseStationViewBl(int baseStationId);
+
+        /// <summary>
+        /// Drone view
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns>Drone show</returns>
+        public Drone DroneView(int droneId);
+
+        /// <summary>
+        /// Customer view
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns>Customer show</returns>
+        public Customer CustomerView(int customerId);
+
+        /// <summary>
+        /// Parcel view
+        /// </summary>
+        /// <param name="parcelId"></param>
+        /// <returns>Parcel show</returns>
+        public Parcel ParcelView(int parcelId);
+        #endregion
+
+        #region GET LISTS
+        /// <summary>
+        /// Displays a list of base stations
+        /// </summary>
+        /// <returns>List of base stations</returns>
+        public IEnumerable<BaseStationForList> GetAllBaseStationsBo();
+
+        /// <summary>
+        /// Displays a list of drones
+        /// </summary>
+        /// <returns>List of drones</returns>
+        public IEnumerable<DroneForList> GetAllDronesBo();
+
+        /// <summary>
+        /// Displays a list of customers
+        /// </summary>
+        /// <returns>List of customers</returns>
+        public IEnumerable<CustomerForList> GetAllCustomersBo();
+
+        /// <summary>
+        /// Displays a list of parcels
+        /// </summary>
+        /// <returns>List of parcels</returns>
+        public IEnumerable<ParcelForList> GetAllParcelsBo();
+
+        /// <summary>
+        /// Get all parcels not yet associated with the glider
+        /// </summary>
+        /// <returns>List with all parcels not yet associated with the glider</returns>
+        public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithGlider();
+
+        /// <summary>
+        /// Getlist with all base station with availible charging
+        /// </summary>
+        /// <returns>List with all base station with availible charging</returns>
+        public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging();
+
         #endregion
 
     }

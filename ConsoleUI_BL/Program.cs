@@ -8,16 +8,17 @@ namespace ConsoleUI_BL
     {
         #region enum
         public enum Menu { EXIT, ADD, UPDATE, DISPLAY, VIEW_ITEM_LIST }
-        public enum Add { ADD_STATION, ADD_DRONE, ADD_CUSTOMER, ADD_PARCEL }
+        public enum Add { ADD_BASE_STATION, ADD_DRONE, ADD_CUSTOMER, ADD_PARCEL_FOR_DELIVERY }
         public enum Update
         {
-            ASSIGNING_PARCEL_TO_DRONE, PARCEL_COLLECTION_BY_DRONE, DELIVERY_PARCEL_TO_CUSTOM,
-            SENDING_DRONE_FOR_CHARGING, RELEAS_DRONE_FROME_CHARGING
+            UPDATE_DRONE_DATA, UPDATE_BASE_STATION_DATA, UPDATE_CUSTOMER_DATA,
+            SENDING_DRONE_FOR_CHARGING, RELEAS_DRONE_FROME_CHARGING, ASSIGN_PARCEL_TO_DRONE,
+            COLLECTION_PARCEL_BY_DRONE, DELIVERY_PARCEL_BY_DRONE
         }
-        public enum Display { PRINT_STATION, PRINT_DRONE, PRINT_CUSTOMER, PRINT_PARCEL }
+        public enum Display { DISPLAY_STATION, DISPLAY_DRONE, DISPLAY_CUSTOMER, DISPLAY_PARCEL }
         public enum viewItemList
         {
-            GEt_ALL_BASE_STATIONS, LIST_OF_DRONE_VIEW, LIST_OF_CUSTOMER_VIEW, LIST_OF_PARCEL_VIEW,
+            LIST_OF_BASE_STATIONS, LIST_OF_DRONE_VIEW, LIST_OF_CUSTOMER_VIEW, LIST_OF_PARCEL_VIEW,
             LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE, LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION
         }
         #endregion
@@ -40,7 +41,7 @@ namespace ConsoleUI_BL
                         choice = int.Parse(Console.ReadLine());
                         switch (choice)
                         {
-                            case (int)Add.ADD_STATION:
+                            case (int)Add.ADD_BASE_STATION:
                                 addStation(bl);
                                 break;
 
@@ -90,10 +91,13 @@ namespace ConsoleUI_BL
         #endregion
 
         #region add item method
-
+        /// <summary>
+        /// Receives input and activates the functions of the bl layer
+        /// </summary>
+        /// <param name="bl">On this standby the functions are activated</param>
         private static void addStation(BlObject bl)
         {
-            Console.WriteLine("Enter the station details: id, name, longitude,lattitude, chargeSlots");
+            Console.WriteLine("Enter the station details: id, name, location, charging ");
             int id = int.Parse(Console.ReadLine());
             int name = int.Parse(Console.ReadLine());
             double longitude = double.Parse(Console.ReadLine());
@@ -105,13 +109,23 @@ namespace ConsoleUI_BL
 
         private static void addDrone(BlObject bl)
         {
-            Console.WriteLine("Enter the drone details: id, model, maxWeight, status, battery");
+            Console.WriteLine("Enter the drone details: id, model, maxWeight, stationId");
             int id = int.Parse(Console.ReadLine());
             string model = Console.ReadLine();
             WeightCategories maxWeight = (WeightCategories)int.Parse(Console.ReadLine());
-            DroneStatus status = (DroneStatus)int.Parse(Console.ReadLine());
-            double battery = double.Parse(Console.ReadLine());
-            bl.AddDrone(id, model, maxWeight);
+            int droneId = int.Parse(Console.ReadLine());
+            bl.AddDroneBo(id, model, maxWeight, droneId);
+        }
+
+        private static void addCustomer(BlObject bl)
+        {
+            Console.WriteLine("Enter the customer details: id, nameCustomer, phone, longitude, lattitude)");
+            int id = int.Parse(Console.ReadLine());
+            string nameCustomer = Console.ReadLine();
+            string phone = Console.ReadLine();
+            double longitude = double.Parse(Console.ReadLine());
+            double lattitude = double.Parse(Console.ReadLine());
+            bl.AddCustomer(id, nameCustomer, phone, longitude, lattitude);
         }
 
 
