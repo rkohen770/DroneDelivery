@@ -61,7 +61,39 @@ namespace ConsoleUI_BL
                         }
 
                         break;
+                    #endregion
+
+                    #region update
+                    case Menu.UPDATE:
+                        MenuUpdate();
+                        choice = int.Parse(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case (int)Update.UPDATE_DRONE_DATA:
+                                updateDrone(bl);
+                                break;
+
+                            case (int)Update.UPDATE_BASE_STATION_DATA:
+                                updateBaseStation(bl);
+                                break;
+
+                            case (int)Update.UPDATE_CUSTOMER_DATA:
+                                updateCustomer(bl);
+                                break;
+
+                            case (int)Update.SENDING_DRONE_FOR_CHARGING:
+                                sendingDroneForCharging(bl);
+                                break;
+
+                            case (int)Update.RELEAS_DRONE_FROME_CHARGING:
+                                releasDroneFromCharging(bl);
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
                         #endregion
+
 
                 }
                 MenuMessages();
@@ -85,7 +117,16 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter 0 for add a base station to the list of stations");
             Console.WriteLine("Enter 1 for add a drone to the list of existing drone");
             Console.WriteLine("Enter 2 for receiving a new customer for an information list");
-            Console.WriteLine("Enter 3 for receipt of package for shipment");
+            Console.WriteLine("Enter 3 for receipt of parcel for shipment");
+        }
+
+        private static void MenuUpdate()
+        {
+            Console.WriteLine("Enter 0 for update the name of the drone");
+            Console.WriteLine("Enter 1 for update the base station data");
+            Console.WriteLine("Enter 2 for update the customer data");
+            Console.WriteLine("Enter 3 for sending a drone for charging at a base station");
+            Console.WriteLine("Enter 4 for release drone from charging at base station");
         }
 
         #endregion
@@ -140,6 +181,50 @@ namespace ConsoleUI_BL
         }
 
 
+        #endregion
+
+        #region update item method
+        private static void updateDrone(BlObject bl)
+        {
+            Console.WriteLine("Enter the drone details: id,model");
+            int id = int.Parse(Console.ReadLine());
+            string model = Console.ReadLine();
+            bl.UpdateNameOfDrone(id, model);
+        }
+
+        public static void updateBaseStation(BlObject bl)
+        {
+            Console.WriteLine("Enter the base station details: id,name, num charging");
+            int stationId = int.Parse(Console.ReadLine());
+            int nameBaseStation= int.Parse(Console.ReadLine());
+            int totalAmountOfChargingStations = int.Parse(Console.ReadLine());
+            bl.UpdateBaseStationData(id: stationId, nameBaseStation: nameBaseStation, totalAmountOfChargingStations: totalAmountOfChargingStations);
+
+        }
+
+        public static void updateCustomer(BlObject bl)
+        {
+            Console.WriteLine("Enter the base station details: id,name, phone");
+            int id = int.Parse(Console.ReadLine());
+            string newName = Console.ReadLine();
+            string newPhone = Console.ReadLine();
+            bl.UpdateCustomerData(id, newName, newPhone);
+        }
+
+        public static void sendingDroneForCharging(BlObject bl)
+        {
+            Console.WriteLine("Enter the sending drone for charging: droneId, stationId");
+            int id = int.Parse(Console.ReadLine());
+            bl.UpdateSendingDroneForCharging(id);
+        }
+
+        private static void releasDroneFromCharging(BlObject bl)
+        {
+            Console.WriteLine("Enter the releas drone from charging: droneId, stationId");
+            int id = int.Parse(Console.ReadLine());
+            DateTime chargingTime = int.Parse(Console.ReadLine());
+            bl.UpdateReleaseDroneFromCharging(id,chargingTime)
+        }
         #endregion
     }
 }
