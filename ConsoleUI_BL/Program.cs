@@ -53,7 +53,7 @@ namespace ConsoleUI_BL
                                 addCustomer(bl);
                                 break;
 
-                            case (int)Add.ADD_PARCEL:
+                            case (int)Add.ADD_PARCEL_FOR_DELIVERY:
                                 addParcel(bl);
                                 break;
                             default:
@@ -119,13 +119,24 @@ namespace ConsoleUI_BL
 
         private static void addCustomer(BlObject bl)
         {
-            Console.WriteLine("Enter the customer details: id, nameCustomer, phone, longitude, lattitude)");
+            Console.WriteLine("Enter the customer details: id, nameCustomer, phone, location)");
             int id = int.Parse(Console.ReadLine());
             string nameCustomer = Console.ReadLine();
             string phone = Console.ReadLine();
             double longitude = double.Parse(Console.ReadLine());
             double lattitude = double.Parse(Console.ReadLine());
-            bl.AddCustomer(id, nameCustomer, phone, longitude, lattitude);
+            Location location = new Location() { Longitude = longitude, Latitude = lattitude };
+            bl.AddCustomerBo(id, nameCustomer, phone, location);
+        }
+
+        private static void addParcel(BlObject bl)
+        {
+            Console.WriteLine("Enter the parcel details: senderId, targetId, maxWeight, priority)");
+            int senderId = int.Parse(Console.ReadLine());
+            int targetId = int.Parse(Console.ReadLine());
+            WeightCategories maxWeight = (WeightCategories)int.Parse(Console.ReadLine());
+            Priorities priority = (Priorities)int.Parse(Console.ReadLine());
+            bl.AddParcelBo(senderId, targetId, maxWeight, priority);
         }
 
 
