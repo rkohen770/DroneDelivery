@@ -9,17 +9,22 @@ namespace IDAL
 {
     public interface IDal
     {
+        #region ADD
         public void AddStation(int id, int name, double longitude, double lattitude, int chargeSlots);
         public void AddDrone(int id, string model, WeightCategories maxWeight);
         public void AddCustomer(int id, string name, string phone, double longitude, double lattitude);
         public int AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, int droneId = 0);
+        #endregion
 
+        #region UPDATE
         public void AssigningParcelToDrone(int parcelId, int droneId);
         public void PackagCollectionByDrone(int parcelId);
         public void DeliveryPackageToCustomer(int parcelId);
         public void SendingDroneForCharging(int droneId, int stationId);
         public void ReleasDroneFromCharging(int droneId, int stationId);
+        #endregion
 
+        #region 
         public Station BaseStationView(int stationId);
         public Drone DroneView(int droneId);
         public Customer CustomerView(int customerId);
