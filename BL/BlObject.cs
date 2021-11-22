@@ -210,12 +210,14 @@ namespace BL
         public BaseStation BaseStationViewBl(int baseStationId)
         {
             Station station = dal.BaseStationView(baseStationId);
+            List<int> dronesId = dal.GetDronesInChargingsAtStation(baseStationId).ToList();
+            List<DroneInCharging> dronesInCarging =
             BaseStation baseStation = new BaseStation()
             {
                 Id = baseStationId,
                 NameBaseStation = station.Name,
-                Location= new() { Latitude=station.Lattitude,Longitude=station.Longitude},
-                DroneInChargings=dal.car
+                Location = new() { Latitude = station.Lattitude, Longitude = station.Longitude },
+                DroneInChargings = dal.GetDronesInChargingsAtStation(baseStationId).ToList();
                 NumOfAvailableChargingPositions=station.ChargeSlots+
             };
 

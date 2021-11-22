@@ -158,6 +158,13 @@ namespace IDAL
         /// </summary>
         /// <returns>List of base stations with available charging stations</returns>
         public IEnumerable<Station> GetAllStationsWithAvailableChargingStations();
+
+        /// <summary>
+        /// List of drones loaded at a specific station
+        /// </summary>
+        /// <param name="stationId">base station Id</param>
+        /// <returns>List of drones loaded at a specific station</returns>
+        public IEnumerable<int> GetDronesInChargingsAtStation(int stationId);
         #endregion
 
 
