@@ -9,52 +9,97 @@ using IDAL;
 using IDAL.DO;
 namespace BL
 {
-    public partial class BlObject :IBL.IBL
+    public partial class BlObject : IBL.IBL
     {
         Random random = new Random();
         IDal dal = new DalObject.DalObject();
         //public List<DroneForList> droneForLists=new List<DroneForList>();
-        public BlObject()
-        {
-            
-        }
+        public BlObject() { }
+
+        #region ADD
 
         public void AddBaseStationBo(int id, int nameBaseStation, Location location, int numOfAvailableChargingPositions)
         {
-            BaseStation baseStation = new BaseStation();
+            //add baseStation fields in BL.
+            BaseStation baseStation = new BaseStation()
+            {
+                Id = id,
+                NameBaseStation = nameBaseStation,
+                Location = location,
+                NumOfAvailableChargingPositions = numOfAvailableChargingPositions
+            };
+            //Add baseStation in DAL to data source.
             dal.AddStation(id, nameBaseStation, location.Longitude, location.Latitude, numOfAvailableChargingPositions);
-            baseStation.Id = id;
-            baseStation.NameBaseStation = nameBaseStation;
-            baseStation.Location = location;
-            baseStation.NumOfAvailableChargingPositions = numOfAvailableChargingPositions;
         }
 
 
         public void AddDroneBo(int droneId, string model, IBL.BO.WeightCategories maxWeight, int stationId)
         {
-            IBL.BO.Drone drone = new IBL.BO.Drone();
+            //add drone fields in BL.
+            Station s = dal.BaseStationView(stationId);
+            IBL.BO.Drone drone = new IBL.BO.Drone()
+            {
+                Id = droneId,
+                Model = model,
+                Weight = maxWeight,
+                Battery = random.Next(20, 41),
+                DroneStatus = DroneStatus.Maintenance,
+                CurrentLocation = new Location() { Latitude = s.Lattitude, Longitude = s.Longitude }
+            };
+            dal.SendingDroneForCharging(droneId, stationId);
+            //להוסיף את הרחפן לרשימה של רחפנים בטעינה של תחנת בסיס
+
+            //Add drone in DAL to data source.
             dal.AddDrone(droneId, model, (IDAL.DO.WeightCategories)maxWeight);
-            drone.Id = droneId;
-            drone.Model = model;
-            drone.Weight = maxWeight;
-            drone.Battery = random.Next(20, 41);
-            drone.DroneStatus = DroneStatus.Maintenance;
-           Station s= dal.BaseStationView(stationId);
-            Location location = new Location() { Latitude = s.Lattitude, Longitude = s.Longitude };
-            drone.CurrentLocation = location;
         }
 
 
         public void AddCustomer(int id, string name, string phone, double longitude, double lattitude)
         {
-            throw new NotImplementedException();
+            //add customer fields in BL.
+            IBL.BO.Customer customer = new IBL.BO.Customer()
+            {
+                Id = id,
+                Name = name,
+                Phone = phone,
+                Location = new Location() { Longitude = longitude, Latitude = lattitude }
+            };
+           
+            //Add customer in DAL to data source.
+            dal.AddCustomer(id, name, phone, longitude, lattitude);
         }
 
-        
 
-        public int AddParcel(int senderId, int targetId, WeightCategories weight, Enums.Priorities priority, int droneId = 0)
+
+        public void AddParcel(int senderId, int targetId, IBL.BO.WeightCategories weight, IBL.BO.Priorities priority)
         {
-            throw new NotImplementedException();
+            //Add parcel in DAL to data source and get the parcel id that was created.
+            int parcelId = dal.AddParcel(senderId, targetId, (IDAL.DO.WeightCategories)weight, (IDAL.DO.Priorities)priority);
+
+            //Find a customer sending
+            IDAL.DO.Customer customerS = dal.CustomerView(senderId);
+            CustomerInParcel sender = new CustomerInParcel() { Id = customerS.Id, Name = customerS.Name };
+            //Find a receiving customer
+            IDAL.DO.Customer customerG = dal.CustomerView(targetId);
+            CustomerInParcel getting = new CustomerInParcel() { Id = customerG.Id, Name = customerG.Name };
+
+            //add per fields in BL.
+            IBL.BO.Parcel parcel = new IBL.BO.Parcel()
+            {
+                Id = parcelId,
+                Sender = sender,
+                Getting = getting,
+                Weight = weight,
+                Priorities = priority,
+                DroneInParcel = null,
+                CreateParcel = DateTime.Now,
+                ParcelAssociation = DateTime.MinValue,
+                ParcelCollection = DateTime.MinValue,
+                ParcelDelivery= DateTime.MinValue
+            };
         }
+
+        #endregion
+
     }
 }
