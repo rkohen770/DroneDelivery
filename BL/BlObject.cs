@@ -77,7 +77,7 @@ namespace BL
         /// <param name="name">The customer's name</param>
         /// <param name="phone">Phone Number</param>
         /// <param name="location">Customer location</param>
-        public void AddCustomerBo(int id, string name, string phone, double longitude, double lattitude)
+        public void AddCustomerBo(int id, string name, string phone,Location location)
         {
             //add customer fields in BL.
             IBL.BO.Customer customer = new IBL.BO.Customer()
@@ -85,11 +85,11 @@ namespace BL
                 Id = id,
                 Name = name,
                 Phone = phone,
-                Location = new Location() { Longitude = longitude, Latitude = lattitude }
+                Location = location
             };
            
             //Add customer in DAL to data source.
-            dal.AddCustomer(id, name, phone, longitude, lattitude);
+            dal.AddCustomer(id, name, phone,location.Longitude,location.Latitude);
         }
 
         /// <summary>
