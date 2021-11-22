@@ -134,6 +134,45 @@ namespace IBL
         public Parcel ParcelView(int parcelId);
         #endregion
 
+        #region GET LISTS
+        /// <summary>
+        /// Displays a list of base stations
+        /// </summary>
+        /// <returns>List of base stations</returns>
+        public IEnumerable<BaseStationForList> GetAllBaseStationsBo();
+
+        /// <summary>
+        /// Displays a list of drones
+        /// </summary>
+        /// <returns>List of drones</returns>
+        public IEnumerable<DroneForList> GetAllDronesBo();
+
+        /// <summary>
+        /// Displays a list of customers
+        /// </summary>
+        /// <returns>List of customers</returns>
+        public IEnumerable<CustomerForList> GetAllCustomersBo();
+
+        /// <summary>
+        /// Displays a list of parcels
+        /// </summary>
+        /// <returns>List of parcels</returns>
+        public IEnumerable<ParcelForList> GetAllParcelsBo();
+
+        /// <summary>
+        /// Get all parcels not yet associated with the glider
+        /// </summary>
+        /// <returns>List with all parcels not yet associated with the glider</returns>
+        public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithGlider();
+
+        /// <summary>
+        /// Getlist with all base station with availible charging
+        /// </summary>
+        /// <returns>List with all base station with availible charging</returns>
+        public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging();
+
+        #endregion
+
     }
 
 
