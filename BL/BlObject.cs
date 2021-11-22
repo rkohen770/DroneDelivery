@@ -11,6 +11,7 @@ namespace BL
 {
     public partial class BlObject :IBL.IBL
     {
+        Random random = new Random();
         IDal dal = new DalObject.DalObject();
         //public List<DroneForList> droneForLists=new List<DroneForList>();
         public BlObject()
@@ -33,8 +34,14 @@ namespace BL
         {
             IBL.BO.Drone drone = new IBL.BO.Drone();
             dal.AddDrone(droneId, model, (IDAL.DO.WeightCategories)maxWeight);
-
-
+            drone.Id = droneId;
+            drone.Model = model;
+            drone.Weight = maxWeight;
+            drone.Battery = random.Next(20, 41);
+            drone.DroneStatus = DroneStatus.Maintenance;
+           Station s= dal.BaseStationView(stationId);
+            Location location = new Location() { Latitude = s.Lattitude, Longitude = s.Longitude };
+            drone.CurrentLocation = location;
         }
 
 
