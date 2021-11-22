@@ -171,6 +171,8 @@ namespace IBL
         /// <returns>List with all base station with availible charging</returns>
         public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging();
 
+
+
         #endregion
 
     }
