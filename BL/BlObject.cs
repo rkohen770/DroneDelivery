@@ -18,7 +18,7 @@ namespace BL
             
         }
 
-        public void AddBaseStation(int id, string nameBaseStation, Location location, int numOfAvailableChargingPositions)
+        public void AddBaseStationBo(int id, int nameBaseStation, Location location, int numOfAvailableChargingPositions)
         {
             BaseStation baseStation = new BaseStation();
             dal.AddStation(id, nameBaseStation, location.Longitude, location.Latitude, numOfAvailableChargingPositions);
@@ -29,9 +29,12 @@ namespace BL
         }
 
 
-        public void AddDrone(int droneId,  string model, WeightCategories maxWeight, int stationId )
+        public void AddDroneBo(int droneId, string model, IBL.BO.WeightCategories maxWeight, int stationId)
         {
-            throw new NotImplementedException();
+            IBL.BO.Drone drone = new IBL.BO.Drone();
+            dal.AddDrone(droneId, model, (IDAL.DO.WeightCategories)maxWeight);
+
+
         }
 
 

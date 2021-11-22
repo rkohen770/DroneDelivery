@@ -9,9 +9,9 @@ namespace IBL.BO
     class ParcelInTransfer
     {
         public int Id { get; set; }
-        public Enums.ParcelStatusInTransfer ParcelStatusInTransfer { get; set; }
-        public Enums.Priorities Priorities { get; set; }
-        public Enums.WeightCategories Weight { get; set; }
+        public ParcelStatusInTransfer ParcelStatusInTransfer { get; set; }
+        public Priorities Priorities { get; set; }
+        public WeightCategories Weight { get; set; }
         public CustomerInParcel Sender { get; set; }
         public CustomerInParcel Getting { get; set; }
         public Location Collection { get; set; }

@@ -10,9 +10,9 @@ namespace IBL.BO
     {
         public int Id { get; set; }
         public string Model { get; set; }
-        public Enums.WeightCategories Weight { get; set; }
+        public WeightCategories Weight { get; set; }
         public double Battery { get; set; }
-        public Enums.DroneStatus DroneStatus { get; set; }
+        public DroneStatus DroneStatus { get; set; }
         public ParcelInTransfer ParcelInTransfer { get; set; }
         public Location CurrentLocation { get; set; }
 

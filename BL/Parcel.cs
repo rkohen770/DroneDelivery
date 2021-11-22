@@ -11,8 +11,8 @@ namespace IBL.BO
         public int Id { get; set; }
         public CustomerInParcel Sender { get; set; }
         public CustomerInParcel Getting { get; set; }
-        public Enums.WeightCategories Weight { get; set; }
-        public Enums.Priorities Priorities { get; set; }
+        public WeightCategories Weight { get; set; }
+        public Priorities Priorities { get; set; }
         public DroneInParcel DroneInParcel { get; set; }
         public DateTime CreateParcel { get; set; }
         public DateTime ParcelAssociation { get; set; }

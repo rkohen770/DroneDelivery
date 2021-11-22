@@ -11,9 +11,9 @@ namespace IBL.BO
         public int Id { get; set; }
         public string CustomerNameSend { get; set; }
         public string CustomerNameGetting { get; set; }
-        public Enums.WeightCategories Weight { get; set; }
-        public Enums.Priorities Priorities { get; set; }
-        public Enums.ParcelStatus ParcelStatus { get; set; }
+        public WeightCategories Weight { get; set; }
+        public Priorities Priorities { get; set; }
+        public ParcelStatus ParcelStatus { get; set; }
 
         public override string ToString()
         {
