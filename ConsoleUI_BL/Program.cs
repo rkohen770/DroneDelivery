@@ -24,7 +24,7 @@ namespace ConsoleUI_BL
 
         static void Main(string[] args)
         {
-            BL.BL bl = new BL.BL();
+            BlObject bl = new BlObject();
 
             MenuMessages();
             int choice;
@@ -91,18 +91,19 @@ namespace ConsoleUI_BL
 
         #region add item method
 
-        private static void addStation(BL.BL bl)
+        private static void addStation(BlObject bl)
         {
             Console.WriteLine("Enter the station details: id, name, longitude,lattitude, chargeSlots");
             int id = int.Parse(Console.ReadLine());
             int name = int.Parse(Console.ReadLine());
             double longitude = double.Parse(Console.ReadLine());
             double lattitude = double.Parse(Console.ReadLine());
+            Location location = new Location() { Latitude = lattitude, Longitude = longitude };
             int chargeSlots = int.Parse(Console.ReadLine());
-            bl.AddStation(id, name, longitude, lattitude, chargeSlots);
+            bl.AddBaseStationBo(id, name,location, chargeSlots);
         }
 
-        private static void addDrone(BL.BL bl)
+        private static void addDrone(BlObject bl)
         {
             Console.WriteLine("Enter the drone details: id, model, maxWeight, status, battery");
             int id = int.Parse(Console.ReadLine());
