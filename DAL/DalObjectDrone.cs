@@ -9,7 +9,7 @@ using IDAL.DO;
 
 namespace DalObject
 {
-    public partial class DalObject:IDal
+    public partial class DalObject : IDal
     {
         #region ADD
         /// <summary>
@@ -115,19 +115,16 @@ namespace DalObject
             }
             else
             {
-                for (int i = 0; i < DataSource.drones.Count; i++)
+                int dIndex = DataSource.drones.FindIndex(d => d.Id == droneId);
+
+                if (DataSource.drones[dIndex].Model != model)
                 {
-                    if (DataSource.drones[i].Id == droneId)//Obtain an index for the location where the package ID is located
-                    {
-                        if (DataSource.drones[i].Model!=model)
-                        {
-                            Drone drone = DataSource.drones[i];
-                            drone.Model = model;
-                            DataSource.drones[i] = drone;
-                            return;
-                        }
-                    }
+                    Drone drone = DataSource.drones[dIndex];
+                    drone.Model = model;
+                    DataSource.drones[dIndex] = drone;
+                    return;
                 }
+
             }
         }
         #endregion
