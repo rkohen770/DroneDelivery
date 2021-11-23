@@ -243,7 +243,15 @@ namespace BL
         {
             Station station = dal.BaseStationView(baseStationId);
             List<int> dronesId = dal.GetDronesInChargingsAtStation(baseStationId).ToList();
-            List<DroneInCharging> dronesInCarging =
+            IDAL.DO.Drone drone = drones.Find(d => d.Id == dronesId[0]);
+            List<DroneInCharging> dronesInCarging = new()
+            {
+                new DroneInCharging
+                {
+                    Id = dronesId[0],
+
+                }
+            }
             BaseStation baseStation = new BaseStation()
             {
                 Id = baseStationId,
@@ -257,12 +265,12 @@ namespace BL
             return stations.Find(s => s.Id == stationId);
         }
 
-        /// <summary>
-        /// Drone view
-        /// </summary>
-        /// <param name="droneId"></param>
-        /// <returns>Drone show</returns>
-        public Drone DroneView(int droneId)
+    /// <summary>
+    /// Drone view
+    /// </summary>
+    /// <param name="droneId"></param>
+    /// <returns>Drone show</returns>
+    public Drone DroneView(int droneId)
         {
 
         }
@@ -284,7 +292,11 @@ namespace BL
         /// <returns>Parcel show</returns>
         public Parcel ParcelView(int parcelId)
         {
+            IDAL.DO.Parcel parcel = dal.ParcelView(parcelId);
+            if (parcel.DroneId!=0)
+            {
 
+            }
         }
         #endregion
     }

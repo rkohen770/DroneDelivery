@@ -133,21 +133,21 @@ namespace ConsoleUI_BL
                         break;
                     #endregion
 
-                    //#region viewItemList
-                    //case Menu.VIEW_ITEM_LIST:
-                    //    MenuViewItemList();
-                    //    choice = int.Parse(Console.ReadLine());
-                    //    switch (choice)
-                    //    {
-                    //        case (int)viewItemList.LIST_OF_BASE_STATIONS:
-                    //            foreach (var temp in bl.GetAllBaseStationsBo()) ;
-                    //                Console.WriteLine(temp);
-                    //            break;
+                    #region viewItemList
+                    case Menu.VIEW_ITEM_LIST:
+                      MenuViewItemList();
+                      choice = int.Parse(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case (int)viewItemList.LIST_OF_BASE_STATIONS:
+                                foreach (var temp in bl.GetAllBaseStationsBo()) ;
+                                    Console.WriteLine(temp);
+                                break;
 
-                    //        case (int)viewItemList.LIST_OF_DRONE_VIEW:
-                    //            foreach (var temp in dal.GetAllDrones())
-                    //                Console.WriteLine(temp);
-                    //            break;
+                            case (int)viewItemList.LIST_OF_DRONE_VIEW:
+                                foreach (var temp in bl.GetAllDrones())
+                                    Console.WriteLine(temp);
+                                break;
 
                     //        case (int)viewItemList.LIST_OF_CUSTOMER_VIEW:
                     //            foreach (var temp in dal.GetAllCustomers())
