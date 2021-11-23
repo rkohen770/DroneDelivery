@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IBL.BO;
-using DalObject;
 using IDAL;
 using IDAL.DO;
 namespace BL
@@ -248,56 +247,71 @@ namespace BL
             {
                 new DroneInCharging
                 {
-                    Id = dronesId[0],
-
+                    Id = dronesId[0]
+                },
+                new DroneInCharging
+                {
+                    Id = dronesId[1]
                 }
-            }
+            };
             BaseStation baseStation = new BaseStation()
             {
                 Id = baseStationId,
                 NameBaseStation = station.Name,
                 Location = new() { Latitude = station.Lattitude, Longitude = station.Longitude },
-                DroneInChargings = dal.GetDronesInChargingsAtStation(baseStationId).ToList();
-            NumOfAvailableChargingPositions = station.ChargeSlots +
+                DroneInChargings = dronesInCarging,
+                NumOfAvailableChargingPositions = station.ChargeSlots +drones.Count()
             };
 
             //find the station in the array of stations and return it.
-            return stations.Find(s => s.Id == stationId);
+            return baseStation;
         }
 
-    /// <summary>
-    /// Drone view
-    /// </summary>
-    /// <param name="droneId"></param>
-    /// <returns>Drone show</returns>
-    public Drone DroneView(int droneId)
+        public IBL.BO.Drone DroneViewBl(int droneId)
         {
-
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Customer view
-        /// </summary>
-        /// <param name="customerId"></param>
-        /// <returns>Customer show</returns>
-        public Customer CustomerView(int customerId)
+        public IBL.BO.Customer CustomerViewBl(int customerId)
         {
-
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Parcel view
-        /// </summary>
-        /// <param name="parcelId"></param>
-        /// <returns>Parcel show</returns>
-        public Parcel ParcelView(int parcelId)
+        public IBL.BO.Parcel ParcelViewBl(int parcelId)
         {
-            IDAL.DO.Parcel parcel = dal.ParcelView(parcelId);
-            if (parcel.DroneId!=0)
-            {
-
-            }
+            throw new NotImplementedException();
         }
+
+        public IEnumerable<BaseStationForList> GetAllBaseStationsBo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<DroneForList> GetAllDronesBo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<CustomerForList> GetAllCustomersBo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ParcelForList> GetAllParcelsBo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithGlider()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }
