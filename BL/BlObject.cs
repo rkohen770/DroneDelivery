@@ -193,7 +193,7 @@ namespace BL
         /// </summary>
         /// <param name="id">Id drone</param>
         /// <param name="chargingtime">Charging time</param>
-        public void UpdateReleaseDroneFromCharging(int id, double chargingtime)
+        public void UpdateReleaseDroneFromCharging(int id, TimeSpan chargingtime)
         {
 
         }

@@ -135,44 +135,46 @@ namespace ConsoleUI_BL
 
                     #region viewItemList
                     case Menu.VIEW_ITEM_LIST:
-                      MenuViewItemList();
-                      choice = int.Parse(Console.ReadLine());
+                        MenuViewItemList();
+                        choice = int.Parse(Console.ReadLine());
                         switch (choice)
                         {
                             case (int)viewItemList.LIST_OF_BASE_STATIONS:
-                                foreach (var temp in bl.GetAllBaseStationsBo()) ;
+                                foreach (var temp in bl.GetAllBaseStationsBo())
                                     Console.WriteLine(temp);
                                 break;
 
                             case (int)viewItemList.LIST_OF_DRONE_VIEW:
-                                foreach (var temp in bl.GetAllDrones())
+                                foreach (var temp in bl.GetAllDronesBo())
                                     Console.WriteLine(temp);
                                 break;
 
-                    //        case (int)viewItemList.LIST_OF_CUSTOMER_VIEW:
-                    //            foreach (var temp in dal.GetAllCustomers())
-                    //                Console.WriteLine(temp);
-                    //            break;
-                    //        case (int)viewItemList.LIST_OF_PARCEL_VIEW:
-                    //            foreach (var temp in dal.GetAllParcels())
-                    //                Console.WriteLine(temp);
-                    //            break;
-
-                    //        case (int)viewItemList.LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE:
-                    //            foreach (var temp in dal.GetAllParcelsWithoutSpecialDron())
-                    //                Console.WriteLine(temp);
-                    //            break;
-                    //        case (int)viewItemList.LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION:
-                    //            foreach (var temp in dal.GetAllStationsWithAvailableChargingStations())
-                    //                Console.WriteLine(temp);
-                    //            break;
+                            case (int)viewItemList.LIST_OF_CUSTOMER_VIEW:
+                                foreach (var temp in bl.GetAllCustomersBo())
+                                    Console.WriteLine(temp);
+                                break;
+                            case (int)viewItemList.LIST_OF_PARCEL_VIEW:
+                                foreach (var temp in bl.GetAllParcelsBo())
+                                    Console.WriteLine(temp);
+                                break;
+                            case (int)viewItemList.LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE:
+                                foreach (var temp in bl.GetAllParcelsNotYetAssociatedWithGlider())
+                                    Console.WriteLine(temp);
+                                break;
+                            case (int)viewItemList.LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION:
+                                foreach (var temp in bl.GetAllBaseStationWhithAvailibleCharging())
+                                    Console.WriteLine(temp);
+                                break;
+                            #endregion
                             default:
-                        break;
+                                break;
 
+                        }
+
+                        MenuMessages();
+                        while (!int.TryParse(Console.ReadLine(), out choice))
+                            Console.Write("ERROR, please enter a number again");
                 }
-                MenuMessages();
-                while (!int.TryParse(Console.ReadLine(), out choice))
-                    Console.Write("ERROR, please enter a number again");
             }
         }
         #region menu

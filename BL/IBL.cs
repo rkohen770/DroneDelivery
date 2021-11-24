@@ -81,7 +81,7 @@ namespace IBL
         /// </summary>
         /// <param name="id">Id drone</param>
         /// <param name="chargingtime">Charging time</param>
-        public void UpdateReleaseDroneFromCharging(int id, double chargingTime);
+        public void UpdateReleaseDroneFromCharging(int id, TimeSpan chargingTime);
 
         /// <summary>
         /// Assign a package to a drone
