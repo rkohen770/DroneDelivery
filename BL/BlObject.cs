@@ -21,26 +21,7 @@ namespace BL
 
         #region ADD
 
-        /// <summary>
-        /// Add base station
-        /// </summary>
-        /// <param name="id">Station number</param>
-        /// <param name="nameBaseStation">Name base station</param>
-        /// <param name="location">Location of the bus stop</param>
-        /// <param name="numOfAvailableChargingPositions">Number of charging stations available</param>
-        public void AddBaseStationBo(int id, int nameBaseStation, Location location, int numOfAvailableChargingPositions)
-        {
-            //add baseStation fields in BL.
-            BaseStation baseStation = new BaseStation()
-            {
-                Id = id,
-                NameBaseStation = nameBaseStation,
-                Location = location,
-                NumOfAvailableChargingPositions = numOfAvailableChargingPositions
-            };
-            //Add baseStation in DAL to data source.
-            dal.AddStation(id, nameBaseStation, location.Longitude, location.Latitude, numOfAvailableChargingPositions);
-        }
+        
 
         /// <summary>
         /// Add drone
@@ -157,16 +138,7 @@ namespace BL
             }
         }
 
-        /// <summary>
-        /// Update station data
-        /// </summary>
-        /// <param name="id">Base station id</param>
-        /// <param name="nameBaseStation">Base station name</param>
-        /// <param name="totalAmountOfChargingStations">Total amount of charging stations</param>
-        public void UpdateBaseStationData(int id, int nameBaseStation = 0, int totalAmountOfChargingStations = 0)
-        {
-
-        }
+        
 
         /// <summary>
         /// Update customer data
