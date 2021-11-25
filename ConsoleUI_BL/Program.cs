@@ -165,16 +165,18 @@ namespace ConsoleUI_BL
                                 foreach (var temp in bl.GetAllBaseStationWhithAvailibleCharging())
                                     Console.WriteLine(temp);
                                 break;
-                            #endregion
+
                             default:
                                 break;
 
                         }
-
-                        MenuMessages();
-                        while (!int.TryParse(Console.ReadLine(), out choice))
-                            Console.Write("ERROR, please enter a number again");
+                        break;
+                        #endregion
                 }
+                MenuMessages();
+                while (!int.TryParse(Console.ReadLine(), out choice))
+                    Console.Write("ERROR, please enter a number again");
+
             }
         }
         #region menu
@@ -318,7 +320,7 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter the drone details: droneId, stationId");
             int id = int.Parse(Console.ReadLine());
-            double chargingTime = double.Parse(Console.ReadLine());
+            TimeSpan chargingTime = TimeSpan.Parse(Console.ReadLine());
             bl.UpdateReleaseDroneFromCharging(id, chargingTime);
         }
 
