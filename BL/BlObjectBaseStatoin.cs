@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IDAL;
+using IDAL.DO;
 
 namespace BL
 {
-    public partial class BlObject :IBL.IBL
+    public partial class BlObject : IBL.IBL
     {
         /// <summary>
         /// Add base station
@@ -36,31 +38,43 @@ namespace BL
         /// <param name="id">Base station id</param>
         /// <param name="nameBaseStation">Base station name</param>
         /// <param name="totalAmountOfChargingStations">Total amount of charging stations</param>
-        public void UpdateBaseStationData(int id, int nameBaseStation = 0, int totalAmountOfChargingStations = 0)
+        public void UpdateBaseStationData(int id, int nameBaseStation , int totalAmountOfChargingStations)
         {
             //update in BL
-            for (int i = 0; i < base.Count; i++)
+            Station station= dal.BaseStationView(id);
+            if (nameBaseStation!=0)
             {
-
+                if (totalAmountOfChargingStations!=0)
+                {
+                    dal.UpdateBaseStationData(id, nameBaseStation, totalAmountOfChargingStations);
+                }
+                else
+                {
+                    dal.UpdateBaseStationName(id, nameBaseStation);
+                }
+            }
+            else
+            {
+                dal.UpdateBaseStationCharging(id, totalAmountOfChargingStations);
             }
 
 
 
-       
-        //    for (int i = 0; i < drones.Count; i++)
-        //    {
-        //        if (drones[i].Id == id)//Obtain an index for the location where the package ID is located
-        //        {
-        //            if (drones[i].Model != model)
-        //            {
-        //                IDAL.DO.Drone drone = drones[i];
-        //                drone.Model = model;
-        //                drones[i] = drone;
-        //                return;
-        //            }
-        //        }
-        //    }
-       // }
+            //    for (int i = 0; i < drones.Count; i++)
+            //    {
+            //        if (drones[i].Id == id)//Obtain an index for the location where the package ID is located
+            //        {
+            //            if (drones[i].Model != model)
+            //            {
+            //                IDAL.DO.Drone drone = drones[i];
+            //                drone.Model = model;
+            //                drones[i] = drone;
+            //                return;
+            //            }
+            //        }
+            //    }
+            // }
+        }
     }
     
 }

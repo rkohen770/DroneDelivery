@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using IDAL;
 using IDAL.DO;
-using 
 
 namespace DalObject
 {
-    public partial class DalObject:IDal
+    public partial class DalObject : IDal
     {
         #region ADD
         /// <summary>
@@ -41,6 +40,75 @@ namespace DalObject
         }
         #endregion
 
+        #region Update
+        /// <summary>
+        /// Update station data
+        /// </summary>
+        /// <param name="id">Base station id</param>
+        /// <param name="nameBaseStation">Base station name</param>
+        /// <param name="totalAmountOfChargingStations">Total amount of charging stations</param>
+        public void UpdateBaseStationData(int id, int nameBaseStation, int totalAmountOfChargingStations)
+        {
+            if (!DataSource.stations.Exists(drone => drone.Id == id))
+            {
+                throw new NoDataExistsException("the station not exists in the list of stations");
+            }
+            else
+            {
+                int sIndex = DataSource.stations.FindIndex(d => d.Id == id);
+                Station station = DataSource.stations[sIndex];
+                station.Name = nameBaseStation;
+
+                List<DroneCharge> charges = DataSource.droneCharges.FindAll(c=>c.StationId==station.Id);
+                station.ChargeSlots = totalAmountOfChargingStations - charges.Count();
+                DataSource.stations[sIndex] = station;
+            }
+        }
+
+        /// <summary>
+        /// Update Base Station Name
+        /// </summary>
+        /// <param name="id">Base Station id</param>
+        /// <param name="nameBaseStation">new Base Station name</param>
+        public void UpdateBaseStationName(int id, int nameBaseStation)
+        {
+            if (!DataSource.stations.Exists(drone => drone.Id == id))
+            {
+                throw new NoDataExistsException("the station not exists in the list of stations");
+            }
+            else
+            {
+                int sIndex = DataSource.stations.FindIndex(d => d.Id == id);
+
+                Station station = DataSource.stations[sIndex];
+                station.Name = nameBaseStation;
+                DataSource.stations[sIndex] = station;
+            }
+        }
+
+        /// <summary>
+        /// Update base station total number of charge slots
+        /// </summary>
+        /// <param name="id">Base station id</param>
+        /// <param name="totalAmountOfChargingStations">Total amount of charging stations</param>
+        public void UpdateBaseStationCharging(int id, int totalAmountOfChargingStations)
+        {
+            if (!DataSource.stations.Exists(drone => drone.Id == id))
+            {
+                throw new NoDataExistsException("the station not exists in the list of stations");
+            }
+            else
+            {
+                int sIndex = DataSource.stations.FindIndex(d => d.Id == id);
+                Station station = DataSource.stations[sIndex];
+
+                List<DroneCharge> charges = DataSource.droneCharges.FindAll(c => c.StationId == station.Id);
+                station.ChargeSlots = totalAmountOfChargingStations - charges.Count();
+                DataSource.stations[sIndex] = station;
+            }
+
+        #endregion
+
         #region Get item
         /// <summary>
         /// return base station by station ID.
@@ -70,7 +138,7 @@ namespace DalObject
             foreach (var s in DataSource.stations)
             {
                 double dictance = Math.Sqrt(Math.Pow(s.Lattitude - senderLattitude, 2) + Math.Pow(s.Longitude - senderLongitude, 2));
-                if (minDistance>dictance)
+                if (minDistance > dictance)
                 {
                     minDistance = dictance;
                     station = s;

@@ -90,7 +90,29 @@ namespace IDAL
         /// <param name="droneId">drone id to update</param>
         /// <param name="model">new model</param>
         public void UpdateDroneModle(int droneId, string model);
-       
+
+        /// <summary>
+        /// Update station data
+        /// </summary>
+        /// <param name="id">Base station id</param>
+        /// <param name="nameBaseStation">Base station name</param>
+        /// <param name="totalAmountOfChargingStations">Total amount of charging stations</param>
+        public void UpdateBaseStationData(int id, int nameBaseStation, int totalAmountOfChargingStations);
+
+        /// <summary>
+        /// Update Base Station Name
+        /// </summary>
+        /// <param name="id">Base Station id</param>
+        /// <param name="nameBaseStation">new Base Station name</param>
+        public void UpdateBaseStationName(int id, int nameBaseStation);
+
+        /// <summary>
+        /// Update base station total number of charge slots
+        /// </summary>
+        /// <param name="id">Base station id</param>
+        /// <param name="totalAmountOfChargingStations">Total amount of charging stations</param>
+        public void UpdateBaseStationCharging(int id, int totalAmountOfChargingStations);
+
         #endregion
 
         #region GET ITEM

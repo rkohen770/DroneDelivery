@@ -148,7 +148,7 @@ namespace BL
         {
             //add drone fields in BL.
             Station s = dal.BaseStationView(stationId);
-            IBL.BO.Drone drone = new IBL.BO.Drone()
+            DroneForList drone = new ()
             {
                 Id = droneId,
                 Model = model,
@@ -158,7 +158,9 @@ namespace BL
                 CurrentLocation = new Location() { Latitude = s.Lattitude, Longitude = s.Longitude }
             };
             dal.SendingDroneForCharging(droneId, stationId);
-            //להוסיף את הרחפן לרשימה של רחפנים בטעינה של תחנת בסיס
+
+            // Add the drone to the list of skimmers when charging from a base station
+            droneForLists.Add(drone);
 
             //Add drone in DAL to data source.
             dal.AddDrone(droneId, model, (IDAL.DO.WeightCategories)maxWeight);
@@ -237,22 +239,20 @@ namespace BL
             dal.UpdateDroneModle(id, model);
 
             //update in BL
-            for (int i = 0; i < drones.Count; i++)
+            for (int i = 0; i < droneForLists.Count; i++)
             {
-                if (drones[i].Id == id)//Obtain an index for the location where the package ID is located
+                if (droneForLists[i].Id == id)//Obtain an index for the location where the package ID is located
                 {
-                    if (drones[i].Model != model)
+                    if (droneForLists[i].Model != model)
                     {
-                        IDAL.DO.Drone drone = drones[i];
+                        DroneForList drone = droneForLists[i];
                         drone.Model = model;
-                        drones[i] = drone;
+                        droneForLists[i] = drone;
                         return;
                     }
                 }
             }
         }
-
-
 
         /// <summary>
         /// Update customer data
