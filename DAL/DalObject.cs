@@ -13,6 +13,27 @@ namespace DalObject
             DataSource.Initialize();
         }
 
+        /// <summary>
+        /// A function that calculates the distance between two points on the map
+        /// </summary>
+        /// <param name="senderId">sender Id</param>
+        /// <param name="targetId">target Id</param>
+        /// <returns>Returns a distance between two points</returns>
+        public double GetDistanceBetweenLocations(int senderId, int targetId)
+        {
+            double minDistance = 1000000000000;
+            Customer sender = CustomerView(senderId);
+            Customer target = CustomerView(targetId);
+            foreach (var s in DataSource.stations)
+            {
+                double dictance = Math.Sqrt(Math.Pow(sender.Lattitude - target.Lattitude, 2) + Math.Pow(sender.Longitude - target.Longitude, 2));
+                if (minDistance > dictance)
+                {
+                    minDistance = dictance;
+                }
+            }
+            return minDistance;
+        }
 
     }
 }

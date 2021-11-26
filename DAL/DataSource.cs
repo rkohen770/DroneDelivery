@@ -257,7 +257,7 @@ namespace DalObject
                   DroneId = 7686,
                   scheduled = new DateTime(2021, 10, 15, 13, 47, 16),
                   PickedUp = new DateTime(2021, 10, 15, 16, 25, 5),
-                  Delivered = new DateTime(2021, 10, 15, 23, 53, 14),
+                  Delivered = DateTime.MinValue,
                 },
 
                 new Parcel
@@ -339,9 +339,9 @@ namespace DalObject
                   priority = (Priorities)rand.Next(3),
                   Requested = new DateTime(2021, 2, 2, 19, 52, 21),
                   DroneId = 0,
-                  scheduled = new DateTime(2021, 2, 2, 20, 20, 12),
-                  PickedUp = new DateTime(2021, 2, 2, 21, 45, 21),
-                  Delivered = new DateTime(2021, 2, 2, 23, 56, 13),
+                  scheduled = DateTime.MinValue,
+                  PickedUp = DateTime.MinValue,
+                  Delivered =DateTime.MinValue
                 }
             };
 

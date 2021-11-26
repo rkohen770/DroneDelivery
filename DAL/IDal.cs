@@ -90,6 +90,7 @@ namespace IDAL
         /// <param name="droneId">drone id to update</param>
         /// <param name="model">new model</param>
         public void UpdateDroneModle(int droneId, string model);
+       
         #endregion
 
         #region GET ITEM
@@ -99,6 +100,29 @@ namespace IDAL
         /// <param name="stationId">Id station</param>
         /// <returns>Base station to show</returns>
         public Station BaseStationView(int stationId);
+
+        /// <summary>
+        /// A function that returns a minimum distance between a point and a base station
+        /// </summary>
+        /// <param name="senderLattitude">Lattitude of sender</param>
+        /// <param name="senderLongitude">longitude of sender</param>
+        /// <returns>Base station closest to the point</returns>
+        public Station GetClosestStation(double senderLattitude, double senderLongitude);
+
+        /// <summary>
+        /// A function that calculates the distance between two points on the map
+        /// </summary>
+        /// <param name="senderId">sender Id</param>
+        /// <param name="targetId">target Id</param>
+        /// <returns>Returns a distance between two points</returns>
+        public double GetDistanceBetweenLocations(int senderId, int targetId);
+
+        /// <summary>
+        /// A function that calculates the distance between a customer's location and a base station for charging
+        /// </summary>
+        /// <param name="targetId">target Id</param>
+        /// <returns>Minimum distance to the nearest base station</returns>
+        public double GetDistanceBetweenLocationAndClosestBaseStation(int targetId);
 
         /// <summary>
         /// Drone display

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IDAL;
 using IDAL.DO;
+using 
 
 namespace DalObject
 {
@@ -55,6 +56,50 @@ namespace DalObject
             //find the station in the array of stations and return it.
             return DataSource.stations.Find(s => s.Id == stationId);
         }
+
+        /// <summary>
+        /// A function that returns a minimum distance between a point and a base station
+        /// </summary>
+        /// <param name="senderLattitude">Lattitude of sender</param>
+        /// <param name="senderLongitude">longitude of sender</param>
+        /// <returns>Base station closest to the point</returns>
+        public Station GetClosestStation(double senderLattitude, double senderLongitude)
+        {
+            double minDistance = 1000000000000;
+            Station station = new();
+            foreach (var s in DataSource.stations)
+            {
+                double dictance = Math.Sqrt(Math.Pow(s.Lattitude - senderLattitude, 2) + Math.Pow(s.Longitude - senderLongitude, 2));
+                if (minDistance>dictance)
+                {
+                    minDistance = dictance;
+                    station = s;
+                }
+            }
+            return station;
+        }
+
+
+        /// <summary>
+        /// A function that calculates the distance between a customer's location and a base station for charging
+        /// </summary>
+        /// <param name="targetId">target Id</param>
+        /// <returns>Minimum distance to the nearest base station</returns>
+        public double GetDistanceBetweenLocationAndClosestBaseStation(int targetId)
+        {
+            double minDistance = 1000000000000;
+            Customer target = CustomerView(targetId);
+            foreach (var s in DataSource.stations)
+            {
+                double dictance = Math.Sqrt(Math.Pow(s.Lattitude - target.Lattitude, 2) + Math.Pow(s.Longitude - target.Longitude, 2));
+                if (minDistance > dictance)
+                {
+                    minDistance = dictance;
+                }
+            }
+            return minDistance;
+        }
+
         #endregion
 
         #region Get lists
