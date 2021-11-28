@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IDAL.DO;
+
 namespace IBL
 {
     public interface IBL
@@ -71,13 +73,13 @@ namespace IBL
         public void UpdateCustomerData(int id, string newName, string newPhone);
 
         /// <summary>
-        /// Sending a skimmer for charging
+        /// Sending a drone for charging
         /// </summary>
         /// <param name="id">Id drone</param>
-        public void UpdateSendingDroneForCharging(int id);
+        public void SendingDroneForCharging(int id);
 
         /// <summary>
-        /// Release skimmer from charging
+        /// Release drone from charging
         /// </summary>
         /// <param name="id">Id drone</param>
         /// <param name="chargingtime">Charging time</param>
@@ -97,7 +99,7 @@ namespace IBL
 
 
         /// <summary>
-        /// Delivery of a package by skimmer
+        /// Delivery of a package by drone
         /// </summary>
         /// <param name="id">Id drone</param>
         public void UpdateDeliveryParcelByDrone(int id);
@@ -170,8 +172,6 @@ namespace IBL
         /// </summary>
         /// <returns>List with all base station with availible charging</returns>
         public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging();
-
-
 
 
         #endregion

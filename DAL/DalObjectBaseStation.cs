@@ -49,17 +49,17 @@ namespace DalObject
         /// <param name="totalAmountOfChargingStations">Total amount of charging stations</param>
         public void UpdateBaseStationData(int id, int nameBaseStation, int totalAmountOfChargingStations)
         {
-            if (!DataSource.stations.Exists(drone => drone.Id == id))
+            if (!DataSource.stations.Exists(s => s.Id == id))
             {
                 throw new NoDataExistsException("the station not exists in the list of stations");
             }
             else
             {
-                int sIndex = DataSource.stations.FindIndex(d => d.Id == id);
+                int sIndex = DataSource.stations.FindIndex(s => s.Id == id);
                 Station station = DataSource.stations[sIndex];
                 station.Name = nameBaseStation;
 
-                List<DroneCharge> charges = DataSource.droneCharges.FindAll(c=>c.StationId==station.Id);
+                List<DroneCharge> charges = DataSource.droneCharges.FindAll(c => c.StationId == station.Id);
                 station.ChargeSlots = totalAmountOfChargingStations - charges.Count();
                 DataSource.stations[sIndex] = station;
             }
@@ -72,13 +72,13 @@ namespace DalObject
         /// <param name="nameBaseStation">new Base Station name</param>
         public void UpdateBaseStationName(int id, int nameBaseStation)
         {
-            if (!DataSource.stations.Exists(drone => drone.Id == id))
+            if (!DataSource.stations.Exists(s => s.Id == id))
             {
                 throw new NoDataExistsException("the station not exists in the list of stations");
             }
             else
             {
-                int sIndex = DataSource.stations.FindIndex(d => d.Id == id);
+                int sIndex = DataSource.stations.FindIndex(s => s.Id == id);
 
                 Station station = DataSource.stations[sIndex];
                 station.Name = nameBaseStation;
@@ -93,20 +93,20 @@ namespace DalObject
         /// <param name="totalAmountOfChargingStations">Total amount of charging stations</param>
         public void UpdateBaseStationCharging(int id, int totalAmountOfChargingStations)
         {
-            if (!DataSource.stations.Exists(drone => drone.Id == id))
+            if (!DataSource.stations.Exists(s => s.Id == id))
             {
                 throw new NoDataExistsException("the station not exists in the list of stations");
             }
             else
             {
-                int sIndex = DataSource.stations.FindIndex(d => d.Id == id);
+                int sIndex = DataSource.stations.FindIndex(s => s.Id == id);
                 Station station = DataSource.stations[sIndex];
 
                 List<DroneCharge> charges = DataSource.droneCharges.FindAll(c => c.StationId == station.Id);
                 station.ChargeSlots = totalAmountOfChargingStations - charges.Count();
                 DataSource.stations[sIndex] = station;
             }
-
+        }
         #endregion
 
         #region Get item
@@ -130,18 +130,34 @@ namespace DalObject
         /// </summary>
         /// <param name="senderLattitude">Lattitude of sender</param>
         /// <param name="senderLongitude">longitude of sender</param>
+        /// <param name="flag">Optional field for selecting a nearby base station flag = false or available nearby base station flag = true</param>
         /// <returns>Base station closest to the point</returns>
-        public Station GetClosestStation(double senderLattitude, double senderLongitude)
+        public Station GetClosestStation(double senderLattitude, double senderLongitude,bool flag=false)
         {
             double minDistance = 1000000000000;
             Station station = new();
-            foreach (var s in DataSource.stations)
+            if (!flag)
             {
-                double dictance = Math.Sqrt(Math.Pow(s.Lattitude - senderLattitude, 2) + Math.Pow(s.Longitude - senderLongitude, 2));
-                if (minDistance > dictance)
+                foreach (var s in DataSource.stations)
                 {
-                    minDistance = dictance;
-                    station = s;
+                    double dictance = Math.Sqrt(Math.Pow(s.Lattitude - senderLattitude, 2) + Math.Pow(s.Longitude - senderLongitude, 2));
+                    if (minDistance > dictance)
+                    {
+                        minDistance = dictance;
+                        station = s;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var s in DataSource.stations.Where(s=>s.ChargeSlots > 0))
+                {
+                    double dictance = Math.Sqrt(Math.Pow(s.Lattitude - senderLattitude, 2) + Math.Pow(s.Longitude - senderLongitude, 2));
+                    if (minDistance > dictance)
+                    {
+                        minDistance = dictance;
+                        station = s;
+                    }
                 }
             }
             return station;
@@ -156,7 +172,7 @@ namespace DalObject
         public double GetDistanceBetweenLocationAndClosestBaseStation(int targetId)
         {
             double minDistance = 1000000000000;
-            Customer target = CustomerView(targetId);
+            Customer target = GetCustomer(targetId);
             foreach (var s in DataSource.stations)
             {
                 double dictance = Math.Sqrt(Math.Pow(s.Lattitude - target.Lattitude, 2) + Math.Pow(s.Longitude - target.Longitude, 2));

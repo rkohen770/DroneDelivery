@@ -37,7 +37,7 @@ namespace IDAL
         /// <param name="longitude">Longitude</param>
         /// <param name="lattitude">Lattitude</param>
         public void AddCustomer(int id, string name, string phone, double longitude, double lattitude);
-
+        
         /// <summary>
         /// Receipt of parcel for delivery
         /// </summary>
@@ -113,6 +113,28 @@ namespace IDAL
         /// <param name="totalAmountOfChargingStations">Total amount of charging stations</param>
         public void UpdateBaseStationCharging(int id, int totalAmountOfChargingStations);
 
+        /// <summary>
+        /// Update Customer Data
+        /// </summary>
+        /// <param name="id">customer id</param>
+        /// <param name="newName">customer name</param>
+        /// <param name="newPhone">customer phone</param>
+        void UpdateCustomerData(int id, string newName, string newPhone);
+
+        /// <summary>
+        /// Update Customer name
+        /// </summary>
+        /// <param name="id">customer id</param>
+        /// <param name="newName">customer name</param>
+        void UpdateCustomerName(int id, string newName);
+
+        /// <summary>
+        /// Update Customer phone
+        /// </summary>
+        /// <param name="id">customer id</param>
+        /// <param name="newPhone">customer phone</param>
+        void UpdateCustomerPhone(int id, string newPhone);
+
         #endregion
 
         #region GET ITEM
@@ -128,8 +150,9 @@ namespace IDAL
         /// </summary>
         /// <param name="senderLattitude">Lattitude of sender</param>
         /// <param name="senderLongitude">longitude of sender</param>
+        /// <param name="flag">Optional field for selecting a nearby base station flag = false or available nearby base station flag = true</param>
         /// <returns>Base station closest to the point</returns>
-        public Station GetClosestStation(double senderLattitude, double senderLongitude);
+        public Station GetClosestStation(double senderLattitude, double senderLongitude,bool flag=false);
 
         /// <summary>
         /// A function that calculates the distance between two points on the map
@@ -158,7 +181,7 @@ namespace IDAL
         /// </summary>
         /// <param name="customerId">Id customer</param>
         /// <returns>Customer to show</returns>
-        public Customer CustomerView(int customerId);
+        public Customer GetCustomer(int customerId);
 
         /// <summary>
         /// Parcel view

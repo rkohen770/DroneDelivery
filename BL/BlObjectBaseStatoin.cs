@@ -29,7 +29,7 @@ namespace BL
                 NumOfAvailableChargingPositions = numOfAvailableChargingPositions
             };
             //Add baseStation in DAL to data source.
-            dal.AddStation(id, nameBaseStation, location.Longitude, location.Latitude, numOfAvailableChargingPositions);
+            dal.AddStation(id, nameBaseStation, location.Longitude, location.Lattitude, numOfAvailableChargingPositions);
         }
 
         /// <summary>
@@ -58,22 +58,6 @@ namespace BL
                 dal.UpdateBaseStationCharging(id, totalAmountOfChargingStations);
             }
 
-
-
-            //    for (int i = 0; i < drones.Count; i++)
-            //    {
-            //        if (drones[i].Id == id)//Obtain an index for the location where the package ID is located
-            //        {
-            //            if (drones[i].Model != model)
-            //            {
-            //                IDAL.DO.Drone drone = drones[i];
-            //                drone.Model = model;
-            //                drones[i] = drone;
-            //                return;
-            //            }
-            //        }
-            //    }
-            // }
         }
     }
     

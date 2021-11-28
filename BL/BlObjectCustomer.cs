@@ -1,12 +1,69 @@
-﻿using System;
+﻿using IBL.BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IDAL;
+using IDAL.DO;
 
 namespace BL
 {
     public partial class BlObject : IBL.IBL
     {
+
+        #region ADD
+        /// <summary>
+        /// Absorption of a new customer
+        /// </summary>
+        /// <param name="id">Customer ID number</param>
+        /// <param name="name">The customer's name</param>
+        /// <param name="phone">Phone Number</param>
+        /// <param name="location">Customer location</param>
+        public void AddCustomerBo(int id, string name, string phone, Location location)
+        {
+            //add customer fields in BL.
+            IBL.BO.Customer customer = new IBL.BO.Customer()
+            {
+                Id = id,
+                Name = name,
+                Phone = phone,
+                Location = location
+            };
+
+            //Add customer in DAL to data source.
+            dal.AddCustomer(id, name, phone, location.Longitude, location.Lattitude);
+        }
+        #endregion
+
+        #region UPDATE
+        /// <summary>
+        /// Update customer data
+        /// </summary>
+        /// <param name="id">Customer ID</param>
+        /// <param name="newName">New name</param>
+        /// <param name="newPhone">New phone</param>
+        public void UpdateCustomerData(int id, string newName, string newPhone)
+        {
+            //update in BL
+            IDAL.DO.Customer customer = dal.GetCustomer(id);
+            if (newName !=null)
+            {
+                if (newPhone != null)
+                {
+                    dal.UpdateCustomerData(id, newName, newPhone);
+                }
+                else
+                {
+                    dal.UpdateCustomerName(id, newName);
+                }
+            }
+            else
+            {
+                dal.UpdateCustomerPhone(id, newPhone);
+            }
+
+        }
+        #endregion
     }
 }

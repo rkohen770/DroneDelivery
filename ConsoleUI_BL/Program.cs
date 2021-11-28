@@ -241,7 +241,7 @@ namespace ConsoleUI_BL
             int name = int.Parse(Console.ReadLine());
             double longitude = double.Parse(Console.ReadLine());
             double lattitude = double.Parse(Console.ReadLine());
-            Location location = new Location() { Latitude = lattitude, Longitude = longitude };
+            Location location = new Location() { Lattitude = lattitude, Longitude = longitude };
             int chargeSlots = int.Parse(Console.ReadLine());
             bl.AddBaseStationBo(id, name, location, chargeSlots);
         }
@@ -264,7 +264,7 @@ namespace ConsoleUI_BL
             string phone = Console.ReadLine();
             double longitude = double.Parse(Console.ReadLine());
             double lattitude = double.Parse(Console.ReadLine());
-            Location location = new Location() { Longitude = longitude, Latitude = lattitude };
+            Location location = new Location() { Longitude = longitude, Lattitude = lattitude };
             bl.AddCustomerBo(id, nameCustomer, phone, location);
         }
 
@@ -313,7 +313,7 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter the drone id: droneId");
             int id = int.Parse(Console.ReadLine());
-            bl.UpdateSendingDroneForCharging(id);
+            bl.SendingDroneForCharging(id);
         }
 
         private static void releasDroneFromCharging(BlObject bl)

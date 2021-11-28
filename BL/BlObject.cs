@@ -56,12 +56,12 @@ namespace BL
                     {
                         // The location of the drone will be at the station closest to the sender
                         int senderId = p.SenderId;
-                        double senderLattitude = dal.CustomerView(senderId).Lattitude;
-                        double senderLongitude = dal.CustomerView(senderId).Longitude;
+                        double senderLattitude = dal.GetCustomer(senderId).Lattitude;
+                        double senderLongitude = dal.GetCustomer(senderId).Longitude;
                         Station st = dal.GetClosestStation(senderLattitude, senderLongitude);
                         drone_BL.CurrentLocation = new Location
                         {
-                            Latitude = st.Lattitude,
+                            Lattitude = st.Lattitude,
                             Longitude = st.Longitude
                         };
                         drone_BL.Battery = random.Next(0, 101);
@@ -71,12 +71,12 @@ namespace BL
                     {
                         //The location of the drone will be at the location of the sender
                         int senderId = p.SenderId;
-                        double senderLattitude = dal.CustomerView(senderId).Lattitude;
-                        double senderLongitude = dal.CustomerView(senderId).Longitude;
+                        double senderLattitude = dal.GetCustomer(senderId).Lattitude;
+                        double senderLongitude = dal.GetCustomer(senderId).Longitude;
                         Station st = dal.GetClosestStation(senderLattitude, senderLongitude);
                         drone_BL.CurrentLocation = new Location
                         {
-                            Latitude = st.Lattitude,
+                            Lattitude = st.Lattitude,
                             Longitude = st.Longitude
                         };
                         double distance = dal.GetDistanceBetweenLocations(p.SenderId, p.TargetId)
@@ -107,7 +107,7 @@ namespace BL
                         int index=random.Next(0, baseStations.Count());
                         drone_BL.CurrentLocation = new()
                         {
-                            Latitude = baseStations[index].Lattitude,
+                            Lattitude = baseStations[index].Lattitude,
                             Longitude = baseStations[index].Longitude
                         };
 
@@ -120,8 +120,8 @@ namespace BL
                         int index = random.Next(0, parcelsDelivered.Count());
                         drone_BL.CurrentLocation = new()
                         {
-                            Latitude = dal.CustomerView(parcelsDelivered[index].TargetId).Lattitude,
-                            Longitude = dal.CustomerView(parcelsDelivered[index].TargetId).Longitude
+                            Lattitude = dal.GetCustomer(parcelsDelivered[index].TargetId).Lattitude,
+                            Longitude = dal.GetCustomer(parcelsDelivered[index].TargetId).Longitude
                         };
                         // Battery mode will be recharged between a minimal charge that will allow it to reach the station closest to charging and a full charge
                         double distance = dal.GetDistanceBetweenLocationAndClosestBaseStation(parcelsDelivered[index].TargetId);
@@ -133,156 +133,14 @@ namespace BL
         }
 
 
-        #region ADD
+       
 
-
-
-        /// <summary>
-        /// Add drone
-        /// </summary>
-        /// <param name="droneId">Manufacturer's serial number</param>
-        /// <param name="model">Drone model</param>
-        /// <param name="maxWeight">Maximum weight</param>
-        /// <param name="stationId">Number of stations to put the drone for initial charging</param>
-        public void AddDroneBo(int droneId, string model, IBL.BO.WeightCategories maxWeight, int stationId)
-        {
-            //add drone fields in BL.
-            Station s = dal.BaseStationView(stationId);
-            DroneForList drone = new ()
-            {
-                Id = droneId,
-                Model = model,
-                Weight = maxWeight,
-                Battery = random.Next(20, 41),
-                DroneStatus = DroneStatus.Maintenance,
-                CurrentLocation = new Location() { Latitude = s.Lattitude, Longitude = s.Longitude }
-            };
-            dal.SendingDroneForCharging(droneId, stationId);
-
-            // Add the drone to the list of skimmers when charging from a base station
-            droneForLists.Add(drone);
-
-            //Add drone in DAL to data source.
-            dal.AddDrone(droneId, model, (IDAL.DO.WeightCategories)maxWeight);
-        }
-
-        /// <summary>
-        /// Absorption of a new customer
-        /// </summary>
-        /// <param name="id">Customer ID number</param>
-        /// <param name="name">The customer's name</param>
-        /// <param name="phone">Phone Number</param>
-        /// <param name="location">Customer location</param>
-        public void AddCustomerBo(int id, string name, string phone, Location location)
-        {
-            //add customer fields in BL.
-            IBL.BO.Customer customer = new IBL.BO.Customer()
-            {
-                Id = id,
-                Name = name,
-                Phone = phone,
-                Location = location
-            };
-
-            //Add customer in DAL to data source.
-            dal.AddCustomer(id, name, phone, location.Longitude, location.Latitude);
-        }
-
-        /// <summary>
-        /// Receipt of parcel for delivery
-        /// </summary>
-        /// <param name="senderId">ID of sending customer</param>
-        /// <param name="targetId">Customer ID card</param>
-        /// <param name="weight">Parcel weight</param>
-        /// <param name="priority">Priority(Normal, Fast, Emergency)</param>
-        public void AddParcelBo(int senderId, int targetId, IBL.BO.WeightCategories weight, IBL.BO.Priorities priority)
-        {
-            //Add parcel in DAL to data source and get the parcel id that was created.
-            int parcelId = dal.AddParcel(senderId, targetId, (IDAL.DO.WeightCategories)weight, (IDAL.DO.Priorities)priority);
-
-            //Find a customer sending
-            IDAL.DO.Customer customerS = dal.CustomerView(senderId);
-            CustomerInParcel sender = new CustomerInParcel() { Id = customerS.Id, Name = customerS.Name };
-            //Find a receiving customer
-            IDAL.DO.Customer customerG = dal.CustomerView(targetId);
-            CustomerInParcel getting = new CustomerInParcel() { Id = customerG.Id, Name = customerG.Name };
-
-            //add per fields in BL.
-            IBL.BO.Parcel parcel = new IBL.BO.Parcel()
-            {
-                Id = parcelId,
-                Sender = sender,
-                Getting = getting,
-                Weight = weight,
-                Priorities = priority,
-                DroneInParcel = null,
-                CreateParcel = DateTime.Now,
-                ParcelAssociation = DateTime.MinValue,
-                ParcelCollection = DateTime.MinValue,
-                ParcelDelivery = DateTime.MinValue
-            };
-        }
-
-        #endregion
 
 
         #region UPDATE
 
-        /// <summary>
-        /// Update the drone data that will allow you to update the drone name only
-        /// </summary>
-        /// <param name="id">Drone id</param>
-        /// <param name="model">Drone model</param>
-        public void UpdateNameOfDrone(int id, string model)
-        {
-            //update in dal
-            dal.UpdateDroneModle(id, model);
+      
 
-            //update in BL
-            for (int i = 0; i < droneForLists.Count; i++)
-            {
-                if (droneForLists[i].Id == id)//Obtain an index for the location where the package ID is located
-                {
-                    if (droneForLists[i].Model != model)
-                    {
-                        DroneForList drone = droneForLists[i];
-                        drone.Model = model;
-                        droneForLists[i] = drone;
-                        return;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Update customer data
-        /// </summary>
-        /// <param name="id">Customer ID</param>
-        /// <param name="newName">New name</param>
-        /// <param name="newPhone">New phone</param>
-        public void UpdateCustomerData(int id, string newName, string newPhone)
-        {
-
-        }
-
-        /// <summary>
-        /// Sending a skimmer for charging
-        /// </summary>
-        /// <param name="id">Id drone</param>
-        public void UpdateSendingDroneForCharging(int id)
-        {
-
-        }
-
-        /// <summary>
-        /// Release skimmer from charging
-        /// </summary>
-        /// <param name="id">Id drone</param>
-        /// <param name="chargingtime">Charging time</param>
-        public void UpdateReleaseDroneFromCharging(int id, TimeSpan chargingtime)
-        {
-
-        }
 
         /// <summary>
         /// Assign parcel to drone
@@ -344,7 +202,7 @@ namespace BL
             {
                 Id = baseStationId,
                 NameBaseStation = station.Name,
-                Location = new() { Latitude = station.Lattitude, Longitude = station.Longitude },
+                Location = new() { Lattitude = station.Lattitude, Longitude = station.Longitude },
                 DroneInChargings = dronesInCarging,
                 NumOfAvailableChargingPositions = station.ChargeSlots + drones.Count()
             };
@@ -399,5 +257,16 @@ namespace BL
         }
 
         #endregion
+        /// <summary>
+        /// A function that calculates the distance between the location of a drone and a base station
+        /// </summary>
+        /// <param name="drone"></param>
+        /// <param name="station"></param>
+        /// <returns></returns>
+        private static double getDistanceBetweenTwoPoints(DroneForList drone, Station station)
+        {
+            return Math.Sqrt(Math.Pow(station.Lattitude - drone.CurrentLocation.Lattitude, 2) +
+                                    Math.Pow(station.Longitude - drone.CurrentLocation.Longitude, 2));
+        }
     }
 }

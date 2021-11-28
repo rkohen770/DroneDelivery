@@ -320,7 +320,7 @@ namespace ConsoleUI
         {
             Console.WriteLine("Enter the customer view: customerId");
             int customerId = int.Parse(Console.ReadLine());
-            Console.WriteLine(dal.CustomerView(customerId));
+            Console.WriteLine(dal.GetCustomer(customerId));
         }
 
         private static void displayDrone(DalObject.DalObject dal)

@@ -22,8 +22,8 @@ namespace DalObject
         public double GetDistanceBetweenLocations(int senderId, int targetId)
         {
             double minDistance = 1000000000000;
-            Customer sender = CustomerView(senderId);
-            Customer target = CustomerView(targetId);
+            Customer sender = GetCustomer(senderId);
+            Customer target = GetCustomer(targetId);
             foreach (var s in DataSource.stations)
             {
                 double dictance = Math.Sqrt(Math.Pow(sender.Lattitude - target.Lattitude, 2) + Math.Pow(sender.Longitude - target.Longitude, 2));
@@ -34,6 +34,8 @@ namespace DalObject
             }
             return minDistance;
         }
+
+      
 
     }
 }

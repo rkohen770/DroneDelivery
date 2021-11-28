@@ -41,13 +41,77 @@ namespace DalObject
         }
         #endregion
 
+        #region UPDATE
+        /// <summary>
+        /// Update Customer Data
+        /// </summary>
+        /// <param name="id">customer id</param>
+        /// <param name="newName">customer name</param>
+        /// <param name="newPhone">customer phone</param>
+        void UpdateCustomerData(int id, string newName, string newPhone)
+        {
+            if (!DataSource.customers.Exists(c => c.Id == id))
+            {
+                throw new NoDataExistsException("the customer not exists in the list of customers");
+            }
+            else
+            {
+                int cIndex = DataSource.customers.FindIndex(c => c.Id == id);
+                Customer customer = DataSource.customers[cIndex];
+                customer.Name = newName;
+                customer.Phone = newPhone;
+                DataSource.customers[cIndex] = customer;
+            }
+        }
+
+        /// <summary>
+        /// Update Customer name
+        /// </summary>
+        /// <param name="id">customer id</param>
+        /// <param name="newName">customer name</param>
+        void UpdateCustomerName(int id, string newName)
+        {
+            if (!DataSource.customers.Exists(c => c.Id == id))
+            {
+                throw new NoDataExistsException("the customer not exists in the list of customers");
+            }
+            else
+            {
+                int cIndex = DataSource.customers.FindIndex(c => c.Id == id);
+                Customer customer = DataSource.customers[cIndex];
+                customer.Name = newName;
+                DataSource.customers[cIndex] = customer;
+            }
+        }
+
+        /// <summary>
+        /// Update Customer phone
+        /// </summary>
+        /// <param name="id">customer id</param>
+        /// <param name="newPhone">customer phone</param>
+        void UpdateCustomerPhone(int id, string newPhone)
+        {
+            if (!DataSource.customers.Exists(c => c.Id == id))
+            {
+                throw new NoDataExistsException("the customer not exists in the list of customers");
+            }
+            else
+            {
+                int cIndex = DataSource.customers.FindIndex(c => c.Id == id);
+                Customer customer = DataSource.customers[cIndex];
+                customer.Phone = newPhone;
+                DataSource.customers[cIndex] = customer;
+            }
+        }
+        #endregion
+
         #region Get item
         /// <summary>
         /// return customer by customer ID to print.
         /// </summary>
         /// <param name="customerId">customer ID to print</param>
         /// <returns>customer to show</returns>
-        public Customer CustomerView(int customerId)
+        public Customer GetCustomer(int customerId)
         {
             if (!DataSource.customers.Exists(customer => customer.Id == customerId))
             {
