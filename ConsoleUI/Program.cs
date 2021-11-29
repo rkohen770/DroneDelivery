@@ -313,7 +313,7 @@ namespace ConsoleUI
         {
             Console.WriteLine("Enter the parcel view: parcelId");
             int parcelId = int.Parse(Console.ReadLine());
-            Console.WriteLine(dal.ParcelView(parcelId));
+            Console.WriteLine(dal.GetParcel(parcelId));
         }
 
         private static void displayCustomer(DalObject.DalObject dal)
@@ -327,14 +327,14 @@ namespace ConsoleUI
         {
             Console.WriteLine("Enter the drone view: droneId");
             int droneId = int.Parse(Console.ReadLine());
-            Console.WriteLine(dal.DroneView(droneId));
+            Console.WriteLine(dal.GetDrone(droneId));
         }
 
         private static void displayStation(DalObject.DalObject dal)
         {
             Console.WriteLine("Enter the base station view: stationId");
             int stationId = int.Parse(Console.ReadLine());
-            Console.WriteLine(dal.BaseStationView(stationId));
+            Console.WriteLine(dal.GetBaseStation(stationId));
         }
 
 

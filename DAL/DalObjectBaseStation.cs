@@ -115,7 +115,7 @@ namespace DalObject
         /// </summary>
         /// <param name="stationId">station ID</param>
         /// <returns>statoin</returns>
-        public Station BaseStationView(int stationId)
+        public Station GetBaseStation(int stationId)
         {
             if (!DataSource.stations.Exists(station => station.Id == stationId))
             {

@@ -27,7 +27,7 @@ namespace IBL
         /// <param name="model">Drone model</param>
         /// <param name="maxWeight">Maximum weight</param>
         /// <param name="stationId">Number of stations to put the drone for initial charging</param>
-        public void AddDroneBo(int droneId, string model, WeightCategories maxWeight, int stationId);
+        public void AddDroneBo(int droneId, string model, BO.WeightCategories maxWeight, int stationId);
 
         /// <summary>
         /// Absorption of a new customer
@@ -45,7 +45,7 @@ namespace IBL
         /// <param name="targetId">Customer ID card</param>
         /// <param name="weight">Parcel weight</param>
         /// <param name="priority">Priority(Normal, Fast, Emergency)</param>
-        public void AddParcelBo(int senderId, int targetId, WeightCategories weight, Priorities priority);
+        public void AddParcelBo(int senderId, int targetId, BO.WeightCategories weight, BO.Priorities priority);
         #endregion
 
         #region UPDATE
@@ -112,28 +112,28 @@ namespace IBL
         /// </summary>
         /// <param name="baseStationId"></param>
         /// <returns>Base station show</returns>
-        public BaseStation BaseStationViewBl(int baseStationId);
+        public BaseStation GetBaseStation(int baseStationId);
 
         /// <summary>
         /// Drone view
         /// </summary>
         /// <param name="droneId"></param>
         /// <returns>Drone show</returns>
-        public Drone DroneViewBl(int droneId);
+        public BO.Drone GetDrone(int droneId);
 
         /// <summary>
         /// Customer view
         /// </summary>
         /// <param name="customerId"></param>
         /// <returns>Customer show</returns>
-        public Customer CustomerViewBl(int customerId);
+        public BO.Customer GetCustomer(int customerId);
 
         /// <summary>
         /// Parcel view
         /// </summary>
         /// <param name="parcelId"></param>
         /// <returns>Parcel show</returns>
-        public Parcel ParcelViewBl(int parcelId);
+        public BO.Parcel GetParcel(int parcelId);
         #endregion
 
         #region GET LISTS

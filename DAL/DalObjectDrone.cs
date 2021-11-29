@@ -135,7 +135,7 @@ namespace DalObject
         /// </summary>
         /// <param name="droneId">drone ID to print</param>
         /// <returns>drone to show</returns>
-        public Drone DroneView(int droneId)
+        public Drone GetDrone(int droneId)
         {
             if (!DataSource.drones.Exists(drone => drone.Id == droneId))
             {

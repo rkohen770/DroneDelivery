@@ -43,7 +43,7 @@ namespace BL
                 {
                     Id = drone_DL.Id,
                     Model = drone_DL.Model,
-                    Weight = (IBL.BO.WeightCategories)drone_DL.MaxWeight
+                    MaxWeight = (IBL.BO.WeightCategories)drone_DL.MaxWeight
                 };
                 List<IDAL.DO.Parcel> parcels = parcelsList.FindAll(p => p.DroneId == drone_BL.Id);
                 drone_BL.ParcelNumIsTransferred = parcels.Count();
@@ -79,7 +79,7 @@ namespace BL
                             Lattitude = st.Lattitude,
                             Longitude = st.Longitude
                         };
-                        double distance = dal.GetDistanceBetweenLocations(p.SenderId, p.TargetId)
+                        double distance = dal.GetDistanceBetweenLocationsOfParcels(p.SenderId, p.TargetId)
                             + dal.GetDistanceBetweenLocationAndClosestBaseStation(p.TargetId);
                         switch (p.Weight)
                         {
@@ -133,113 +133,25 @@ namespace BL
         }
 
 
-       
 
 
 
-        #region UPDATE
 
-      
-
-
-        /// <summary>
-        /// Assign parcel to drone
-        /// </summary>
-        /// <param name="id">Id drone</param>
-        /// <param name="chargingtime">Charging time</param>
-        public void UpdateAssignParcelToDrone(int id)
-        {
-
-        }
-
-        /// <summary>
-        /// Collection of a parcek by drone
-        /// </summary>
-        /// <param name="id">Id drone</param>
-        /// <param name="chargingtime">Charging time</param>
-        public void UpdateCollectionParcelByDrone(int id)
-        {
-
-        }
-
-        /// <summary>
-        /// Delivery parcel by drone
-        /// </summary>
-        /// <param name="id">Id drone</param>
-        /// <param name="chargingtime">Charging time</param>
-        public void UpdateDeliveryParcelByDrone(int id)
-        {
-
-        }
-
-
-        #endregion
+        
 
 
         #region GET ITEM
-        /// <summary>
-        /// Base station view
-        /// </summary>
-        /// <param name="baseStationId"></param>
-        /// <returns>Base station show</returns>
-        public BaseStation BaseStationViewBl(int baseStationId)
-        {
-            Station station = dal.BaseStationView(baseStationId);
-            List<int> dronesId = dal.GetDronesInChargingsAtStation(baseStationId).ToList();
-            IDAL.DO.Drone drone = drones.Find(d => d.Id == dronesId[0]);
-            List<DroneInCharging> dronesInCarging = new()
-            {
-                new DroneInCharging
-                {
-                    Id = dronesId[0]
-                },
-                new DroneInCharging
-                {
-                    Id = dronesId[1]
-                }
-            };
-            BaseStation baseStation = new BaseStation()
-            {
-                Id = baseStationId,
-                NameBaseStation = station.Name,
-                Location = new() { Lattitude = station.Lattitude, Longitude = station.Longitude },
-                DroneInChargings = dronesInCarging,
-                NumOfAvailableChargingPositions = station.ChargeSlots + drones.Count()
-            };
+      
 
-            //find the station in the array of stations and return it.
-            return baseStation;
-        }
+       
 
-        public IBL.BO.Drone DroneViewBl(int droneId)
+
+        public IBL.BO.Parcel GetParcel(int parcelId)
         {
             throw new NotImplementedException();
         }
 
-        public IBL.BO.Customer CustomerViewBl(int customerId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IBL.BO.Parcel ParcelViewBl(int parcelId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<BaseStationForList> GetAllBaseStationsBo()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<DroneForList> GetAllDronesBo()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<CustomerForList> GetAllCustomersBo()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public IEnumerable<ParcelForList> GetAllParcelsBo()
         {
@@ -258,15 +170,16 @@ namespace BL
 
         #endregion
         /// <summary>
-        /// A function that calculates the distance between the location of a drone and a base station
+        /// --BONUS--: another option that recives coordinates and print the distance from it to a station or a customer
+        /// A function that calculates the distance between the location
         /// </summary>
         /// <param name="drone"></param>
         /// <param name="station"></param>
         /// <returns></returns>
-        private static double getDistanceBetweenTwoPoints(DroneForList drone, Station station)
+        private static double getDistanceBetweenTwoPoints(double lattitude_1, double longitude_1, double lattitude_2, double longitude_2)
         {
-            return Math.Sqrt(Math.Pow(station.Lattitude - drone.CurrentLocation.Lattitude, 2) +
-                                    Math.Pow(station.Longitude - drone.CurrentLocation.Longitude, 2));
+            return Math.Sqrt(Math.Pow(lattitude_1 -lattitude_2, 2) +
+                                    Math.Pow(longitude_1 - longitude_2, 2));
         }
     }
 }

@@ -13,7 +13,7 @@ namespace IBL.BO
         public Priorities Priorities { get; set; }
         public WeightCategories Weight { get; set; }
         public CustomerInParcel Sender { get; set; }
-        public CustomerInParcel Getting { get; set; }
+        public CustomerInParcel Target { get; set; }
         public Location Collection { get; set; }
         public Location DeliveryDestination { get; set; }
         public double TransportDistance { get; set; }
@@ -21,7 +21,7 @@ namespace IBL.BO
         public override string ToString()
         {
             return $"Id: {Id} \nParcelStatusInTransfer {ParcelStatusInTransfer} \nPriorities {Priorities} \nWeight {Weight}" +
-                $"\nSender {Sender} \nGetting {Getting} \nCollection {Collection} \nDeliveryDestination {DeliveryDestination} " +
+                $"\nSender {Sender} \nGetting {Target} \nCollection {Collection} \nDeliveryDestination {DeliveryDestination} " +
                 $"\nTransportDistance {TransportDistance}";
         }
     }

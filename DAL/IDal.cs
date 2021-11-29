@@ -143,7 +143,7 @@ namespace IDAL
         /// </summary>
         /// <param name="stationId">Id station</param>
         /// <returns>Base station to show</returns>
-        public Station BaseStationView(int stationId);
+        public Station GetBaseStation(int stationId);
 
         /// <summary>
         /// A function that returns a minimum distance between a point and a base station
@@ -160,7 +160,7 @@ namespace IDAL
         /// <param name="senderId">sender Id</param>
         /// <param name="targetId">target Id</param>
         /// <returns>Returns a distance between two points</returns>
-        public double GetDistanceBetweenLocations(int senderId, int targetId);
+        public double GetDistanceBetweenLocationsOfParcels(int senderId, int targetId);
 
         /// <summary>
         /// A function that calculates the distance between a customer's location and a base station for charging
@@ -174,7 +174,7 @@ namespace IDAL
         /// </summary>
         /// <param name="droneId">Id drone</param>
         /// <returns>Dron to show</returns>
-        public Drone DroneView(int droneId);
+        public Drone GetDrone(int droneId);
 
         /// <summary>
         /// Customer view
@@ -188,7 +188,7 @@ namespace IDAL
         /// </summary>
         /// <param name="parcelId">Id parcel</param>
         /// <returns>parcel to show</returns>
-        public Parcel ParcelView(int parcelId);
+        public Parcel GetParcel(int parcelId);
         #endregion
 
         #region GET LIST

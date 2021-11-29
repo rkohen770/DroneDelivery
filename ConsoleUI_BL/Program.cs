@@ -353,28 +353,28 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter the station view: stationId");
             int stationId = int.Parse(Console.ReadLine());
-            Console.WriteLine(bl.BaseStationViewBl(stationId));
+            Console.WriteLine(bl.GetBaseStation(stationId));
         }
 
         private static void displayDrone(BlObject bl)
         {
             Console.WriteLine("Enter the drone view: droneId");
             int droneId = int.Parse(Console.ReadLine());
-            Console.WriteLine(bl.DroneViewBl(droneId));
+            Console.WriteLine(bl.GetDrone(droneId));
         }
 
         private static void displayCustomer(BlObject bl)
         {
             Console.WriteLine("Enter the customer view: customerId");
             int customerId = int.Parse(Console.ReadLine());
-            Console.WriteLine(bl.CustomerViewBl(customerId));
+            Console.WriteLine(bl.GetCustomer(customerId));
         }
 
         private static void displayParcel(BlObject bl)
         {
             Console.WriteLine("Enter the parcel view: parcelId");
             int parcelId = int.Parse(Console.ReadLine());
-            Console.WriteLine(bl.ParcelViewBl(parcelId));
+            Console.WriteLine(bl.GetParcel(parcelId));
         }
         #endregion
 

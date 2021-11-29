@@ -10,7 +10,7 @@ namespace IBL.BO
     {
         public int Id { get; set; }
         public string Model { get; set; }
-        public WeightCategories Weight { get; set; }
+        public WeightCategories MaxWeight { get; set; }
         public double Battery { get; set; }
         public DroneStatus DroneStatus { get; set; }
         public Location CurrentLocation { get; set; }
@@ -18,7 +18,7 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return $"Id: {Id} \nModel {Model} \nWeight {Weight} \nBattery {Battery} \nDroneStatus {DroneStatus}" +
+            return $"Id: {Id} \nModel {Model} \nWeight {MaxWeight} \nBattery {Battery} \nDroneStatus {DroneStatus}" +
                 $"\nCurrentLocation{CurrentLocation} \nParcelNumIsTransferred {ParcelNumIsTransferred} ";
         }
     }

@@ -133,7 +133,7 @@ namespace DalObject
         /// </summary>
         /// <param name="parcelId">parcel ID to print</param>
         /// <returns>parcel to show</returns>
-        public Parcel ParcelView(int parcelId)
+        public Parcel GetParcel(int parcelId)
         {
             if (!DataSource.parcels.Exists(parcel => parcel.Id == parcelId))
             {

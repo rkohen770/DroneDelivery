@@ -11,6 +11,7 @@ namespace BL
 {
     public partial class BlObject : IBL.IBL
     {
+        #region ADD
         /// <summary>
         /// Add base station
         /// </summary>
@@ -31,20 +32,22 @@ namespace BL
             //Add baseStation in DAL to data source.
             dal.AddStation(id, nameBaseStation, location.Longitude, location.Lattitude, numOfAvailableChargingPositions);
         }
+        #endregion
 
+        #region UPDATE
         /// <summary>
         /// Update station data
         /// </summary>
         /// <param name="id">Base station id</param>
         /// <param name="nameBaseStation">Base station name</param>
         /// <param name="totalAmountOfChargingStations">Total amount of charging stations</param>
-        public void UpdateBaseStationData(int id, int nameBaseStation , int totalAmountOfChargingStations)
+        public void UpdateBaseStationData(int id, int nameBaseStation, int totalAmountOfChargingStations)
         {
             //update in BL
-            Station station= dal.BaseStationView(id);
-            if (nameBaseStation!=0)
+            Station station = dal.GetBaseStation(id);
+            if (nameBaseStation != 0)
             {
-                if (totalAmountOfChargingStations!=0)
+                if (totalAmountOfChargingStations != 0)
                 {
                     dal.UpdateBaseStationData(id, nameBaseStation, totalAmountOfChargingStations);
                 }
@@ -59,6 +62,62 @@ namespace BL
             }
 
         }
+        #endregion
+
+        #region GET ITEM
+        /// <summary>
+        /// Base station view
+        /// </summary>
+        /// <param name="baseStationId">base Station Id</param>
+        /// <returns>Base station thet requested</returns>
+        public BaseStation GetBaseStation(int baseStationId)
+        {
+            Station station = dal.GetBaseStation(baseStationId);
+            List<int> dronesIdInChrging = dal.GetDronesInChargingsAtStation(baseStationId).ToList();
+            List<DroneInCharging> dronesInCarging = new();
+            foreach (var droneId in dronesIdInChrging)
+            {
+                var drone_l = droneForLists.Find(d => d.Id == droneId);
+                DroneInCharging drone_c = new() { Id = droneId, Battery = drone_l.Battery };
+                dronesInCarging.Add(drone_c);
+            }
+
+            return new BaseStation()
+            {
+                Id = baseStationId,
+                NameBaseStation = station.Name,
+                Location = new() { Lattitude = station.Lattitude, Longitude = station.Longitude },
+                NumOfAvailableChargingPositions = station.ChargeSlots,
+                DroneInChargings = dronesInCarging
+            };
+
+        }
+        #endregion
+
+        #region GET LIST
+        public IEnumerable<BaseStationForList> GetAllBaseStationsBo()
+        {
+            List<BaseStationForList> list = new();
+            foreach (var station in dal.GetAllBaseStations())
+            {
+                BaseStationForList stationForList = clonBaseStation(GetBaseStation(station.Id));
+                list.Add(stationForList);
+            }
+            return list;
+        }
+        #endregion
+        private BaseStationForList clonBaseStation(BaseStation baseStation)
+        {
+            return new BaseStationForList
+            {
+                Id = baseStation.Id,
+                NameBaseStation = baseStation.NameBaseStation.ToString(),
+                NumOfAvailableChargingPositions = baseStation.NumOfAvailableChargingPositions,
+                NumOfBusyChargingPositions = baseStation.DroneInChargings.Count()
+            };
+        }
+
+
     }
-    
+
 }

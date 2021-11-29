@@ -9,7 +9,7 @@ using IDAL.DO;
 
 namespace DalObject
 {
-    public partial class DalObject:IDal
+    public partial class DalObject : IDal
     {
         #region ADD
         /// <summary>
@@ -48,7 +48,7 @@ namespace DalObject
         /// <param name="id">customer id</param>
         /// <param name="newName">customer name</param>
         /// <param name="newPhone">customer phone</param>
-        void UpdateCustomerData(int id, string newName, string newPhone)
+        public void UpdateCustomerData(int id, string newName, string newPhone)
         {
             if (!DataSource.customers.Exists(c => c.Id == id))
             {
@@ -69,7 +69,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id">customer id</param>
         /// <param name="newName">customer name</param>
-        void UpdateCustomerName(int id, string newName)
+        public void UpdateCustomerName(int id, string newName)
         {
             if (!DataSource.customers.Exists(c => c.Id == id))
             {
@@ -89,7 +89,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id">customer id</param>
         /// <param name="newPhone">customer phone</param>
-        void UpdateCustomerPhone(int id, string newPhone)
+        public void UpdateCustomerPhone(int id, string newPhone)
         {
             if (!DataSource.customers.Exists(c => c.Id == id))
             {

@@ -19,7 +19,7 @@ namespace DalObject
         /// <param name="senderId">sender Id</param>
         /// <param name="targetId">target Id</param>
         /// <returns>Returns a distance between two points</returns>
-        public double GetDistanceBetweenLocations(int senderId, int targetId)
+        public double GetDistanceBetweenLocationsOfParcels(int senderId, int targetId)
         {
             double minDistance = 1000000000000;
             Customer sender = GetCustomer(senderId);
