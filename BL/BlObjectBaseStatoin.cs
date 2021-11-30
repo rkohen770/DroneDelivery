@@ -105,7 +105,28 @@ namespace BL
             }
             return list;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging()
+        {
+            List<BaseStationForList> list = new();
+            foreach (var station in dal.GetAllStationsWithAvailableChargingStations())
+            {
+                BaseStationForList stationForList = clonBaseStation(GetBaseStation(station.Id));
+                list.Add(stationForList);
+            }
+            return list;
+        }
         #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="baseStation"></param>
+        /// <returns></returns>
         private BaseStationForList clonBaseStation(BaseStation baseStation)
         {
             return new BaseStationForList

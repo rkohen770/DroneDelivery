@@ -82,7 +82,7 @@ namespace BL
                 //find the status of parcel.
                 var ParcelStatus = (parcel.Delivered != DateTime.MinValue) ? IBL.BO.ParcelStatus.Provided :
                     (parcel.PickedUp != DateTime.MinValue) ? IBL.BO.ParcelStatus.WasCollected :
-                    (parcel.scheduled != DateTime.MinValue) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined;
+                    (parcel.Scheduled != DateTime.MinValue) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined;
                 ParcelAtCustomer parcelAt = new()
                 {
                     Id = parcel.Id,
@@ -107,7 +107,7 @@ namespace BL
                 //find the status of parcel.
                 var ParcelStatus = (parcel.Delivered != DateTime.MinValue) ? IBL.BO.ParcelStatus.Provided :
                     (parcel.PickedUp != DateTime.MinValue) ? IBL.BO.ParcelStatus.WasCollected :
-                    (parcel.scheduled != DateTime.MinValue) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined;
+                    (parcel.Scheduled != DateTime.MinValue) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined;
                 ParcelAtCustomer parcelAt = new()
                 {
                     Id = parcel.Id,
@@ -154,7 +154,7 @@ namespace BL
         #endregion
         private CustomerForList clonCustomer(IBL.BO.Customer customer)
         {
-            return new CustomerForList()
+            return new ()
             {
                 Id = customer.Id,
                 Name = customer.Name,

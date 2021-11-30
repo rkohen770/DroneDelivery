@@ -73,7 +73,7 @@ namespace DalObject
                     {
                         Parcel parcel = DataSource.parcels[pIndex];//Obtain an index for the location where the package ID is located
                         parcel.DroneId = droneId;//Update the droneid field in the drone package found
-                        parcel.scheduled = DateTime.Now;//Update packet time association field to now.
+                        parcel.Scheduled = DateTime.Now;//Update packet time association field to now.
                         DataSource.parcels[pIndex] = parcel;
                         return;
                     }

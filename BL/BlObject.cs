@@ -132,43 +132,6 @@ namespace BL
             }
         }
 
-
-
-
-
-
-        
-
-
-        #region GET ITEM
-      
-
-       
-
-
-        public IBL.BO.Parcel GetParcel(int parcelId)
-        {
-            throw new NotImplementedException();
-        }
-
-        
-
-        public IEnumerable<ParcelForList> GetAllParcelsBo()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithGlider()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
         /// <summary>
         /// --BONUS--: another option that recives coordinates and print the distance from it to a station or a customer
         /// A function that calculates the distance between the location

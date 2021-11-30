@@ -34,13 +34,13 @@ namespace BL
             {
                 Id = parcelId,
                 Sender = sender,
-                Getting = getting,
+                Target = getting,
                 Weight = weight,
                 Priorities = priority,
                 DroneInParcel = null,
-                CreateParcel = DateTime.Now,
-                ParcelAssociation = DateTime.MinValue,
-                ParcelCollection = DateTime.MinValue,
+                Requested = DateTime.Now,
+                Scheduled = DateTime.MinValue,
+                PickedUp = DateTime.MinValue,
                 ParcelDelivery = DateTime.MinValue
             };
         }
@@ -97,11 +97,6 @@ namespace BL
             }
         }
 
-        /// <summary>
-        /// Collection of a parcek by drone
-        /// </summary>
-        /// <param name="id">Id drone</param>
-        /// <param name="chargingtime">Charging time</param>
         public void UpdateCollectionParcelByDrone(int droneId)
         {
             //the drone collect a parcel only if the parcel has been assigned to it and haven't picked up yet
@@ -109,7 +104,7 @@ namespace BL
             var drone_l = droneForLists.Find(d => d.DroneStatus == DroneStatus.Delivery);
             var parcel = dal.GetAllParcels().ToList().Find(p => p.DroneId == droneId);
             //check if the parcel was assigned
-            if (parcel.scheduled == DateTime.MinValue)
+            if (parcel.Scheduled == DateTime.MinValue)
             {
                 throw new Exception("the parcel wasn't assigned to the drone!");
             }
@@ -174,6 +169,96 @@ namespace BL
             }
         }
         #endregion
+
+        #region GET ITEM
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parcelId"></param>
+        /// <returns></returns>
+        public IBL.BO.Parcel GetParcel(int parcelId)
+        {
+            var parcel = dal.GetParcel(parcelId);
+            var sender = GetCustomer(parcel.SenderId);
+            var target = GetCustomer(parcel.SenderId);
+            IBL.BO.Parcel parcel_BO = new IBL.BO.Parcel()
+            {
+                Id = parcelId,
+                Sender = new() { Id = sender.Id, Name = sender.Name },
+                Target = new() { Id = target.Id, Name = target.Name },
+                Weight = (IBL.BO.WeightCategories)parcel.Weight,
+                Priorities = (IBL.BO.Priorities)parcel.priority,
+                Requested = parcel.Requested,
+                Scheduled = parcel.Scheduled,
+                PickedUp = parcel.PickedUp,
+                ParcelDelivery = parcel.Delivered
+            };
+            DroneInParcel droneInParcel = new();
+            if (parcel.DroneId != 0)
+            {
+                var drone = droneForLists.Find(d => d.Id == parcel.DroneId);
+                droneInParcel.Id = drone.Id;
+                droneInParcel.Battery = drone.Battery;
+                droneInParcel.CurrentLocation = drone.CurrentLocation;
+            }
+            return parcel_BO;
+        }
+        #endregion
+
+        #region GET LIST 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ParcelForList> GetAllParcelsBo()
+        {
+            List<ParcelForList> list = new();
+            foreach (var parcel in dal.GetAllParcels())
+            {
+                ParcelForList parcelForList = clonParcel(GetParcel(parcel.Id));
+                list.Add(parcelForList);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithGlider()
+        {
+            List<ParcelForList> list = new();
+            foreach (var parcel in dal.GetAllParcelsWithoutSpecialDron())
+            {
+                ParcelForList parcelForList = clonParcel(GetParcel(parcel.Id));
+                list.Add(parcelForList);
+            }
+            return list;
+        }
+        #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parcel"></param>
+        /// <returns></returns>
+        private ParcelForList clonParcel(IBL.BO.Parcel parcel)
+        {
+            return new()
+            {
+                Id = parcel.Id,
+                CustomerNameSend = parcel.Sender.Name,
+                CustomerNameTarget = parcel.Target.Name,
+                Weight = parcel.Weight,
+                Priorities = parcel.Priorities,
+                //find the status of parcel.
+                ParcelStatus = (parcel.ParcelDelivery != DateTime.MinValue) ? IBL.BO.ParcelStatus.Provided :
+                    (parcel.PickedUp != DateTime.MinValue) ? IBL.BO.ParcelStatus.WasCollected :
+                    (parcel.Scheduled != DateTime.MinValue) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined
+            };
+        }
+
+
     }
 }
 

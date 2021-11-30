@@ -18,7 +18,7 @@ namespace IDAL
             public Priorities priority { get; set; }
             public int DroneId { get; set; }
             public DateTime Requested { get; set; }
-            public DateTime scheduled { get; set; }
+            public DateTime Scheduled { get; set; }
             public DateTime PickedUp { get; set; }
             public DateTime Delivered { get; set; }
 
@@ -27,7 +27,7 @@ namespace IDAL
             {
                 return $"Id: {Id} \nSenderId: {SenderId} \nTargetId {TargetId} \n" +
                     $"Weight {Weight} \npriority {priority} \nRequested {Requested} \n" +
-                    $"DroneId {DroneId} \nscheduled {scheduled} \nPickedUp {PickedUp} \nDelivered {Delivered}\n";
+                    $"DroneId {DroneId} \nscheduled {Scheduled} \nPickedUp {PickedUp} \nDelivered {Delivered}\n";
             }
         }
     }
