@@ -17,8 +17,8 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return $"Id: {Id} \nCustomerNameSend: {CustomerNameSend} \nCustomerNameGetting {CustomerNameTarget}" +
-                $" \nWeight {Weight} \nPriorities {Priorities} \nParcelStatus {ParcelStatus}";
+            return $"Id: {Id} \nCustomerNameSend: {CustomerNameSend} \nName Customer Target: {CustomerNameTarget}" +
+                $" \nWeight: {Weight} \nPrioritie: {Priorities} \nParcel Status: {ParcelStatus}\n";
         }
 
     }

@@ -22,9 +22,9 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return $"Id: {Id} \nSender: {Sender} \nGetting {Target} \nWeight {Weight} \nPriorities {Priorities}" +
-                $"\nDroneInParcel {DroneInParcel} \nCreateParcel {Requested} \nParcelAssociation {Scheduled }" +
-                $"\nParcelCollection {PickedUp } \nParcelDelivery {ParcelDelivery}";
+            return $"Id: {Id} \nSender: {Sender} \nTarget: {Target} \nWeight: {Weight} \nPrioritie: {Priorities}" +
+                $"\nDrone In Parcel: {DroneInParcel} \nCreate Parcel: {Requested} \nParce Scheduled: {Scheduled }" +
+                $"\nParcel Collection: {PickedUp } \nParcel Delivery:  {ParcelDelivery}\n";
         }
     }
 }

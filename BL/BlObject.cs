@@ -10,7 +10,7 @@ namespace BL
 {
     public partial class BlObject : IBL.IBL
     {
-        Random random = new Random();
+        static Random random = new Random();
         IDal dal;
         List<DroneForList> droneForLists = new List<DroneForList>();
         public BlObject()
@@ -45,17 +45,17 @@ namespace BL
                     Model = drone_DL.Model,
                     MaxWeight = (IBL.BO.WeightCategories)drone_DL.MaxWeight
                 };
-                List<IDAL.DO.Parcel> parcels = parcelsList.FindAll(p => p.DroneId == drone_BL.Id);
-                drone_BL.ParcelNumIsTransferred = parcels.Count();
-
-                if (parcels != null) //If there is a package that has not yet been delivered but the drone has already been associated
+                //If there is a package that has not yet been delivered but the drone has already been associated
+                var parcel = parcelsList.Find(p => p.DroneId == drone_BL.Id && p.Delivered == DateTime.MinValue);
+                if (parcel.Id != 0)
                 {
+                    double minValueBattery = 0;
                     drone_BL.DroneStatus = DroneStatus.Delivery;
-                    //If the package was associated but not collected
-                    foreach (var p in parcels.Where(p => p.PickedUp == DateTime.MinValue))
+                    //If the parcel was associated but not collected
+                    if (parcel.PickedUp == DateTime.MinValue)
                     {
                         // The location of the drone will be at the station closest to the sender
-                        int senderId = p.SenderId;
+                        int senderId = parcel.SenderId;
                         double senderLattitude = dal.GetCustomer(senderId).Lattitude;
                         double senderLongitude = dal.GetCustomer(senderId).Longitude;
                         Station st = dal.GetClosestStation(senderLattitude, senderLongitude);
@@ -64,13 +64,14 @@ namespace BL
                             Lattitude = st.Lattitude,
                             Longitude = st.Longitude
                         };
-                        drone_BL.Battery = random.Next(0, 101);
+                        minValueBattery = getDistanceBetweenTwoPoints(senderLattitude, senderLongitude, st.Lattitude, st.Longitude)
+                           + dal.GetDistanceBetweenLocationsOfParcels(parcel.SenderId, parcel.TargetId)
+                           + dal.GetDistanceBetweenLocationAndClosestBaseStation(parcel.TargetId) * dal.PowerConsumptionRequest()[0] + 1;
                     }
-                    //If the package has been collected but has not yet been delivered
-                    foreach (var p in parcels.Where(p => p.PickedUp != DateTime.MinValue && p.Delivered == DateTime.MinValue))
+                    else if (parcel.PickedUp != DateTime.MinValue && parcel.Delivered == DateTime.MinValue)
                     {
                         //The location of the drone will be at the location of the sender
-                        int senderId = p.SenderId;
+                        int senderId = parcel.SenderId;
                         double senderLattitude = dal.GetCustomer(senderId).Lattitude;
                         double senderLongitude = dal.GetCustomer(senderId).Longitude;
                         Station st = dal.GetClosestStation(senderLattitude, senderLongitude);
@@ -79,23 +80,24 @@ namespace BL
                             Lattitude = st.Lattitude,
                             Longitude = st.Longitude
                         };
-                        double distance = dal.GetDistanceBetweenLocationsOfParcels(p.SenderId, p.TargetId)
-                            + dal.GetDistanceBetweenLocationAndClosestBaseStation(p.TargetId);
-                        switch (p.Weight)
+                        double distance = dal.GetDistanceBetweenLocationsOfParcels(parcel.SenderId, parcel.TargetId)
+                            + dal.GetDistanceBetweenLocationAndClosestBaseStation(parcel.TargetId);
+                        switch (parcel.Weight)
                         {
                             case IDAL.DO.WeightCategories.Easy:
-                                drone_BL.Battery = random.Next((int)(distance * dal.PowerConsumptionRequest()[1] + 1), 101);
+                                minValueBattery = distance * dal.PowerConsumptionRequest()[1] + 1;
                                 break;
                             case IDAL.DO.WeightCategories.Intermediate:
-                                drone_BL.Battery = random.Next((int)(distance * dal.PowerConsumptionRequest()[2] + 1), 101);
+                                minValueBattery = distance * dal.PowerConsumptionRequest()[2] + 1;
                                 break;
                             case IDAL.DO.WeightCategories.Liver:
-                                drone_BL.Battery = random.Next((int)(distance * dal.PowerConsumptionRequest()[3] + 1), 101);
+                                minValueBattery = distance * dal.PowerConsumptionRequest()[3] + 1;
                                 break;
                             default:
                                 break;
                         }
                     }
+                    drone_BL.Battery = random.Next((int)minValueBattery, 101);
                 }
                 else //the drone is not in delivery
                 {
@@ -104,19 +106,18 @@ namespace BL
                     {
                         //Its location will be drawn between the purchasing stations
                         List<Station> baseStations = dal.GetAllBaseStations().ToList();
-                        int index=random.Next(0, baseStations.Count());
+                        int index = random.Next(0, baseStations.Count());
                         drone_BL.CurrentLocation = new()
                         {
                             Lattitude = baseStations[index].Lattitude,
                             Longitude = baseStations[index].Longitude
                         };
-
                         drone_BL.Battery = random.Next(0, 21);
                     }
                     else if (drone_BL.DroneStatus == DroneStatus.Available)
                     {
                         //Its location will be raffled off among customers who have packages provided to them
-                        List<IDAL.DO.Parcel> parcelsDelivered = parcels.FindAll(p => p.Delivered != DateTime.MinValue);
+                        List<IDAL.DO.Parcel> parcelsDelivered = parcelsList.FindAll(p => p.Delivered != DateTime.MinValue);
                         int index = random.Next(0, parcelsDelivered.Count());
                         drone_BL.CurrentLocation = new()
                         {
@@ -130,6 +131,7 @@ namespace BL
                 }
                 droneForLists.Add(drone_BL);
             }
+
         }
 
         /// <summary>

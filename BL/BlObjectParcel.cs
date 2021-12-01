@@ -180,7 +180,7 @@ namespace BL
         {
             var parcel = dal.GetParcel(parcelId);
             var sender = GetCustomer(parcel.SenderId);
-            var target = GetCustomer(parcel.SenderId);
+            var target = GetCustomer(parcel.TargetId);
             IBL.BO.Parcel parcel_BO = new IBL.BO.Parcel()
             {
                 Id = parcelId,

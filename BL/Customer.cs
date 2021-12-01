@@ -18,8 +18,8 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return $"Id: {Id} \nName: {Name} \nPhone {Phone} \nLocation {Location}" +
-                $"\nFromCustomer {FromCustomer} \nToCustomer {ToCustomer}";
+            return $"Id: {Id} \nName: {Name} \nPhone: {Phone} \nLocation: {Location}" +
+                $"\nFrom Customer: {FromCustomer} \nTo Customer: {ToCustomer}\n";
         }
     }
 }

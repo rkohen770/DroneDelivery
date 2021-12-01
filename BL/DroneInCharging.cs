@@ -13,7 +13,7 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return $"Id: {Id} \nBattery {Battery}";
+            return $"Id: {Id} \nBattery: {Battery}\nS";
         }
     }
 }

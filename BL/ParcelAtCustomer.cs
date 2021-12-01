@@ -15,8 +15,8 @@ namespace IBL.BO
         public CustomerInParcel SourceOrTarget { get; set; }
         public override string ToString()
         {
-            return $"Id: {Id} \nWeight {Weight} \nPriorities {Priorities} \nParcelStatus {ParcelStatus}" +
-                $"\nSource {SourceOrTarget} ";
+            return $"Id: {Id} \nWeight: {Weight} \nPrioritie: {Priorities} \nParcel Status: {ParcelStatus}" +
+                $"\nSource: {SourceOrTarget} \n";
         }
 
     }

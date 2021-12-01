@@ -102,7 +102,7 @@ namespace BL
             List<IDAL.DO.Parcel> parcel_To_Customer = dal.GetAllParcels().
                 Where(p => p.TargetId == customerId).ToList();
             List<ParcelAtCustomer> to_customer = new();
-            foreach (var parcel in parcel_From_Customer)
+            foreach (var parcel in parcel_To_Customer)
             {
                 //find the status of parcel.
                 var ParcelStatus = (parcel.Delivered != DateTime.MinValue) ? IBL.BO.ParcelStatus.Provided :
@@ -120,7 +120,7 @@ namespace BL
                         Name = dal.GetCustomer(parcel.SenderId).Name
                     }
                 };
-                from_customer.Add(parcelAt);
+                to_customer.Add(parcelAt);
             };
 
             return new()

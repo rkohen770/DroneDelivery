@@ -18,9 +18,9 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return $"Id: {Id} \nName: {Name} \nNumParcelsSentAndDelivered {NumParcelsSentAndDelivered}" +
-                $"\nNumParcelsSentNotDelivered {NumParcelsSentAndNotDelivered} \nNumParcelsReceived {NumParcelsReceived}" +
-                $"\nSeveralParcelsOnTheWayToCustomer {SeveralParcelsOnTheWayToCustomer}";
+            return $"Id: {Id} \nName: {Name} \nNum Parcels Sent And Delivered: {NumParcelsSentAndDelivered} " +
+                $"\nNum Parcels Sent Not Delivered: {NumParcelsSentAndNotDelivered} \nNum Parcels Received: {NumParcelsReceived} " +
+                $"\nSeveral Parcels On The Way To Customer: {SeveralParcelsOnTheWayToCustomer} \n";
         }
     }
 

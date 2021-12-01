@@ -157,30 +157,25 @@ namespace BL
             DroneForList drone_l = droneForLists.Find(d => d.Id == droneId);
             if (drone_l.DroneStatus == DroneStatus.Delivery)
             {
-                var parcel = dal.GetAllParcels().FirstOrDefault(p => p.DroneId == droneId);
+                var parcel = dal.GetAllParcels().ToList().Find(p => p.DroneId == droneId);
                 var customer_sender = dal.GetCustomer(parcel.SenderId);
                 var customer_target = dal.GetCustomer(parcel.TargetId);
 
-                ParcelInTransfer parcelInTransfer = new()
+                ParcelInTransfer parcelInTransfer = new ParcelInTransfer()
                 {
                     Id = parcel.Id,
                     Priorities = (IBL.BO.Priorities)parcel.priority,
                     Weight = (IBL.BO.WeightCategories)parcel.Weight,
-                    Sender = { Id = customer_sender.Id, Name = customer_sender.Name },
-                    Target = { Id = customer_target.Id, Name = customer_target.Name },
-                    Collection = { Lattitude = customer_sender.Lattitude, Longitude = customer_sender.Longitude },
-                    DeliveryDestination = { Lattitude = customer_target.Lattitude, Longitude = customer_target.Longitude },
+                    Sender = new() { Id = customer_sender.Id, Name = customer_sender.Name },
+                    Target = new() { Id = customer_target.Id, Name = customer_target.Name },
+                    Collection = new() { Lattitude = customer_sender.Lattitude, Longitude = customer_sender.Longitude },
+                    DeliveryDestination = new() { Lattitude = customer_target.Lattitude, Longitude = customer_target.Longitude },
                     TransportDistance = getDistanceBetweenTwoPoints(customer_sender.Lattitude, customer_sender.Longitude, customer_target.Lattitude, customer_target.Longitude)
                 };
 
-                if (parcel.PickedUp == DateTime.MinValue)
-                {
-                    parcelInTransfer.ParcelStatusInTransfer = ParcelStatusInTransfer.AwaitingCollection;
-                }
-                else
-                {
+                parcelInTransfer.ParcelStatusInTransfer = (parcel.PickedUp == DateTime.MinValue) ? ParcelStatusInTransfer.AwaitingCollection :
                     parcelInTransfer.ParcelStatusInTransfer = ParcelStatusInTransfer.OnTheWayToDestination;
-                }
+
                 return new()
                 {
                     Id = droneId,
@@ -202,7 +197,7 @@ namespace BL
                     Weight = drone_l.MaxWeight,
                     Battery = drone_l.Battery,
                     DroneStatus = drone_l.DroneStatus,
-                    ParcelInTransfer =null,
+                    ParcelInTransfer = null,
                     CurrentLocation = drone_l.CurrentLocation
 
                 };
@@ -221,8 +216,12 @@ namespace BL
             foreach (var drone_l in droneForLists)
             {
                 DroneForList droneFor = clonDrone(GetDrone(drone_l.Id));
-                droneFor.ParcelNumIsTransferred = dal.GetAllParcels().
-                    Where(p => p.DroneId == drone_l.Id).Count();
+                if (drone_l.DroneStatus == DroneStatus.Delivery)
+                {
+                    droneFor.ParcelNumIsTransferred = dal.GetAllParcels().
+                        ToList().Find(p => p.DroneId == drone_l.Id).Id;
+                }
+
                 list.Add(droneFor);
             }
             return list;

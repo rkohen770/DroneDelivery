@@ -20,9 +20,9 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return $"Id: {Id} \nParcelStatusInTransfer {ParcelStatusInTransfer} \nPriorities {Priorities} \nWeight {Weight}" +
-                $"\nSender {Sender} \nGetting {Target} \nCollection {Collection} \nDeliveryDestination {DeliveryDestination} " +
-                $"\nTransportDistance {TransportDistance}";
+            return $"Id: {Id} \nParcel Status In Transfer: {ParcelStatusInTransfer} \nPriorities: {Priorities} \nWeight: {Weight}" +
+                $"\nSender: {Sender} \nTarget: {Target} \nCollection: {Collection} \nDelivery Destination: {DeliveryDestination} " +
+                $"\nTransport Distance: {TransportDistance}\n";
         }
     }
 }
