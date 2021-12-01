@@ -23,7 +23,7 @@ namespace DalObject
         {
             if (DataSource.stations.Exists(station => station.Id == id))
             {
-                throw new ExistingFigureException("the station exists allready");
+                throw new BaseStationAlreadyExistException(id,name,"the station exists allready");
             }
             else
             {
@@ -51,7 +51,7 @@ namespace DalObject
         {
             if (!DataSource.stations.Exists(s => s.Id == id))
             {
-                throw new NoDataExistsException("the station not exists in the list of stations");
+                throw new BadBaseStationIDException(id,"the station not exists in the system");
             }
             else
             {
@@ -66,7 +66,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// Update Base Station Name
+        /// Update Base Station Model
         /// </summary>
         /// <param name="id">Base Station id</param>
         /// <param name="nameBaseStation">new Base Station name</param>
@@ -74,7 +74,7 @@ namespace DalObject
         {
             if (!DataSource.stations.Exists(s => s.Id == id))
             {
-                throw new NoDataExistsException("the station not exists in the list of stations");
+                throw new BadBaseStationIDException(id,"the station not exists in the system");
             }
             else
             {
@@ -95,7 +95,7 @@ namespace DalObject
         {
             if (!DataSource.stations.Exists(s => s.Id == id))
             {
-                throw new NoDataExistsException("the station not exists in the list of stations");
+                throw new BadBaseStationIDException(id,"the station not exists in the list of stations");
             }
             else
             {
@@ -119,7 +119,7 @@ namespace DalObject
         {
             if (!DataSource.stations.Exists(station => station.Id == stationId))
             {
-                throw new NoDataExistsException("the base station not exists in the list of station");
+                throw new BadBaseStationIDException(stationId,"the base station not exists in the list of station");
             }
             //find the station in the array of stations and return it.
             return DataSource.stations.Find(s => s.Id == stationId);
@@ -167,7 +167,7 @@ namespace DalObject
         /// <summary>
         /// A function that calculates the distance between a customer's location and a base station for charging
         /// </summary>
-        /// <param name="targetId">target Id</param>
+        /// <param name="targetId">target ID</param>
         /// <returns>Minimum distance to the nearest base station</returns>
         public double GetDistanceBetweenLocationAndClosestBaseStation(int targetId)
         {

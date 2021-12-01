@@ -25,11 +25,11 @@ namespace DalObject
         {
             if (DataSource.customers.Exists(customer => customer.Id != senderId))
             {
-                throw new ExistingFigureException("the sender not exists in the list of customers");
+                throw new BadCustomerIDException(senderId,"the sender not exists in the list of customers");
             }
             if (DataSource.customers.Exists(customer => customer.Id != targetId))
             {
-                throw new ExistingFigureException("the target not exists in the list of customers");
+                throw new BadCustomerIDException(targetId,"the target not exists in the list of customers");
             }
             else
             {
@@ -58,11 +58,11 @@ namespace DalObject
         {
             if (!DataSource.parcels.Exists(parcel => parcel.Id == parcelId))
             {
-                throw new NoDataExistsException("the percel not exists in the list of parcels");
+                throw new BadParcelIDException(parcelId,"the percel not exists in the list of parcels");
             }
             if (!DataSource.drones.Exists(drone => drone.Id == droneId))
             {
-                throw new NoDataExistsException("the drone not exists in the list of drones");
+                throw new BadDroneIDException(droneId,"the drone not exists in the list of drones");
             }
             else
             {
@@ -89,7 +89,7 @@ namespace DalObject
         {
             if (!DataSource.parcels.Exists(parcel => parcel.Id == parcelId))
             {
-                throw new NoDataExistsException("the percel not exists in the list of parcels");
+                throw new BadParcelIDException(parcelId,"the percel not exists in the list of parcels");
             }
             for (int i = 0; i < DataSource.parcels.Count; i++)
             {
@@ -112,7 +112,7 @@ namespace DalObject
         {
             if (!DataSource.parcels.Exists(parcel => parcel.Id == parcelId))
             {
-                throw new NoDataExistsException("the percel not exists in the list of parcels");
+                throw new BadParcelIDException(parcelId,"the percel not exists in the list of parcels");
             }
             for (int i = 0; i < DataSource.parcels.Count; i++)
             {
@@ -137,7 +137,7 @@ namespace DalObject
         {
             if (!DataSource.parcels.Exists(parcel => parcel.Id == parcelId))
             {
-                throw new NoDataExistsException("the parcel not exists in the list of parcels");
+                throw new BadParcelIDException(parcelId,"the parcel not exists in the list of parcels");
             }
             //find the place of the parcel in the array of parcels
             return DataSource.parcels.Find(p => p.Id == parcelId);

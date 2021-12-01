@@ -50,7 +50,7 @@ namespace BL
         /// <summary>
         /// Assign parcel to drone
         /// </summary>
-        /// <param name="droneId">Id drone</param>
+        /// <param name="droneId">ID drone</param>
         /// <param name="chargingtime">Charging time</param>
         public void UpdateAssignParcelToDrone(int droneId)
         {
@@ -133,7 +133,7 @@ namespace BL
         /// <summary>
         /// Delivery parcel by drone
         /// </summary>
-        /// <param name="id">Id drone</param>
+        /// <param name="id">ID drone</param>
         /// <param name="chargingtime">Charging time</param>
         public void UpdateDeliveryParcelByDrone(int droneId)
         {

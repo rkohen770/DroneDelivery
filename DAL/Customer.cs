@@ -18,7 +18,7 @@ namespace IDAL
 
             public override string ToString()
             {
-               return$"Id: {Id} \nName: {Name} \nPhone {Phone} \n" +
+               return$"ID: {Id} \nName: {Name} \nPhone {Phone} \n" +
                     $"Longitude {Longitude} \nLattitude {Lattitude}\n";
             }
         }

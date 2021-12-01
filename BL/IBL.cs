@@ -15,7 +15,7 @@ namespace IBL
         /// Add base station
         /// </summary>
         /// <param name="id">Station number</param>
-        /// <param name="nameBaseStation">Name base station</param>
+        /// <param name="nameBaseStation">Model base station</param>
         /// <param name="location">Location of the bus stop</param>
         /// <param name="numOfAvailableChargingPositions">Number of charging stations available</param>
         public void AddBaseStationBo(int id, int nameBaseStation, Location location, int numOfAvailableChargingPositions);
@@ -75,33 +75,33 @@ namespace IBL
         /// <summary>
         /// Sending a drone for charging
         /// </summary>
-        /// <param name="id">Id drone</param>
+        /// <param name="id">ID drone</param>
         public void SendingDroneForCharging(int id);
 
         /// <summary>
         /// Release drone from charging
         /// </summary>
-        /// <param name="id">Id drone</param>
+        /// <param name="id">ID drone</param>
         /// <param name="chargingtime">Charging time</param>
         public void UpdateReleaseDroneFromCharging(int id, TimeSpan chargingTime);
 
         /// <summary>
         /// Assign a package to a drone
         /// </summary>
-        /// <param name="id">Id drone</param>
+        /// <param name="id">ID drone</param>
         public void UpdateAssignParcelToDrone(int id);
         
         /// <summary>
         /// Collection of a package by drone
         /// </summary>
-        /// <param name="id">Id drone</param>
+        /// <param name="id">ID drone</param>
         public void UpdateCollectionParcelByDrone(int id);
 
 
         /// <summary>
         /// Delivery of a package by drone
         /// </summary>
-        /// <param name="id">Id drone</param>
+        /// <param name="id">ID drone</param>
         public void UpdateDeliveryParcelByDrone(int id);
 
         #endregion

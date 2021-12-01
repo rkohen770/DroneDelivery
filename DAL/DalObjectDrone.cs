@@ -22,7 +22,7 @@ namespace DalObject
         {
             if (DataSource.drones.Exists(drone => drone.Id == id))
             {
-                throw new ExistingFigureException("the drone exists allready");
+                throw new DroneAlreadyExistException(id,model,"the drone exists allready");
             }
             else
             {
@@ -47,11 +47,11 @@ namespace DalObject
         {
             if (!DataSource.drones.Exists(drone => drone.Id == droneId))
             {
-                throw new NoDataExistsException("the drone not exists in the list of drones");
+                throw new BadDroneIDException(droneId,"the drone not exists in the list of drones");
             }
             if (!DataSource.stations.Exists(station => station.Id == stationId))
             {
-                throw new NoDataExistsException("the base station not exists in the list of station");
+                throw new BadBaseStationIDException(stationId,"the base station not exists in the list of station");
             }
             for (int sIndex = 0; sIndex < DataSource.stations.Count; sIndex++)
             {
@@ -76,11 +76,11 @@ namespace DalObject
         {
             if (!DataSource.drones.Exists(drone => drone.Id == droneId))
             {
-                throw new NoDataExistsException("the drone not exists in the list of drones");
+                throw new BadDroneIDException(droneId,"the drone not exists in the list of drones");
             }
             if (!DataSource.stations.Exists(station => station.Id == stationId))
             {
-                throw new NoDataExistsException("the base station not exists in the list of station");
+                throw new BadBaseStationIDException(stationId,"the base station not exists in the list of station");
             }
             for (int sIndex = 0; sIndex < DataSource.stations.Count; sIndex++)
             {
@@ -111,7 +111,7 @@ namespace DalObject
         {
             if (!DataSource.drones.Exists(drone => drone.Id == droneId))
             {
-                throw new NoDataExistsException("the drone not exists in the list of drones");
+                throw new BadDroneIDException(droneId,"the drone not exists in the list of drones");
             }
             else
             {
@@ -139,7 +139,7 @@ namespace DalObject
         {
             if (!DataSource.drones.Exists(drone => drone.Id == droneId))
             {
-                throw new NoDataExistsException("the drone not exists in the list of drones");
+                throw new BadDroneIDException(droneId,"the drone not exists in the list of drones");
             }
             //find the place of the drone in the array of drones
             return DataSource.drones.Find(d => d.Id == droneId);
@@ -160,10 +160,14 @@ namespace DalObject
         /// <summary>
         /// List of drones loaded at a specific station
         /// </summary>
-        /// <param name="stationId">base station Id</param>
+        /// <param name="stationId">base station ID</param>
         /// <returns>List of drones loaded at a specific station</returns>
         public IEnumerable<int> GetDronesInChargingsAtStation(int stationId)
         {
+            if (!DataSource.stations.Exists(station => station.Id == stationId))
+            {
+                throw new BadBaseStationIDException(stationId, "the base station not exists in the list of station");
+            }
             return from droneCharge in DataSource.droneCharges
                    where droneCharge.StationId == stationId
                    select droneCharge.DroneId;

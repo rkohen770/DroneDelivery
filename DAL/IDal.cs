@@ -14,7 +14,7 @@ namespace IDAL
         /// Add station
         /// </summary>
         /// <param name="id">Unique ID number</param>
-        /// <param name="name">Name of station</param>
+        /// <param name="name">Model of station</param>
         /// <param name="longitude">Longitude</param>
         /// <param name="lattitude">Lattitude</param>
         /// <param name="chargeSlots">Several claim positions are vacant</param>
@@ -100,7 +100,7 @@ namespace IDAL
         public void UpdateBaseStationData(int id, int nameBaseStation, int totalAmountOfChargingStations);
 
         /// <summary>
-        /// Update Base Station Name
+        /// Update Base Station Model
         /// </summary>
         /// <param name="id">Base Station id</param>
         /// <param name="nameBaseStation">new Base Station name</param>
@@ -141,7 +141,7 @@ namespace IDAL
         /// <summary>
         /// Base Station View
         /// </summary>
-        /// <param name="stationId">Id station</param>
+        /// <param name="stationId">ID station</param>
         /// <returns>Base station to show</returns>
         public Station GetBaseStation(int stationId);
 
@@ -157,36 +157,36 @@ namespace IDAL
         /// <summary>
         /// A function that calculates the distance between two points on the map
         /// </summary>
-        /// <param name="senderId">sender Id</param>
-        /// <param name="targetId">target Id</param>
+        /// <param name="senderId">sender ID</param>
+        /// <param name="targetId">target ID</param>
         /// <returns>Returns a distance between two points</returns>
         public double GetDistanceBetweenLocationsOfParcels(int senderId, int targetId);
 
         /// <summary>
         /// A function that calculates the distance between a customer's location and a base station for charging
         /// </summary>
-        /// <param name="targetId">target Id</param>
+        /// <param name="targetId">target ID</param>
         /// <returns>Minimum distance to the nearest base station</returns>
         public double GetDistanceBetweenLocationAndClosestBaseStation(int targetId);
 
         /// <summary>
         /// Drone display
         /// </summary>
-        /// <param name="droneId">Id drone</param>
+        /// <param name="droneId">ID drone</param>
         /// <returns>Dron to show</returns>
         public Drone GetDrone(int droneId);
 
         /// <summary>
         /// Customer view
         /// </summary>
-        /// <param name="customerId">Id customer</param>
+        /// <param name="customerId">ID customer</param>
         /// <returns>Customer to show</returns>
         public Customer GetCustomer(int customerId);
 
         /// <summary>
         /// Parcel view
         /// </summary>
-        /// <param name="parcelId">Id parcel</param>
+        /// <param name="parcelId">ID parcel</param>
         /// <returns>parcel to show</returns>
         public Parcel GetParcel(int parcelId);
         #endregion
@@ -231,7 +231,7 @@ namespace IDAL
         /// <summary>
         /// List of drones loaded at a specific station
         /// </summary>
-        /// <param name="stationId">base station Id</param>
+        /// <param name="stationId">base station ID</param>
         /// <returns>List of drones loaded at a specific station</returns>
         public IEnumerable<int> GetDronesInChargingsAtStation(int stationId);
         #endregion

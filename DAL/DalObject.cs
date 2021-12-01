@@ -16,8 +16,8 @@ namespace DalObject
         /// <summary>
         /// A function that calculates the distance between two points on the map
         /// </summary>
-        /// <param name="senderId">sender Id</param>
-        /// <param name="targetId">target Id</param>
+        /// <param name="senderId">sender ID</param>
+        /// <param name="targetId">target ID</param>
         /// <returns>Returns a distance between two points</returns>
         public double GetDistanceBetweenLocationsOfParcels(int senderId, int targetId)
         {

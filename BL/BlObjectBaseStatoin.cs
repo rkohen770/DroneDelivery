@@ -16,7 +16,7 @@ namespace BL
         /// Add base station
         /// </summary>
         /// <param name="id">Station number</param>
-        /// <param name="nameBaseStation">Name base station</param>
+        /// <param name="nameBaseStation">Model base station</param>
         /// <param name="location">Location of the bus stop</param>
         /// <param name="numOfAvailableChargingPositions">Number of charging stations available</param>
         public void AddBaseStationBo(int id, int nameBaseStation, Location location, int numOfAvailableChargingPositions)
@@ -34,7 +34,10 @@ namespace BL
                 //Add baseStation in DAL to data source.
                 dal.AddStation(id, nameBaseStation, location.Longitude, location.Lattitude, numOfAvailableChargingPositions);
             }
-            catch(IDAL.DO.exce)
+            catch (IDAL.DO.BadDroneIDException)
+            {
+                //*****************************
+            }
         }
         #endregion
 
@@ -72,7 +75,7 @@ namespace BL
         /// <summary>
         /// Base station view
         /// </summary>
-        /// <param name="baseStationId">base Station Id</param>
+        /// <param name="baseStationId">base Station ID</param>
         /// <returns>Base station thet requested</returns>
         public BaseStation GetBaseStation(int baseStationId)
         {

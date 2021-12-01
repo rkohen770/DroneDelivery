@@ -68,7 +68,7 @@ namespace BL
         /// <summary>
         /// Sending a drone for charging
         /// </summary>
-        /// <param name="id">Id drone for charging</param>
+        /// <param name="id">ID drone for charging</param>
         public void SendingDroneForCharging(int id)
         {
             DroneForList drone = droneForLists.Find(d => d.Id == id);
@@ -111,7 +111,7 @@ namespace BL
         /// <summary>
         /// Release drone from charging
         /// </summary>
-        /// <param name="id">Id drone</param>
+        /// <param name="id">ID drone</param>
         /// <param name="chargingtime">Charging time</param>
         public void UpdateReleaseDroneFromCharging(int id, TimeSpan chargingTime)
         {

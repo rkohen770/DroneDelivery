@@ -4,9 +4,11 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using IBL;
 
-namespace BL
-{
+namespace IBL.BO
+{ 
+    [Serializable]
     class NoDataExistsException: Exception
     {
         public NoDataExistsException() { }
@@ -22,7 +24,7 @@ namespace BL
         public NotEnoughFuelException() { }
         public NotEnoughFuelException(string exe) : base(exe) { }
     }
-    [Serializable]
+    
      class ParcelException : Exception
     {
         public ParcelException()
