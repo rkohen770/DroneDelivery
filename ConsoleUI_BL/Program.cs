@@ -108,7 +108,7 @@ namespace ConsoleUI_BL
 
                     #region display method
                     case Menu.DISPLAY:
-                        MenuUpdate();
+                        MenuDisplay();
                         choice = int.Parse(Console.ReadLine());
                         switch (choice)
                         {

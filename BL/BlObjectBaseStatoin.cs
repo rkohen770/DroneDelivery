@@ -21,16 +21,20 @@ namespace BL
         /// <param name="numOfAvailableChargingPositions">Number of charging stations available</param>
         public void AddBaseStationBo(int id, int nameBaseStation, Location location, int numOfAvailableChargingPositions)
         {
-            //add baseStation fields in BL.
-            BaseStation baseStation = new BaseStation()
+            try
             {
-                Id = id,
-                NameBaseStation = nameBaseStation,
-                Location = location,
-                NumOfAvailableChargingPositions = numOfAvailableChargingPositions
-            };
-            //Add baseStation in DAL to data source.
-            dal.AddStation(id, nameBaseStation, location.Longitude, location.Lattitude, numOfAvailableChargingPositions);
+                //add baseStation fields in BL.
+                BaseStation baseStation = new BaseStation()
+                {
+                    Id = id,
+                    NameBaseStation = nameBaseStation,
+                    Location = location,
+                    NumOfAvailableChargingPositions = numOfAvailableChargingPositions
+                };
+                //Add baseStation in DAL to data source.
+                dal.AddStation(id, nameBaseStation, location.Longitude, location.Lattitude, numOfAvailableChargingPositions);
+            }
+            catch(IDAL.DO.exce)
         }
         #endregion
 

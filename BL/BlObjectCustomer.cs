@@ -45,11 +45,15 @@ namespace BL
         /// <param name="newPhone">New phone</param>
         public void UpdateCustomerData(int id, string newName, string newPhone)
         {
+            if (newName != ""&& newPhone != "")
+            {
+                throw new Exception("No details were entered for change at the customer entity");
+            }
             //update in BL
             IDAL.DO.Customer customer = dal.GetCustomer(id);
-            if (newName != null)
+            if (newName != "")
             {
-                if (newPhone != null)
+                if (newPhone != "")
                 {
                     dal.UpdateCustomerData(id, newName, newPhone);
                 }

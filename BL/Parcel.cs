@@ -22,9 +22,7 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return $"Id: {Id} \nSender: {Sender} \nTarget: {Target} \nWeight: {Weight} \nPrioritie: {Priorities}" +
-                $"\nDrone In Parcel: {DroneInParcel} \nCreate Parcel: {Requested} \nParce Scheduled: {Scheduled }" +
-                $"\nParcel Collection: {PickedUp } \nParcel Delivery:  {ParcelDelivery}\n";
+            return this.ToStringProperty();
         }
     }
 }

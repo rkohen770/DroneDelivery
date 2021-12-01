@@ -17,11 +17,11 @@ namespace DalObject
         {
             public static int OrdinalParcelNumber = 10000;
 
-            public static double vacant { get; set; }
-            public static double CarriesLightWeight { get; set; }
-            public static double CarriesMediumWeight { get; set; }
-            public static double CarriesHeavyWeight { get; set; }
-            public static double DroneChargingRate { get; set; }
+            public static double vacant = 0.01;
+            public static double CarriesLightWeight = 0.015;
+            public static double CarriesMediumWeight = 0.018;
+            public static double CarriesHeavyWeight=0.02;
+            public static double DroneChargingRate = 0.003;
         }
 
         public static void Initialize()

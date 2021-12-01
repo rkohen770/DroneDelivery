@@ -9,7 +9,7 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return $"Longitude: {Longitude} \nLatitude: {Lattitude}\n";
+            return this.ToStringProperty();
         }
     }
 }

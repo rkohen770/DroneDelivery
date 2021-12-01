@@ -64,7 +64,7 @@ namespace BL
                             Lattitude = st.Lattitude,
                             Longitude = st.Longitude
                         };
-                        minValueBattery = getDistanceBetweenTwoPoints(senderLattitude, senderLongitude, st.Lattitude, st.Longitude)
+                        minValueBattery =drone_BL.Battery- getDistanceBetweenTwoPoints(senderLattitude, senderLongitude, st.Lattitude, st.Longitude)
                            + dal.GetDistanceBetweenLocationsOfParcels(parcel.SenderId, parcel.TargetId)
                            + dal.GetDistanceBetweenLocationAndClosestBaseStation(parcel.TargetId) * dal.PowerConsumptionRequest()[0] + 1;
                     }
@@ -85,13 +85,13 @@ namespace BL
                         switch (parcel.Weight)
                         {
                             case IDAL.DO.WeightCategories.Easy:
-                                minValueBattery = distance * dal.PowerConsumptionRequest()[1] + 1;
+                                minValueBattery = drone_BL.Battery- distance * dal.PowerConsumptionRequest()[1] + 1;
                                 break;
                             case IDAL.DO.WeightCategories.Intermediate:
-                                minValueBattery = distance * dal.PowerConsumptionRequest()[2] + 1;
+                                minValueBattery = drone_BL.Battery - distance * dal.PowerConsumptionRequest()[2] + 1;
                                 break;
                             case IDAL.DO.WeightCategories.Liver:
-                                minValueBattery = distance * dal.PowerConsumptionRequest()[3] + 1;
+                                minValueBattery = drone_BL.Battery - distance * dal.PowerConsumptionRequest()[3] + 1;
                                 break;
                             default:
                                 break;

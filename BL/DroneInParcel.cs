@@ -14,7 +14,7 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return $"Id: {Id} \nBattery: {Battery} \nCurrent Location: {CurrentLocation}\n"; 
+            return this.ToStringProperty();
         }
     }
 }

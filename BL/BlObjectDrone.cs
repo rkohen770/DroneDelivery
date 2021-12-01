@@ -30,13 +30,16 @@ namespace BL
                 DroneStatus = DroneStatus.Maintenance,
                 CurrentLocation = new Location() { Lattitude = s.Lattitude, Longitude = s.Longitude }
             };
-            dal.SendingDroneForCharging(droneId, stationId);
 
             // Add the drone to the list of drones when charging from a base station
             droneForLists.Add(drone);
 
             //Add drone in DAL to data source.
             dal.AddDrone(droneId, model, (IDAL.DO.WeightCategories)maxWeight);
+
+            dal.SendingDroneForCharging(droneId, stationId);
+
+            
         }
         #endregion
 
@@ -75,7 +78,6 @@ namespace BL
                 {
                     Station station = dal.GetClosestStation(drone.CurrentLocation.Lattitude, drone.CurrentLocation.Longitude, true);
                     double minDistans = getDistanceBetweenTwoPoints(drone.CurrentLocation.Lattitude, drone.CurrentLocation.Longitude, station.Lattitude, station.Longitude);
-                    dal.SendingDroneForCharging(id, station.Id);
                     if (drone.Battery >= minDistans * dal.PowerConsumptionRequest()[0])
                     {
                         //update in BL
@@ -119,7 +121,7 @@ namespace BL
                 if (drone.DroneStatus == DroneStatus.Maintenance)
                 {
                     //update in BL
-                    drone.Battery -= chargingTime.TotalMilliseconds * 1000 * dal.PowerConsumptionRequest()[4];
+                    drone.Battery += chargingTime.TotalMilliseconds * 1000 * dal.PowerConsumptionRequest()[4];
                     drone.DroneStatus = DroneStatus.Available;
 
                     int dIndex = droneForLists.FindIndex(d => d.Id == id);

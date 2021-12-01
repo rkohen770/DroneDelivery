@@ -15,9 +15,7 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return $"Id: {Id} \nName Base Station: {NameBaseStation} " +
-                $"\nNum Of Available Charging Positions: {NumOfAvailableChargingPositions} " +
-                $"\nNum Of Busy Charging Positions: {NumOfBusyChargingPositions} \n";
+            return this.ToStringProperty();
         }
 
     }
