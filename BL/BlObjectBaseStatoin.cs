@@ -78,7 +78,7 @@ namespace BL
         }
         #endregion
 
-        #region GET ITEM
+        #region DISPLAY
         /// <summary>
         /// Base station view
         /// </summary>
