@@ -34,9 +34,9 @@ namespace BL
                 //Add baseStation in DAL to data source.
                 dal.AddStation(id, nameBaseStation, location.Longitude, location.Lattitude, numOfAvailableChargingPositions);
             }
-            catch (IDAL.DO.BadDroneIDException)
+            catch (IDAL.DO.BaseStationAlreadyExistException exception )
             {
-                //*****************************
+                throw new IBL.BO.BaseStationAlreadyExistException(id,nameBaseStation, exception.Message);
             }
         }
         #endregion
@@ -51,23 +51,29 @@ namespace BL
         public void UpdateBaseStationData(int id, int nameBaseStation, int totalAmountOfChargingStations)
         {
             //update in BL
-            Station station = dal.GetBaseStation(id);
-            if (nameBaseStation != 0)
+            try
             {
-                if (totalAmountOfChargingStations != 0)
+                Station station = dal.GetBaseStation(id);
+                if (nameBaseStation != 0)
                 {
-                    dal.UpdateBaseStationData(id, nameBaseStation, totalAmountOfChargingStations);
+                    if (totalAmountOfChargingStations != 0)
+                    {
+                        dal.UpdateBaseStationData(id, nameBaseStation, totalAmountOfChargingStations);
+                    }
+                    else
+                    {
+                        dal.UpdateBaseStationName(id, nameBaseStation);
+                    }
                 }
                 else
                 {
-                    dal.UpdateBaseStationName(id, nameBaseStation);
+                    dal.UpdateBaseStationCharging(id, totalAmountOfChargingStations);
                 }
             }
-            else
+            catch(IDAL.DO.BadBaseStationIDException exception)
             {
-                dal.UpdateBaseStationCharging(id, totalAmountOfChargingStations);
+                throw new IBL.BO.BadBaseStationIDException(id, exception.Message, exception.InnerException);
             }
-
         }
         #endregion
 
