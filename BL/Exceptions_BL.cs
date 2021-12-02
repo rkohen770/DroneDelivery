@@ -134,7 +134,7 @@ namespace IBL.BO
     }
     #endregion
 
-    #region Base Station Exception
+    #region Customer Exception
     public class BadCustomerIDException : Exception
     {
         public int ID;
@@ -143,7 +143,7 @@ namespace IBL.BO
             base(message) => ID = id;
         public BadCustomerIDException(int id, string message, Exception innerException) :
               base(message, innerException) => ID = id;
-        public override string ToString() => base.ToString() + $", bad Customer id: {ID}";
+        public override string ToString() => base.ToString() + $", Customer not found ID: {ID}";
 
     }
 
