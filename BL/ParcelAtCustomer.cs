@@ -15,7 +15,7 @@ namespace IBL.BO
         public CustomerInParcel SourceOrTarget { get; set; }
         public override string ToString()
         {
-            return this.ToStringProperty();
+            return this.ToStringProperty() + "\n";
         }
 
     }

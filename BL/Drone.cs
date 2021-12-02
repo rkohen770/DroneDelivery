@@ -18,7 +18,7 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return this.ToStringProperty();
+            return this.ToStringProperty()+"\n";
         }
 
     }
