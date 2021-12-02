@@ -312,7 +312,7 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter the drone id: droneId");
             int id = int.Parse(Console.ReadLine());
-            bl.SendingDroneForCharging(id);
+            Console.WriteLine(bl.SendingDroneForCharging(id)); 
         }
 
         private static void releasDroneFromCharging(BlObject bl)

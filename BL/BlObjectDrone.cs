@@ -90,7 +90,7 @@ namespace BL
         /// Sending a drone for charging
         /// </summary>
         /// <param name="id">ID drone for charging</param>
-        public void SendingDroneForCharging(int id)
+        public int SendingDroneForCharging(int id)
         {
             try
             {
@@ -113,7 +113,8 @@ namespace BL
                             droneForLists[dIndex] = drone;
 
                             //update in DAL
-                            dal.SendingDroneForCharging(id, station.Id);
+                            return dal.SendingDroneForCharging(id, station.Id);
+
                         }
                         else
                         {
@@ -139,6 +140,7 @@ namespace BL
             {
                 throw new IBL.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
+            
         }
 
         /// <summary>

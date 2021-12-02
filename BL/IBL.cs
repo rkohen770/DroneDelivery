@@ -76,7 +76,7 @@ namespace IBL
         /// Sending a drone for charging
         /// </summary>
         /// <param name="id">ID drone</param>
-        public void SendingDroneForCharging(int id);
+        public int SendingDroneForCharging(int id);
 
         /// <summary>
         /// Release drone from charging

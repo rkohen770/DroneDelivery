@@ -43,7 +43,7 @@ namespace DalObject
         /// </summary>
         /// <param name="droneId">Drone ID for charging</param>
         /// <param name="stationId">Charging station ID</param>
-        public void SendingDroneForCharging(int droneId, int stationId)
+        public int SendingDroneForCharging(int droneId, int stationId)
         {
             if (!DataSource.drones.Exists(drone => drone.Id == droneId))
             {
@@ -65,6 +65,7 @@ namespace DalObject
             }
             DroneCharge droneCharge = new DroneCharge { DroneId = droneId, StationId = stationId };//Add a instance of an instance loading entity
             DataSource.droneCharges.Add(droneCharge);//Add a load of drones to the array
+            return stationId;
         }
 
         /// <summary>

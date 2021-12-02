@@ -60,7 +60,7 @@ namespace BL
             {
                 DroneForList dr = droneForLists.Find(d => d.Id == droneId);
 
-                List<IDAL.DO.Parcel> parcels = dal.GetAllParcels().Where(p => p.Requested == DateTime.MinValue).ToList();
+                List<IDAL.DO.Parcel> parcels = dal.GetAllParcels().Where(p => p.Scheduled == DateTime.MinValue).ToList();
 
                 // list parcels ordered by priority and weight
                 List<IDAL.DO.Parcel> orderedParcels = (from parcel in parcels

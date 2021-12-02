@@ -51,31 +51,27 @@ namespace DalObject
             #endregion
 
             #region drones
-            drones = new List<Drone> 
+            drones = new List<Drone>
             {
                 new Drone
                 {
                     Id = 7486,
                     Model = "EG-574",
-                    MaxWeight = (WeightCategories)rand.Next(3),
-                    //Status = (DroneStatuses)rand.Next(3),
-                    //Battery = 94.3
+                    MaxWeight = WeightCategories.Liver
+                    
                 },
                 new Drone
                 {
                     Id = 7686,
                     Model = "EG-574",
-                    MaxWeight = (WeightCategories)rand.Next(3),
-                    //Status = (DroneStatuses)rand.Next(3),
-                    //Battery = 36
+                    MaxWeight = WeightCategories.Liver
+                   
                 },
                 new Drone
                 {
                     Id = 7916,
                     Model = "EG-474",
-                    MaxWeight = (WeightCategories)rand.Next(3),
-                    //Status = (DroneStatuses)rand.Next(3),
-                    //Battery = 84.8
+                    MaxWeight = WeightCategories.Liver
                 },
                 new Drone
                 {

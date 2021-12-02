@@ -75,7 +75,7 @@ namespace IDAL
         /// </summary>
         /// <param name="droneId">Drone id</param>
         /// <param name="stationId">station id</param>
-        public void SendingDroneForCharging(int droneId, int stationId);
+        public int SendingDroneForCharging(int droneId, int stationId);
 
         /// <summary>
         /// Release drone from charging at base station
