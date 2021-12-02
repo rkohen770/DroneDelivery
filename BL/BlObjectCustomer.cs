@@ -22,17 +22,24 @@ namespace BL
         /// <param name="location">Customer location</param>
         public void AddCustomerBo(int id, string name, string phone, Location location)
         {
-            //add customer fields in BL.
-            IBL.BO.Customer customer = new IBL.BO.Customer()
+            try
             {
-                Id = id,
-                Name = name,
-                Phone = phone,
-                Location = location
-            };
+                //add customer fields in BL.
+                IBL.BO.Customer customer = new IBL.BO.Customer()
+                {
+                    Id = id,
+                    Name = name,
+                    Phone = phone,
+                    Location = location
+                };
 
-            //Add customer in DAL to data source.
-            dal.AddCustomer(id, name, phone, location.Longitude, location.Lattitude);
+                //Add customer in DAL to data source.
+                dal.AddCustomer(id, name, phone, location.Longitude, location.Lattitude);
+            }
+            catch (IDAL.DO.CustomerAlreadyExistException e)
+            {
+                throw new IBL.BO.CustomerAlreadyExistException(e.ID, e.Message);
+            }
         }
         #endregion
 
@@ -45,7 +52,7 @@ namespace BL
         /// <param name="newPhone">New phone</param>
         public void UpdateCustomerData(int id, string newName, string newPhone)
         {
-            if (newName != ""&& newPhone != "")
+            if (newName == ""&& newPhone == "")
             {
                 throw new Exception("No details were entered for change at the customer entity");
             }
