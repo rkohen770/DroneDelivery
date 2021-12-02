@@ -93,18 +93,18 @@ namespace BL
                     }
                     else
                     {
-                        throw new NotEnoughFuelException("The drone cannot be sent for charging because there " +
+                        throw new IBL.BO.BadDroneIDException(id,"The drone cannot be sent for charging because there " +
                             "is not enough fuel to reach the nearest available charging station.");
                     }
                 }
                 else
                 {
-                    throw new DroneConditionNotConfirmException("The drone can not be sent for charging because it is not available");
+                    throw new IBL.BO.BadDroneIDException(id, "The drone can not be sent for charging because it is not available");
                 }
             }
             else
             {
-                throw new NoDataExistsException("the drone not exists in the list of drones");
+                throw new IBL.BO.BadDroneIDException(id,"the drone not exists in the list of drones");
             }
         }
 
@@ -136,12 +136,12 @@ namespace BL
                 }
                 else
                 {
-                    throw new DroneConditionNotConfirmException("The drone can not be relese from charging because it is not in maintenance");
+                    throw new IBL.BO.BadDroneIDException(id, "The drone can not be relese from charging because it is not in maintenance");
                 }
             }
             else
             {
-                throw new NoDataExistsException("the drone not exists in the list of drones");
+                throw new IBL.BO.BadDroneIDException(id, "the drone not exists in the list of drones");
             }
         }
 

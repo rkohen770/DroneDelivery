@@ -93,7 +93,7 @@ namespace BL
             }
             else
             {
-                throw new DroneConditionNotConfirmException("A drone is not available to associate a drone package");
+                throw new IBL.BO.BadDroneIDException(droneId, "A drone is not available to associate a drone package");
             }
         }
 
