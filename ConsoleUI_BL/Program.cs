@@ -26,7 +26,6 @@ namespace ConsoleUI_BL
         static void Main(string[] args)
         {
             BlObject bl = new BlObject();
-
             MenuMessages();
             int choice;
             while (!int.TryParse(Console.ReadLine(), out choice))

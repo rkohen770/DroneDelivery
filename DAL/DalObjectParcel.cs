@@ -23,11 +23,11 @@ namespace DalObject
         public int AddParcel(int senderId, int targetId, WeightCategories weight,
             Priorities priority, int droneId = 0)
         {
-            if (DataSource.customers.Exists(customer => customer.Id != senderId))
+            if (!(DataSource.customers.Exists(customer => customer.Id == senderId)))
             {
                 throw new BadCustomerIDException(senderId,"the sender not exists in the list of customers");
             }
-            if (DataSource.customers.Exists(customer => customer.Id != targetId))
+            if (!(DataSource.customers.Exists(customer => customer.Id == targetId)))
             {
                 throw new BadCustomerIDException(targetId,"the target not exists in the list of customers");
             }
