@@ -38,7 +38,7 @@ namespace BL
             }
             catch (IDAL.DO.CustomerAlreadyExistException e)
             {
-                throw new IBL.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new IBL.BO.CustomerAlreadyExistException(e.ID, e.Message);
             }
         }
         #endregion
