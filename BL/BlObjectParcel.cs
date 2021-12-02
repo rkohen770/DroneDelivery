@@ -17,7 +17,7 @@ namespace BL
         /// <param name="targetId">Customer ID card</param>
         /// <param name="weight">Parcel weight</param>
         /// <param name="priority">Priority(Normal, Fast, Emergency)</param>
-        public void AddParcelBo(int senderId, int targetId, IBL.BO.WeightCategories weight, IBL.BO.Priorities priority)
+        public int AddParcelBo(int senderId, int targetId, IBL.BO.WeightCategories weight, IBL.BO.Priorities priority)
         {
             //Add parcel in DAL to data source and get the parcel id that was created.
             int parcelId = dal.AddParcel(senderId, targetId, (IDAL.DO.WeightCategories)weight, (IDAL.DO.Priorities)priority);
@@ -43,6 +43,7 @@ namespace BL
                 PickedUp = DateTime.MinValue,
                 ParcelDelivery = DateTime.MinValue
             };
+            return parcelId;
         }
         #endregion
 

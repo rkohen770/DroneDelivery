@@ -274,7 +274,7 @@ namespace ConsoleUI_BL
             int targetId = int.Parse(Console.ReadLine());
             WeightCategories maxWeight = (WeightCategories)int.Parse(Console.ReadLine());
             Priorities priority = (Priorities)int.Parse(Console.ReadLine());
-            bl.AddParcelBo(senderId, targetId, maxWeight, priority);
+            Console.WriteLine(bl.AddParcelBo(senderId, targetId, maxWeight, priority)); 
         }
 
 
@@ -301,7 +301,7 @@ namespace ConsoleUI_BL
 
         public static void updateCustomer(BlObject bl)
         {
-            Console.WriteLine("Enter the base customer details: id,name, phone");
+            Console.WriteLine("Enter the customer details: id,name, phone");
             int id = int.Parse(Console.ReadLine());
             string newName = Console.ReadLine();
             string newPhone = Console.ReadLine();

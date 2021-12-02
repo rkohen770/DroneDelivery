@@ -45,7 +45,7 @@ namespace IBL
         /// <param name="targetId">Customer ID card</param>
         /// <param name="weight">Parcel weight</param>
         /// <param name="priority">Priority(Normal, Fast, Emergency)</param>
-        public void AddParcelBo(int senderId, int targetId, BO.WeightCategories weight, BO.Priorities priority);
+        public int AddParcelBo(int senderId, int targetId, BO.WeightCategories weight, BO.Priorities priority);
         #endregion
 
         #region UPDATE
