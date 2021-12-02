@@ -1,4 +1,5 @@
 ﻿using IBL.BO;
+using IBL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace BL
             }
             catch (IDAL.DO.BaseStationAlreadyExistException exception )
             {
-                throw new IBL.BO.BaseStationAlreadyExistException(id,nameBaseStation, exception.Message);
+                throw new IBL.BO.BaseStationAlreadyExistException(id,nameBaseStation, exception.Message,exception.InnerException);
             }
         }
         #endregion
@@ -85,35 +86,45 @@ namespace BL
         /// <returns>Base station thet requested</returns>
         public BaseStation GetBaseStation(int baseStationId)
         {
-            Station station = dal.GetBaseStation(baseStationId);
-            List<int> dronesIdInChrging = dal.GetDronesInChargingsAtStation(baseStationId).ToList();
-            List<DroneInCharging> dronesInCarging = new();
-            foreach (var droneId in dronesIdInChrging)
+            try
             {
-                var drone_l = droneForLists.Find(d => d.Id == droneId);
-                DroneInCharging drone_c = new() { Id = droneId, Battery = drone_l.Battery };
-                dronesInCarging.Add(drone_c);
+                Station station = dal.GetBaseStation(baseStationId);
+                List<int> dronesIdInChrging = dal.GetDronesInChargingsAtStation(baseStationId).ToList();
+                List<DroneInCharging> dronesInCarging = new();
+                foreach (var droneId in dronesIdInChrging)
+                {
+                    var drone_l = droneForLists.Find(d => d.Id == droneId);
+                    DroneInCharging drone_c = new() { Id = droneId, Battery = drone_l.Battery };
+                    dronesInCarging.Add(drone_c);
+                }
+
+                return new BaseStation()
+                {
+                    Id = baseStationId,
+                    NameBaseStation = station.Name,
+                    Location = new() { Lattitude = station.Lattitude, Longitude = station.Longitude },
+                    NumOfAvailableChargingPositions = station.ChargeSlots,
+                    DroneInChargings = dronesInCarging
+                };
             }
-
-            return new BaseStation()
+            catch (IDAL.DO.BadBaseStationIDException e)
             {
-                Id = baseStationId,
-                NameBaseStation = station.Name,
-                Location = new() { Lattitude = station.Lattitude, Longitude = station.Longitude },
-                NumOfAvailableChargingPositions = station.ChargeSlots,
-                DroneInChargings = dronesInCarging
-            };
-
+                throw new IBL.BO.BadBaseStationIDException(e.ID, e.Message, e.InnerException);
+            }
         }
         #endregion
 
         #region GET LIST
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<BaseStationForList> GetAllBaseStationsBo()
         {
             List<BaseStationForList> list = new();
             foreach (var station in dal.GetAllBaseStations())
             {
-                BaseStationForList stationForList = clonBaseStation(GetBaseStation(station.Id));
+                BaseStationForList stationForList = cloneBaseStation(GetBaseStation(station.Id));
                 list.Add(stationForList);
             }
             return list;
@@ -128,7 +139,7 @@ namespace BL
             List<BaseStationForList> list = new();
             foreach (var station in dal.GetAllStationsWithAvailableChargingStations())
             {
-                BaseStationForList stationForList = clonBaseStation(GetBaseStation(station.Id));
+                BaseStationForList stationForList = cloneBaseStation(GetBaseStation(station.Id));
                 list.Add(stationForList);
             }
             return list;
@@ -140,7 +151,7 @@ namespace BL
         /// </summary>
         /// <param name="baseStation"></param>
         /// <returns></returns>
-        private BaseStationForList clonBaseStation(BaseStation baseStation)
+        private BaseStationForList cloneBaseStation(BaseStation baseStation)
         {
             return new BaseStationForList
             {
