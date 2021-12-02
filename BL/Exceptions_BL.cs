@@ -62,7 +62,7 @@ namespace IBL.BO
         public int ID;
         public DroneStatus? Status;
         public string Action;
-        public StatusDroneNotAllowException(int id, DroneStatus status,string action) : base()
+        public StatusDroneNotAllowException(int id, DroneStatus status, string action) : base()
         {
             Action = action;
             Status = status;
@@ -82,6 +82,33 @@ namespace IBL.BO
             ID = id;
         }
         public override string ToString() => base.ToString() + $", The Drone: {ID} Can't perform {Action} because his status: {Status} does not allow him ";
+
+    }
+    public class BatteryOfDroneNotAllowException : Exception
+    {
+        public int ID;
+        public double? Battery;
+        public string Action;
+        public BatteryOfDroneNotAllowException(int id, double battery, string action) : base()
+        {
+            Action = action;
+            Battery = battery;
+            ID = id;
+        }
+        public BatteryOfDroneNotAllowException(int id, double battery, string action, string message) : base(message)
+        {
+            Action = action;
+            Battery = battery;
+            ID = id;
+        }
+
+        public BatteryOfDroneNotAllowException(int id, double battery, string action, string message, Exception innerException) : base(message, innerException)
+        {
+            Action = action;
+            Battery = battery;
+            ID = id;
+        }
+        public override string ToString() => base.ToString() + $", The Drone: {ID} Can't perform {Action} because his battery: {Battery} does not allow him ";
 
     }
 
@@ -118,7 +145,7 @@ namespace IBL.BO
             base(message) => ID = id;
         public BadParcelIDException(int id, string message, Exception innerException) :
               base(message, innerException) => ID = id;
-        public override string ToString() => base.ToString() + $", bad Parcel id: {ID}";
+        public override string ToString() => base.ToString() + $", The Parcel: {ID }not found";
 
     }
 
@@ -143,7 +170,7 @@ namespace IBL.BO
             base(message) => ID = id;
         public BadCustomerIDException(int id, string message, Exception innerException) :
               base(message, innerException) => ID = id;
-        public override string ToString() => base.ToString() + $", Customer not found ID: {ID}";
+        public override string ToString() => base.ToString() + $", Customer not found. ID: {ID}";
 
     }
 
