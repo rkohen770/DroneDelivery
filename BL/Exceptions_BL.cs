@@ -57,6 +57,33 @@ namespace IBL.BO
         public override string ToString() => base.ToString() + $", bad Drone id: {ID}";
 
     }
+    public class StatusDroneNotAllowException : Exception
+    {
+        public int ID;
+        public DroneStatus? Status;
+        public string Action;
+        public StatusDroneNotAllowException(int id, DroneStatus status,string action) : base()
+        {
+            Action = action;
+            Status = status;
+            ID = id;
+        }
+        public StatusDroneNotAllowException(int id, DroneStatus status, string action, string message) : base(message)
+        {
+            Action = action;
+            Status = status;
+            ID = id;
+        }
+
+        public StatusDroneNotAllowException(int id, DroneStatus status, string action, string message, Exception innerException) : base(message, innerException)
+        {
+            Action = action;
+            Status = status;
+            ID = id;
+        }
+        public override string ToString() => base.ToString() + $", The Drone: {ID} Can't perform {Action} because his status: {Status} does not allow him ";
+
+    }
 
     public class DroneAlreadyExistException : Exception
     {
@@ -78,7 +105,7 @@ namespace IBL.BO
             Model = model;
             ID = id;
         }
-        public override string ToString() => base.ToString() + $", The Drone: {ID} model: {Model} is already exist in the system ";
+        public override string ToString() => base.ToString() + $", The Drone: {ID} status: {Model} is already exist in the system ";
     }
     #endregion
 
