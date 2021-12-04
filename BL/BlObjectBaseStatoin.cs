@@ -116,9 +116,9 @@ namespace BL
 
         #region GET LIST
         /// <summary>
-        /// 
+        /// Displays a list of base stations
         /// </summary>
-        /// <returns></returns>
+        /// <returns>list of base stations</returns>
         public IEnumerable<BaseStationForList> GetAllBaseStationsBo()
         {
             List<BaseStationForList> list = new();
@@ -131,9 +131,9 @@ namespace BL
         }
 
         /// <summary>
-        /// 
+        /// Display of base stations with available charging stations
         /// </summary>
-        /// <returns></returns>
+        /// <returns>list of base stations with available charging stations</returns>
         public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging()
         {
             List<BaseStationForList> list = new();
@@ -147,10 +147,10 @@ namespace BL
         #endregion
 
         /// <summary>
-        /// 
+        /// Converts from object base station to object base station for list
         /// </summary>
-        /// <param name="baseStation"></param>
-        /// <returns></returns>
+        /// <param name="baseStation">base station</param>
+        /// <returns> base station for list</returns>
         private BaseStationForList cloneBaseStation(BaseStation baseStation)
         {
             return new BaseStationForList

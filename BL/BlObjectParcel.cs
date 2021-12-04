@@ -233,10 +233,10 @@ namespace BL
 
         #region GET ITEM
         /// <summary>
-        /// 
+        /// Parcel view
         /// </summary>
-        /// <param name="parcelId"></param>
-        /// <returns></returns>
+        /// <param name="parcelId">parcel id</param>
+        /// <returns>parcel</returns>
         public IBL.BO.Parcel GetParcel(int parcelId)
         {
             try
@@ -284,9 +284,9 @@ namespace BL
 
         #region GET LIST 
         /// <summary>
-        /// 
+        /// Displays the list of parcels
         /// </summary>
-        /// <returns></returns>
+        /// <returns>list of parcels</returns>
         public IEnumerable<ParcelForList> GetAllParcelsBo()
         {
             try
@@ -306,9 +306,9 @@ namespace BL
         }
 
         /// <summary>
-        /// 
+        /// Displays a list of parcels that have not yet been assigned to the drone
         /// </summary>
-        /// <returns></returns>
+        /// <returns>list of parcels that have not yet been assigned to the drone</returns>
         public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithGlider()
         {
             List<ParcelForList> list = new();
@@ -322,10 +322,9 @@ namespace BL
         #endregion
 
         /// <summary>
-        /// 
+        /// Converts from object parcel to object parcel for list
         /// </summary>
-        /// <param name="parcel"></param>
-        /// <returns></returns>
+        /// <param name="parcel">parcel</param>
         private ParcelForList clonParcel(IBL.BO.Parcel parcel)
         {
             return new()

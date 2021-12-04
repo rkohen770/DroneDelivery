@@ -196,10 +196,10 @@ namespace BL
 
         #region GET ITEM
         /// <summary>
-        /// 
+        /// Drone display
         /// </summary>
-        /// <param name="droneId"></param>
-        /// <returns></returns>
+        /// <param name="droneId">drone id</param>
+        /// <returns>drone</returns>
         public IBL.BO.Drone GetDrone(int droneId)
         {
             try
@@ -267,9 +267,9 @@ namespace BL
 
         #region GET LIST
         /// <summary>
-        /// 
+        /// Displays the list of drones
         /// </summary>
-        /// <returns></returns>
+        /// <returns>list of drones</returns>
         public IEnumerable<DroneForList> GetAllDronesBo()
         {
             try
@@ -295,6 +295,11 @@ namespace BL
         }
         #endregion
 
+        /// <summary>
+        /// Converts from object drone to object drone for list
+        /// </summary>
+        /// <param name="drone">drone</param>
+        /// <returns>drone for list</returns>
         private DroneForList clonDrone(IBL.BO.Drone drone)
         {
             return new DroneForList

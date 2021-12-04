@@ -85,7 +85,11 @@ namespace BL
         #endregion
 
         #region GET ITEM
-
+        /// <summary>
+        /// Customer view
+        /// </summary>
+        /// <param name="customerId">customer id</param>
+        /// <returns>customer</returns>
         public IBL.BO.Customer GetCustomer(int customerId)
         {
             try
@@ -162,9 +166,9 @@ namespace BL
 
         #region GET LIST
         /// <summary>
-        /// 
+        /// View customer list
         /// </summary>
-        /// <returns></returns>
+        /// <returns>customer list</returns>
         public IEnumerable<CustomerForList> GetAllCustomersBo()
         {
             try
@@ -183,6 +187,12 @@ namespace BL
             }
         }
         #endregion
+
+        /// <summary>
+        ///  Converts from object customer to object customer for list
+        /// </summary>
+        /// <param name="customer">customer</param>
+        /// <returns>customer for list</returns>
         private CustomerForList clonCustomer(IBL.BO.Customer customer)
         {
             return new ()
