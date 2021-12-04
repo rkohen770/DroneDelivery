@@ -193,8 +193,8 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter 0 for add a base station to the list of stations");
             Console.WriteLine("Enter 1 for add a drone to the list of existing drone");
-            Console.WriteLine("Enter 2 for receiving a new customer for an information list");
-            Console.WriteLine("Enter 3 for receipt of parcel for shipment");
+            Console.WriteLine("Enter 2 for add a new customer for an information list");
+            Console.WriteLine("Enter 3 for add a parcel for delivery");
         }
 
         private static void MenuUpdate()
@@ -204,9 +204,9 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter 2 for update the customer data");
             Console.WriteLine("Enter 3 for sending a drone for charging at a base station");
             Console.WriteLine("Enter 4 for release the drone from charging");
-            Console.WriteLine("Enter 5 for association of the package to the drone");
+            Console.WriteLine("Enter 5 for assign a parcel to a drone");
             Console.WriteLine("Enter 6 for Collection of a parcel by drone");
-            Console.WriteLine("Enter 7 for delivery parcel by drone");
+            Console.WriteLine("Enter 7 for delivery of a parcel by drone");
         }
 
         private static void MenuDisplay()
