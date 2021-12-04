@@ -187,7 +187,7 @@ namespace BL
             {
                 //the drone collect a parcel only if the parcel has been assigned to it and haven't picked up yet
                 var drone = dal.GetDrone(droneId);
-                var drone_l = droneForLists.Find(d => d.DroneStatus == DroneStatus.Delivery);
+                var drone_l = droneForLists.Find(d => d.DroneId == droneId && d.DroneStatus == DroneStatus.Delivery);
                 var parcel = dal.GetAllParcels().ToList().Find(p => p.DroneId == droneId);
                 //check if the parcel was assigned
                 if (parcel.PickedUp == DateTime.MinValue)
