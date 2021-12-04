@@ -27,10 +27,10 @@ namespace BL
                 //add customer fields in BL.
                 IBL.BO.Customer customer = new IBL.BO.Customer()
                 {
-                    Id = id,
-                    Name = name,
-                    Phone = phone,
-                    Location = location
+                    CustomerId = id,
+                    NameOfCustomer = name,
+                    PhoneOfCustomer = phone,
+                    LocationOfCustomer = location
                 };
 
                 //Add customer in DAL to data source.
@@ -105,14 +105,14 @@ namespace BL
                         (parcel.Scheduled != DateTime.MinValue) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined;
                     ParcelAtCustomer parcelAt = new()
                     {
-                        Id = parcel.Id,
+                        ParcelId = parcel.Id,
                         Weight = (IBL.BO.WeightCategories)parcel.Weight,
                         Priorities = (IBL.BO.Priorities)parcel.priority,
                         ParcelStatus = ParcelStatus,
                         SourceOrTarget = new()
                         {
-                            Id = parcel.TargetId,
-                            Name = dal.GetCustomer(parcel.TargetId).Name
+                            CustomerId = parcel.TargetId,
+                            CustomerName = dal.GetCustomer(parcel.TargetId).Name
                         }
                     };
                     from_customer.Add(parcelAt);
@@ -130,14 +130,14 @@ namespace BL
                         (parcel.Scheduled != DateTime.MinValue) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined;
                     ParcelAtCustomer parcelAt = new()
                     {
-                        Id = parcel.Id,
+                        ParcelId = parcel.Id,
                         Weight = (IBL.BO.WeightCategories)parcel.Weight,
                         Priorities = (IBL.BO.Priorities)parcel.priority,
                         ParcelStatus = ParcelStatus,
                         SourceOrTarget = new()
                         {
-                            Id = parcel.SenderId,
-                            Name = dal.GetCustomer(parcel.SenderId).Name
+                            CustomerId = parcel.SenderId,
+                            CustomerName = dal.GetCustomer(parcel.SenderId).Name
                         }
                     };
                     to_customer.Add(parcelAt);
@@ -145,10 +145,10 @@ namespace BL
 
                 return new()
                 {
-                    Id = customerId,
-                    Name = customer.Name,
-                    Phone = customer.Phone,
-                    Location = new() { Lattitude = customer.Lattitude, Longitude = customer.Longitude },
+                    CustomerId = customerId,
+                    NameOfCustomer = customer.Name,
+                    PhoneOfCustomer = customer.Phone,
+                    LocationOfCustomer = new() { Lattitude = customer.Lattitude, Longitude = customer.Longitude },
                     FromCustomer = from_customer,
                     ToCustomer = to_customer
                 };
@@ -187,9 +187,9 @@ namespace BL
         {
             return new ()
             {
-                Id = customer.Id,
-                Name = customer.Name,
-                Phone = customer.Phone,
+                IdCustomer = customer.CustomerId,
+                NameOfCustomer = customer.NameOfCustomer,
+                Phone = customer.PhoneOfCustomer,
                 NumParcelsSentAndNotDelivered = customer.FromCustomer.Where(p => p.ParcelStatus == ParcelStatus.Provided).Count(),
                 NumParcelsSentAndDelivered = customer.FromCustomer.Where(p => p.ParcelStatus != ParcelStatus.Provided).Count(),
                 NumParcelsReceived = customer.ToCustomer.Where(p => p.ParcelStatus == ParcelStatus.Provided).Count(),
