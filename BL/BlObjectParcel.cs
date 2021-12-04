@@ -83,28 +83,31 @@ namespace BL
                                                            select parcel).ToList();
 
                     // choose the first parcel from the list of parcels
-                    IDAL.DO.Parcel theParcel = orderedParcels.FirstOrDefault();
-                    // finds the customer's location
-                    IDAL.DO.Customer customer = dal.GetCustomer(theParcel.SenderId);
-                    //Find the nearest package
-                    //All of the above only on condition that the drone manages to reach the sender,
-                    //deliver the package to the destination and reach the nearest station(from the delivery destination)
-                    //in order to be loaded(if there is an additional need)
-                    if (getDistanceBetweenTwoPoints(dr.CurrentLocation.Lattitude, dr.CurrentLocation.Longitude, customer.Lattitude, customer.Longitude) * dal.PowerConsumptionRequest()[0] +
-                    dal.GetDistanceBetweenLocationsOfParcels(theParcel.SenderId, theParcel.TargetId) * dal.PowerConsumptionRequest()[(int)theParcel.Weight + 1] +
-                    dal.GetDistanceBetweenLocationAndClosestBaseStation(theParcel.TargetId) + dal.PowerConsumptionRequest()[0] <= dr.DroneBattery)
+                    //************ IDAL.DO.Parcel theParcel = orderedParcels.FirstOrDefault();
+                    foreach (var theParcel in orderedParcels)
                     {
-                        int dIndex = droneForLists.FindIndex(d => d.DroneId == droneId);
-                        dr.DroneStatus = DroneStatus.Delivery;
-                        droneForLists[dIndex] = dr;
+                        // finds the customer's location
+                        IDAL.DO.Customer customer = dal.GetCustomer(theParcel.SenderId);
+                        double distanceForBattery = getDistanceBetweenTwoPoints(dr.CurrentLocation.Lattitude, dr.CurrentLocation.Longitude, customer.Lattitude, customer.Longitude) * dal.PowerConsumptionRequest()[0] +
+                            dal.GetDistanceBetweenLocationsOfParcels(theParcel.SenderId, theParcel.TargetId) * dal.PowerConsumptionRequest()[(int)theParcel.Weight + 1] +
+                            dal.GetDistanceBetweenLocationAndClosestBaseStation(theParcel.TargetId) + dal.PowerConsumptionRequest()[0];
 
-                        dal.AssigningParcelToDrone(theParcel.Id, droneId);
+
+                        //Find the nearest package
+                        //All of the above only on condition that the drone manages to reach the sender,
+                        //deliver the package to the destination and reach the nearest station(from the delivery destination)
+                        //in order to be loaded(if there is an additional need)
+                        if (distanceForBattery <= dr.DroneBattery)
+                        {
+                            int dIndex = droneForLists.FindIndex(d => d.DroneId == droneId);
+                            dr.DroneStatus = DroneStatus.Delivery;
+                            droneForLists[dIndex] = dr;
+
+                            dal.AssigningParcelToDrone(theParcel.Id, droneId);
+                            return;
+                        }
                     }
-                    else
-                    {
-                        throw new BatteryOfDroneNotAllowException(droneId,dr.DroneBattery, "To Assign Parcel To Drone", "The battery in the drone is not enough to make the shipment");
-                    }
-                    throw new BatteryOfDroneNotAllowException(droneId, dr.Battery, "To Assign Parcel To Drone", "The battery in the drone is not enough to make the shipment.\n Please enter another drone number.");
+                    throw new BatteryOfDroneNotAllowException(droneId, dr.DroneBattery, "To Assign Parcel To Drone", "The battery in the drone is not enough to make the shipment.\n Please enter another drone number.");
                 }
                 else
                 {

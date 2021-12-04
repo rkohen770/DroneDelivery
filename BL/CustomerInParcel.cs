@@ -9,7 +9,7 @@ namespace IBL.BO
     public class CustomerInParcel
     {
         public int CustomerId { get; set; }
-        public string NameOfCustomer { get; set; }
+        public string CustomerName { get; set; }
 
         public override string ToString()
         {
