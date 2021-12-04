@@ -26,17 +26,17 @@ namespace BL
 
                 //Find a customer sending
                 IDAL.DO.Customer customerS = dal.GetCustomer(senderId);
-                CustomerInParcel sender = new CustomerInParcel() { Id = customerS.Id, Name = customerS.Name };
+                CustomerInParcel sender = new CustomerInParcel() { CustomerId = customerS.Id, CustomerName = customerS.Name };
                 //Find a receiving customer
                 IDAL.DO.Customer customerG = dal.GetCustomer(targetId);
-                CustomerInParcel getting = new CustomerInParcel() { Id = customerG.Id, Name = customerG.Name };
+                CustomerInParcel getting = new CustomerInParcel() { CustomerId = customerG.Id, CustomerName = customerG.Name };
 
                 //add per fields in BL.
                 IBL.BO.Parcel parcel = new IBL.BO.Parcel()
                 {
-                    Id = parcelId,
-                    Sender = sender,
-                    Target = getting,
+                    ParcelId = parcelId,
+                    SenderOfParcel = sender,
+                    TargetToParcel = getting,
                     Weight = weight,
                     Priorities = priority,
                     DroneInParcel = null,
@@ -69,9 +69,9 @@ namespace BL
             try
             {
                 IDAL.DO.Drone drone = dal.GetDrone(droneId);
-                if (droneForLists.Exists(d => d.Id == droneId && d.DroneStatus == DroneStatus.Available))
+                if (droneForLists.Exists(d => d.DroneId == droneId && d.DroneStatus == DroneStatus.Available))
                 {
-                    DroneForList dr = droneForLists.Find(d => d.Id == droneId);
+                    DroneForList dr = droneForLists.Find(d => d.DroneId == droneId);
 
                     List<IDAL.DO.Parcel> parcels = dal.GetAllParcels().Where(p => p.Scheduled == DateTime.MinValue).ToList();
                     // list parcels ordered by priority and weight
@@ -154,8 +154,8 @@ namespace BL
                     double distance = getDistanceBetweenTwoPoints(drone_l.CurrentLocation.Lattitude, drone_l.CurrentLocation.Longitude, customer.Lattitude, customer.Longitude);
                     // update the location of the drone to where the senderk
                     drone_l.CurrentLocation = new Location { Lattitude = customer.Lattitude, Longitude = customer.Longitude };
-                    drone_l.Battery -= distance * dal.PowerConsumptionRequest()[(int)parcel.Weight + 1];
-                    int dIndex = droneForLists.FindIndex(d => d.Id == droneId);
+                    drone_l.DroneBattery -= distance * dal.PowerConsumptionRequest()[(int)parcel.Weight + 1];
+                    int dIndex = droneForLists.FindIndex(d => d.DroneId == droneId);
                     droneForLists[dIndex] = drone_l;
 
                     //update in dal
@@ -207,9 +207,9 @@ namespace BL
                     double distance = dal.GetDistanceBetweenLocationsOfParcels(parcel.SenderId, parcel.TargetId);
                     // update the location of the drone to where the senderk
                     drone_l.CurrentLocation = new Location { Lattitude = customer.Lattitude, Longitude = customer.Longitude };
-                    drone_l.Battery -= distance * dal.PowerConsumptionRequest()[0];
+                    drone_l.DroneBattery -= distance * dal.PowerConsumptionRequest()[0];
                     drone_l.DroneStatus = DroneStatus.Available;
-                    int dIndex = droneForLists.FindIndex(d => d.Id == droneId);
+                    int dIndex = droneForLists.FindIndex(d => d.DroneId == droneId);
                     droneForLists[dIndex] = drone_l;
 
                     //update in dal
@@ -246,9 +246,9 @@ namespace BL
                 var target = GetCustomer(parcel.TargetId);
                 IBL.BO.Parcel parcel_BO = new IBL.BO.Parcel()
                 {
-                    Id = parcelId,
-                    Sender = new() { Id = sender.Id, Name = sender.Name },
-                    Target = new() { Id = target.Id, Name = target.Name },
+                    ParcelId = parcelId,
+                    SenderOfParcel = new() { CustomerId = sender.CustomerId, CustomerName = sender.NameOfCustomer },
+                    TargetToParcel = new() { CustomerId = target.CustomerId, CustomerName = target.NameOfCustomer },
                     Weight = (IBL.BO.WeightCategories)parcel.Weight,
                     Priorities = (IBL.BO.Priorities)parcel.priority,
                     Requested = parcel.Requested,
@@ -260,9 +260,9 @@ namespace BL
                 if (parcel.DroneId != 0)
                 {
                     dal.GetDrone(parcel.DroneId);
-                    var drone = droneForLists.Find(d => d.Id == parcel.DroneId);
-                    droneInParcel.Id = drone.Id;
-                    droneInParcel.Battery = drone.Battery;
+                    var drone = droneForLists.Find(d => d.DroneId == parcel.DroneId);
+                    droneInParcel.DroneId = drone.DroneId;
+                    droneInParcel.DroneBattery = drone.DroneBattery;
                     droneInParcel.CurrentLocation = drone.CurrentLocation;
                 }
                 return parcel_BO;
@@ -330,9 +330,9 @@ namespace BL
         {
             return new()
             {
-                Id = parcel.Id,
-                CustomerNameSend = parcel.Sender.Name,
-                CustomerNameTarget = parcel.Target.Name,
+                ParcelId = parcel.ParcelId,
+                CustomerNameSend = parcel.SenderOfParcel.CustomerName,
+                CustomerNameTarget = parcel.TargetToParcel.CustomerName,
                 Weight = parcel.Weight,
                 Priorities = parcel.Priorities,
                 //find the status of parcel.
