@@ -46,13 +46,13 @@ namespace BL
                     MaxWeight = (IBL.BO.WeightCategories)drone_DL.MaxWeight
                 };
                 //If there is a package that has not yet been delivered but the drone has already been associated
-                var parcel = parcelsList.Find(p => p.DroneId == drone_BL.DroneId && p.Delivered == DateTime.MinValue);
+                var parcel = parcelsList.Find(p => p.DroneId == drone_BL.DroneId && p.Delivered == null);
                 if (parcel.Id != 0)
                 {
                     double minValueBattery = 0;
                     drone_BL.DroneStatus = DroneStatus.Delivery;
                     //If the parcel was associated but not collected
-                    if (parcel.PickedUp == DateTime.MinValue)
+                    if (parcel.PickedUp == null)
                     {
                         // The location of the drone will be at the station closest to the sender
                         int senderId = parcel.SenderId;
@@ -68,7 +68,7 @@ namespace BL
                            + dal.GetDistanceBetweenLocationsOfParcels(parcel.SenderId, parcel.TargetId)
                            + dal.GetDistanceBetweenLocationAndClosestBaseStation(parcel.TargetId) * dal.PowerConsumptionRequest()[0] + 1;
                     }
-                    else if (parcel.PickedUp != DateTime.MinValue && parcel.Delivered == DateTime.MinValue)
+                    else if (parcel.PickedUp != null && parcel.Delivered == null)
                     {
                         //The location of the drone will be at the location of the sender
                         int senderId = parcel.SenderId;
@@ -117,7 +117,7 @@ namespace BL
                     else if (drone_BL.DroneStatus == DroneStatus.Available)
                     {
                         //Its location will be raffled off among customers who have packages provided to them
-                        List<IDAL.DO.Parcel> parcelsDelivered = parcelsList.FindAll(p => p.Delivered != DateTime.MinValue);
+                        List<IDAL.DO.Parcel> parcelsDelivered = parcelsList.FindAll(p => p.Delivered != null);
                         int index = random.Next(0, parcelsDelivered.Count());
                         drone_BL.CurrentLocation = new()
                         {

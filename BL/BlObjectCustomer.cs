@@ -104,9 +104,9 @@ namespace BL
                 foreach (var parcel in parcel_From_Customer)
                 {
                     //find the status of parcel.
-                    var ParcelStatus = (parcel.Delivered != DateTime.MinValue) ? IBL.BO.ParcelStatus.Provided :
-                        (parcel.PickedUp != DateTime.MinValue) ? IBL.BO.ParcelStatus.WasCollected :
-                        (parcel.Scheduled != DateTime.MinValue) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined;
+                    var ParcelStatus = (parcel.Delivered != null) ? IBL.BO.ParcelStatus.Provided :
+                        (parcel.PickedUp != null) ? IBL.BO.ParcelStatus.WasCollected :
+                        (parcel.Scheduled != null) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined;
                     ParcelAtCustomer parcelAt = new()
                     {
                         ParcelId = parcel.Id,
@@ -129,9 +129,9 @@ namespace BL
                 foreach (var parcel in parcel_To_Customer)
                 {
                     //find the status of parcel.
-                    var ParcelStatus = (parcel.Delivered != DateTime.MinValue) ? IBL.BO.ParcelStatus.Provided :
-                        (parcel.PickedUp != DateTime.MinValue) ? IBL.BO.ParcelStatus.WasCollected :
-                        (parcel.Scheduled != DateTime.MinValue) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined;
+                    var ParcelStatus = (parcel.Delivered != null) ? IBL.BO.ParcelStatus.Provided :
+                        (parcel.PickedUp != null) ? IBL.BO.ParcelStatus.WasCollected :
+                        (parcel.Scheduled != null) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined;
                     ParcelAtCustomer parcelAt = new()
                     {
                         ParcelId = parcel.Id,

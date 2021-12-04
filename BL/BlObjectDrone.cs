@@ -224,7 +224,7 @@ namespace BL
                         TransportDistance = getDistanceBetweenTwoPoints(customer_sender.Lattitude, customer_sender.Longitude, customer_target.Lattitude, customer_target.Longitude)
                     };
 
-                    parcelInTransfer.ParcelStatus = (parcel.PickedUp == DateTime.MinValue) ? ParcelStatusInTransfer.AwaitingCollection :
+                    parcelInTransfer.ParcelStatus = (parcel.PickedUp == null) ? ParcelStatusInTransfer.AwaitingCollection :
                         parcelInTransfer.ParcelStatus = ParcelStatusInTransfer.OnTheWayToDestination;
 
                     return new()

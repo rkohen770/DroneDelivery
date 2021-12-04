@@ -41,9 +41,9 @@ namespace BL
                     Priorities = priority,
                     DroneInParcel = null,
                     Requested = DateTime.Now,
-                    Scheduled = DateTime.MinValue,
-                    PickedUp = DateTime.MinValue,
-                    ParcelDelivery = DateTime.MinValue
+                    Scheduled = null,
+                    PickedUp = null,
+                    ParcelDelivery = null
                 };
                 return parcelId;
             }
@@ -73,7 +73,7 @@ namespace BL
                 {
                     DroneForList dr = droneForLists.Find(d => d.DroneId == droneId);
 
-                    List<IDAL.DO.Parcel> parcels = dal.GetAllParcels().Where(p => p.Scheduled == DateTime.MinValue).ToList();
+                    List<IDAL.DO.Parcel> parcels = dal.GetAllParcels().Where(p => p.Scheduled == null).ToList();
                     // list parcels ordered by priority and weight
                     List<IDAL.DO.Parcel> orderedParcels = (from parcel in parcels
                                                            orderby parcel.priority descending,
@@ -135,14 +135,14 @@ namespace BL
                 //the drone collect a parcel only if the parcel has been assigned to it and haven't picked up yet
                 var drone = dal.GetDrone(droneId);
                 var drone_l = droneForLists.Find(d => d.DroneId == droneId && d.DroneStatus == DroneStatus.Delivery);
-                var parcel = dal.GetAllParcels().ToList().Find(p => p.DroneId == droneId && p.Delivered == DateTime.MinValue);
+                var parcel = dal.GetAllParcels().ToList().Find(p => p.DroneId == droneId && p.Delivered == null);
                 //check if the parcel was assigned
-                if (parcel.Scheduled == DateTime.MinValue)
+                if (parcel.Scheduled == null)
                 {
                     throw new Exception("the parcel wasn't assigned to the drone!");
                 }
                 //check if the parcel was picked up
-                if (parcel.PickedUp != DateTime.MinValue)
+                if (parcel.PickedUp != null)
                 {
                     throw new Exception("the parcel was picked up already!");
                 }
@@ -190,12 +190,12 @@ namespace BL
                 var drone_l = droneForLists.Find(d => d.DroneId == droneId && d.DroneStatus == DroneStatus.Delivery);
                 var parcel = dal.GetAllParcels().ToList().Find(p => p.DroneId == droneId);
                 //check if the parcel was assigned
-                if (parcel.PickedUp == DateTime.MinValue)
+                if (parcel.PickedUp == null)
                 {
                     throw new Exception("the parcel wasn't picked up yet!");
                 }
                 //check if the parcel was picked up
-                if (parcel.Delivered != DateTime.MinValue)
+                if (parcel.Delivered != null)
                 {
                     throw new Exception("the parcel delivered already!");
                 }
@@ -335,9 +335,9 @@ namespace BL
                 Weight = parcel.Weight,
                 Priorities = parcel.Priorities,
                 //find the status of parcel.
-                ParcelStatus = (parcel.ParcelDelivery != DateTime.MinValue) ? IBL.BO.ParcelStatus.Provided :
-                    (parcel.PickedUp != DateTime.MinValue) ? IBL.BO.ParcelStatus.WasCollected :
-                    (parcel.Scheduled != DateTime.MinValue) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined
+                ParcelStatus = (parcel.ParcelDelivery != null) ? IBL.BO.ParcelStatus.Provided :
+                    (parcel.PickedUp != null) ? IBL.BO.ParcelStatus.WasCollected :
+                    (parcel.Scheduled != null) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined
             };
         }
 
