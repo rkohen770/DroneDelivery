@@ -41,12 +41,12 @@ namespace BL
             {
                 drone_BL = new DroneForList()
                 {
-                    Id = drone_DL.Id,
-                    Model = drone_DL.Model,
+                    DroneId = drone_DL.Id,
+                    DroneModel = drone_DL.Model,
                     MaxWeight = (IBL.BO.WeightCategories)drone_DL.MaxWeight
                 };
                 //If there is a package that has not yet been delivered but the drone has already been associated
-                var parcel = parcelsList.Find(p => p.DroneId == drone_BL.Id && p.Delivered == DateTime.MinValue);
+                var parcel = parcelsList.Find(p => p.DroneId == drone_BL.DroneId && p.Delivered == DateTime.MinValue);
                 if (parcel.Id != 0)
                 {
                     double minValueBattery = 0;
@@ -64,7 +64,7 @@ namespace BL
                             Lattitude = st.Lattitude,
                             Longitude = st.Longitude
                         };
-                        minValueBattery =drone_BL.Battery- getDistanceBetweenTwoPoints(senderLattitude, senderLongitude, st.Lattitude, st.Longitude)
+                        minValueBattery =drone_BL.DroneBattery- getDistanceBetweenTwoPoints(senderLattitude, senderLongitude, st.Lattitude, st.Longitude)
                            + dal.GetDistanceBetweenLocationsOfParcels(parcel.SenderId, parcel.TargetId)
                            + dal.GetDistanceBetweenLocationAndClosestBaseStation(parcel.TargetId) * dal.PowerConsumptionRequest()[0] + 1;
                     }
@@ -85,19 +85,19 @@ namespace BL
                         switch (parcel.Weight)
                         {
                             case IDAL.DO.WeightCategories.Easy:
-                                minValueBattery = drone_BL.Battery- distance * dal.PowerConsumptionRequest()[1] + 1;
+                                minValueBattery = drone_BL.DroneBattery- distance * dal.PowerConsumptionRequest()[1] + 1;
                                 break;
                             case IDAL.DO.WeightCategories.Intermediate:
-                                minValueBattery = drone_BL.Battery - distance * dal.PowerConsumptionRequest()[2] + 1;
+                                minValueBattery = drone_BL.DroneBattery - distance * dal.PowerConsumptionRequest()[2] + 1;
                                 break;
                             case IDAL.DO.WeightCategories.Liver:
-                                minValueBattery = drone_BL.Battery - distance * dal.PowerConsumptionRequest()[3] + 1;
+                                minValueBattery = drone_BL.DroneBattery - distance * dal.PowerConsumptionRequest()[3] + 1;
                                 break;
                             default:
                                 break;
                         }
                     }
-                    drone_BL.Battery = random.Next((int)minValueBattery, 101);
+                    drone_BL.DroneBattery = random.Next((int)minValueBattery, 101);
                 }
                 else //the drone is not in delivery
                 {
@@ -112,7 +112,7 @@ namespace BL
                             Lattitude = baseStations[index].Lattitude,
                             Longitude = baseStations[index].Longitude
                         };
-                        drone_BL.Battery = random.Next(0, 21);
+                        drone_BL.DroneBattery = random.Next(0, 21);
                     }
                     else if (drone_BL.DroneStatus == DroneStatus.Available)
                     {
@@ -126,7 +126,7 @@ namespace BL
                         };
                         // Battery mode will be recharged between a minimal charge that will allow it to reach the station closest to charging and a full charge
                         double distance = dal.GetDistanceBetweenLocationAndClosestBaseStation(parcelsDelivered[index].TargetId);
-                        drone_BL.Battery = random.Next((int)(distance * dal.PowerConsumptionRequest()[0] + 1), 101);
+                        drone_BL.DroneBattery = random.Next((int)(distance * dal.PowerConsumptionRequest()[0] + 1), 101);
                     }
                 }
                 droneForLists.Add(drone_BL);

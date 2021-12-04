@@ -27,7 +27,7 @@ namespace BL
                 //add baseStation fields in BL.
                 BaseStation baseStation = new BaseStation()
                 {
-                    Id = id,
+                    BaseStationId = id,
                     NameBaseStation = nameBaseStation,
                     Location = location,
                     NumOfAvailableChargingPositions = numOfAvailableChargingPositions
@@ -93,14 +93,14 @@ namespace BL
                 List<DroneInCharging> dronesInCarging = new();
                 foreach (var droneId in dronesIdInChrging)
                 {
-                    var drone_l = droneForLists.Find(d => d.Id == droneId);
-                    DroneInCharging drone_c = new() { Id = droneId, Battery = drone_l.Battery };
+                    var drone_l = droneForLists.Find(d => d.DroneId == droneId);
+                    DroneInCharging drone_c = new() { DroneId = droneId, DroneBattery = drone_l.DroneBattery };
                     dronesInCarging.Add(drone_c);
                 }
 
                 return new BaseStation()
                 {
-                    Id = baseStationId,
+                    BaseStationId = baseStationId,
                     NameBaseStation = station.Name,
                     Location = new() { Lattitude = station.Lattitude, Longitude = station.Longitude },
                     NumOfAvailableChargingPositions = station.ChargeSlots,
@@ -155,7 +155,7 @@ namespace BL
         {
             return new BaseStationForList
             {
-                Id = baseStation.Id,
+                BaseStationId = baseStation.BaseStationId,
                 NameBaseStation = baseStation.NameBaseStation.ToString(),
                 NumOfAvailableChargingPositions = baseStation.NumOfAvailableChargingPositions,
                 NumOfBusyChargingPositions = baseStation.DroneInChargings.Count()

@@ -25,10 +25,10 @@ namespace BL
                 Station s = dal.GetBaseStation(stationId);
                 DroneForList drone = new()
                 {
-                    Id = droneId,
-                    Model = model,
+                    DroneId = droneId,
+                    DroneModel = model,
                     MaxWeight = maxWeight,
-                    Battery = random.Next(20, 41),
+                    DroneBattery = random.Next(20, 41),
                     DroneStatus = DroneStatus.Maintenance,
                     CurrentLocation = new Location() { Lattitude = s.Lattitude, Longitude = s.Longitude }
                 };
@@ -71,11 +71,11 @@ namespace BL
                 dal.UpdateDroneModle(id, model);
 
                 //update in BL
-                int dIndex = droneForLists.FindIndex(d => d.Id == id);//Obtain an index for the location where the package ID is located
-                if (droneForLists[dIndex].Model != model)
+                int dIndex = droneForLists.FindIndex(d => d.DroneId == id);//Obtain an index for the location where the package ID is located
+                if (droneForLists[dIndex].DroneModel != model)
                 {
                     DroneForList drone = droneForLists[dIndex];
-                    drone.Model = model;
+                    drone.DroneModel = model;
                     droneForLists[dIndex] = drone;
                 }
             }
@@ -95,21 +95,21 @@ namespace BL
             try
             {
                 dal.GetDrone(id);
-                DroneForList drone = droneForLists.Find(d => d.Id == id);
+                DroneForList drone = droneForLists.Find(d => d.DroneId == id);
                 if (drone != null)
                 {
                     if (drone.DroneStatus == DroneStatus.Available)
                     {
                         Station station = dal.GetClosestStation(drone.CurrentLocation.Lattitude, drone.CurrentLocation.Longitude, true);
                         double minDistans = getDistanceBetweenTwoPoints(drone.CurrentLocation.Lattitude, drone.CurrentLocation.Longitude, station.Lattitude, station.Longitude);
-                        if (drone.Battery >= minDistans * dal.PowerConsumptionRequest()[0])
+                        if (drone.DroneBattery >= minDistans * dal.PowerConsumptionRequest()[0])
                         {
                             //update in BL
-                            drone.Battery -= minDistans * dal.PowerConsumptionRequest()[0];
+                            drone.DroneBattery -= minDistans * dal.PowerConsumptionRequest()[0];
                             drone.CurrentLocation = new Location { Lattitude = station.Lattitude, Longitude = station.Longitude };
                             drone.DroneStatus = DroneStatus.Maintenance;
 
-                            int dIndex = droneForLists.FindIndex(d => d.Id == id);
+                            int dIndex = droneForLists.FindIndex(d => d.DroneId == id);
                             droneForLists[dIndex] = drone;
 
                             //update in DAL
@@ -153,16 +153,16 @@ namespace BL
             try
             {
                 dal.GetDrone(id);
-                DroneForList drone = droneForLists.Find(d => d.Id == id);
+                DroneForList drone = droneForLists.Find(d => d.DroneId == id);
                 if (drone != null)
                 {
                     if (drone.DroneStatus == DroneStatus.Maintenance)
                     {
                         //update in BL
-                        drone.Battery += chargingTime.TotalMilliseconds * 1000 * dal.PowerConsumptionRequest()[4];
+                        drone.DroneBattery += chargingTime.TotalMilliseconds * 1000 * dal.PowerConsumptionRequest()[4];
                         drone.DroneStatus = DroneStatus.Available;
 
-                        int dIndex = droneForLists.FindIndex(d => d.Id == id);
+                        int dIndex = droneForLists.FindIndex(d => d.DroneId == id);
                         droneForLists[dIndex] = drone;
 
                         //update in DAL 
@@ -205,7 +205,7 @@ namespace BL
             try
             {
                 IDAL.DO.Drone drone = dal.GetDrone(droneId);
-                DroneForList drone_l = droneForLists.Find(d => d.Id == droneId);
+                DroneForList drone_l = droneForLists.Find(d => d.DroneId == droneId);
                 if (drone_l.DroneStatus == DroneStatus.Delivery)
                 {
                     var parcel = dal.GetAllParcels().ToList().Find(p => p.DroneId == droneId);
@@ -214,25 +214,25 @@ namespace BL
 
                     ParcelInTransfer parcelInTransfer = new ParcelInTransfer()
                     {
-                        Id = parcel.Id,
+                        ParcelId = parcel.Id,
                         Priorities = (IBL.BO.Priorities)parcel.priority,
                         Weight = (IBL.BO.WeightCategories)parcel.Weight,
-                        Sender = new() { Id = customer_sender.Id, Name = customer_sender.Name },
-                        Target = new() { Id = customer_target.Id, Name = customer_target.Name },
+                        SenderOfParcel = new() { CustomerId = customer_sender.Id, CustomerName = customer_sender.Name },
+                        TargetToParcel = new() { CustomerId = customer_target.Id, CustomerName = customer_target.Name },
                         Collection = new() { Lattitude = customer_sender.Lattitude, Longitude = customer_sender.Longitude },
                         DeliveryDestination = new() { Lattitude = customer_target.Lattitude, Longitude = customer_target.Longitude },
                         TransportDistance = getDistanceBetweenTwoPoints(customer_sender.Lattitude, customer_sender.Longitude, customer_target.Lattitude, customer_target.Longitude)
                     };
 
-                    parcelInTransfer.ParcelStatusInTransfer = (parcel.PickedUp == DateTime.MinValue) ? ParcelStatusInTransfer.AwaitingCollection :
-                        parcelInTransfer.ParcelStatusInTransfer = ParcelStatusInTransfer.OnTheWayToDestination;
+                    parcelInTransfer.ParcelStatus = (parcel.PickedUp == DateTime.MinValue) ? ParcelStatusInTransfer.AwaitingCollection :
+                        parcelInTransfer.ParcelStatus = ParcelStatusInTransfer.OnTheWayToDestination;
 
                     return new()
                     {
-                        Id = droneId,
-                        Model = drone.Model,
+                        DroneId = droneId,
+                        DroneModel = drone.Model,
                         Weight = drone_l.MaxWeight,
-                        Battery = drone_l.Battery,
+                        DroneBattery = drone_l.DroneBattery,
                         DroneStatus = drone_l.DroneStatus,
                         ParcelInTransfer = parcelInTransfer,
                         CurrentLocation = drone_l.CurrentLocation
@@ -243,10 +243,10 @@ namespace BL
                 {
                     return new()
                     {
-                        Id = droneId,
-                        Model = drone.Model,
+                        DroneId = droneId,
+                        DroneModel = drone.Model,
                         Weight = drone_l.MaxWeight,
-                        Battery = drone_l.Battery,
+                        DroneBattery = drone_l.DroneBattery,
                         DroneStatus = drone_l.DroneStatus,
                         ParcelInTransfer = null,
                         CurrentLocation = drone_l.CurrentLocation
@@ -277,11 +277,11 @@ namespace BL
                 List<DroneForList> list = new();
                 foreach (var drone_l in droneForLists)
                 {
-                    DroneForList droneFor = clonDrone(GetDrone(drone_l.Id));
+                    DroneForList droneFor = clonDrone(GetDrone(drone_l.DroneId));
                     if (drone_l.DroneStatus == DroneStatus.Delivery)
                     {
                         droneFor.ParcelNumIsTransferred = dal.GetAllParcels().
-                            ToList().Find(p => p.DroneId == drone_l.Id).Id;
+                            ToList().Find(p => p.DroneId == drone_l.DroneId).Id;
                     }
 
                     list.Add(droneFor);
@@ -299,10 +299,10 @@ namespace BL
         {
             return new DroneForList
             {
-                Id = drone.Id,
-                Model = drone.Model,
+                DroneId = drone.DroneId,
+                DroneModel = drone.DroneModel,
                 MaxWeight = drone.Weight,
-                Battery = drone.Battery,
+                DroneBattery = drone.DroneBattery,
                 DroneStatus = drone.DroneStatus,
                 CurrentLocation = drone.CurrentLocation
             };
