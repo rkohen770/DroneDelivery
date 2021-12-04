@@ -309,10 +309,10 @@ namespace BL
         /// Displays a list of parcels that have not yet been assigned to the drone
         /// </summary>
         /// <returns>list of parcels that have not yet been assigned to the drone</returns>
-        public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithGlider()
+        public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithDrone(Predicate<IDAL.DO.Parcel>p)
         {
             List<ParcelForList> list = new();
-            foreach (var parcel in dal.GetAllParcelsWithoutSpecialDron())
+            foreach (var parcel in dal.GetAllParcelsWithoutSpecialDron(p))
             {
                 ParcelForList parcelForList = clonParcel(GetParcel(parcel.Id));
                 list.Add(parcelForList);

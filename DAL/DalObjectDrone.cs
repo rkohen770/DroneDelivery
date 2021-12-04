@@ -163,14 +163,14 @@ namespace DalObject
         /// </summary>
         /// <param name="stationId">base station ID</param>
         /// <returns>List of drones loaded at a specific station</returns>
-        public IEnumerable<int> GetDronesInChargingsAtStation(int stationId)
+        public IEnumerable<int> GetDronesInChargingsAtStation(int stationId, Predicate<DroneCharge> p)
         {
             if (!DataSource.stations.Exists(station => station.Id == stationId))
             {
                 throw new BadBaseStationIDException(stationId, "the base station not exists in the list of station");
             }
             return from droneCharge in DataSource.droneCharges
-                   where droneCharge.StationId == stationId
+                   where  p(droneCharge)
                    select droneCharge.DroneId;
         }
         #endregion

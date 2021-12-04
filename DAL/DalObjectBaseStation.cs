@@ -23,7 +23,7 @@ namespace DalObject
         {
             if (DataSource.stations.Exists(station => station.Id == id))
             {
-                throw new BaseStationAlreadyExistException(id,name,"the station exists allready");
+                throw new BaseStationAlreadyExistException(id, name, "the station exists allready");
             }
             else
             {
@@ -51,7 +51,7 @@ namespace DalObject
         {
             if (!DataSource.stations.Exists(s => s.Id == id))
             {
-                throw new BadBaseStationIDException(id,"the station not exists in the system");
+                throw new BadBaseStationIDException(id, "the station not exists in the system");
             }
             else
             {
@@ -74,7 +74,7 @@ namespace DalObject
         {
             if (!DataSource.stations.Exists(s => s.Id == id))
             {
-                throw new BadBaseStationIDException(id,"the station not exists in the system");
+                throw new BadBaseStationIDException(id, "the station not exists in the system");
             }
             else
             {
@@ -95,7 +95,7 @@ namespace DalObject
         {
             if (!DataSource.stations.Exists(s => s.Id == id))
             {
-                throw new BadBaseStationIDException(id,"the station not exists in the list of stations");
+                throw new BadBaseStationIDException(id, "the station not exists in the list of stations");
             }
             else
             {
@@ -119,7 +119,7 @@ namespace DalObject
         {
             if (!DataSource.stations.Exists(station => station.Id == stationId))
             {
-                throw new BadBaseStationIDException(stationId,"the base station not exists in the list of station");
+                throw new BadBaseStationIDException(stationId, "the base station not exists in the list of station");
             }
             //find the station in the array of stations and return it.
             return DataSource.stations.Find(s => s.Id == stationId);
@@ -132,7 +132,7 @@ namespace DalObject
         /// <param name="senderLongitude">longitude of sender</param>
         /// <param name="flag">Optional field for selecting a nearby base station flag = false or available nearby base station flag = true</param>
         /// <returns>Base station closest to the point</returns>
-        public Station GetClosestStation(double senderLattitude, double senderLongitude,bool flag=false)
+        public Station GetClosestStation(double senderLattitude, double senderLongitude, bool flag = false)
         {
             double minDistance = 1000000000000;
             Station station = new();
@@ -150,7 +150,7 @@ namespace DalObject
             }
             else
             {
-                foreach (var s in DataSource.stations.Where(s=>s.ChargeSlots > 0))
+                foreach (var s in DataSource.stations.Where(s => s.ChargeSlots > 0))
                 {
                     double dictance = Math.Sqrt(Math.Pow(s.Lattitude - senderLattitude, 2) + Math.Pow(s.Longitude - senderLongitude, 2));
                     if (minDistance > dictance)
@@ -201,11 +201,11 @@ namespace DalObject
         /// return base stations with available charging stations
         /// </summary>
         /// <returns>list of station with availible charge station</returns>
-        public IEnumerable<Station> GetAllStationsWithAvailableChargingStations()
+        public IEnumerable<Station> GetAllStationsWithAvailableChargingStations(Predicate<Station> p)
         {
             return from station in DataSource.stations
-                   where station.ChargeSlots > 0
-                   select station.Clone();
+                   where p(station)
+                   select station;
         }
         #endregion
     }

@@ -157,11 +157,11 @@ namespace ConsoleUI_BL
                                     Console.WriteLine(temp);
                                 break;
                             case (int)viewItemList.LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE:
-                                foreach (var temp in bl.GetAllParcelsNotYetAssociatedWithGlider())
+                                foreach (var temp in bl.GetAllParcelsNotYetAssociatedWithDrone(parcel => parcel.Id > 0 && parcel.DroneId == 0))
                                     Console.WriteLine(temp);
                                 break;
                             case (int)viewItemList.LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION:
-                                foreach (var temp in bl.GetAllBaseStationWhithAvailibleCharging())
+                                foreach (var temp in bl.GetAllBaseStationWhithAvailibleCharging(station => station.ChargeSlots > 0))
                                     Console.WriteLine(temp);
                                 break;
 

@@ -1,4 +1,5 @@
-﻿using IDAL;
+﻿using DAL;
+using IDAL;
 using IDAL.DO;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace DalObject
             return minDistance;
         }
 
-      
+       
 
     }
 }

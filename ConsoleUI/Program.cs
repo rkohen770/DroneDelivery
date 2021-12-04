@@ -146,11 +146,11 @@ namespace ConsoleUI
                                 break;
 
                             case (int)viewItemList.LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE:
-                                foreach (var temp in dal.GetAllParcelsWithoutSpecialDron())
+                                foreach (var temp in dal.GetAllParcelsWithoutSpecialDron(parcel=>parcel.Id > 0 && parcel.DroneId == 0))
                                     Console.WriteLine(temp);
                                 break;
                             case (int)viewItemList.LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION:
-                                foreach (var temp in dal.GetAllStationsWithAvailableChargingStations())
+                                foreach (var temp in dal.GetAllStationsWithAvailableChargingStations(station => station.ChargeSlots > 0))
                                     Console.WriteLine(temp);
                                 break;
                             default:
@@ -303,7 +303,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter the parcel id for assigning to drone: parcelId , droneId");
             int parceleId = int.Parse(Console.ReadLine());
             int droneID = int.Parse(Console.ReadLine());
-            dal.AssigningParcelToDrone(parceleId,droneID);
+            dal.AssigningParcelToDrone(parceleId, droneID);
         }
         #endregion
 

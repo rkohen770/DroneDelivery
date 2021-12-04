@@ -220,20 +220,20 @@ namespace IDAL
         /// Displays a list of parcel that have not yet been assigned to the glider
         /// </summary>
         /// <returns>List of parcel that have not yet been assigned to the glider</returns>
-        public IEnumerable<Parcel> GetAllParcelsWithoutSpecialDron();
+        public IEnumerable<Parcel> GetAllParcelsWithoutSpecialDron(Predicate<Parcel> p);
 
         /// <summary>
         /// Display of base stations with available charging stations
         /// </summary>
         /// <returns>List of base stations with available charging stations</returns>
-        public IEnumerable<Station> GetAllStationsWithAvailableChargingStations();
+        public IEnumerable<Station> GetAllStationsWithAvailableChargingStations(Predicate<Station> p);
 
         /// <summary>
         /// List of drones loaded at a specific station
         /// </summary>
         /// <param name="stationId">base station ID</param>
         /// <returns>List of drones loaded at a specific station</returns>
-        public IEnumerable<int> GetDronesInChargingsAtStation(int stationId);
+        public IEnumerable<int> GetDronesInChargingsAtStation(int stationId, Predicate<DroneCharge> p);
         #endregion
 
 

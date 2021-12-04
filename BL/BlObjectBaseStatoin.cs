@@ -89,7 +89,7 @@ namespace BL
             try
             {
                 Station station = dal.GetBaseStation(baseStationId);
-                List<int> dronesIdInChrging = dal.GetDronesInChargingsAtStation(baseStationId).ToList();
+                List<int> dronesIdInChrging = dal.GetDronesInChargingsAtStation(baseStationId, droneCharge=>droneCharge.StationId == baseStationId).ToList();
                 List<DroneInCharging> dronesInCarging = new();
                 foreach (var droneId in dronesIdInChrging)
                 {
@@ -134,10 +134,10 @@ namespace BL
         /// Display of base stations with available charging stations
         /// </summary>
         /// <returns>list of base stations with available charging stations</returns>
-        public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging()
+        public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging(Predicate<Station> p)
         {
             List<BaseStationForList> list = new();
-            foreach (var station in dal.GetAllStationsWithAvailableChargingStations())
+            foreach (var station in dal.GetAllStationsWithAvailableChargingStations(p))
             {
                 BaseStationForList stationForList = cloneBaseStation(GetBaseStation(station.Id));
                 list.Add(stationForList);
