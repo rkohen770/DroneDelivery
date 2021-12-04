@@ -162,7 +162,7 @@ namespace IBL
         public IEnumerable<ParcelForList> GetAllParcelsBo();
 
         /// <summary>
-        /// Get all parcels not yet associated with the glider
+        /// Get all parcels not yet associated with the drone
         /// </summary>
         /// <returns>List with all parcels not yet associated with the glider</returns>
         public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithDrone(Predicate<IDAL.DO.Parcel> p);
