@@ -134,7 +134,7 @@ namespace BL
             {
                 //the drone collect a parcel only if the parcel has been assigned to it and haven't picked up yet
                 var drone = dal.GetDrone(droneId);
-                var drone_l = droneForLists.Find(d => d.DroneStatus == DroneStatus.Delivery);
+                var drone_l = droneForLists.Find(d => d.DroneId == droneId && d.DroneStatus == DroneStatus.Delivery);
                 var parcel = dal.GetAllParcels().ToList().Find(p => p.DroneId == droneId && p.Delivered == DateTime.MinValue);
                 //check if the parcel was assigned
                 if (parcel.Scheduled == DateTime.MinValue)
@@ -150,7 +150,7 @@ namespace BL
                 {
                     //update in BL
                     IDAL.DO.Customer customer = dal.GetCustomer(parcel.SenderId);//finds the sender 
-                                                                                 //calculate the distance frome the current location of the drone- to the customer
+                                                                                //calculate the distance frome the current location of the drone- to the customer
                     double distance = getDistanceBetweenTwoPoints(drone_l.CurrentLocation.Lattitude, drone_l.CurrentLocation.Longitude, customer.Lattitude, customer.Longitude);
                     // update the location of the drone to where the senderk
                     drone_l.CurrentLocation = new Location { Lattitude = customer.Lattitude, Longitude = customer.Longitude };
