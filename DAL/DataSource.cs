@@ -210,8 +210,8 @@ namespace DalObject
                    Requested = new DateTime(2021, 8,27,8,30,11),
                    DroneId = 7486,
                    Scheduled = new DateTime(2021, 8, 27, 13, 39, 53),
-                   //PickedUp = new DateTime(2021, 8, 27, 15, 30, 26),
-                   //Delivered = new DateTime(2021, 8, 27, 21, 46, 11),
+                   PickedUp = new DateTime(2021, 8, 27, 15, 30, 26),
+                   Delivered = new DateTime(2021, 8, 27, 21, 46, 11),
                 },
 
                 new Parcel
@@ -224,9 +224,7 @@ namespace DalObject
                    Requested = new DateTime(2021, 8, 25, 7, 11, 26),
                    DroneId = 7486,
                    Scheduled = new DateTime(2021, 8, 25, 8, 30, 11),
-                  // PickedUp=DateTime.MinValue,
-                   //PickedUp = new DateTime(2021, 8, 25, 13, 25, 15),
-                   //Delivered = new DateTime(2021, 8, 25, 18, 8, 6),
+                   
                 },
 
                 new Parcel
@@ -254,7 +252,7 @@ namespace DalObject
                   DroneId = 7686,
                   Scheduled = new DateTime(2021, 10, 15, 13, 47, 16),
                   PickedUp = new DateTime(2021, 10, 15, 16, 25, 5),
-                  Delivered = DateTime.MinValue,
+                  Delivered = null,
                 },
 
                 new Parcel
@@ -336,9 +334,9 @@ namespace DalObject
                   priority = (Priorities)rand.Next(3),
                   Requested = new DateTime(2021, 2, 2, 19, 52, 21),
                   DroneId = 0,
-                  Scheduled = DateTime.MinValue,
-                  PickedUp = DateTime.MinValue,
-                  Delivered =DateTime.MinValue
+                  Scheduled = null,
+                  PickedUp = null,
+                  Delivered =null,
                 }
             };
 
