@@ -8,7 +8,7 @@ namespace IBL.BO
 {
     public class BaseStation
     {
-        public int Id { get; set; }
+        public int BaseStationId { get; set; }
         public int NameBaseStation { get; set; }
         public Location Location { get; set; }
         public int NumOfAvailableChargingPositions { get; set; }

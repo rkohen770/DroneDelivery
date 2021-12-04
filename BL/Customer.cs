@@ -8,10 +8,10 @@ namespace IBL.BO
 {
     public class Customer
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Phone { get; set; }
-        public Location Location { get; set; }
+        public int CustomerId { get; set; }
+        public string NameOfCustomer { get; set; }
+        public string PhoneOfCustomer { get; set; }
+        public Location LocationOfCustomer { get; set; }
         public List<ParcelAtCustomer> FromCustomer { get; set; }
         public List<ParcelAtCustomer> ToCustomer { get; set; }
 
