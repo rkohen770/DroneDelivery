@@ -16,7 +16,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{F72B0936-E2A4-4384-BAD9-DA7DD215BD52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleUI_BL", "ConsoleUI_BL\ConsoleUI_BL.csproj", "{72B8E753-F8BD-40D4-B618-F7D08702003C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI_BL", "ConsoleUI_BL\ConsoleUI_BL.csproj", "{72B8E753-F8BD-40D4-B618-F7D08702003C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL", "PL\PL.csproj", "{A735BEDD-8367-4ACE-A325-90DE28B0C0A9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F72B0936-E2A4-4384-BAD9-DA7DD215BD52} = {F72B0936-E2A4-4384-BAD9-DA7DD215BD52}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +49,10 @@ Global
 		{72B8E753-F8BD-40D4-B618-F7D08702003C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72B8E753-F8BD-40D4-B618-F7D08702003C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72B8E753-F8BD-40D4-B618-F7D08702003C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A735BEDD-8367-4ACE-A325-90DE28B0C0A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A735BEDD-8367-4ACE-A325-90DE28B0C0A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A735BEDD-8367-4ACE-A325-90DE28B0C0A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A735BEDD-8367-4ACE-A325-90DE28B0C0A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

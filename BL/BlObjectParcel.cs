@@ -28,15 +28,15 @@ namespace BL
                 IDAL.DO.Customer customerS = dal.GetCustomer(senderId);
                 CustomerInParcel sender = new CustomerInParcel() { CustomerId = customerS.Id, CustomerName = customerS.Name };
                 //Find a receiving customer
-                IDAL.DO.Customer customerG = dal.GetCustomer(targetId);
-                CustomerInParcel getting = new CustomerInParcel() { CustomerId = customerG.Id, CustomerName = customerG.Name };
+                IDAL.DO.Customer customerT = dal.GetCustomer(targetId);
+                CustomerInParcel target = new CustomerInParcel() { CustomerId = customerT.Id, CustomerName = customerT.Name };
 
                 //add per fields in BL.
                 IBL.BO.Parcel parcel = new IBL.BO.Parcel()
                 {
                     ParcelId = parcelId,
                     SenderOfParcel = sender,
-                    TargetToParcel = getting,
+                    TargetToParcel = target,
                     Weight = weight,
                     Priorities = priority,
                     DroneInParcel = null,
@@ -309,10 +309,10 @@ namespace BL
         /// Displays a list of parcels that have not yet been assigned to the drone
         /// </summary>
         /// <returns>list of parcels that have not yet been assigned to the drone</returns>
-        public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithDrone(Predicate<IDAL.DO.Parcel>p)
+        public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithDrone()
         {
             List<ParcelForList> list = new();
-            foreach (var parcel in dal.GetAllParcelsWithoutSpecialDron(p))
+            foreach (var parcel in dal.GetAllParcelsWithoutSpecialDron(parcel => parcel.Id > 0 && parcel.DroneId == 0))
             {
                 ParcelForList parcelForList = clonParcel(GetParcel(parcel.Id));
                 list.Add(parcelForList);

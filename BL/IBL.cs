@@ -165,13 +165,13 @@ namespace IBL
         /// Get all parcels not yet associated with the drone
         /// </summary>
         /// <returns>List with all parcels not yet associated with the glider</returns>
-        public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithDrone(Predicate<IDAL.DO.Parcel> p);
+        public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithDrone();
 
         /// <summary>
         /// Getlist with all base station with availible charging
         /// </summary>
         /// <returns>List with all base station with availible charging</returns>
-        public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging(Predicate<Station> p);
+        public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging();
 
 
         #endregion
