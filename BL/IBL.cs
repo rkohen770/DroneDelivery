@@ -171,7 +171,11 @@ namespace IBL
         /// Getlist with all base station with availible charging
         /// </summary>
         /// <returns>List with all base station with availible charging</returns>
-        public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging();
+        public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging(Predicate<Station> p);
+
+        public IEnumerable<CustomerForList> GetAllCustomerByPredicate(Predicate<IDAL.DO.Customer> p);
+
+        public IEnumerable<DroneForList> GetDronesByPredicat(Predicate<DroneForList> p);
 
 
         #endregion

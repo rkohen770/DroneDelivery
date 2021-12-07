@@ -134,10 +134,10 @@ namespace BL
         /// Display of base stations with available charging stations
         /// </summary>
         /// <returns>list of base stations with available charging stations</returns>
-        public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging()
+        public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging(Predicate<Station>p)
         {
             List<BaseStationForList> list = new();
-            foreach (var station in dal.GetAllStationsWithAvailableChargingStations(station => station.ChargeSlots > 0))
+            foreach (var station in dal.GetAllStationsWithAvailableChargingStations(p))
             {
                 BaseStationForList stationForList = cloneBaseStation(GetBaseStation(station.Id));
                 list.Add(stationForList);

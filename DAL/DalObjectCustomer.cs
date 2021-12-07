@@ -52,7 +52,7 @@ namespace DalObject
         {
             if (!DataSource.customers.Exists(c => c.Id == id))
             {
-                throw new BadCustomerIDException(id,"the customer not exists in the list of customers");
+                throw new BadCustomerIDException(id, "the customer not exists in the list of customers");
             }
             else
             {
@@ -73,7 +73,7 @@ namespace DalObject
         {
             if (!DataSource.customers.Exists(c => c.Id == id))
             {
-                throw new BadCustomerIDException(id,"the customer not exists in the list of customers");
+                throw new BadCustomerIDException(id, "the customer not exists in the list of customers");
             }
             else
             {
@@ -93,7 +93,7 @@ namespace DalObject
         {
             if (!DataSource.customers.Exists(c => c.Id == id))
             {
-                throw new BadCustomerIDException(id,"the customer not exists in the list of customers");
+                throw new BadCustomerIDException(id, "the customer not exists in the list of customers");
             }
             else
             {
@@ -115,7 +115,7 @@ namespace DalObject
         {
             if (!DataSource.customers.Exists(customer => customer.Id == customerId))
             {
-                throw new BadCustomerIDException(customerId,"the customer not exists in the list of customers");
+                throw new BadCustomerIDException(customerId, "the customer not exists in the list of customers");
             }
             //find the place of the customer in the array of customers
             return DataSource.customers.Find(c => c.Id == customerId);
@@ -132,6 +132,14 @@ namespace DalObject
             return from customer in DataSource.customers
                    select customer.Clone();
         }
+
+        public IEnumerable<Customer> GetAllCustomerByPredicate(Predicate<Customer> p)
+        {
+            return from customer in DataSource.customers
+                   where p(customer)
+                   select customer;
+        }
+
         #endregion
     }
 }

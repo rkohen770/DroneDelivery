@@ -37,7 +37,7 @@ namespace IDAL
         /// <param name="longitude">Longitude</param>
         /// <param name="lattitude">Lattitude</param>
         public void AddCustomer(int id, string name, string phone, double longitude, double lattitude);
-        
+
         /// <summary>
         /// Receipt of parcel for delivery
         /// </summary>
@@ -152,7 +152,7 @@ namespace IDAL
         /// <param name="senderLongitude">longitude of sender</param>
         /// <param name="flag">Optional field for selecting a nearby base station flag = false or available nearby base station flag = true</param>
         /// <returns>Base station closest to the point</returns>
-        public Station GetClosestStation(double senderLattitude, double senderLongitude,bool flag=false);
+        public Station GetClosestStation(double senderLattitude, double senderLongitude, bool flag = false);
 
         /// <summary>
         /// A function that calculates the distance between two points on the map
@@ -234,6 +234,11 @@ namespace IDAL
         /// <param name="stationId">base station ID</param>
         /// <returns>List of drones loaded at a specific station</returns>
         public IEnumerable<int> GetDronesInChargingsAtStation(int stationId, Predicate<DroneCharge> p);
+
+        public IEnumerable<Drone> GetDronesByPredicat(Predicate<Drone> p);
+
+        public IEnumerable<Customer> GetAllCustomerByPredicate(Predicate<Customer> p);
+
         #endregion
 
 

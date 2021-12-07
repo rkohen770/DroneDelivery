@@ -7,38 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="640" Width="800">
     <Grid Name="MainGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="200*"/>
-            <RowDefinition Height="200*"/>
-            <RowDefinition Height="200*"/>
-        </Grid.RowDefinitions>
-        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
-             VerticalAlignment="Stretch" Width="auto">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions >
-            <ComboBox Name="StatusSelector" 
-                      HorizontalAlignment= "Stretch"
-                      VerticalAlignment="Stretch"
-                      Grid.Column="1" 
-                      Margin="05,20,5,20" Height="90" Width="150"/>
-            <Label Content="Label" Grid.Column="0"
-                   HorizontalAlignment="Center" 
-                   Margin="0,0,0,0" 
-                   VerticalAlignment="Stretch" 
-                   RenderTransformOrigin="-11.049,0.494" 
-                   Height="50" Width="150"/>
-        </Grid>
-        <ListView x:Name="DronesListView" Grid.Row="1">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        
+      
         <Button Content="Button" HorizontalAlignment="Left" Margin="149,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="70" Width="181" Click="ShowDroneButton_Click"/>
     </Grid>
 </Window>

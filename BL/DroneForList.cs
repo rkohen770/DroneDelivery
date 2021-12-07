@@ -12,13 +12,13 @@ namespace IBL.BO
         public string DroneModel { get; set; }
         public WeightCategories MaxWeight { get; set; }
         public double DroneBattery { get; set; }
-        public DroneStatus DroneStatus { get; set; }
+        public DroneStatus? DroneStatus { get; set; }
         public Location CurrentLocation { get; set; }
         public int ParcelNumIsTransferred { get; set; }
 
         public override string ToString()
         {
-            return this.ToStringProperty() + "\n";
+            return this.ToStringProperty() + " ";
         }
     }
 }

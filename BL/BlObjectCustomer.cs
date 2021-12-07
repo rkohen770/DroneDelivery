@@ -176,7 +176,7 @@ namespace BL
                 List<CustomerForList> list = new();
                 foreach (var customer in dal.GetAllCustomers())
                 {
-                    CustomerForList customerForList = clonCustomer(GetCustomer(customer.Id));
+                    CustomerForList customerForList = cloneCustomer(GetCustomer(customer.Id));
                     list.Add(customerForList);
                 }
                 return list;
@@ -186,6 +186,18 @@ namespace BL
                 throw new IBL.BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
             }
         }
+
+
+        public IEnumerable<CustomerForList> GetAllCustomerByPredicate(Predicate<IDAL.DO.Customer> p)
+        {
+            List<CustomerForList> list = new();
+            foreach (var customer in dal.GetAllCustomerByPredicate(p))
+            {
+                CustomerForList customerForList = cloneCustomer(GetCustomer(customer.Id));
+                list.Add(customerForList);
+            }
+            return list;
+        }
         #endregion
 
         /// <summary>
@@ -193,7 +205,7 @@ namespace BL
         /// </summary>
         /// <param name="customer">customer</param>
         /// <returns>customer for list</returns>
-        private CustomerForList clonCustomer(IBL.BO.Customer customer)
+        private CustomerForList cloneCustomer(IBL.BO.Customer customer)
         {
             return new ()
             {

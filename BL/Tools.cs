@@ -18,9 +18,9 @@ namespace IBL.BO
                 var value = prop.GetValue(t, null);
                 if (value is IEnumerable)
                     foreach (var item in (IEnumerable)value)
-                        str += item.ToStringProperty("   ");
+                        str += item.ToStringProperty(" ");
                 else
-                    str += "\n" + suffix + prop.Name + ": " + value;
+                    str += "\t" + suffix + prop.Name + ": " + value;
             }
             return str;
         }

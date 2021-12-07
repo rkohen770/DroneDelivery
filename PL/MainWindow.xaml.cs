@@ -26,11 +26,14 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         private void ShowDroneButton_Click(object sender, RoutedEventArgs e)
         {
             new DroneListWindow(bl).Show();
+
         }
+
     }
 }

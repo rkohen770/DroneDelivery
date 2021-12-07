@@ -173,6 +173,13 @@ namespace DalObject
                    where  p(droneCharge)
                    select droneCharge.DroneId;
         }
+
+        public IEnumerable<Drone> GetDronesByPredicat( Predicate<Drone> p)
+        {
+            return from drone in DataSource.drones
+                   where p(drone)
+                   select drone;
+        }
         #endregion
 
         /// <summary>

@@ -277,7 +277,7 @@ namespace BL
                 List<DroneForList> list = new();
                 foreach (var drone_l in droneForLists)
                 {
-                    DroneForList droneFor = clonDrone(GetDrone(drone_l.DroneId));
+                    DroneForList droneFor = cloneDrone(GetDrone(drone_l.DroneId));
                     if (drone_l.DroneStatus == DroneStatus.Delivery)
                     {
                         droneFor.ParcelNumIsTransferred = dal.GetAllParcels().
@@ -293,6 +293,17 @@ namespace BL
                 throw new IBL.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
         }
+
+        public IEnumerable<DroneForList> GetDronesByPredicat(Predicate<DroneForList> p)
+        {
+            List<DroneForList> list = new();
+
+            foreach (var drone in droneForLists.FindAll(p))
+            {
+                list.Add(drone);
+            }
+            return list;
+        }
         #endregion
 
         /// <summary>
@@ -300,7 +311,7 @@ namespace BL
         /// </summary>
         /// <param name="drone">drone</param>
         /// <returns>drone for list</returns>
-        private DroneForList clonDrone(IBL.BO.Drone drone)
+        private DroneForList cloneDrone(IBL.BO.Drone drone)
         {
             return new DroneForList
             {

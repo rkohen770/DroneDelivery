@@ -62,20 +62,20 @@ namespace IBL.BO
         public int ID;
         public DroneStatus? Status;
         public string Action;
-        public StatusDroneNotAllowException(int id, DroneStatus status, string action) : base()
+        public StatusDroneNotAllowException(int id, DroneStatus? status, string action) : base()
         {
             Action = action;
             Status = status;
             ID = id;
         }
-        public StatusDroneNotAllowException(int id, DroneStatus status, string action, string message) : base(message)
+        public StatusDroneNotAllowException(int id, DroneStatus? status, string action, string message) : base(message)
         {
             Action = action;
             Status = status;
             ID = id;
         }
 
-        public StatusDroneNotAllowException(int id, DroneStatus status, string action, string message, Exception innerException) : base(message, innerException)
+        public StatusDroneNotAllowException(int id, DroneStatus? status, string action, string message, Exception innerException) : base(message, innerException)
         {
             Action = action;
             Status = status;

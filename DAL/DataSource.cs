@@ -57,14 +57,14 @@ namespace DalObject
                 {
                     Id = 7486,
                     Model = "EG-574",
-                    MaxWeight = WeightCategories.Liver
+                    MaxWeight = WeightCategories.Intermediate
                     
                 },
                 new Drone
                 {
                     Id = 7686,
                     Model = "EG-574",
-                    MaxWeight = WeightCategories.Liver
+                    MaxWeight = WeightCategories.Easy
                    
                 },
                 new Drone
