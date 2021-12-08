@@ -48,7 +48,8 @@
         </Grid>
         <ListView x:Name="DronesListView" Grid.Row="1"
                   HorizontalAlignment= "Stretch"
-                  VerticalAlignment="Stretch">
+                  VerticalAlignment="Stretch" SelectionChanged="DronesListView_SelectionChanged">
+            <Button Content="Add drone" Height="41" Width="64" Click="Button_Click"/>
 
         </ListView>
     </Grid>

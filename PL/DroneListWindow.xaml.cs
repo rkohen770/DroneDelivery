@@ -51,5 +51,10 @@ namespace PL
             DronesListView.ItemsSource = list;
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
