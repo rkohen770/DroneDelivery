@@ -5,14 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneListWindow" Height="450" Width="878">
+        Title="DroneListWindow" Height="450" Width="880">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="657*"/>
+            <ColumnDefinition Width="221*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
-            <RowDefinition Height="200*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
-             VerticalAlignment="Stretch" Width="auto" Background="#FFFFEDC8">
+        <Grid Name="UpGrid" Height="87"
+             VerticalAlignment="Center" Width="auto" Background="#FFFFEDC8" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*" />
@@ -24,7 +29,7 @@
                       HorizontalAlignment= "Stretch"
                       VerticalAlignment="Stretch"
                       Grid.Column="1" 
-                      Margin="05,20,5,20" SelectionChanged="StatusSelector_SelectionChanged" HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8">
+                      Margin="05,20,5,20" SelectionChanged="statusSelector_SelectionChanged" HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8">
             </ComboBox>
             <Label Content="Drone status" Grid.Column="0"
                    HorizontalAlignment="Stretch" 
@@ -43,14 +48,11 @@
                       HorizontalAlignment= "Stretch"
                       VerticalAlignment="Stretch"
                       Grid.Column="3" 
-                      Margin="05,20,5,20"  HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="WeightSelector_SelectionChanged">
+                      Margin="05,20,5,20"  HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="weightSelector_SelectionChanged">
             </ComboBox>
         </Grid>
-        <ListView x:Name="DronesListView" Grid.Row="1"
-                  HorizontalAlignment= "Stretch"
-                  VerticalAlignment="Stretch" SelectionChanged="DronesListView_SelectionChanged">
-            <Button Content="Add drone" Height="41" Width="64" Click="Button_Click"/>
-
-        </ListView>
+        <ListView x:Name="DronesListView" Grid.Row="1" Grid.ColumnSpan="2" />
+        <Button Content="Add drone" Click="Add_Drone_Click" Margin="0,70,0,0" Grid.Row="2" RenderTransformOrigin="0.484,6.564" HorizontalAlignment="Left" VerticalAlignment="Top" Width="440" Height="30"/>
+        <Button Content="Close" HorizontalAlignment="Left" Margin="440,70,0,0" Grid.Row="2" VerticalAlignment="Top" Width="440" Height="30" Grid.ColumnSpan="2" Click="Button_Click"/>
     </Grid>
 </Window>

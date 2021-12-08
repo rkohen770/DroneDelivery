@@ -37,14 +37,14 @@ namespace PL
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
         }
 
-        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void statusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DroneStatus status = (DroneStatus)((ComboBox)sender).SelectedItem;
             List<DroneForList> list = bl.GetDronesByPredicat(d => d.DroneStatus == status).ToList();
             DronesListView.ItemsSource = list;
         }
 
-        private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void weightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             WeightCategories weight = (WeightCategories)((ComboBox)sender).SelectedItem;
             List<DroneForList> list = bl.GetDronesByPredicat(d => d.MaxWeight == weight).ToList();
@@ -52,9 +52,14 @@ namespace PL
 
         }
 
+        private void Add_Drone_Click(object sender, RoutedEventArgs e)
+        {
+            new AddDroneWindow(bl).Show();
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            Close();
         }
     }
 }
