@@ -22,17 +22,40 @@ namespace PL
     public partial class AddDroneWindow : Window
     {
         private IBL.IBL bl = BLFactory.GetBL();
-
+        public DroneForList drone { get; set; }
+        private DroneListWindow droneListWindow;
+      
         public AddDroneWindow ()
         {
+            DialogResult = true;
             InitializeComponent();
         }
-
-        public AddDroneWindow (IBL.IBL bl)
+        
+        public AddDroneWindow(IBL.IBL bl,DroneListWindow droneListWindow)
         {
             InitializeComponent();
+            this.bl = bl;
+            this.droneListWindow = droneListWindow;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            Status.Text = "Maintenance";
+
+        }
+        public AddDroneWindow(IBL.IBL bl, DroneForList drone)
+        {
+            InitializeComponent();
+            this.bl = bl;
+            this.drone = drone;
+            SaveClick.Visibility = Visibility.Hidden;
+            Update.Visibility = Visibility.Visible;
+            ID.SelectedText = drone.DroneId.ToString();
+            ID.IsReadOnly = true;
+            Model.Text = drone.DroneModel;
+            WeightSelector.SelectedItem = drone.MaxWeight;
+            Battery.Text = drone.DroneBattery.ToString();
+            Status.Text = drone.DroneStatus.ToString();
+            StationID.IsEnabled = false;
+            Longitude.Text = drone.CurrentLocation.Longitude.ToString();
+            Lattitude.Text = drone.CurrentLocation.Lattitude.ToString();
+            
         }
 
         /// <summary>
@@ -53,13 +76,27 @@ namespace PL
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            Button save = sender as Button;
-           // bl.AddDroneBo(sender.)
+            if (ID.Text == null || Model.Text == null || WeightSelector.SelectedItem == null || StationID.Text == null)
+                MessageBox.Show("Not all detalis are set");
+            else if (ID.Text.Length > 4)
+                MessageBox.Show("Drone id longs then 4 letters");
+            else if ( StationID.Text.Length > 5)
+                MessageBox.Show("Station id longs then 5 letters");
+            else
+            {
+                bl.AddDroneBo(int.Parse(ID.Text), Model.Text,
+                    (WeightCategories)WeightSelector.SelectedItem, int.Parse(StationID.Text));
+            }
+            MessageBox.Show("Adding a drone was completed successfully");
+            droneListWindow.DronesListView.Items.Refresh();
+            Close();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
+
+
     }
 }

@@ -317,7 +317,7 @@ namespace BL
             {
                 DroneId = drone.DroneId,
                 DroneModel = drone.DroneModel,
-                MaxWeight = drone.Weight,
+                MaxWeight = (IBL.BO.WeightCategories)drone.Weight,
                 DroneBattery = drone.DroneBattery,
                 DroneStatus = drone.DroneStatus,
                 CurrentLocation = drone.CurrentLocation

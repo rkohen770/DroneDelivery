@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,8 @@ namespace PL
     public partial class DroneListWindow : Window
     {
         private IBL.IBL bl = BLFactory.GetBL();
-
+        List<DroneForList> droneCollection;
+      
         public DroneListWindow()
         {
             InitializeComponent();
@@ -31,6 +33,7 @@ namespace PL
         public DroneListWindow(IBL.IBL _bl)
         {
             InitializeComponent();
+            droneCollection = new List<DroneForList>(bl.GetAllDronesBo());
             bl = _bl;
             DronesListView.ItemsSource = bl.GetAllDronesBo();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
@@ -54,12 +57,28 @@ namespace PL
 
         private void Add_Drone_Click(object sender, RoutedEventArgs e)
         {
-            new AddDroneWindow(bl).Show();
+          
+            new AddDroneWindow( bl, this).ShowDialog();
+            DronesListView.Items.Refresh(); 
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Show_Drones_Click(object sender, MouseButtonEventArgs e)
+        {
+            DroneForList drone = droneCollection[((ListView)sender).SelectedIndex];
+          
+            new AddDroneWindow( bl, drone).Show();
+           // new DroneWindow(drone).Show();
+        }
+
+        private void DronesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
