@@ -35,7 +35,17 @@ namespace PL
         {
             InitializeComponent();
             this.bl = bl;
+            SaveClick.Visibility = Visibility.Visible;
+            Update.Visibility = Visibility.Hidden;
+            status.Visibility = Visibility.Hidden;
+            Status.Visibility = Visibility.Hidden;
+            WeightSelector.Visibility = Visibility.Visible;
+            MaxWeight.Visibility = Visibility.Hidden;
             this.droneListWindow = droneListWindow;
+            longitude.Visibility = Visibility.Hidden;
+            Longitude.Visibility = Visibility.Hidden;
+            lattitude.Visibility = Visibility.Hidden;
+            Lattitude.Visibility = Visibility.Hidden;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
 
         }
@@ -46,13 +56,25 @@ namespace PL
             this.drone = drone;
             SaveClick.Visibility = Visibility.Hidden;
             Update.Visibility = Visibility.Visible;
-            ID.SelectedText = drone.DroneId.ToString();
+            status.Visibility = Visibility.Visible;
+            Status.Visibility = Visibility.Visible;
+            longitude.Visibility = Visibility.Visible;
+            Longitude.Visibility = Visibility.Visible;
+            lattitude.Visibility = Visibility.Visible;
+            Lattitude.Visibility = Visibility.Visible;
+            WeightSelector.Visibility = Visibility.Hidden;
+            MaxWeight.Visibility = Visibility.Visible;
             ID.IsReadOnly = true;
+            ID.Text = drone.DroneId.ToString();
             Model.Text = drone.DroneModel;
-            WeightSelector.SelectedItem = drone.MaxWeight;
+            MaxWeight.Text = drone.MaxWeight.ToString();
             Battery.Text = drone.DroneBattery.ToString();
+            Status.IsReadOnly = true;
             Status.Text = drone.DroneStatus.ToString();
-            StationID.IsEnabled = false;
+            stationID.Width = 200;
+            stationID.Margin = new Thickness(10, 225, 0, 0);
+            stationID.Content = "Parcel Num Is Transferred";
+            StationID.Text = drone.ParcelNumIsTransferred.ToString();
             Longitude.Text = drone.CurrentLocation.Longitude.ToString();
             Lattitude.Text = drone.CurrentLocation.Lattitude.ToString();
             
@@ -76,18 +98,36 @@ namespace PL
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            if (ID.Text == null || Model.Text == null || WeightSelector.SelectedItem == null || StationID.Text == null)
-                MessageBox.Show("Not all detalis are set");
-            else if (ID.Text.Length > 4)
-                MessageBox.Show("Drone id longs then 4 letters");
-            else if ( StationID.Text.Length > 5)
-                MessageBox.Show("Station id longs then 5 letters");
-            else
+
+            try
             {
-                bl.AddDroneBo(int.Parse(ID.Text), Model.Text,
-                    (WeightCategories)WeightSelector.SelectedItem, int.Parse(StationID.Text));
+                bool flag = false;
+                while (!flag)
+                {
+                    if (ID.Text == null || Model.Text == null || WeightSelector.SelectedItem == null || StationID.Text == null)
+                        MessageBox.Show("Not all detalis are set");
+                    else if (ID.Text.Length > 4)
+                        MessageBox.Show("Drone id longs then 4 letters");
+                    else if (StationID.Text.Length > 5)
+                        MessageBox.Show("Station id longs then 5 letters");
+                    else
+                    {
+                        bl.AddDroneBo(int.Parse(ID.Text), Model.Text,
+                            (WeightCategories)WeightSelector.SelectedItem, int.Parse(StationID.Text));
+                    }
+                    MessageBox.Show("Adding a drone was completed successfully");
+                    flag = true;
+                }
             }
-            MessageBox.Show("Adding a drone was completed successfully");
+            catch (BadDroneIDException ex)
+            {
+                MessageBox.Show(ex.ID.ToString(), ex.Message + "\nAdding a drone was not completed successfully");
+            }
+            catch (BadBaseStationIDException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
             droneListWindow.DronesListView.Items.Refresh();
             Close();
         }
@@ -96,7 +136,13 @@ namespace PL
         {
             Close();
         }
-
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+            bl.UpdateNameOfDrone(int.Parse(ID.Text), Model.Text);
+            MessageBox.Show("Update a drone was completed successfully");
+            
+            Close();
+        }
 
     }
 }

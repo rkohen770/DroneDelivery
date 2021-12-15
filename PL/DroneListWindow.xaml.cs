@@ -60,7 +60,6 @@ namespace PL
           
             new AddDroneWindow( bl, this).ShowDialog();
             DronesListView.Items.Refresh(); 
-            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -73,7 +72,9 @@ namespace PL
             DroneForList drone = droneCollection[((ListView)sender).SelectedIndex];
           
             new AddDroneWindow( bl, drone).Show();
-           // new DroneWindow(drone).Show();
+            DronesListView.Items.Refresh();
+
+            // new DroneWindow(drone).Show();
         }
 
         private void DronesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
