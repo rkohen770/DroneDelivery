@@ -52,29 +52,39 @@ namespace PL
             WeightCategories weight = (WeightCategories)((ComboBox)sender).SelectedItem;
             List<DroneForList> list = bl.GetDronesByPredicat(d => d.MaxWeight == weight).ToList();
             DronesListView.ItemsSource = list;
-
         }
 
-        private void Add_Drone_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// A button that opens a window for adding a drone
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void AddDroneButton_Click(object sender, RoutedEventArgs e)
         {
-          
-            new AddDroneWindow( bl, this).ShowDialog();
-            DronesListView.Items.Refresh(); 
+            new AddDroneWindow(bl, this).ShowDialog();
+            DronesListView.Items.Refresh();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Button for closing a window
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void Show_Drones_Click(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// A button that opens a window of the drone details
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void ShowDronesButtom_Click(object sender, MouseButtonEventArgs e)
         {
             DroneForList drone = droneCollection[((ListView)sender).SelectedIndex];
-          
             new AddDroneWindow( bl, drone).Show();
             DronesListView.Items.Refresh();
-
-            // new DroneWindow(drone).Show();
         }
 
         private void DronesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

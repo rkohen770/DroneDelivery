@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,13 +25,13 @@ namespace PL
         private IBL.IBL bl = BLFactory.GetBL();
         public DroneForList drone { get; set; }
         private DroneListWindow droneListWindow;
-      
+    
         public AddDroneWindow ()
         {
             DialogResult = true;
             InitializeComponent();
         }
-        
+     
         public AddDroneWindow(IBL.IBL bl,DroneListWindow droneListWindow)
         {
             InitializeComponent();
@@ -83,22 +84,21 @@ namespace PL
         /// <summary>
         /// text box that allows only numbers to be entered
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">TextBox type</param>
         /// <param name="e"></param>
-        private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void DroneIdTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            System.Windows.Controls.TextBox text = sender as TextBox;
-
-            if (e.Key == Key.D0 || e.Key == Key.D1 || e.Key == Key.D2 || e.Key == Key.D3 || e.Key == Key.D4 || e.Key == Key.D5 || e.Key == Key.D6 || e.Key == Key.D7 || e.Key == Key.D8 || e.Key == Key.D9 || e.Key == Key.Enter || e.Key == Key.Delete || e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
-                e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
-                || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right)
-                return;
-            e.Handled = true;
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void Save(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Button for saving the details of the new drone
+        /// </summary>
+        /// <param name="sender">button type</param>
+        /// <param name="e"></param>
+        private void SaveDroneButton_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 bool flag = false;
@@ -127,20 +127,29 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
-            
             droneListWindow.DronesListView.Items.Refresh();
             Close();
         }
 
-        private void Close_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Button for closing a window
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-        private void Update_Click(object sender, RoutedEventArgs e)
+
+        /// <summary>
+        /// A button that opens a window for updating a drone
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void UpdateDroneButton_Click(object sender, RoutedEventArgs e)
         {
             bl.UpdateNameOfDrone(int.Parse(ID.Text), Model.Text);
             MessageBox.Show("Update a drone was completed successfully");
-            
             Close();
         }
 

@@ -26,13 +26,16 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
-            
         }
 
+        /// <summary>
+        /// A button that opens a window of the drone details
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
         private void ShowDroneButton_Click(object sender, RoutedEventArgs e)
         {
             new DroneListWindow(bl).Show();
-
         }
 
     }

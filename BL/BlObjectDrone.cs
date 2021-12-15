@@ -274,19 +274,7 @@ namespace BL
         {
             try
             {
-                List<DroneForList> list = new();
-                foreach (var drone_l in droneForLists)
-                {
-                    DroneForList droneFor = cloneDrone(GetDrone(drone_l.DroneId));
-                    if (drone_l.DroneStatus == DroneStatus.Delivery)
-                    {
-                        droneFor.ParcelNumIsTransferred = dal.GetAllParcels().
-                            ToList().Find(p => p.DroneId == drone_l.DroneId).Id;
-                    }
-
-                    list.Add(droneFor);
-                }
-                return list;
+               return droneForLists;
             }
             catch (IDAL.DO.BadDroneIDException e)
             {
