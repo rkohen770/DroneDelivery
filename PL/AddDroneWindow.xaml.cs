@@ -40,6 +40,8 @@ namespace PL
             Update.Visibility = Visibility.Hidden;
             status.Visibility = Visibility.Hidden;
             Status.Visibility = Visibility.Hidden;
+            Battery.Visibility = Visibility.Hidden;
+            battery.Visibility = Visibility.Hidden;
             WeightSelector.Visibility = Visibility.Visible;
             MaxWeight.Visibility = Visibility.Hidden;
             this.droneListWindow = droneListWindow;

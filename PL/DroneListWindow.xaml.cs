@@ -22,7 +22,7 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
-        private IBL.IBL bl = BLFactory.GetBL();
+        private IBL.IBL bl;
         List<DroneForList> droneCollection;
       
         public DroneListWindow()
@@ -33,8 +33,8 @@ namespace PL
         public DroneListWindow(IBL.IBL _bl)
         {
             InitializeComponent();
-            droneCollection = new List<DroneForList>(bl.GetAllDronesBo());
             bl = _bl;
+            droneCollection = new List<DroneForList>(bl.GetAllDronesBo());
             DronesListView.ItemsSource = bl.GetAllDronesBo();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
