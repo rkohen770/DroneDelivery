@@ -75,7 +75,7 @@ namespace PL
             Status.IsReadOnly = true;
             Status.Text = drone.DroneStatus.ToString();
             stationID.Width = 200;
-            stationID.Margin = new Thickness(10, 225, 0, 0);
+            stationID.Margin = new Thickness(30, 145, 0, 0);
             stationID.Content = "Parcel Num Is Transferred";
             StationID.Text = drone.ParcelNumIsTransferred.ToString();
             Longitude.Text = drone.CurrentLocation.Longitude.ToString();
