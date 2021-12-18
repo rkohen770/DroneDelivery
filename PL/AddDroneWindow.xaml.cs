@@ -36,6 +36,8 @@ namespace PL
         {
             InitializeComponent();
             this.bl = bl;
+            this.droneListWindow = droneListWindow;
+
             SaveClick.Visibility = Visibility.Visible;
             Update.Visibility = Visibility.Hidden;
             status.Visibility = Visibility.Hidden;
@@ -44,7 +46,6 @@ namespace PL
             battery.Visibility = Visibility.Hidden;
             WeightSelector.Visibility = Visibility.Visible;
             MaxWeight.Visibility = Visibility.Hidden;
-            this.droneListWindow = droneListWindow;
             longitude.Visibility = Visibility.Hidden;
             Longitude.Visibility = Visibility.Hidden;
             lattitude.Visibility = Visibility.Hidden;
@@ -52,11 +53,12 @@ namespace PL
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
 
         }
-        public AddDroneWindow(IBL.IBL bl, DroneForList drone)
+        public AddDroneWindow(IBL.IBL bl, DroneForList drone, DroneListWindow droneListWindow)
         {
             InitializeComponent();
             this.bl = bl;
             this.drone = drone;
+            this.droneListWindow = droneListWindow;
             SaveClick.Visibility = Visibility.Hidden;
             Update.Visibility = Visibility.Visible;
             status.Visibility = Visibility.Visible;
@@ -103,23 +105,19 @@ namespace PL
         {
             try
             {
-                bool flag = false;
-                while (!flag)
+                if (ID.Text == null || Model.Text == null || WeightSelector.SelectedItem == null || StationID.Text == null)
+                    MessageBox.Show("Not all detalis are set");
+                else if (ID.Text.Length > 4)
+                    MessageBox.Show("Drone id longs then 4 letters");
+                else if (StationID.Text.Length > 5)
+                    MessageBox.Show("Station id longs then 5 letters");
+                else
                 {
-                    if (ID.Text == null || Model.Text == null || WeightSelector.SelectedItem == null || StationID.Text == null)
-                        MessageBox.Show("Not all detalis are set");
-                    else if (ID.Text.Length > 4)
-                        MessageBox.Show("Drone id longs then 4 letters");
-                    else if (StationID.Text.Length > 5)
-                        MessageBox.Show("Station id longs then 5 letters");
-                    else
-                    {
-                        bl.AddDroneBo(int.Parse(ID.Text), Model.Text,
-                            (WeightCategories)WeightSelector.SelectedItem, int.Parse(StationID.Text));
-                    }
-                    MessageBox.Show("Adding a drone was completed successfully");
-                    flag = true;
+                    bl.AddDroneBo(int.Parse(ID.Text), Model.Text,
+                        (WeightCategories)WeightSelector.SelectedItem, int.Parse(StationID.Text));
                 }
+                MessageBox.Show("Adding a drone was completed successfully");
+
             }
             catch (BadDroneIDException ex)
             {
@@ -152,6 +150,7 @@ namespace PL
         {
             bl.UpdateNameOfDrone(int.Parse(ID.Text), Model.Text);
             MessageBox.Show("Update a drone was completed successfully");
+            droneListWindow.DronesListView.Items.Refresh();
             Close();
         }
 
