@@ -4,9 +4,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using IBL;
+using BLApi;
 
-namespace IBL.BO
+namespace BLApi.BO
 { 
     [Serializable]
     #region Base Station Exception

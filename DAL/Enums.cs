@@ -1,4 +1,4 @@
-﻿namespace IDAL.DO
+﻿namespace DO
 {
     public enum WeightCategories { Easy, Intermediate, Liver };
     //public enum DroneStatuses { Available, Maintenance, Shipping };

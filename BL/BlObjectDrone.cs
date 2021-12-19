@@ -1,12 +1,12 @@
-﻿using IBL.BO;
-using IDAL.DO;
+﻿using BLApi.BO;
+using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace BL
 {
-    public partial class BlObject : IBL.IBL
+    public partial class BlObject : BLApi.IBL
     {
 
         #region ADD
@@ -17,7 +17,7 @@ namespace BL
         /// <param name="model">Drone model</param>
         /// <param name="maxWeight">Maximum weight</param>
         /// <param name="stationId">Number of stations to put the drone for initial charging</param>
-        public void AddDroneBo(int droneId, string model, IBL.BO.WeightCategories maxWeight, int stationId)
+        public void AddDroneBo(int droneId, string model, BLApi.BO.WeightCategories maxWeight, int stationId)
         {
             try
             {
@@ -37,21 +37,21 @@ namespace BL
                 droneForLists.Add(drone);
 
                 //Add drone in DAL to data source.
-                dal.AddDrone(droneId, model, (IDAL.DO.WeightCategories)maxWeight);
+                dal.AddDrone(droneId, model, (DO.WeightCategories)maxWeight);
 
                 dal.SendingDroneForCharging(droneId, stationId);
             }
-            catch(IDAL.DO.DroneAlreadyExistException e)
+            catch(DO.DroneAlreadyExistException e)
             {
-                throw new IBL.BO.DroneAlreadyExistException(e.ID, e.Model, e.Message, e.InnerException);
+                throw new BLApi.BO.DroneAlreadyExistException(e.ID, e.Model, e.Message, e.InnerException);
             }
-            catch (IDAL.DO.BadDroneIDException e)
+            catch (DO.BadDroneIDException e)
             {
-                throw new IBL.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BLApi.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
-            catch (IDAL.DO.BadBaseStationIDException e)
+            catch (DO.BadBaseStationIDException e)
             {
-                throw new IBL.BO.BadBaseStationIDException(e.ID, e.Message, e.InnerException);
+                throw new BLApi.BO.BadBaseStationIDException(e.ID, e.Message, e.InnerException);
             }
         }
         #endregion
@@ -79,9 +79,9 @@ namespace BL
                     droneForLists[dIndex] = drone;
                 }
             }
-            catch (IDAL.DO.BadDroneIDException e)
+            catch (DO.BadDroneIDException e)
             {
-                throw new IBL.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BLApi.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
         }
 
@@ -129,16 +129,16 @@ namespace BL
                 }
                 else
                 {
-                    throw new IBL.BO.BadDroneIDException(id, "the drone not exists in the list of drones");
+                    throw new BLApi.BO.BadDroneIDException(id, "the drone not exists in the list of drones");
                 }
             }
-            catch (IDAL.DO.BadBaseStationIDException e)
+            catch (DO.BadBaseStationIDException e)
             {
-                throw new IBL.BO.BadBaseStationIDException(e.ID, e.Message, e.InnerException);
+                throw new BLApi.BO.BadBaseStationIDException(e.ID, e.Message, e.InnerException);
             }
-            catch (IDAL.DO.BadDroneIDException e)
+            catch (DO.BadDroneIDException e)
             {
-                throw new IBL.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BLApi.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
             
         }
@@ -181,16 +181,16 @@ namespace BL
                 }
                 else
                 {
-                    throw new IBL.BO.BadDroneIDException(id, "the drone not exists in the system");
+                    throw new BLApi.BO.BadDroneIDException(id, "the drone not exists in the system");
                 }
             }
-            catch (IDAL.DO.BadDroneIDException e)
+            catch (DO.BadDroneIDException e)
             {
-                throw new IBL.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BLApi.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
-            catch (IDAL.DO.BadBaseStationIDException e)
+            catch (DO.BadBaseStationIDException e)
             {
-                throw new IBL.BO.BadBaseStationIDException(e.ID, e.Message, e.InnerException);
+                throw new BLApi.BO.BadBaseStationIDException(e.ID, e.Message, e.InnerException);
             }
         }
 
@@ -202,11 +202,11 @@ namespace BL
         /// </summary>
         /// <param name="droneId">drone id</param>
         /// <returns>drone</returns>
-        public IBL.BO.Drone GetDrone(int droneId)
+        public BLApi.BO.Drone GetDrone(int droneId)
         {
             try
             {
-                IDAL.DO.Drone drone = dal.GetDrone(droneId);
+                DO.Drone drone = dal.GetDrone(droneId);
                 DroneForList drone_l = droneForLists.Find(d => d.DroneId == droneId);
                 if (drone_l.DroneStatus == DroneStatus.Delivery)
                 {
@@ -217,8 +217,8 @@ namespace BL
                     ParcelInTransfer parcelInTransfer = new ParcelInTransfer()
                     {
                         ParcelId = parcel.Id,
-                        Priorities = (IBL.BO.Priorities)parcel.priority,
-                        Weight = (IBL.BO.WeightCategories)parcel.Weight,
+                        Priorities = (BLApi.BO.Priorities)parcel.priority,
+                        Weight = (BLApi.BO.WeightCategories)parcel.Weight,
                         SenderOfParcel = new() { CustomerId = customer_sender.Id, CustomerName = customer_sender.Name },
                         TargetToParcel = new() { CustomerId = customer_target.Id, CustomerName = customer_target.Name },
                         Collection = new() { Lattitude = customer_sender.Lattitude, Longitude = customer_sender.Longitude },
@@ -256,13 +256,13 @@ namespace BL
                     };
                 }
             }
-            catch (IDAL.DO.BadDroneIDException e)
+            catch (DO.BadDroneIDException e)
             {
-                throw new IBL.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BLApi.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
-            catch (IDAL.DO.BadCustomerIDException e)
+            catch (DO.BadCustomerIDException e)
             {
-                throw new IBL.BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
+                throw new BLApi.BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
             }
         }
         #endregion
@@ -289,9 +289,9 @@ namespace BL
                 }
                 return list;
             }
-            catch (IDAL.DO.BadDroneIDException e)
+            catch (DO.BadDroneIDException e)
             {
-                throw new IBL.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BLApi.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
         }
 
@@ -318,13 +318,13 @@ namespace BL
         /// </summary>
         /// <param name="drone">drone</param>
         /// <returns>drone for list</returns>
-        private DroneForList cloneDrone(IBL.BO.Drone drone)
+        private DroneForList cloneDrone(BLApi.BO.Drone drone)
         {
             return new DroneForList
             {
                 DroneId = drone.DroneId,
                 DroneModel = drone.DroneModel,
-                MaxWeight = (IBL.BO.WeightCategories)drone.Weight,
+                MaxWeight = (BLApi.BO.WeightCategories)drone.Weight,
                 DroneBattery = drone.DroneBattery,
                 DroneStatus = drone.DroneStatus,
                 CurrentLocation = drone.CurrentLocation

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DalObject;
-using IDAL;
-using IDAL.DO;
+using DalApi;
+using DalApi.DO;
+using DO;
 
-namespace DalObject
+
+namespace DalApi
 {
-    public partial class DalObject : IDal
+     partial class DalObject : IDal
     {
         #region ADD
         /// <summary>

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BL;
 
-namespace IBL
+namespace BLApi
 {
     /// <summary>
     /// Implement the design pattern of a factory

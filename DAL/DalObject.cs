@@ -1,14 +1,17 @@
-﻿using DAL;
-using IDAL;
-using IDAL.DO;
+﻿using DalApi;
+using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DalObject
+namespace DalApi
 {
-    public partial class DalObject :IDal
+    sealed partial class DalObject : IDal
     {
+        static readonly Lazy<DalObject> lazy = new Lazy<DalObject>(() => new());
+
+        public static DalObject Instance { get { return lazy.Value; } }
+
         public DalObject()
         {
             DataSource.Initialize();
@@ -25,7 +28,7 @@ namespace DalObject
             double minDistance = 1000000000000;
             Customer sender = GetCustomer(senderId);
             Customer target = GetCustomer(targetId);
-            foreach (var s in DataSource.stations)
+            foreach (var station in DataSource.stations)
             {
                 double dictance = Math.Sqrt(Math.Pow(sender.Lattitude - target.Lattitude, 2) + Math.Pow(sender.Longitude - target.Longitude, 2));
                 if (minDistance > dictance)
@@ -35,8 +38,5 @@ namespace DalObject
             }
             return minDistance;
         }
-
-       
-
     }
 }

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DalObject;
-using IDAL;
-using IDAL.DO;
+using DalApi;
+using DO;
 
-namespace DalObject
+namespace DalApi
 {
-    public partial class DalObject : IDal
+    sealed partial class DalObject : IDal
     {
         #region ADD
         /// <summary>
@@ -28,7 +27,7 @@ namespace DalObject
             }
             else
             {
-                Customer c = new Customer
+                Customer customer = new Customer
                 {
                     Id = id,
                     Name = name,
@@ -36,7 +35,7 @@ namespace DalObject
                     Longitude = longitude,
                     Lattitude = lattitude
                 };
-                DataSource.customers.Add(c);//Adding the new customer to the array
+                DataSource.customers.Add(customer);//Adding the new customer to the array
             }
         }
         #endregion

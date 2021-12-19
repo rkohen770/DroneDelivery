@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IDAL.DO
+namespace DO
 {
     /// <summary>
     /// Help tools for the data base layer

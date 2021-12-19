@@ -1,6 +1,6 @@
 ﻿using System;
-using IDAL.DO;
-using DalObject;
+using DalApi.DO;
+using DalApi;
 using System.Collections.Generic;
 namespace ConsoleUI
 {
@@ -24,7 +24,7 @@ namespace ConsoleUI
 
         static void Main(string[] args)
         {
-            DalObject.DalObject dal = new DalObject.DalObject();
+            DalApi.DalObject dal = new DalApi.DalObject();
             MenuMessages();
             int choice;
             while (!int.TryParse(Console.ReadLine(), out choice))
@@ -221,7 +221,7 @@ namespace ConsoleUI
         /// Receives input and activates the functions of the dal layer
         /// </summary>
         /// <param name="dal">On this standby the functions are activated</param>
-        private static void addParcel(DalObject.DalObject dal)
+        private static void addParcel(DalApi.DalObject dal)
         {
             Console.WriteLine("Enter the parcel details: senderId, targetId, maxWeight, priority, droneId)");
             int senderId = int.Parse(Console.ReadLine());
@@ -232,7 +232,7 @@ namespace ConsoleUI
             dal.AddParcel(senderId, targetId, maxWeight, priority, droneId);
         }
 
-        private static void addCustomer(DalObject.DalObject dal)
+        private static void addCustomer(DalApi.DalObject dal)
         {
             Console.WriteLine("Enter the customer details: id, nameCustomer, phone, longitude, lattitude)");
             int id = int.Parse(Console.ReadLine());
@@ -243,7 +243,7 @@ namespace ConsoleUI
             dal.AddCustomer(id, nameCustomer, phone, longitude, lattitude);
         }
 
-        private static void addDrone(DalObject.DalObject dal)
+        private static void addDrone(DalApi.DalObject dal)
         {
             Console.WriteLine("Enter the drone details: id, model, maxWeight, status, battery");
             int id = int.Parse(Console.ReadLine());
@@ -254,7 +254,7 @@ namespace ConsoleUI
             dal.AddDrone(id, model, maxWeight/*, status,  battery*/);
         }
 
-        private static void addStation(DalObject.DalObject dal)
+        private static void addStation(DalApi.DalObject dal)
         {
             Console.WriteLine("Enter the station details: id, name, longitude,lattitude, chargeSlots");
             int id = int.Parse(Console.ReadLine());
@@ -268,7 +268,7 @@ namespace ConsoleUI
 
         #region update method
 
-        private static void releasDroneFromCharging(DalObject.DalObject dal)
+        private static void releasDroneFromCharging(DalApi.DalObject dal)
         {
             Console.WriteLine("Enter the releas drone from charging: droneId, stationId");
             int droneId = int.Parse(Console.ReadLine());
@@ -276,7 +276,7 @@ namespace ConsoleUI
             dal.ReleasDroneFromCharging(droneId, stationId);
         }
 
-        private static void sendingDroneForCharging(DalObject.DalObject dal)
+        private static void sendingDroneForCharging(DalApi.DalObject dal)
         {
             Console.WriteLine("Enter the sending drone for charging: droneId, stationId");
             int droneId = int.Parse(Console.ReadLine());
@@ -284,21 +284,21 @@ namespace ConsoleUI
             dal.SendingDroneForCharging(droneId, stationId);
         }
 
-        private static void deliveryPackageToCustomer(DalObject.DalObject dal)
+        private static void deliveryPackageToCustomer(DalApi.DalObject dal)
         {
             Console.WriteLine("Enter the delivery package to customer: parcelId");
             int parceleId = int.Parse(Console.ReadLine());
             dal.DeliveryPackageToCustomer(parceleId);
         }
 
-        private static void parcelCollectionByDrone(DalObject.DalObject dal)
+        private static void parcelCollectionByDrone(DalApi.DalObject dal)
         {
             Console.WriteLine("Enter the packag collection by drone: parcelId");
             int parceleId = int.Parse(Console.ReadLine());
             dal.PackagCollectionByDrone(parceleId);
         }
 
-        private static void assigningParcelToDrone(DalObject.DalObject dal)
+        private static void assigningParcelToDrone(DalApi.DalObject dal)
         {
             Console.WriteLine("Enter the parcel id for assigning to drone: parcelId , droneId");
             int parceleId = int.Parse(Console.ReadLine());
@@ -309,28 +309,28 @@ namespace ConsoleUI
 
         #region display method
 
-        private static void displayParcel(DalObject.DalObject dal)
+        private static void displayParcel(DalApi.DalObject dal)
         {
             Console.WriteLine("Enter the parcel view: parcelId");
             int parcelId = int.Parse(Console.ReadLine());
             Console.WriteLine(dal.GetParcel(parcelId));
         }
 
-        private static void displayCustomer(DalObject.DalObject dal)
+        private static void displayCustomer(DalApi.DalObject dal)
         {
             Console.WriteLine("Enter the customer view: customerId");
             int customerId = int.Parse(Console.ReadLine());
             Console.WriteLine(dal.GetCustomer(customerId));
         }
 
-        private static void displayDrone(DalObject.DalObject dal)
+        private static void displayDrone(DalApi.DalObject dal)
         {
             Console.WriteLine("Enter the drone view: droneId");
             int droneId = int.Parse(Console.ReadLine());
             Console.WriteLine(dal.GetDrone(droneId));
         }
 
-        private static void displayStation(DalObject.DalObject dal)
+        private static void displayStation(DalApi.DalObject dal)
         {
             Console.WriteLine("Enter the base station view: stationId");
             int stationId = int.Parse(Console.ReadLine());

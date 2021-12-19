@@ -1,16 +1,16 @@
-﻿using IBL.BO;
-using IBL;
+﻿using BLApi.BO;
+using BLApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL;
-using IDAL.DO;
+using DalApi;
+using DO;
 
 namespace BL
 {
-    public partial class BlObject : IBL.IBL
+    public partial class BlObject : BLApi.IBL
     {
         #region ADD
         /// <summary>
@@ -35,9 +35,9 @@ namespace BL
                 //Add baseStation in DAL to data source.
                 dal.AddStation(id, nameBaseStation, location.Longitude, location.Lattitude, numOfAvailableChargingPositions);
             }
-            catch (IDAL.DO.BaseStationAlreadyExistException exception )
+            catch (DO.BaseStationAlreadyExistException exception )
             {
-                throw new IBL.BO.BaseStationAlreadyExistException(id,nameBaseStation, exception.Message,exception.InnerException);
+                throw new BLApi.BO.BaseStationAlreadyExistException(id,nameBaseStation, exception.Message,exception.InnerException);
             }
         }
         #endregion
@@ -71,9 +71,9 @@ namespace BL
                     dal.UpdateBaseStationCharging(id, totalAmountOfChargingStations);
                 }
             }
-            catch(IDAL.DO.BadBaseStationIDException exception)
+            catch(DO.BadBaseStationIDException exception)
             {
-                throw new IBL.BO.BadBaseStationIDException(id, exception.Message, exception.InnerException);
+                throw new BLApi.BO.BadBaseStationIDException(id, exception.Message, exception.InnerException);
             }
         }
         #endregion
@@ -107,9 +107,9 @@ namespace BL
                     DroneInChargings = dronesInCarging
                 };
             }
-            catch (IDAL.DO.BadBaseStationIDException e)
+            catch (DO.BadBaseStationIDException e)
             {
-                throw new IBL.BO.BadBaseStationIDException(e.ID, e.Message, e.InnerException);
+                throw new BLApi.BO.BadBaseStationIDException(e.ID, e.Message, e.InnerException);
             }
         }
         #endregion
