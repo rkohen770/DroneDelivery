@@ -61,6 +61,11 @@ namespace PL
             this.droneListWindow = droneListWindow;
             SaveClick.Visibility = Visibility.Hidden;
             Update.Visibility = Visibility.Visible;
+            Sending.Visibility = Visibility.Visible;
+            Release.Visibility = Visibility.Visible;
+            Send_Delivery.Visibility = Visibility.Visible;
+            Collection.Visibility = Visibility.Visible;
+            Parcel_Delivery.Visibility = Visibility.Visible;
             status.Visibility = Visibility.Visible;
             Status.Visibility = Visibility.Visible;
             longitude.Visibility = Visibility.Visible;
@@ -148,11 +153,119 @@ namespace PL
         /// <param name="e"></param>
         private void UpdateDroneButton_Click(object sender, RoutedEventArgs e)
         {
-            bl.UpdateNameOfDrone(int.Parse(ID.Text), Model.Text);
-            MessageBox.Show("Update a drone was completed successfully");
-            droneListWindow.DronesListView.Items.Refresh();
-            Close();
+            try
+            {
+                bl.UpdateNameOfDrone(int.Parse(ID.Text), Model.Text);
+                MessageBox.Show("Update a drone was completed successfully");
+                droneListWindow.DronesListView.Items.Refresh();
+            }
+            catch(BadDroneIDException ex)
+            {
+                MessageBox.Show(ex.ID.ToString(), ex.Message );
+            }
         }
+         private void SendingButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.SendingDroneForCharging(int.Parse(ID.Text));
+                MessageBox.Show("Sending the drone for charging was completed successfully");
+                droneListWindow.DronesListView.Items.Refresh();
+            }
+            catch (StatusDroneNotAllowException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (BadBaseStationIDException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (BadDroneIDException ex)
+            {
+                MessageBox.Show(ex.ID.ToString(), ex.Message);
+            }
+        }
+
+        private void ReleaseButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.UpdateReleaseDroneFromCharging(int.Parse(ID.Text), new TimeSpan(1, 0, 0));
+                MessageBox.Show("Release the drone from charging was completed successfully");
+                droneListWindow.DronesListView.Items.Refresh();
+            }
+            catch (StatusDroneNotAllowException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (BadDroneIDException ex)
+            {
+                MessageBox.Show(ex.ID.ToString(), ex.Message);
+            }
+            catch (BadBaseStationIDException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void SendDeliveryButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.UpdateAssignParcelToDrone(int.Parse(ID.Text));
+                MessageBox.Show("Sending the drone for delivery was completed successfully");
+                droneListWindow.DronesListView.Items.Refresh();
+            }
+            catch (BatteryOfDroneNotAllowException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void CollectionButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.UpdateCollectionParcelByDrone(int.Parse(ID.Text));
+                MessageBox.Show("Collection parcel by drone was completed successfully");
+                droneListWindow.DronesListView.Items.Refresh();
+            }
+            catch (BadParcelIDException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (BadDroneIDException ex)
+            {
+                MessageBox.Show(ex.ID.ToString(), ex.Message);
+            }
+            catch (BadCustomerIDException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ParcelDeliveryButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.UpdateDeliveryParcelByDrone(int.Parse(ID.Text));
+                MessageBox.Show("Delivery parcel by drone was completed successfully");
+                droneListWindow.DronesListView.Items.Refresh();
+            }
+            catch (BadParcelIDException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (BadDroneIDException ex)
+            {
+                MessageBox.Show(ex.ID.ToString(), ex.Message);
+            }
+            catch (BadCustomerIDException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+
 
     }
 }

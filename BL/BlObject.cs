@@ -11,11 +11,13 @@ namespace BL
     public partial class BlObject : IBL.IBL
     {
         static Random random = new Random();
-        IDal dal;
+
         List<DroneForList> droneForLists = new List<DroneForList>();
+
+        internal static IDAL.IDal dal = new DalObject.DalObject();
+
         public BlObject()
         {
-            dal = new DalObject.DalObject();
             double[] power = dal.PowerConsumptionRequest();
             double vacant = power[0],
                 CarriesLightWeight = power[1],

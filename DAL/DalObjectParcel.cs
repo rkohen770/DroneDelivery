@@ -66,7 +66,7 @@ namespace DalObject
             }
             else
             {
-                //We will go through the entire array of the drone, to find a available drone
+                //We will go through the entire list of the drone, to find a available drone
                 for (int pIndex = 0; pIndex < DataSource.parcels.Count; pIndex++)
                 {
                     if (DataSource.parcels[pIndex].Id == parcelId)
@@ -75,7 +75,6 @@ namespace DalObject
                         parcel.DroneId = droneId;//Update the droneid field in the drone package found
                         parcel.Scheduled = DateTime.Now;//Update packet time association field to now.
                         DataSource.parcels[pIndex] = parcel;
-                        return;
                     }
                 }
             }
@@ -149,23 +148,22 @@ namespace DalObject
         /// return a list of actual parcel
         /// </summary>
         /// <returns>list of parcels</returns>
-        public IEnumerable<Parcel> GetAllParcels()
+        public IEnumerable<Parcel> GetAllParcels(Predicate<Parcel> predicate)
         {
-            return from parcel in DataSource.parcels
-                   select parcel.Clone();
+            return DataSource.parcels.FindAll(predicate);
         }
 
         /// <summary>
         /// Displays a list of parcels that have not yet been assigned to the drone
         /// </summary>
         /// <returns>list of parcel without special dron</returns>
-        public IEnumerable<Parcel> GetAllParcelsWithoutSpecialDron(Predicate<Parcel> p)
-        {
-            //return all the parcels without special drone
-            return from parcel in DataSource.parcels
-                   where p(parcel)
-                   select parcel.Clone();
-        }
+        //public IEnumerable<Parcel> GetAllParcelsWithoutSpecialDron(Predicate<Parcel> p)
+        //{
+        //    //return all the parcels without special drone
+        //    return from parcel in DataSource.parcels
+        //           where p(parcel)
+        //           select parcel.Clone();
+        //}
         #endregion
 
     }

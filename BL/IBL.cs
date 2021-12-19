@@ -165,7 +165,7 @@ namespace IBL
         /// Get all parcels not yet associated with the drone
         /// </summary>
         /// <returns>List with all parcels not yet associated with the glider</returns>
-        public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithDrone();
+         IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithDrone();
 
         /// <summary>
         /// Getlist with all base station with availible charging
