@@ -160,6 +160,8 @@ namespace BL
                     {
                         //update in BL
                         drone.DroneBattery += chargingTime.TotalMilliseconds * 1000 * dal.PowerConsumptionRequest()[4];
+                        if (drone.DroneBattery >= 100)
+                            drone.DroneBattery = 100;
                         drone.DroneStatus = DroneStatus.Available;
 
                         int dIndex = droneForLists.FindIndex(d => d.DroneId == id);
@@ -169,7 +171,7 @@ namespace BL
                         //We will find the charging station by the location of the drone
                         Station station = dal.GetAllBaseStations().
                             Where(s => s.Lattitude == drone.CurrentLocation.Lattitude && s.Longitude == drone.CurrentLocation.Longitude).
-                            ToList()[0];
+                            FirstOrDefault();
                         dal.ReleasDroneFromCharging(id, station.Id);//sending for dal
                     }
                     else
