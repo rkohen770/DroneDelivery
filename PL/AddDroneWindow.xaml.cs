@@ -132,6 +132,10 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             droneListWindow.DronesListView.Items.Refresh();
             Close();
         }
@@ -157,6 +161,7 @@ namespace PL
             {
                 bl.UpdateNameOfDrone(int.Parse(ID.Text), Model.Text);
                 MessageBox.Show("Update a drone was completed successfully");
+                droneListWindow.DronesListView.DataContext = bl.GetAllDronesBo();
                 droneListWindow.DronesListView.Items.Refresh();
             }
             catch(BadDroneIDException ex)
@@ -184,6 +189,10 @@ namespace PL
             {
                 MessageBox.Show(ex.ID.ToString(), ex.Message);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void ReleaseButton_Click(object sender, RoutedEventArgs e)
@@ -206,6 +215,10 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private void SendDeliveryButton_Click(object sender, RoutedEventArgs e)
         {
@@ -216,6 +229,10 @@ namespace PL
                 droneListWindow.DronesListView.Items.Refresh();
             }
             catch (BatteryOfDroneNotAllowException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -240,6 +257,10 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void ParcelDeliveryButton_Click(object sender, RoutedEventArgs e)
@@ -259,6 +280,10 @@ namespace PL
                 MessageBox.Show(ex.ID.ToString(), ex.Message);
             }
             catch (BadCustomerIDException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

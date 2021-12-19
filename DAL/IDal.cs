@@ -214,13 +214,13 @@ namespace IDAL
         /// Displays a list of parcel
         /// </summary>
         /// <returns>List of parcels</returns>
-         IEnumerable<Parcel> GetAllParcels(Predicate<Parcel> predicate);
+         IEnumerable<Parcel> GetAllParcels();
 
         /// <summary>
         /// Displays a list of parcel that have not yet been assigned to the glider
         /// </summary>
         /// <returns>List of parcel that have not yet been assigned to the glider</returns>
-      //   IEnumerable<Parcel> GetAllParcelsWithoutSpecialDron(Predicate<Parcel> p);
+        IEnumerable<Parcel> GetAllParcelsWithoutSpecialDron(Predicate<Parcel> p);
 
         /// <summary>
         /// Display of base stations with available charging stations

@@ -22,9 +22,7 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
-        private IBL.IBL bl;
-        List<DroneForList> droneCollection;
-      
+        private IBL.IBL bl;      
         public DroneListWindow()
         {
             InitializeComponent();
@@ -34,8 +32,7 @@ namespace PL
         {
             InitializeComponent();
             bl = _bl;
-            droneCollection = new List<DroneForList>(bl.GetAllDronesBo());
-            DronesListView.ItemsSource = bl.GetAllDronesBo();
+            DronesListView.DataContext = bl.GetAllDronesBo();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
         }
@@ -62,6 +59,7 @@ namespace PL
         private void AddDroneButton_Click(object sender, RoutedEventArgs e)
         {
             new AddDroneWindow(bl, this).ShowDialog();
+            DronesListView.DataContext = bl.GetAllDronesBo();
             DronesListView.Items.Refresh();
         }
 
@@ -82,14 +80,11 @@ namespace PL
         /// <param name="e"></param>
         private void ShowDronesButtom_Click(object sender, MouseButtonEventArgs e)
         {
-            DroneForList drone = droneCollection[((ListView)sender).SelectedIndex];
+            DroneForList drone = (DroneForList)((ListView)sender).SelectedItem;
             new AddDroneWindow( bl, drone,this).Show();
+            DronesListView.DataContext = bl.GetAllDronesBo();
             DronesListView.Items.Refresh();
         }
 
-        private void DronesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

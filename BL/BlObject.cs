@@ -19,11 +19,6 @@ namespace BL
         public BlObject()
         {
             double[] power = dal.PowerConsumptionRequest();
-            double vacant = power[0],
-                CarriesLightWeight = power[1],
-                CarriesMediumWeight = power[2],
-                CarriesHeavyWeight = power[3],
-                DroneChargingRate = power[4];
             List<IDAL.DO.Drone> drones = dal.GetAllDrones().ToList();
 
             initializeListOfDrone(drones);
