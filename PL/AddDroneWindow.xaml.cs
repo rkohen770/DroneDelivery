@@ -154,5 +154,9 @@ namespace PL
             Close();
         }
 
+        private void closing(object sender, ToolTipEventArgs e)
+        {
+
+        }
     }
 }
