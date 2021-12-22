@@ -20,15 +20,15 @@ namespace PL
     /// <summary>
     /// Interaction logic for DroneListWindow.xaml
     /// </summary>
-    public partial class DroneListWindow : Window
+    public partial class MainWindow : Window
     {
         private BLApi.IBL bl;      
-        public DroneListWindow()
+        public MainWindow()
         {
             InitializeComponent();
         }
 
-        public DroneListWindow(BLApi.IBL _bl)
+        public MainWindow(BLApi.IBL _bl)
         {
             InitializeComponent();
             bl = _bl;
@@ -58,7 +58,7 @@ namespace PL
         /// <param name="e"></param>
         private void AddDroneButton_Click(object sender, RoutedEventArgs e)
         {
-            new AddDroneWindow(bl, this).ShowDialog();
+            new AddDroneWindow(bl,this).ShowDialog();
             DronesListView.DataContext = bl.GetAllDronesBo();
             DronesListView.Items.Refresh();
         }
