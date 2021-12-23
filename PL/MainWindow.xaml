@@ -31,8 +31,8 @@
                         <ComboBox x:Name="cmbDronesID"  Height="25"  Width="100" DisplayMemberPath = "DroneId" SelectedValuePath="DroneId" Margin="40,0,0,0"/>
                     </StackPanel>
                     
-                    <ListView x:Name="LVListDrones" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="LVlistBuses_MouseDoubleClick" Grid.ColumnSpan="2"  >
-                        <!--<ListView.View>
+                    <!--<ListView x:Name="LVListDrones" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="LVlistBuses_MouseDoubleClick" Grid.ColumnSpan="2"  >
+                        <ListView.View>
 
                             <GridView>
                                 <GridViewColumn Header="Drone Id" DisplayMemberBinding="{Binding Path=droneId, Converter={StaticResource printL},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
@@ -54,7 +54,7 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                 buttons
+                                 --><!--buttons--><!--
 
                                 <GridViewColumn>
                                     <GridViewColumn.CellTemplate>
@@ -110,12 +110,12 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                 finish button
+                                 --><!--finish button--><!--
 
                             </GridView>
-                        </ListView.View>-->
+                        </ListView.View>
 
-                        <!--<ListView.Resources>
+                        --><!--<ListView.Resources>
                             <Style TargetType="{x:Type ListViewItem}">
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
@@ -129,8 +129,8 @@
                                 <Setter Property="Foreground" Value="Black"/>
                             </Style>
 
-                        </ListView.Resources>-->
-                    </ListView>
+                        </ListView.Resources>--><!--
+                    </ListView>-->
                 </Grid>
             </TabItem>
         </TabControl>
