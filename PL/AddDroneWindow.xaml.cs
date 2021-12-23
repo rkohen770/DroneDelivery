@@ -1,5 +1,5 @@
-﻿using BLApi;
-using BLApi.BO;
+﻿using IBL;
+using IBL.BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +22,7 @@ namespace PL
     /// </summary>
     public partial class AddDroneWindow : Window
     {
-        private IBL bl = BLFactory.GetBL();
+        private IBL.IBL bl = BLFactory.GetBL();
         public DroneForList drone { get; set; }
         private MainWindow mainWindow;
         public bool isAdd;
@@ -35,7 +35,7 @@ namespace PL
             InitializeComponent();
         }
      
-        public AddDroneWindow(IBL bl,MainWindow mainWindow)
+        public AddDroneWindow(IBL.IBL bl,DroneListWindow droneListWindow)
         {
             InitializeComponent();
             this.bl = bl;
@@ -57,7 +57,7 @@ namespace PL
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
 
         }
-        public AddDroneWindow(IBL bl,DroneForList drone, MainWindow mainWindow)
+        public AddDroneWindow(IBL.IBL bl, DroneForList drone, DroneListWindow droneListWindow)
         {
             InitializeComponent();
             this.bl = bl;

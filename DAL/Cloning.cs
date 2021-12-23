@@ -4,8 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using DO;
-namespace DalApi
+using IDAL.DO;
+namespace DalObject
 {
     static class Cloning
     {

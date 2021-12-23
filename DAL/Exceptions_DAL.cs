@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 /// <summary>
 ///Exception of the data base layer
 /// </summary>
-namespace DO
+namespace IDAL.DO
 {
     [Serializable]
 
@@ -146,13 +146,4 @@ namespace DO
     }
     #endregion
 
-    /// <summary>
-    /// Represents errors during DalApi initialization
-    /// </summary>
-    
-    public class DLConfigException : Exception
-    {
-        public DLConfigException(string message) : base(message) { }
-        public DLConfigException(string message, Exception inner) : base(message, inner) { }
-    }
 }

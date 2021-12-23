@@ -12,23 +12,23 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BLApi;
-using BLApi.BO;
+using IBL;
+using IBL.BO;
 
 namespace PL
 {
     /// <summary>
     /// Interaction logic for DroneListWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DroneListWindow : Window
     {
-        private BLApi.IBL bl;      
-        public MainWindow()
+        private IBL.IBL bl;      
+        public DroneListWindow()
         {
             InitializeComponent();
         }
 
-        public MainWindow(BLApi.IBL _bl)
+        public DroneListWindow(IBL.IBL _bl)
         {
             InitializeComponent();
             bl = _bl;

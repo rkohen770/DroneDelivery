@@ -1,21 +1,25 @@
-﻿using DalApi;
+﻿using DalObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace DO
+
+namespace IDAL
 {
-    public struct Drone
+    namespace DO
     {
-        public int Id { get; set; }
-        public string Model { get; set; }
-        public WeightCategories MaxWeight { get; set; }
-
-
-        public override string ToString()
+        public struct Drone
         {
-            return $"ID: {Id} \nModel: {Model} \nMaxWeight: {MaxWeight} \n";
+            public int Id { get; set; }
+            public string Model { get; set; }
+            public WeightCategories MaxWeight { get; set; }
+           
+
+            public override string ToString()
+            {
+                return $"ID: {Id} \nModel: {Model} \nMaxWeight: {MaxWeight} \n";
+            }
         }
     }
 }
