@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BL;
+using BO;
 using BLApi;
-using BLApi.BO;
 
 namespace PL
 {
@@ -24,13 +22,10 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        private BLApi.IBL bl =BLFactory.GetBL();
-        ObservableCollection<Drone> droneList;
+        private IBL bl = BLFactory.GetBL();
         public MainWindow()
         {
-
             InitializeComponent();
-            droneList = (ObservableCollection<Drone>)bl.GetAllDronesBo() ;
         }
 
         /// <summary>
@@ -40,18 +35,8 @@ namespace PL
         /// <param name="e"></param>
         private void ShowDroneButton_Click(object sender, RoutedEventArgs e)
         {
-            new MainWindow((IBL)this.bl).Show();
+            new DroneListWindow(bl).Show();
         }
 
-        /// <summary>
-        /// A button that opens a window for adding a drone
-        /// </summary>
-        /// <param name="sender">Button type</param>
-        /// <param name="e"></param>
-        private void AddDroneButton_Click(object sender, RoutedEventArgs e)
-        {
-            new AddDroneWindow(bl,this).ShowDialog();
-           
-        }
     }
 }

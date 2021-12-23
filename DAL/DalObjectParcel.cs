@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DalObject;
-using IDAL;
-using IDAL.DO;
+using DalApi;
+using DO;
 
-namespace DalObject
+namespace DalApi
 {
-    public partial class DalObject:IDal
+    sealed partial class DalObject : IDal
     {
         #region ADD
         /// <summary>
@@ -25,15 +24,15 @@ namespace DalObject
         {
             if (!(DataSource.customers.Exists(customer => customer.Id == senderId)))
             {
-                throw new BadCustomerIDException(senderId,"the sender not exists in the list of customers");
+                throw new BadCustomerIDException(senderId, "the sender not exists in the list of customers");
             }
             if (!(DataSource.customers.Exists(customer => customer.Id == targetId)))
             {
-                throw new BadCustomerIDException(targetId,"the target not exists in the list of customers");
+                throw new BadCustomerIDException(targetId, "the target not exists in the list of customers");
             }
             else
             {
-                Parcel p = new Parcel
+                Parcel parcel = new Parcel
                 {
                     Id = DataSource.Config.OrdinalParcelNumber++,
                     SenderId = senderId,
@@ -43,8 +42,8 @@ namespace DalObject
                     Requested = DateTime.Now,
                     DroneId = droneId
                 };
-                DataSource.parcels.Add(p);//Adding the new parcel to the array
-                return p.Id;
+                DataSource.parcels.Add(parcel);//Adding the new parcel to the array
+                return parcel.Id;
             }
         }
         #endregion
@@ -58,11 +57,11 @@ namespace DalObject
         {
             if (!DataSource.parcels.Exists(parcel => parcel.Id == parcelId))
             {
-                throw new BadParcelIDException(parcelId,"the percel not exists in the list of parcels");
+                throw new BadParcelIDException(parcelId, "the percel not exists in the list of parcels");
             }
             if (!DataSource.drones.Exists(drone => drone.Id == droneId))
             {
-                throw new BadDroneIDException(droneId,"the drone not exists in the list of drones");
+                throw new BadDroneIDException(droneId, "the drone not exists in the list of drones");
             }
             else
             {
@@ -88,7 +87,7 @@ namespace DalObject
         {
             if (!DataSource.parcels.Exists(parcel => parcel.Id == parcelId))
             {
-                throw new BadParcelIDException(parcelId,"the percel not exists in the list of parcels");
+                throw new BadParcelIDException(parcelId, "the percel not exists in the list of parcels");
             }
             for (int i = 0; i < DataSource.parcels.Count; i++)
             {
@@ -101,7 +100,7 @@ namespace DalObject
                 }
             }
         }
-        
+
 
         /// <summary>
         /// Delivery package to customer
@@ -111,7 +110,7 @@ namespace DalObject
         {
             if (!DataSource.parcels.Exists(parcel => parcel.Id == parcelId))
             {
-                throw new BadParcelIDException(parcelId,"the percel not exists in the list of parcels");
+                throw new BadParcelIDException(parcelId, "the percel not exists in the list of parcels");
             }
             for (int i = 0; i < DataSource.parcels.Count; i++)
             {
@@ -136,7 +135,7 @@ namespace DalObject
         {
             if (!DataSource.parcels.Exists(parcel => parcel.Id == parcelId))
             {
-                throw new BadParcelIDException(parcelId,"the parcel not exists in the list of parcels");
+                throw new BadParcelIDException(parcelId, "the parcel not exists in the list of parcels");
             }
             //find the place of the parcel in the array of parcels
             return DataSource.parcels.Find(p => p.Id == parcelId);
@@ -150,7 +149,7 @@ namespace DalObject
         /// <returns>list of parcels</returns>
         public IEnumerable<Parcel> GetAllParcels()
         {
-            return DataSource.parcels;
+            return (IEnumerable<Parcel>)DataSource.parcels;
         }
 
         /// <summary>

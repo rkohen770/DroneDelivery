@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IBL.BO
+namespace BO
 {
     public class Location
     {
@@ -9,7 +9,7 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return this.ToStringProperty()+"\n";
+            return this.ToStringProperty() + "\n";
         }
     }
 }

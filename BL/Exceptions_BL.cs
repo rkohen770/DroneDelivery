@@ -4,10 +4,10 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using IBL;
+using BLApi;
 
-namespace IBL.BO
-{ 
+namespace BO
+{
     [Serializable]
     #region Base Station Exception
     public class BadBaseStationIDException : Exception

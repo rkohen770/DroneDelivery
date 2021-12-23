@@ -1,11 +1,11 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL;
 
-namespace IBL
+namespace BLApi
 {
     /// <summary>
     /// Implement the design pattern of a factory

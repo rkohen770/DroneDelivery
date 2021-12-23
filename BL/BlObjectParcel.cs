@@ -1,13 +1,13 @@
-﻿using IBL.BO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL.DO;
+using BO;
+using DO;
 namespace BL
 {
-    public partial class BlObject : IBL.IBL
+    public partial class BlObject : BLApi.IBL
     {
         #region ADD
         /// <summary>
@@ -17,22 +17,22 @@ namespace BL
         /// <param name="targetId">Customer ID card</param>
         /// <param name="weight">Parcel weight</param>
         /// <param name="priority">Priority(Normal, Fast, Emergency)</param>
-        public int AddParcelBo(int senderId, int targetId, IBL.BO.WeightCategories weight, IBL.BO.Priorities priority)
+        public int AddParcelBo(int senderId, int targetId, BO.WeightCategories weight, BO.Priorities priority)
         {
             try
             {
                 //Add parcel in DAL to data source and get the parcel id that was created.
-                int parcelId = dal.AddParcel(senderId, targetId, (IDAL.DO.WeightCategories)weight, (IDAL.DO.Priorities)priority);
+                int parcelId = dal.AddParcel(senderId, targetId, (DO.WeightCategories)weight, (DO.Priorities)priority);
 
                 //Find a customer sending
-                IDAL.DO.Customer customerS = dal.GetCustomer(senderId);
+                DO.Customer customerS = dal.GetCustomer(senderId);
                 CustomerInParcel sender = new CustomerInParcel() { CustomerId = customerS.Id, CustomerName = customerS.Name };
                 //Find a receiving customer
-                IDAL.DO.Customer customerT = dal.GetCustomer(targetId);
+                DO.Customer customerT = dal.GetCustomer(targetId);
                 CustomerInParcel target = new CustomerInParcel() { CustomerId = customerT.Id, CustomerName = customerT.Name };
 
                 //add per fields in BL.
-                IBL.BO.Parcel parcel = new IBL.BO.Parcel()
+                BO.Parcel parcel = new BO.Parcel()
                 {
                     ParcelId = parcelId,
                     SenderOfParcel = sender,
@@ -47,13 +47,13 @@ namespace BL
                 };
                 return parcelId;
             }
-            catch (IDAL.DO.ParcelAlreadyExistException e)
+            catch (DO.ParcelAlreadyExistException e)
             {
-                throw new IBL.BO.ParcelAlreadyExistException(e.ID, e.Message, e.InnerException);
+                throw new BO.ParcelAlreadyExistException(e.ID, e.Message, e.InnerException);
             }
-            catch (IDAL.DO.BadCustomerIDException e)
+            catch (DO.BadCustomerIDException e)
             {
-                throw new IBL.BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
+                throw new BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
             }
         }
         #endregion
@@ -68,26 +68,26 @@ namespace BL
         {
             try
             {
-                IDAL.DO.Drone drone = dal.GetDrone(droneId);
+                DO.Drone drone = dal.GetDrone(droneId);
                 if (droneForLists.Exists(d => d.DroneId == droneId && d.DroneStatus == DroneStatus.Available))
                 {
                     DroneForList dr = droneForLists.Find(d => d.DroneId == droneId);
 
-                    List<IDAL.DO.Parcel> parcels = dal.GetAllParcels().Where(p => p.DroneId == 0).ToList();
+                    List<DO.Parcel> parcels = dal.GetAllParcels().Where(p => p.DroneId == 0).ToList();
                     // list parcels ordered by priority and weight
-                    List<IDAL.DO.Parcel> orderedParcels = (from parcel in parcels
-                                                           orderby parcel.priority descending,
-                                                           parcel.Weight ascending,
-                                                           getDistanceBetweenTwoPoints(dr.CurrentLocation.Lattitude, dr.CurrentLocation.Longitude, dal.GetCustomer(parcel.SenderId).Lattitude, dal.GetCustomer(parcel.SenderId).Longitude)
-                                                           where parcel.Weight <= drone.MaxWeight
-                                                           select parcel).ToList();
+                    List<DO.Parcel> orderedParcels = (from parcel in parcels
+                                                      orderby parcel.priority descending,
+                                                      parcel.Weight ascending,
+                                                      getDistanceBetweenTwoPoints(dr.CurrentLocation.Lattitude, dr.CurrentLocation.Longitude, dal.GetCustomer(parcel.SenderId).Lattitude, dal.GetCustomer(parcel.SenderId).Longitude)
+                                                      where parcel.Weight <= drone.MaxWeight
+                                                      select parcel).ToList();
 
                     // choose the first parcel from the list of parcels
-                    //************ IDAL.DO.Parcel theParcel = orderedParcels.FirstOrDefault();
+                    //************ DO.Parcel theParcel = orderedParcels.FirstOrDefault();
                     foreach (var theParcel in orderedParcels)
                     {
                         // finds the customer's location
-                        IDAL.DO.Customer customer = dal.GetCustomer(theParcel.SenderId);
+                        DO.Customer customer = dal.GetCustomer(theParcel.SenderId);
                         double distanceForBattery = getDistanceBetweenTwoPoints(dr.CurrentLocation.Lattitude, dr.CurrentLocation.Longitude, customer.Lattitude, customer.Longitude) * dal.PowerConsumptionRequest()[0] +
                             dal.GetDistanceBetweenLocationsOfParcels(theParcel.SenderId, theParcel.TargetId) * dal.PowerConsumptionRequest()[(int)theParcel.Weight + 1] +
                             dal.GetDistanceBetweenLocationAndClosestBaseStation(theParcel.TargetId) + dal.PowerConsumptionRequest()[0];
@@ -111,20 +111,20 @@ namespace BL
                 }
                 else
                 {
-                    throw new IBL.BO.BadDroneIDException(droneId, "A drone is not available to associate a drone package");
+                    throw new BO.BadDroneIDException(droneId, "A drone is not available to associate a drone package");
                 }
             }
-            catch (IDAL.DO.BadParcelIDException e)
+            catch (DO.BadParcelIDException e)
             {
-                throw new IBL.BO.BadParcelIDException(e.ID, e.Message, e.InnerException);
+                throw new BO.BadParcelIDException(e.ID, e.Message, e.InnerException);
             }
-            catch (IDAL.DO.BadDroneIDException e)
+            catch (DO.BadDroneIDException e)
             {
-                throw new IBL.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
-            catch (IDAL.DO.BadCustomerIDException e)
+            catch (DO.BadCustomerIDException e)
             {
-                throw new IBL.BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
+                throw new BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
             }
         }
 
@@ -155,8 +155,8 @@ namespace BL
                     else
                     {
                         //update in BL
-                        IDAL.DO.Customer customer = dal.GetCustomer(parcel.SenderId);//finds the sender 
-                                                                                     //calculate the distance frome the current location of the drone- to the customer
+                        DO.Customer customer = dal.GetCustomer(parcel.SenderId);//finds the sender 
+                                                                                //calculate the distance frome the current location of the drone- to the customer
                         double distance = getDistanceBetweenTwoPoints(drone_l.CurrentLocation.Lattitude, drone_l.CurrentLocation.Longitude, customer.Lattitude, customer.Longitude);
                         // update the location of the drone to where the senderk
                         drone_l.CurrentLocation = new Location { Lattitude = customer.Lattitude, Longitude = customer.Longitude };
@@ -169,17 +169,17 @@ namespace BL
                     }
                 }
             }
-            catch (IDAL.DO.BadParcelIDException e)
+            catch (DO.BadParcelIDException e)
             {
-                throw new IBL.BO.BadParcelIDException(e.ID, e.Message, e.InnerException);
+                throw new BO.BadParcelIDException(e.ID, e.Message, e.InnerException);
             }
-            catch (IDAL.DO.BadDroneIDException e)
+            catch (DO.BadDroneIDException e)
             {
-                throw new IBL.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
-            catch (IDAL.DO.BadCustomerIDException e)
+            catch (DO.BadCustomerIDException e)
             {
-                throw new IBL.BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
+                throw new BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
             }
         }
 
@@ -212,8 +212,8 @@ namespace BL
                     else
                     {
                         //update in BL
-                        IDAL.DO.Customer customer = dal.GetCustomer(parcel.TargetId);//finds the sender 
-                                                                                     //calculate the distance frome the current location of the drone- to the customer
+                        DO.Customer customer = dal.GetCustomer(parcel.TargetId);//finds the sender 
+                                                                                //calculate the distance frome the current location of the drone- to the customer
                         double distance = dal.GetDistanceBetweenLocationsOfParcels(parcel.SenderId, parcel.TargetId);
                         // update the location of the drone to where the senderk
                         drone_l.CurrentLocation = new Location { Lattitude = customer.Lattitude, Longitude = customer.Longitude };
@@ -227,17 +227,17 @@ namespace BL
                     }
                 }
             }
-            catch (IDAL.DO.BadParcelIDException e)
+            catch (DO.BadParcelIDException e)
             {
-                throw new IBL.BO.BadParcelIDException(e.ID, e.Message, e.InnerException);
+                throw new BO.BadParcelIDException(e.ID, e.Message, e.InnerException);
             }
-            catch (IDAL.DO.BadDroneIDException e)
+            catch (DO.BadDroneIDException e)
             {
-                throw new IBL.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
-            catch (IDAL.DO.BadCustomerIDException e)
+            catch (DO.BadCustomerIDException e)
             {
-                throw new IBL.BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
+                throw new BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
             }
         }
         #endregion
@@ -248,20 +248,20 @@ namespace BL
         /// </summary>
         /// <param name="parcelId">parcel id</param>
         /// <returns>parcel</returns>
-        public IBL.BO.Parcel GetParcel(int parcelId)
+        public BO.Parcel GetParcel(int parcelId)
         {
             try
             {
                 var parcel = dal.GetParcel(parcelId);
                 var sender = GetCustomer(parcel.SenderId);
                 var target = GetCustomer(parcel.TargetId);
-                IBL.BO.Parcel parcel_BO = new IBL.BO.Parcel()
+                BO.Parcel parcel_BO = new BO.Parcel()
                 {
                     ParcelId = parcelId,
                     SenderOfParcel = new() { CustomerId = sender.CustomerId, CustomerName = sender.NameOfCustomer },
                     TargetToParcel = new() { CustomerId = target.CustomerId, CustomerName = target.NameOfCustomer },
-                    Weight = (IBL.BO.WeightCategories)parcel.Weight,
-                    Priorities = (IBL.BO.Priorities)parcel.priority,
+                    Weight = (BO.WeightCategories)parcel.Weight,
+                    Priorities = (BO.Priorities)parcel.priority,
                     Requested = parcel.Requested,
                     Scheduled = parcel.Scheduled,
                     PickedUp = parcel.PickedUp,
@@ -278,17 +278,17 @@ namespace BL
                 }
                 return parcel_BO;
             }
-            catch (IDAL.DO.BadParcelIDException e)
+            catch (DO.BadParcelIDException e)
             {
-                throw new IBL.BO.BadParcelIDException(e.ID, e.Message, e.InnerException);
+                throw new BO.BadParcelIDException(e.ID, e.Message, e.InnerException);
             }
-            catch (IDAL.DO.BadCustomerIDException e)
+            catch (DO.BadCustomerIDException e)
             {
-                throw new IBL.BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
+                throw new BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
             }
-            catch (IDAL.DO.BadDroneIDException e)
+            catch (DO.BadDroneIDException e)
             {
-                throw new IBL.BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
         }
         #endregion
@@ -310,9 +310,9 @@ namespace BL
                 }
                 return ParcelForList;
             }
-            catch (IDAL.DO.BadParcelIDException e)
+            catch (DO.BadParcelIDException e)
             {
-                throw new IBL.BO.BadParcelIDException(e.ID, e.Message, e.InnerException);
+                throw new BO.BadParcelIDException(e.ID, e.Message, e.InnerException);
             }
         }
 
@@ -323,7 +323,7 @@ namespace BL
         public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithDrone()
         {
             List<ParcelForList> list = new();
-            foreach (var parcel in dal.GetAllParcelsWithoutSpecialDron(x=> x.Id > 0 &&  x.DroneId == 0))
+            foreach (var parcel in dal.GetAllParcelsWithoutSpecialDron(x => x.Id > 0 && x.DroneId == 0))
             {
                 ParcelForList parcelForList = clonParcel(GetParcel(parcel.Id));
                 list.Add(parcelForList);
@@ -336,7 +336,7 @@ namespace BL
         /// Converts from object parcel to object parcel for list
         /// </summary>
         /// <param name="parcel">parcel</param>
-        private ParcelForList clonParcel(IBL.BO.Parcel parcel)
+        private ParcelForList clonParcel(BO.Parcel parcel)
         {
             return new()
             {
@@ -346,13 +346,12 @@ namespace BL
                 Weight = parcel.Weight,
                 Priorities = parcel.Priorities,
                 //find the status of parcel.
-                ParcelStatus = (parcel.ParcelDelivery != null) ? IBL.BO.ParcelStatus.Provided :
-                    (parcel.PickedUp != null) ? IBL.BO.ParcelStatus.WasCollected :
-                    (parcel.Scheduled != null) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined
+                ParcelStatus = (parcel.ParcelDelivery != null) ? BO.ParcelStatus.Provided :
+                    (parcel.PickedUp != null) ? BO.ParcelStatus.WasCollected :
+                    (parcel.Scheduled != null) ? BO.ParcelStatus.Associated : BO.ParcelStatus.Defined
             };
         }
 
 
     }
 }
-

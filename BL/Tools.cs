@@ -6,18 +6,18 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL.BO
+namespace BO
 {
     static class Tools
     {
-        public static string ToStringProperty<T>(this T t,string suffix = "")
+        public static string ToStringProperty<T>(this T t, string suffix = "")
         {
             string str = "";
-            foreach (PropertyInfo  prop in t.GetType().GetProperties())
+            foreach (PropertyInfo prop in t.GetType().GetProperties())
             {
                 var value = prop.GetValue(t, null);
                 if (value is string)
-                    str += "\t" + suffix + prop.Name + ": " + value; 
+                    str += "\t" + suffix + prop.Name + ": " + value;
                 else if (value is IEnumerable)
                 {
                     foreach (var item in (IEnumerable)value)

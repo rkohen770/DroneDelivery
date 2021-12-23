@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL;
-using IDAL.DO;
+using DalApi;
+using DO;
 
-namespace DalObject
+namespace DalApi
 {
-    public partial class DalObject : IDal
+    sealed partial class DalObject : IDal
     {
         #region ADD
         /// <summary>
@@ -27,7 +27,7 @@ namespace DalObject
             }
             else
             {
-                Station s = new Station
+                Station station = new Station
                 {
                     Id = id,
                     Name = name,
@@ -35,7 +35,7 @@ namespace DalObject
                     Lattitude = lattitude,
                     ChargeSlots = chargeSlots
                 };
-                DataSource.stations.Add(s);//Adding the new station to the array;
+                DataSource.stations.Add(station);//Adding the new station to the array;
             }
         }
         #endregion
@@ -138,25 +138,25 @@ namespace DalObject
             Station station = new();
             if (!flag)
             {
-                foreach (var s in DataSource.stations)
+                foreach (var stations in DataSource.stations)
                 {
-                    double dictance = Math.Sqrt(Math.Pow(s.Lattitude - senderLattitude, 2) + Math.Pow(s.Longitude - senderLongitude, 2));
+                    double dictance = Math.Sqrt(Math.Pow(stations.Lattitude - senderLattitude, 2) + Math.Pow(stations.Longitude - senderLongitude, 2));
                     if (minDistance > dictance)
                     {
                         minDistance = dictance;
-                        station = s;
+                        station = stations;
                     }
                 }
             }
             else
             {
-                foreach (var s in DataSource.stations.Where(s => s.ChargeSlots > 0))
+                foreach (var stations in DataSource.stations.Where(s => s.ChargeSlots > 0))
                 {
-                    double dictance = Math.Sqrt(Math.Pow(s.Lattitude - senderLattitude, 2) + Math.Pow(s.Longitude - senderLongitude, 2));
+                    double dictance = Math.Sqrt(Math.Pow(stations.Lattitude - senderLattitude, 2) + Math.Pow(stations.Longitude - senderLongitude, 2));
                     if (minDistance > dictance)
                     {
                         minDistance = dictance;
-                        station = s;
+                        station = stations;
                     }
                 }
             }

@@ -12,8 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using IBL;
-using IBL.BO;
+using BO;
 
 namespace PL
 {
@@ -22,13 +21,13 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
-        private IBL.IBL bl;      
+        private BLApi.IBL bl;
         public DroneListWindow()
         {
             InitializeComponent();
         }
 
-        public DroneListWindow(IBL.IBL _bl)
+        public DroneListWindow(BLApi.IBL _bl)
         {
             InitializeComponent();
             bl = _bl;
@@ -58,7 +57,7 @@ namespace PL
         /// <param name="e"></param>
         private void AddDroneButton_Click(object sender, RoutedEventArgs e)
         {
-            new AddDroneWindow(bl,this).ShowDialog();
+            new AddDroneWindow(bl, this).ShowDialog();
             DronesListView.DataContext = bl.GetAllDronesBo();
             DronesListView.Items.Refresh();
         }
@@ -81,7 +80,7 @@ namespace PL
         private void ShowDronesButtom_Click(object sender, MouseButtonEventArgs e)
         {
             DroneForList drone = (DroneForList)((ListView)sender).SelectedItem;
-            new AddDroneWindow( bl, drone,this).Show();
+            new AddDroneWindow(bl, drone, this).Show();
             DronesListView.DataContext = bl.GetAllDronesBo();
             DronesListView.Items.Refresh();
         }

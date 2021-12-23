@@ -1,12 +1,12 @@
 ﻿using System;
-using IBL.BO;
+using BO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL.DO;
+using DO;
 
-namespace IBL
+namespace BLApi
 {
     public interface IBL
     {
@@ -90,7 +90,7 @@ namespace IBL
         /// </summary>
         /// <param name="id">ID drone</param>
         public void UpdateAssignParcelToDrone(int id);
-        
+
         /// <summary>
         /// Collection of a package by drone
         /// </summary>
@@ -165,7 +165,7 @@ namespace IBL
         /// Get all parcels not yet associated with the drone
         /// </summary>
         /// <returns>List with all parcels not yet associated with the glider</returns>
-         IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithDrone();
+        IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithDrone();
 
         /// <summary>
         /// Getlist with all base station with availible charging
@@ -173,7 +173,7 @@ namespace IBL
         /// <returns>List with all base station with availible charging</returns>
         public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging(Predicate<Station> p);
 
-        public IEnumerable<CustomerForList> GetAllCustomerByPredicate(Predicate<IDAL.DO.Customer> p);
+        public IEnumerable<CustomerForList> GetAllCustomerByPredicate(Predicate<DO.Customer> p);
 
         public IEnumerable<DroneForList> GetDronesByPredicat(Predicate<DroneForList> p);
 

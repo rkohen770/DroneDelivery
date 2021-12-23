@@ -1,8 +1,8 @@
-﻿using IDAL.DO;
+﻿using DO;
 using System;
 using System.Collections.Generic;
 
-namespace DalObject
+namespace DalApi
 {
     class DataSource
     {
@@ -20,7 +20,7 @@ namespace DalObject
             public static double vacant = 0.01;
             public static double CarriesLightWeight = 0.015;
             public static double CarriesMediumWeight = 0.018;
-            public static double CarriesHeavyWeight=0.02;
+            public static double CarriesHeavyWeight = 0.02;
             public static double DroneChargingRate = 0.003;
         }
 
@@ -58,14 +58,14 @@ namespace DalObject
                     Id = 7486,
                     Model = "EG-574",
                     MaxWeight = WeightCategories.Intermediate
-                    
+
                 },
                 new Drone
                 {
                     Id = 7686,
                     Model = "EG-574",
                     MaxWeight = WeightCategories.Easy
-                   
+
                 },
                 new Drone
                 {
@@ -93,7 +93,7 @@ namespace DalObject
             #endregion
 
             #region customer
-            customers = new List<Customer> 
+            customers = new List<Customer>
             {
                 new Customer
                 {
@@ -193,7 +193,7 @@ namespace DalObject
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                   Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
                 }
-                
+
             };
             #endregion
 
@@ -224,7 +224,7 @@ namespace DalObject
                    Requested = new DateTime(2021, 8, 25, 7, 11, 26),
                    DroneId = 7486,
                    Scheduled = new DateTime(2021, 8, 25, 8, 30, 11),
-                   
+
                 },
 
                 new Parcel
