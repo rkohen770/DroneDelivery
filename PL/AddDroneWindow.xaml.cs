@@ -1,5 +1,5 @@
-﻿using BLApi;
-using BLApi.BO;
+﻿using IBL;
+using IBL.BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +22,12 @@ namespace PL
     /// </summary>
     public partial class AddDroneWindow : Window
     {
-        private BLApi.IBL bl = BLFactory.GetBL();
+        private IBL.IBL bl = BLFactory.GetBL();
         public DroneForList drone { get; set; }
-        private DroneListWindow droneListWindow;
+        private MainWindow mainWindow;
+        public bool isAdd;
+        public bool isUpdate;
+
     
         public AddDroneWindow ()
         {
@@ -32,12 +35,13 @@ namespace PL
             InitializeComponent();
         }
      
-        public AddDroneWindow(BLApi.IBL bl,DroneListWindow droneListWindow)
+        public AddDroneWindow(IBL.IBL bl,DroneListWindow droneListWindow)
         {
             InitializeComponent();
             this.bl = bl;
-            this.droneListWindow = droneListWindow;
-
+            this.mainWindow = mainWindow;
+            isAdd = true;
+            isUpdate = false;
             SaveClick.Visibility = Visibility.Visible;
             Update.Visibility = Visibility.Hidden;
             status.Visibility = Visibility.Hidden;
@@ -53,12 +57,15 @@ namespace PL
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
 
         }
-        public AddDroneWindow(BLApi.IBL bl, DroneForList drone, DroneListWindow droneListWindow)
+        public AddDroneWindow(IBL.IBL bl, DroneForList drone, DroneListWindow droneListWindow)
         {
             InitializeComponent();
             this.bl = bl;
             this.drone = drone;
-            this.droneListWindow = droneListWindow;
+            this.mainWindow = mainWindow;
+            isUpdate = true;
+            isAdd = false;
+            //DroneGrid.DataContext = drone;
             SaveClick.Visibility = Visibility.Hidden;
             Update.Visibility = Visibility.Visible;
             Sending.Visibility = Visibility.Visible;
@@ -136,7 +143,7 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
-            droneListWindow.DronesListView.Items.Refresh();
+            mainWindow.DronesListView.Items.Refresh();
             Close();
         }
 
@@ -161,8 +168,8 @@ namespace PL
             {
                 bl.UpdateNameOfDrone(int.Parse(ID.Text), Model.Text);
                 MessageBox.Show("Update a drone was completed successfully");
-                droneListWindow.DronesListView.DataContext = bl.GetAllDronesBo();
-                droneListWindow.DronesListView.Items.Refresh();
+                mainWindow.DronesListView.DataContext = bl.GetAllDronesBo();
+                mainWindow.DronesListView.Items.Refresh();
             }
             catch(BadDroneIDException ex)
             {
@@ -175,7 +182,7 @@ namespace PL
             {
                 bl.SendingDroneForCharging(int.Parse(ID.Text));
                 MessageBox.Show("Sending the drone for charging was completed successfully");
-                droneListWindow.DronesListView.Items.Refresh();
+                mainWindow.DronesListView.Items.Refresh();
             }
             catch (StatusDroneNotAllowException ex)
             {
@@ -201,7 +208,7 @@ namespace PL
             {
                 bl.UpdateReleaseDroneFromCharging(int.Parse(ID.Text), new TimeSpan(1, 0, 0));
                 MessageBox.Show("Release the drone from charging was completed successfully");
-                droneListWindow.DronesListView.Items.Refresh();
+                mainWindow.DronesListView.Items.Refresh();
             }
             catch (StatusDroneNotAllowException ex)
             {
@@ -226,7 +233,7 @@ namespace PL
             {
                 bl.UpdateAssignParcelToDrone(int.Parse(ID.Text));
                 MessageBox.Show("Sending the drone for delivery was completed successfully");
-                droneListWindow.DronesListView.Items.Refresh();
+                mainWindow.DronesListView.Items.Refresh();
             }
             catch (BatteryOfDroneNotAllowException ex)
             {
@@ -243,7 +250,7 @@ namespace PL
             {
                 bl.UpdateCollectionParcelByDrone(int.Parse(ID.Text));
                 MessageBox.Show("Collection parcel by drone was completed successfully");
-                droneListWindow.DronesListView.Items.Refresh();
+                mainWindow.DronesListView.Items.Refresh();
             }
             catch (BadParcelIDException ex)
             {
@@ -269,7 +276,7 @@ namespace PL
             {
                 bl.UpdateDeliveryParcelByDrone(int.Parse(ID.Text));
                 MessageBox.Show("Delivery parcel by drone was completed successfully");
-                droneListWindow.DronesListView.Items.Refresh();
+                mainWindow.DronesListView.Items.Refresh();
             }
             catch (BadParcelIDException ex)
             {

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DalApi.DO;
-using DO;
+using IDAL.DO;
 
-namespace DalApi
+namespace IDAL
 {
     public interface IDal
     {

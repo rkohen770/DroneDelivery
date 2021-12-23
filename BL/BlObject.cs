@@ -3,27 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BLApi.BO;
-using DalApi;
-using DO;
+using IBL.BO;
+using IDAL;
+using IDAL.DO;
 namespace BL
 {
-    public sealed partial class BlObject : BLApi.IBL
+    public partial class BlObject : IBL.IBL
     {
-        static readonly Lazy<BlObject> lazy = new Lazy<BlObject>(() => new());
-
-        public static BlObject Instance { get { return lazy.Value; } }
-
         static Random random = new Random();
 
         List<DroneForList> droneForLists = new List<DroneForList>();
 
-        internal static IDal dal = DalFactory.GetDal("dalObject");
+        internal static IDAL.IDal dal = new DalObject.DalObject();
 
         public BlObject()
         {
             double[] power = dal.PowerConsumptionRequest();
-            List<DO.Drone> drones = dal.GetAllDrones().ToList();
+            List<IDAL.DO.Drone> drones = dal.GetAllDrones().ToList();
 
             initializeListOfDrone(drones);
 
@@ -32,10 +28,10 @@ namespace BL
         /// List boot function of "drones to list "
         /// </summary>
         /// <param name="drones">list of DO of drones</param>
-        private void initializeListOfDrone(List<DO.Drone> drones)
+        private void initializeListOfDrone(List<IDAL.DO.Drone> drones)
         {
             //find A package that has not yet been delivered but the drone has already been associated
-            List<DO.Parcel> parcelsList = dal.GetAllParcels().ToList();
+            List<IDAL.DO.Parcel> parcelsList = dal.GetAllParcels().ToList();
             DroneForList drone_BL;
 
             foreach (var drone_DL in drones)
@@ -44,7 +40,7 @@ namespace BL
                 {
                     DroneId = drone_DL.Id,
                     DroneModel = drone_DL.Model,
-                    MaxWeight = (BLApi.BO.WeightCategories)drone_DL.MaxWeight
+                    MaxWeight = (IBL.BO.WeightCategories)drone_DL.MaxWeight
                 };
                 //If there is a package that has not yet been delivered but the drone has already been associated
                 var parcel = parcelsList.Find(p => p.DroneId == drone_BL.DroneId && p.Delivered == null);
@@ -85,13 +81,13 @@ namespace BL
                             + dal.GetDistanceBetweenLocationAndClosestBaseStation(parcel.TargetId);
                         switch (parcel.Weight)
                         {
-                            case DO.WeightCategories.Easy:
+                            case IDAL.DO.WeightCategories.Easy:
                                 minValueBattery = drone_BL.DroneBattery- distance * dal.PowerConsumptionRequest()[1] + 1;
                                 break;
-                            case DO.WeightCategories.Intermediate:
+                            case IDAL.DO.WeightCategories.Intermediate:
                                 minValueBattery = drone_BL.DroneBattery - distance * dal.PowerConsumptionRequest()[2] + 1;
                                 break;
-                            case DO.WeightCategories.Liver:
+                            case IDAL.DO.WeightCategories.Liver:
                                 minValueBattery = drone_BL.DroneBattery - distance * dal.PowerConsumptionRequest()[3] + 1;
                                 break;
                             default:
@@ -118,7 +114,7 @@ namespace BL
                     else if (drone_BL.DroneStatus == DroneStatus.Available)
                     {
                         //Its location will be raffled off among customers who have packages provided to them
-                        List<DO.Parcel> parcelsDelivered = parcelsList.FindAll(p => p.Delivered != null);
+                        List<IDAL.DO.Parcel> parcelsDelivered = parcelsList.FindAll(p => p.Delivered != null);
                         int index = random.Next(0, parcelsDelivered.Count());
                         drone_BL.CurrentLocation = new()
                         {
