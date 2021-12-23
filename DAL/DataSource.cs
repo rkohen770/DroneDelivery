@@ -1,9 +1,8 @@
-﻿using DalApi.DO;
-using DO;
+﻿using IDAL.DO;
 using System;
 using System.Collections.Generic;
 
-namespace DalApi
+namespace DalObject
 {
     class DataSource
     {

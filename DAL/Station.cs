@@ -4,20 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DO
+namespace IDAL
 {
-    public struct Station
+    namespace DO
     {
-        public int Id { get; set; }
-        public int Name { get; set; }
-        public double Longitude { get; set; }
-        public double Lattitude { get; set; }
-        public int ChargeSlots { get; set; }
-
-        public override string ToString()
+        public struct Station
         {
-            return $"ID: {Id} \nName: {Name} \nLongitude: {Longitude} \n" +
-                $"Lattitude: {Lattitude} \nChargeSlots: {ChargeSlots}\n";
+            public int Id { get; set; }
+            public int Name { get; set; }
+            public double Longitude { get; set; }
+            public double Lattitude { get; set; }
+            public int ChargeSlots { get; set; }
+
+            public override string ToString()
+            {
+                return $"ID: {Id} \nName: {Name} \nLongitude: {Longitude} \n" + 
+                    $"Lattitude: {Lattitude} \nChargeSlots: {ChargeSlots}\n";
+            }
         }
+
+
     }
 }

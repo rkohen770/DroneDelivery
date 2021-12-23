@@ -1,15 +1,15 @@
-﻿using BLApi.BO;
+﻿using IBL.BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DalApi;
-using DO;
+using IDAL;
+using IDAL.DO;
 
 namespace BL
 {
-    public partial class BlObject : BLApi.IBL
+    public partial class BlObject : IBL.IBL
     {
 
         #region ADD
@@ -25,7 +25,7 @@ namespace BL
             try
             {
                 //add customer fields in BL.
-                BLApi.BO.Customer customer = new BLApi.BO.Customer()
+                IBL.BO.Customer customer = new IBL.BO.Customer()
                 {
                     CustomerId = id,
                     NameOfCustomer = name,
@@ -36,9 +36,9 @@ namespace BL
                 //Add customer in DAL to data source.
                 dal.AddCustomer(id, name, phone, location.Longitude, location.Lattitude);
             }
-            catch (DO.CustomerAlreadyExistException e)
+            catch (IDAL.DO.CustomerAlreadyExistException e)
             {
-                throw new BLApi.BO.CustomerAlreadyExistException(e.ID,e.Name, e.Message,e.InnerException);
+                throw new IBL.BO.CustomerAlreadyExistException(e.ID,e.Name, e.Message,e.InnerException);
             }
         }
         #endregion
@@ -59,7 +59,7 @@ namespace BL
                     throw new Exception("No details were entered for change at the customer entity");
                 }
                 //update in BL
-                DO.Customer customer = dal.GetCustomer(id);
+                IDAL.DO.Customer customer = dal.GetCustomer(id);
                 if (newName != "")
                 {
                     if (newPhone != "")
@@ -76,9 +76,9 @@ namespace BL
                     dal.UpdateCustomerPhone(id, newPhone);
                 }
             }
-            catch (DO.BadCustomerIDException e)
+            catch (IDAL.DO.BadCustomerIDException e)
             {
-                throw new BLApi.BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
+                throw new IBL.BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
             }
 
         }
@@ -90,28 +90,28 @@ namespace BL
         /// </summary>
         /// <param name="customerId">customer id</param>
         /// <returns>customer</returns>
-        public BLApi.BO.Customer GetCustomer(int customerId)
+        public IBL.BO.Customer GetCustomer(int customerId)
         {
             try
             {
-                DO.Customer customer = dal.GetCustomer(customerId);
+                IDAL.DO.Customer customer = dal.GetCustomer(customerId);
 
                 //The list of packages that the customer
-                List<DO.Parcel> parcel_From_Customer = dal.GetAllParcels().
+                List<IDAL.DO.Parcel> parcel_From_Customer = dal.GetAllParcels().
                     Where(p => p.SenderId == customerId).ToList();
 
                 List<ParcelAtCustomer> from_customer = new();
                 foreach (var parcel in parcel_From_Customer)
                 {
                     //find the status of parcel.
-                    var ParcelStatus = (parcel.Delivered != null) ? BLApi.BO.ParcelStatus.Provided :
-                        (parcel.PickedUp != null) ? BLApi.BO.ParcelStatus.WasCollected :
-                        (parcel.Scheduled != null) ? BLApi.BO.ParcelStatus.Associated : BLApi.BO.ParcelStatus.Defined;
+                    var ParcelStatus = (parcel.Delivered != null) ? IBL.BO.ParcelStatus.Provided :
+                        (parcel.PickedUp != null) ? IBL.BO.ParcelStatus.WasCollected :
+                        (parcel.Scheduled != null) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined;
                     ParcelAtCustomer parcelAt = new()
                     {
                         ParcelId = parcel.Id,
-                        Weight = (BLApi.BO.WeightCategories)parcel.Weight,
-                        Priorities = (BLApi.BO.Priorities)parcel.priority,
+                        Weight = (IBL.BO.WeightCategories)parcel.Weight,
+                        Priorities = (IBL.BO.Priorities)parcel.priority,
                         ParcelStatus = ParcelStatus,
                         SourceOrTarget = new()
                         {
@@ -123,20 +123,20 @@ namespace BL
                 };
 
                 //The list of packages that the customer receives
-                List<DO.Parcel> parcel_To_Customer = dal.GetAllParcels().
+                List<IDAL.DO.Parcel> parcel_To_Customer = dal.GetAllParcels().
                     Where(p => p.TargetId == customerId).ToList();
                 List<ParcelAtCustomer> to_customer = new();
                 foreach (var parcel in parcel_To_Customer)
                 {
                     //find the status of parcel.
-                    var ParcelStatus = (parcel.Delivered != null) ? BLApi.BO.ParcelStatus.Provided :
-                        (parcel.PickedUp != null) ? BLApi.BO.ParcelStatus.WasCollected :
-                        (parcel.Scheduled != null) ? BLApi.BO.ParcelStatus.Associated : BLApi.BO.ParcelStatus.Defined;
+                    var ParcelStatus = (parcel.Delivered != null) ? IBL.BO.ParcelStatus.Provided :
+                        (parcel.PickedUp != null) ? IBL.BO.ParcelStatus.WasCollected :
+                        (parcel.Scheduled != null) ? IBL.BO.ParcelStatus.Associated : IBL.BO.ParcelStatus.Defined;
                     ParcelAtCustomer parcelAt = new()
                     {
                         ParcelId = parcel.Id,
-                        Weight = (BLApi.BO.WeightCategories)parcel.Weight,
-                        Priorities = (BLApi.BO.Priorities)parcel.priority,
+                        Weight = (IBL.BO.WeightCategories)parcel.Weight,
+                        Priorities = (IBL.BO.Priorities)parcel.priority,
                         ParcelStatus = ParcelStatus,
                         SourceOrTarget = new()
                         {
@@ -157,9 +157,9 @@ namespace BL
                     ToCustomer = to_customer
                 };
             }
-            catch (DO.BadCustomerIDException e)
+            catch (IDAL.DO.BadCustomerIDException e)
             {
-                throw new BLApi.BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
+                throw new IBL.BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
             }
         }
         #endregion
@@ -181,14 +181,14 @@ namespace BL
                 }
                 return list;
             }
-            catch (DO.BadCustomerIDException e)
+            catch (IDAL.DO.BadCustomerIDException e)
             {
-                throw new BLApi.BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
+                throw new IBL.BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
             }
         }
 
 
-        public IEnumerable<CustomerForList> GetAllCustomerByPredicate(Predicate<DO.Customer> p)
+        public IEnumerable<CustomerForList> GetAllCustomerByPredicate(Predicate<IDAL.DO.Customer> p)
         {
             List<CustomerForList> list = new();
             foreach (var customer in dal.GetAllCustomerByPredicate(p))
@@ -205,7 +205,7 @@ namespace BL
         /// </summary>
         /// <param name="customer">customer</param>
         /// <returns>customer for list</returns>
-        private CustomerForList cloneCustomer(BLApi.BO.Customer customer)
+        private CustomerForList cloneCustomer(IBL.BO.Customer customer)
         {
             return new ()
             {
