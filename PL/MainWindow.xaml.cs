@@ -29,6 +29,19 @@ namespace PL
         }
 
         /// <summary>
+        /// A button that opens a window for adding a drone
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void AddDroneButton_Click(object sender, RoutedEventArgs e)
+        {
+            new AddDroneWindow(bl, this).ShowDialog();
+        }
+
+
+
+
+        /// <summary>
         /// A button that opens a window of the drone details
         /// </summary>
         /// <param name="sender">Button type</param>
