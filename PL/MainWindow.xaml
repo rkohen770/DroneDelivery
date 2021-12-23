@@ -7,8 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="640" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <!--Icon="/images/drone_image.jpeg"-->
-    <Grid Name="MainGrid">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -55,7 +53,7 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                 --><!--buttons--><!--
+                                --><!-- buttons--><!--
 
                                 <GridViewColumn>
                                     <GridViewColumn.CellTemplate>
@@ -111,12 +109,12 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                 --><!--finish button--><!--
+                                --><!-- finish button--><!--
 
                             </GridView>
                         </ListView.View>
 
-                        --><!--<ListView.Resources>
+                        <ListView.Resources>
                             <Style TargetType="{x:Type ListViewItem}">
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
@@ -130,7 +128,7 @@
                                 <Setter Property="Foreground" Value="Black"/>
                             </Style>
 
-                        </ListView.Resources>--><!--
+                        </ListView.Resources>
                     </ListView>-->
                 </Grid>
             </TabItem>
