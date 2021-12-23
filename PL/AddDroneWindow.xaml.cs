@@ -25,34 +25,13 @@ namespace PL
         private BLApi.IBL bl = BLFactory.GetBL();
         public DroneForList drone { get; set; }
         private DroneListWindow droneListWindow;
-        private MainWindow mainWindow;
 
         public AddDroneWindow()
         {
             DialogResult = true;
             InitializeComponent();
         }
-        public AddDroneWindow(BLApi.IBL bl, MainWindow mainWindow)
-        {
-            InitializeComponent();
-            this.bl = bl;
-            this.mainWindow = mainWindow;
 
-            SaveClick.Visibility = Visibility.Visible;
-            Update.Visibility = Visibility.Hidden;
-            status.Visibility = Visibility.Hidden;
-            Status.Visibility = Visibility.Hidden;
-            Battery.Visibility = Visibility.Hidden;
-            battery.Visibility = Visibility.Hidden;
-            WeightSelector.Visibility = Visibility.Visible;
-            MaxWeight.Visibility = Visibility.Hidden;
-            longitude.Visibility = Visibility.Hidden;
-            Longitude.Visibility = Visibility.Hidden;
-            lattitude.Visibility = Visibility.Hidden;
-            Lattitude.Visibility = Visibility.Hidden;
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-
-        }
         public AddDroneWindow(BLApi.IBL bl, DroneListWindow droneListWindow)
         {
             InitializeComponent();
