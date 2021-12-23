@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BLApi.BO
+namespace IBL.BO
 {
     public class Location
     {

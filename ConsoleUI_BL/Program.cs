@@ -1,5 +1,5 @@
 ﻿using System;
-using BLApi.BO;
+using IBL.BO;
 using BL;
 
 namespace ConsoleUI_BL

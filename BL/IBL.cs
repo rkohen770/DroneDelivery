@@ -1,12 +1,12 @@
 ﻿using System;
-using BLApi.BO;
+using IBL.BO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DO;
+using IDAL.DO;
 
-namespace BLApi
+namespace IBL
 {
     public interface IBL
     {
@@ -173,7 +173,7 @@ namespace BLApi
         /// <returns>List with all base station with availible charging</returns>
         public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging(Predicate<Station> p);
 
-        public IEnumerable<CustomerForList> GetAllCustomerByPredicate(Predicate<DO.Customer> p);
+        public IEnumerable<CustomerForList> GetAllCustomerByPredicate(Predicate<IDAL.DO.Customer> p);
 
         public IEnumerable<DroneForList> GetDronesByPredicat(Predicate<DroneForList> p);
 
