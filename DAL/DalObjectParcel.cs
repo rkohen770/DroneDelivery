@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DalApi;
-using DalApi.DO;
-using DO;
+using DalObject;
+using IDAL;
+using IDAL.DO;
 
-namespace DalApi
+namespace DalObject
 {
-    sealed partial class DalObject:IDal
+    public partial class DalObject:IDal
     {
         #region ADD
         /// <summary>
@@ -33,7 +33,7 @@ namespace DalApi
             }
             else
             {
-                Parcel parcel = new Parcel
+                Parcel p = new Parcel
                 {
                     Id = DataSource.Config.OrdinalParcelNumber++,
                     SenderId = senderId,
@@ -43,8 +43,8 @@ namespace DalApi
                     Requested = DateTime.Now,
                     DroneId = droneId
                 };
-                DataSource.parcels.Add(parcel);//Adding the new parcel to the array
-                return parcel.Id;
+                DataSource.parcels.Add(p);//Adding the new parcel to the array
+                return p.Id;
             }
         }
         #endregion
@@ -150,7 +150,7 @@ namespace DalApi
         /// <returns>list of parcels</returns>
         public IEnumerable<Parcel> GetAllParcels()
         {
-            return (IEnumerable<Parcel>)DataSource.parcels;
+            return DataSource.parcels;
         }
 
         /// <summary>
