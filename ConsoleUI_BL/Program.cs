@@ -1,6 +1,6 @@
 ﻿using System;
 using IBL.BO;
-using BL;
+using BO;
 
 namespace ConsoleUI_BL
 {

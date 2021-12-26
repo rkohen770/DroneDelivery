@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BO;
 using DO;
-namespace BL
+namespace BO
 {
     public partial class BlObject : BLApi.IBL
     {

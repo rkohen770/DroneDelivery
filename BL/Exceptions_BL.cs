@@ -9,7 +9,7 @@ using BLApi;
 namespace BO
 {
     [Serializable]
-    #region Base Station Exception
+    #region BaseStationException
     public class BadBaseStationIDException : Exception
     {
         public int Code;
@@ -45,7 +45,7 @@ namespace BO
     }
     #endregion
 
-    #region Drone Exception
+    #region DroneException
     public class BadDroneIDException : Exception
     {
         public int ID;
@@ -136,7 +136,7 @@ namespace BO
     }
     #endregion
 
-    #region Parcel Exception
+    #region ParcelException
     public class BadParcelIDException : Exception
     {
         public int ID;
@@ -161,7 +161,7 @@ namespace BO
     }
     #endregion
 
-    #region Customer Exception
+    #region CustomerException
     public class BadCustomerIDException : Exception
     {
         public int ID;
@@ -197,4 +197,16 @@ namespace BO
         public override string ToString() => base.ToString() + $", The Customer:{Name} \nID: {ID} is already exist in the system ";
     }
     #endregion
+
+    #region UserException
+    [Serializable]
+    public class BadUserNameException : Exception
+    {
+        public string UserName;
+        public BadUserNameException(string message, Exception innerException) :
+            base(message, innerException) => UserName = ((DO.BadUserNameException)innerException).Code;
+        public override string ToString() => base.ToString() + $", bad User name : {UserName}";
+    }
+    #endregion
+
 }

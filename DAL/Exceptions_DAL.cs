@@ -146,6 +146,20 @@ namespace DO
     }
     #endregion
 
+    #region UserException
+    public class BadUserNameException : Exception
+    {
+        public string Code;
+        public BadUserNameException(string userName) : base() => Code = userName;
+        public BadUserNameException(string userName, string message) : base(message) => Code = userName;
+        public BadUserNameException(string userName, string message, Exception innerException) :
+              base(message, innerException) => Code = userName;
+        public override string ToString() => base.ToString() + $", bad User name: {Code}";
+
+
+    }
+    #endregion
+
     /// <summary>
     /// Represents errors during DalApi initialization
     /// </summary>

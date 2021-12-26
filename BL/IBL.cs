@@ -46,6 +46,8 @@ namespace BLApi
         /// <param name="weight">Parcel weight</param>
         /// <param name="priority">Priority(Normal, Fast, Emergency)</param>
         public int AddParcelBo(int senderId, int targetId, BO.WeightCategories weight, BO.Priorities priority);
+
+
         #endregion
 
         #region UPDATE
@@ -180,7 +182,29 @@ namespace BLApi
 
         #endregion
 
+        #region User
+        /// <summary>
+        /// adds a new BO.user instance
+        /// </summary>
+        /// <param name="user"></param>
+        void AddUser(BO.User user);
+        /// <summary>
+        /// updates an exist BO.user instance
+        /// </summary>
+        /// <param name="user"></param>
+        void UpdateUser(BO.User user);
+        /// <summary>
+        /// deletes an exist BO.user instance by the user name
+        /// </summary>
+        /// <param name="userName"></param>
+        void DeleteUser(string userName);
+        /// <summary>
+        /// returns an exist BO.user instance by the user name
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        BO.User GetUser(string userName);
+        #endregion
+
     }
-
-
 }

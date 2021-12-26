@@ -1,0 +1,62 @@
+﻿<Window x:Name="_for" x:Class="PL.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" Title="Login" Height="450" Width="450" ResizeMode="NoResize"
+        TextElement.Foreground="Black"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="White"
+        >
+    <Grid RenderTransformOrigin="0.506,0.216">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="151*"/>
+            <ColumnDefinition Width="42*"/>
+            <ColumnDefinition Width="162*"/>
+            <ColumnDefinition Width="39*"/>
+            <ColumnDefinition Width="56*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Welcome to our Shipping System" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="25" FontWeight="Medium" FontFamily="Times New Roman" Foreground="#4362AC" Margin="40,17,0,0" Height="39" Width="350" Grid.ColumnSpan="4"/>
+        <TabControl Margin="0,49,0,0" Grid.ColumnSpan="5">
+
+            <TabItem Header="log in">
+                <Grid>
+
+                    <TextBox x:Name="userName" HorizontalAlignment="Left" Height="33" Margin="191,70,0,0"  VerticalAlignment="Top" Width="114" MaxLength="10"/>
+                    <PasswordBox x:Name="password" HorizontalAlignment="Left" Height="33" Margin="191,135,0,0" VerticalAlignment="Top" Width="114" MaxLength="6"/>
+                    <Label Content="User name" HorizontalAlignment="Left" Height="38" Margin="63,73,0,0" VerticalAlignment="Top" Width="102" FontWeight="Bold" FontSize="16"/>
+                    <Label Content="Password" HorizontalAlignment="Left" Height="33" Margin="63,137,0,0" VerticalAlignment="Top" Width="102" FontWeight="Bold" FontSize="16"/>
+                    <Button x:Name="enter" Content="Enter" HorizontalAlignment="Left" Height="34" Margin="158,216,0,0" VerticalAlignment="Top" Width="147" Click="Enter_Click" FontSize="16" FontWeight="Bold" Background="#FFD48224"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="sign up">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="14"/>
+                        <ColumnDefinition Width="83*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <PasswordBox x:Name="passwordBox" MaxLength="6" Margin="129,95,148,220" Grid.Column="2"/>
+
+                    <Label Content="User name" HorizontalAlignment="Left" Height="32" Margin="14,40,0,0" VerticalAlignment="Top" Width="96" FontWeight="Bold" FontSize="16" Grid.ColumnSpan="3"/>
+                    <Label Content="Password" Height="33" Margin="9,95,316,0" VerticalAlignment="Top" FontWeight="Bold" Grid.ColumnSpan="2" FontSize="16" Grid.Column="1"/>
+                    <Button x:Name="enter1" Content="Save and Enter" HorizontalAlignment="Left" Height="34" Margin="114,254,0,0" VerticalAlignment="Top" Width="147" Click="SaveEnter_Click" FontWeight="Bold" FontSize="16" Background="#FFD48224" Grid.Column="2"/>
+                    <CheckBox x:Name="checkM" Content="Menager" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top"  FontWeight="Bold" FontSize="16" Margin="0,187,0,0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <PasswordBox x:Name="managerP" Margin="247,181,0,132"  IsEnabled="{Binding ElementName=checkM, Path=IsChecked}" HorizontalAlignment="Left" Height="35"  VerticalAlignment="Top" Width="126" FontSize="16" MaxLength="6" Grid.Column="2"/>
+                    <Label Content="Manager Pin" HorizontalAlignment="Left" Height="32"  Margin="114,181,0,0" VerticalAlignment="Top" Width="108" FontWeight="Bold" FontSize="16" Grid.Column="2"/>
+                    <TextBox x:Name="username1" HorizontalAlignment="Left" Height="37" Margin="129,40,0,0"  VerticalAlignment="Top" Width="132" MaxLength="10" FontSize="16" Grid.Column="2"/>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+
+    </Grid>
+</Window>

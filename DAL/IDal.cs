@@ -241,7 +241,29 @@ namespace DalApi
 
         #endregion
 
-
+        #region User
+        /// <summary>
+        ///  adds a new DO.user instance
+        /// </summary>
+        /// <param name="user"></param>
+        void AddUser(DO.User user);
+        /// <summary>
+        /// updates an exist DO.user instance
+        /// </summary>
+        /// <param name="user"></param>
+        void UpdateUser(DO.User user);
+        /// <summary>
+        /// deletes an exist DO.user instance by the user name
+        /// </summary>
+        /// <param name="userName"></param>
+        void DeleteUser(string userName);
+        /// <summary>
+        ///  returns an exist DO.user instance by the user name
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        DO.User GetUser(string userName);
+        #endregion
         /// <summary>
         /// A method of requesting power consumption by a drone  
         /// </summary>
