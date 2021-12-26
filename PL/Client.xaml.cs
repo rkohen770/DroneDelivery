@@ -21,7 +21,7 @@ namespace PL
     /// </summary>
     public partial class Client : Window
     {
-        public BO.User MyUser { get; set; }
+        public BO.User _user { get; set; }
         public TimeSpan second = new TimeSpan(0, 0, 0, 1);
         Window last = null;
         DispatcherTimer timer;
@@ -30,10 +30,10 @@ namespace PL
             InitializeComponent();
         }
 
-        public Client(BO.User user, Window w = default)
+        public Client(BO.User user, Window win = default)
         {
             InitializeComponent();
-            MyUser = user;
+            this._user = user;
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
@@ -43,7 +43,7 @@ namespace PL
             //lUser.DataContext = MyUser;
             //lDate.Content = DateTime.Now.ToString("dd/MM/yy");
             //cmbStations.SelectedIndex = 0;
-            last = w;
+            last = win;
         }
         /// <summary>
         /// an event that shows the timer
