@@ -23,9 +23,12 @@ namespace PL
     public partial class MainWindow : Window
     {
         private IBL bl = BLFactory.GetBL();
-        public MainWindow()
+        public BO.User MyUser { get; set; }
+        public MainWindow(BO.User user)
         {
             InitializeComponent();
+            MyUser = user;
+           // userGrid.DataContext = MyUser;
         }
 
         /// <summary>
