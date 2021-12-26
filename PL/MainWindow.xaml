@@ -58,9 +58,6 @@
                                 <GridViewColumn Header="  Parcel Num Transferred  "  />
                                 <!-- buttons-->
 
-                                
-                                <!-- finish button-->
-
                             </GridView>
                         </ListView.View>
 

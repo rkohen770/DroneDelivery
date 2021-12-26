@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BO;
 using BLApi;
+using System.Collections.ObjectModel;
 
 namespace PL
 {
@@ -24,11 +25,20 @@ namespace PL
     {
         private IBL bl = BLFactory.GetBL();
         public BO.User MyUser { get; set; }
+        /// <summary>
+        /// collection of drones
+        /// </summary>
+        ObservableCollection<DroneForList> listDrone;
+        
         public MainWindow(BO.User user)
         {
             InitializeComponent();
             MyUser = user;
-           // userGrid.DataContext = MyUser;
+
+            //reset the list of the drones   
+            listDrone = new ObservableCollection<DroneForList>(bl.GetAllDronesBo());
+            LVListDrones.ItemsSource = listDrone;
+            // userGrid.DataContext = MyUser;
         }
 
         /// <summary>
