@@ -1,7 +1,5 @@
 ﻿using System;
-using IBL.BO;
 using BO;
-
 namespace ConsoleUI_BL
 {
     class Program
