@@ -6,21 +6,4 @@
         Closing="Window_Closing"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Client"  Height="510.178" Width="917.561" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
-       
-        TextElement.Foreground="Black"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"
-        FontFamily="Times New Roman"  Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}">
-    <Grid Margin="0,23,-0.4,0" Height="388" VerticalAlignment="Top">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-
-
-    </Grid>
-</Window>
+        Title="Client"  Height="510.178" Width="917.561" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"/>

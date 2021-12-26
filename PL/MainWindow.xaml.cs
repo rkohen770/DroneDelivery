@@ -24,13 +24,13 @@ namespace PL
     public partial class MainWindow : Window
     {
         private IBL bl = BLFactory.GetBL();
-        public BO.User MyUser { get; set; }
+        public User MyUser { get; set; }
         /// <summary>
         /// collection of drones
         /// </summary>
         ObservableCollection<DroneForList> listDrone;
         
-        public MainWindow(BO.User user)
+        public MainWindow(User user)
         {
             InitializeComponent();
             MyUser = user;

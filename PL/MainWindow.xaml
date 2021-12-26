@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
         <TabControl Margin="0,5,-0.4,0.4" Grid.Row="1" >
             <!--#region Drone-->
-            <TabItem Header="Drones">
+            <TabItem Header="Drones" Foreground="#FF4362AC">
                 <Grid Margin="20">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="28*"/>
@@ -34,7 +34,7 @@
                         <RowDefinition  Height="60"/>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0" Grid.ColumnSpan="2" >
-                        <Button x:Name="bAdd" MinWidth="120" Background="#FFC5B053" Content="Add new drone" Click="AddDroneButton_Click"/>
+                        <Button x:Name="bAdd" MinWidth="120" Background="#FFD48224" Content="Add new drone" Click="AddDroneButton_Click"/>
                         <Label Margin="20,0,0,0"  Height="25" Content="Drone ID:" />
                         <ComboBox x:Name="cmbDronesID"  Height="25"  Width="100" DisplayMemberPath = "DroneId" SelectedValuePath="DroneId" Margin="40,0,0,0"/>
                     </StackPanel>
