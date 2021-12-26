@@ -46,7 +46,7 @@ namespace PL
                         }
                         else
                         {
-                            Passenger passenger = new Passenger(user);
+                            Client passenger = new Client(user);
                             passenger.Show();
                         }
                         Close();
@@ -100,7 +100,7 @@ namespace PL
                         MessageBox.Show("Passenger user:" + user.UserName + " added succsesfully!");
                         checkM.IsChecked = false;
                         passwordBox.Password = "";
-                        Passenger passenger = new Passenger(user);
+                        Client passenger = new Client(user);
                         passenger.Show();
                         Close();
                     }
