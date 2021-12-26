@@ -1,0 +1,26 @@
+﻿<Window x:Class="PL.Client"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Closing="Window_Closing"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="Client"  Height="510.178" Width="917.561" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+       
+        TextElement.Foreground="Black"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="Times New Roman"  Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}">
+    <Grid Margin="0,23,-0.4,0" Height="388" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+
+    </Grid>
+</Window>
