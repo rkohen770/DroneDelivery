@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Closing="Window_Closing"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Client"  Height="510.178" Width="917.561" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"/>

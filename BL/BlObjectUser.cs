@@ -29,7 +29,14 @@ namespace BO
         {
             try
             {
-                dal.AddUser(UserBoDoAdapter(user));
+                DO.User user1 = new ()
+                {
+                    UserName = user.UserName,
+                    Admin = (DO.Permission)user.Admin,
+                    password = user.password,
+                };
+                //Add baseStation in DAL to data source.
+                dal.AddUser(user1);
             }
             catch (DO.BadUserNameException ex)
             {

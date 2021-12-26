@@ -10,6 +10,7 @@ namespace DalApi
         internal static List<Station> stations = new List<Station>(5);
         internal static List<Customer> customers = new List<Customer>(100);
         internal static List<Parcel> parcels = new List<Parcel>(1000);
+        internal static List<User> users = new List<User>(1000);
         internal static List<DroneCharge> droneCharges = new List<DroneCharge>(5);
         static Random rand = new();
 
