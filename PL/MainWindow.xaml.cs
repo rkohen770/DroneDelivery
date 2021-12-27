@@ -23,7 +23,7 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        private IBL bl = BLFactory.GetBL();
+        private readonly IBL bl = BLFactory.GetBL();
         public User MyUser { get; set; }
         /// <summary>
         /// collection of drones
@@ -40,7 +40,15 @@ namespace PL
             LVListDrones.ItemsSource = listDrone;
             // userGrid.DataContext = MyUser;
         }
+        public MainWindow()
+        {
+            InitializeComponent();
 
+            //reset the list of the drones   
+            listDrone = new ObservableCollection<DroneForList>(bl.GetAllDronesBo());
+            LVListDrones.ItemsSource = listDrone;
+            // userGrid.DataContext = MyUser;
+        }
         /// <summary>
         /// A button that opens a window for adding a drone
         /// </summary>

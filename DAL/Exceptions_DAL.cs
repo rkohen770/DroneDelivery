@@ -63,7 +63,7 @@ namespace DO
     public class DroneAlreadyExistException : Exception
     {
         public int ID;
-        public string? Model;
+        public string Model;
         public DroneAlreadyExistException(int id, string model) : base()
         {
             Model = model;
@@ -125,7 +125,7 @@ namespace DO
     public class CustomerAlreadyExistException : Exception
     {
         public int ID;
-        public string? Name;
+        public string Name;
         public CustomerAlreadyExistException(int id, string name) : base()
         {
             Name = name;

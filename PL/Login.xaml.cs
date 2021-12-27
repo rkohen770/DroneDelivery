@@ -19,7 +19,7 @@ namespace PL
     /// </summary>
     public partial class Login : Window
     {
-        IBL bl = BLFactory.GetBL();
+        readonly IBL bl = BLFactory.GetBL();
         BO.User user;
         public Login()
         {
@@ -40,12 +40,12 @@ namespace PL
                     {
                         if (user.Admin == BO.Permission.Managment)
                         {
-                            MainWindow main = new MainWindow(user);
+                            MainWindow main = new (user);
                             main.Show();
                         }
                         else
                         {
-                            Client passenger = new Client(user);
+                            Client passenger = new (user);
                             passenger.Show();
                         }
                         Close();
@@ -83,8 +83,7 @@ namespace PL
 
                         bl.AddUser(user);
                         MessageBox.Show("Manager user:" + user.UserName + " added succsesfully!");
-                        MainWindow main = new MainWindow(user);
-                        main.Show();
+                        new MainWindow(user).Show();
                         checkM.IsChecked = false;
                         passwordBox.Password = "";
                         username1.Text = "";
@@ -99,7 +98,7 @@ namespace PL
                         MessageBox.Show("Passenger user:" + user.UserName + " added succsesfully!");
                         checkM.IsChecked = false;
                         passwordBox.Password = "";
-                        Client passenger = new Client(user);
+                        Client passenger = new (user);
                         passenger.Show();
                         Close();
                     }
