@@ -45,10 +45,10 @@ namespace PL
 
             //reset the list of the drones   
             listDrone = new ObservableCollection<DroneForList>(bl.GetAllDronesBo());
-           
-            userGrid.DataContext = MyUser;
+
+            ChangeClient.DataContext = MyUser;
             //check the status of the drones
-            foreach (var d in listDrone) d.DroneStatus(1);
+            //foreach (var d in listDrone) d.DroneStatus(1);
 
             LVListDrones.ItemsSource = listDrone;
             // userGrid.DataContext = MyUser;
@@ -111,7 +111,7 @@ namespace PL
         /// an event to show the passenger window
         /// </summary>
 
-        private void ChangePassenger_Click(object sender, RoutedEventArgs e)
+        private void ChangeClient_Click(object sender, RoutedEventArgs e)
         {
             PassengerOpen = true;
             Client passenger = new (MyUser, this);
