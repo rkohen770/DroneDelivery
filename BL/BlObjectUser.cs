@@ -33,7 +33,7 @@ namespace BO
                 {
                     UserName = user.UserName,
                     Admin = (DO.Permission)user.Admin,
-                    password = user.password,
+                    Password = user.password,
                 };
                 //Add baseStation in DAL to data source.
                 dal.AddUser(user1);

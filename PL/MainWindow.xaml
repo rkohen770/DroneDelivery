@@ -43,7 +43,7 @@
                         <ListView.View>
 
                             <GridView>
-                                <GridViewColumn Header="  Drone Id  " DisplayMemberBinding="{Binding Path=DroneId, Converter={StaticResource DroneId},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                                <GridViewColumn Header="  Drone Id  " DisplayMemberBinding="{Binding Path=DroneId,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
                                 <GridViewColumn Header="  Model  "/>
                                 <GridViewColumn Header="  Max Weight  " />
                                 <GridViewColumn Header="  Battery  " />

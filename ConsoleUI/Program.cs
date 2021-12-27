@@ -16,7 +16,7 @@ namespace ConsoleUI
             SENDING_DRONE_FOR_CHARGING, RELEAS_DRONE_FROME_CHARGING
         }
         public enum Display { DISPLAY_STATION, DISPLAY_DRONE, DISPLAY_CUSTOMER, DISPLAY_PARCEL }
-        public enum viewItemList
+        public enum ViewItemList
         {
             LIST_OF_BASE_STATIONS, LIST_OF_DRONE_VIEW, LIST_OF_CUSTOMER_VIEW, LIST_OF_PARCEL_VIEW,
             LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE, LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION
@@ -128,30 +128,30 @@ namespace ConsoleUI
                         choice = int.Parse(Console.ReadLine());
                         switch (choice)
                         {
-                            case (int)viewItemList.LIST_OF_BASE_STATIONS:
+                            case (int)ViewItemList.LIST_OF_BASE_STATIONS:
                                 foreach (var temp in dal.GetAllBaseStations())
                                     Console.WriteLine(temp);
                                 break;
 
-                            case (int)viewItemList.LIST_OF_DRONE_VIEW:
+                            case (int)ViewItemList.LIST_OF_DRONE_VIEW:
                                 foreach (var temp in dal.GetAllDrones())
                                     Console.WriteLine(temp);
                                 break;
 
-                            case (int)viewItemList.LIST_OF_CUSTOMER_VIEW:
+                            case (int)ViewItemList.LIST_OF_CUSTOMER_VIEW:
                                 foreach (var temp in dal.GetAllCustomers())
                                     Console.WriteLine(temp);
                                 break;
-                            case (int)viewItemList.LIST_OF_PARCEL_VIEW:
+                            case (int)ViewItemList.LIST_OF_PARCEL_VIEW:
                                 foreach (var temp in dal.GetAllParcels())
                                     Console.WriteLine(temp);
                                 break;
 
-                            case (int)viewItemList.LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE:
+                            case (int)ViewItemList.LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE:
                                 foreach (var temp in dal.GetAllParcelsWithoutSpecialDron(parcel=>parcel.Id > 0 && parcel.DroneId == 0))
                                     Console.WriteLine(temp);
                                 break;
-                            case (int)viewItemList.LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION:
+                            case (int)ViewItemList.LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION:
                                 foreach (var temp in dal.GetAllStationsWithAvailableChargingStations(station => station.ChargeSlots > 0))
                                     Console.WriteLine(temp);
                                 break;

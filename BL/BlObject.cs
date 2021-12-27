@@ -14,9 +14,9 @@ namespace BO
 
         public static BlObject Instance { get { return lazy.Value; } }
 
-        static Random random = new Random();
+        static Random random = new ();
 
-        List<DroneForList> droneForLists = new List<DroneForList>();
+        List<DroneForList> droneForLists = new ();
 
         internal static IDal dal = DalFactory.GetDal("dalObject");
 

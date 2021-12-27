@@ -59,7 +59,7 @@ namespace DalApi
         /// <param name="user"></param>
         public void AddUser(User user)
         {
-            if (DataSource.users.Exists(u=>u.UserName==user.UserName && u.Admin==user.Admin && u.password==user.password))
+            if (DataSource.users.Exists(u=>u.UserName==user.UserName && u.Admin==user.Admin && u.Password==user.Password))
             {
                 throw new BadUserNameException(user.UserName, "the user exists allready");
             }
@@ -69,7 +69,7 @@ namespace DalApi
                 {
                     UserName = user.UserName,
                     Admin = user.Admin,
-                    password = user.password
+                    Password = user.Password
                 };
                 DataSource.users.Add(u); //Adding the new user to the list
             }

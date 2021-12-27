@@ -23,7 +23,7 @@ namespace PL
     public partial class AddDroneWindow : Window
     {
         private BLApi.IBL bl = BLFactory.GetBL();
-        public DroneForList drone { get; set; }
+        private DroneForList drone { get; set; }
         private DroneListWindow droneListWindow;
         private MainWindow mainWindow;
 
