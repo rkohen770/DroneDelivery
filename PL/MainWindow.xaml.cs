@@ -26,6 +26,10 @@ namespace PL
         private IBL bl = BLFactory.GetBL();
         public User MyUser { get; set; }
         /// <summary>
+        /// collection of stations
+        /// </summary>
+        ObservableCollection<BaseStation> listStations;
+        /// <summary>
         /// collection of drones
         /// </summary>
         ObservableCollection<DroneForList> listDrone;
@@ -34,11 +38,18 @@ namespace PL
         {
             InitializeComponent();
             MyUser = user;
+            //reset list of ststions
+            listStations = new ObservableCollection<BaseStation>((IEnumerable<BaseStation>)bl.GetAllBaseStationsBo());
 
             //reset the list of the drones   
             listDrone = new ObservableCollection<DroneForList>(bl.GetAllDronesBo());
+           
+            userGrid.DataContext = MyUser;
+            //check the status of the drones
+            foreach (var d in listDrone) d.DroneStatus(1);
+
             LVListDrones.ItemsSource = listDrone;
-            // userGrid.DataContext = MyUser;
+
         }
 
         /// <summary>
