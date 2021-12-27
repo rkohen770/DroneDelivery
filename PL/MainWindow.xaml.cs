@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using BO;
 using BLApi;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace PL
 {
@@ -25,6 +26,7 @@ namespace PL
     {
         private readonly IBL bl = BLFactory.GetBL();
         public User MyUser { get; set; }
+        public bool PassengerOpen { get; set; }
         /// <summary>
         /// collection of drones
         /// </summary>
@@ -38,7 +40,7 @@ namespace PL
             //reset the list of the drones   
             listDrone = new ObservableCollection<DroneForList>(bl.GetAllDronesBo());
             LVListDrones.ItemsSource = listDrone;
-            // userGrid.DataContext = MyUser;
+             userGrid.DataContext = MyUser;
         }
         public MainWindow()
         {
@@ -47,7 +49,7 @@ namespace PL
             //reset the list of the drones   
             listDrone = new ObservableCollection<DroneForList>(bl.GetAllDronesBo());
             LVListDrones.ItemsSource = listDrone;
-            // userGrid.DataContext = MyUser;
+            cmbDronesID.ItemsSource = listDrone;
         }
         /// <summary>
         /// A button that opens a window for adding a drone
@@ -72,5 +74,39 @@ namespace PL
             new DroneListWindow(bl).Show();
         }
 
+
+
+        #region User 
+        /// <summary>
+        /// an event show the login window
+        /// </summary>
+
+        private void ChangeUser_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                Login enter = new ();
+                enter.Show();
+                Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        /// <summary>
+        /// an event to show the passenger window
+        /// </summary>
+
+        private void ChangePassenger_Click(object sender, RoutedEventArgs e)
+        {
+            PassengerOpen = true;
+            Client passenger = new (MyUser, this);
+            passenger.Show();
+        }
+
+        #endregion
     }
 }

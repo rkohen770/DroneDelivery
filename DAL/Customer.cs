@@ -18,7 +18,7 @@ namespace DO
         public override string ToString()
         {
             return $"ID: {Id} \nName: {Name} \nPhone {Phone} \n" +
-                 $"Longitude {Longitude} \nLattitude {Lattitude}\n";
+                $"{Lattitude:n3}°N, {Longitude:n3}°E\n";
         }
     }
 }

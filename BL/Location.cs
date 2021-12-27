@@ -9,7 +9,7 @@ namespace BO
 
         public override string ToString()
         {
-            return this.ToStringProperty() + "\n";
+            return $"{Lattitude:n3}°N, {Longitude:n3}°E";
         }
     }
 }
