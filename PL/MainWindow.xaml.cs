@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using BO;
 using BLApi;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace PL
 {
@@ -25,6 +26,7 @@ namespace PL
     {
         private readonly IBL bl = BLFactory.GetBL();
         public User MyUser { get; set; }
+        public bool PassengerOpen { get; set; }
         /// <summary>
         /// collection of stations
         /// </summary>
@@ -43,13 +45,13 @@ namespace PL
 
             //reset the list of the drones   
             listDrone = new ObservableCollection<DroneForList>(bl.GetAllDronesBo());
-           
-            userGrid.DataContext = MyUser;
+
+            ChangeClient.DataContext = MyUser;
             //check the status of the drones
-          //  foreach (var d in listDrone) d.DroneStatus(1);
+            //foreach (var d in listDrone) d.DroneStatus(1);
 
             LVListDrones.ItemsSource = listDrone;
-
+            // userGrid.DataContext = MyUser;
         }
         public MainWindow()
         {
@@ -58,7 +60,7 @@ namespace PL
             //reset the list of the drones   
             listDrone = new ObservableCollection<DroneForList>(bl.GetAllDronesBo());
             LVListDrones.ItemsSource = listDrone;
-            // userGrid.DataContext = MyUser;
+            cmbDronesID.ItemsSource = listDrone;
         }
         /// <summary>
         /// A button that opens a window for adding a drone
@@ -83,5 +85,39 @@ namespace PL
             new DroneListWindow(bl).Show();
         }
 
+
+
+        #region User 
+        /// <summary>
+        /// an event show the login window
+        /// </summary>
+
+        private void ChangeUser_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                Login enter = new ();
+                enter.Show();
+                Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        /// <summary>
+        /// an event to show the passenger window
+        /// </summary>
+
+        private void ChangeClient_Click(object sender, RoutedEventArgs e)
+        {
+            PassengerOpen = true;
+            Client passenger = new (MyUser, this);
+            passenger.Show();
+        }
+
+        #endregion
     }
 }

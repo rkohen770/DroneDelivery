@@ -18,7 +18,13 @@ namespace BO
 
         public override string ToString()
         {
-            return this.ToStringProperty() + "\n";
+            return $"Drone ID: {DroneId},\n " +
+                $"Drone Model: {DroneModel},\n" +
+                $"Weight: {Weight},\n" +
+                $"Drone Battery: {DroneBattery},\n " +
+                $"Drone Status: {DroneStatus},\n " +
+                $"Current Location: {CurrentLocation},\n" +
+                $"Parcel In Transfer: {ParcelInTransfer}";
         }
 
     }

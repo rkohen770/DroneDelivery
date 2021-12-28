@@ -18,6 +18,10 @@ namespace BO
                 var value = prop.GetValue(t, null);
                 if (value is string)
                     str += "\t" + suffix + prop.Name + ": " + value;
+                else if (prop.Name == "Lattitude" || prop.Name == "Longitude")
+                {
+                    str += "\t" + suffix +prop.Name + ": " + DO.SexagesimalAngle.FromDouble((double)value);
+                }
                 else if (value is IEnumerable)
                 {
                     foreach (var item in (IEnumerable)value)

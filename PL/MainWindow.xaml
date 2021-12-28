@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="640" Width="800"
+        Title="MainWindow"  Height="700" Width="1245"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto">
+        TextElement.FontWeight="Regular" TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto">
     <Window.Resources>
         <local:DroneStatusToImage x:Key="DroneStatusConvert"/>
-        <local:DroneID x:Key="DroneId"/>
+        <local:DroneWeightCategoriesToImage x:Key="DroneWeightConvert"/>
+        <local:DroneBattery x:Key="DroneBatteryConvert"/>
+        <local:DroneCurrentLocation x:Key="DroneLocationConvert"/>
     </Window.Resources>
 
     <Grid>
@@ -21,6 +21,13 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid x:Name="userGrid" Grid.Row="0" >
+            <Button x:Name="ChangeClient" Background="#FFD48224" Content="Enter as a client" Click="ChangeClient_Click" Height="40" VerticalAlignment="Top" Width="163" HorizontalAlignment="Left" Margin="290,10,0,0"/>
+            <Button Content="Change user" HorizontalAlignment="Left" Background="#FFD48224" Height="40" Margin="460,10,0,0" VerticalAlignment="Top" Width="163" Click="ChangeUser_Click"/>
+            <TextBlock x:Name="Permis" Text="{Binding Path=Admin, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="795,34,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
+            <TextBlock x:Name="userName" Text="{Binding Path=UserName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="893,34,-11,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
+
+        </Grid>
         <TabControl Margin="0,5,-0.4,0.4" Grid.Row="1" >
             <!--#region Drone-->
             <TabItem Header="Drones" Foreground="#FF4362AC">
@@ -34,7 +41,7 @@
                         <RowDefinition  Height="60"/>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0" Grid.ColumnSpan="2" >
-                        <Button x:Name="bAdd" MinWidth="120" Background="#FFD48224" Content="Add new drone" Click="AddDroneButton_Click"/>
+                        <Button x:Name="bAdd" MinWidth="120" Background="#FFD48224" Content="Add new drone" Click="AddDroneButton_Click" Height="45"/>
                         <Label Margin="20,0,0,0"  Height="25" Content="Drone ID:" />
                         <ComboBox x:Name="cmbDronesID"  Height="25"  Width="100" DisplayMemberPath = "DroneId" SelectedValuePath="DroneId" Margin="40,0,0,0"/>
                     </StackPanel>
@@ -44,9 +51,16 @@
 
                             <GridView>
                                 <GridViewColumn Header="  Drone Id  " DisplayMemberBinding="{Binding Path=DroneId,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-                                <GridViewColumn Header="  Model  "/>
-                                <GridViewColumn Header="  Max Weight  " />
-                                <GridViewColumn Header="  Battery  " />
+                                <GridViewColumn Header="  Model  " DisplayMemberBinding="{Binding Path=DroneModel,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                <GridViewColumn Header="  Max Weight  "  >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Width="30" Height="30" Source="{Binding Path=MaxWeight, Converter={StaticResource DroneWeightConvert}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="  Battery  " DisplayMemberBinding="{Binding Path=DroneBattery, 
+                                    Converter={StaticResource DroneBatteryConvert}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="  Status  ">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -54,8 +68,8 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="  Current Location  " />
-                                <GridViewColumn Header="  Parcel Num Transferred  "  />
+                                <GridViewColumn Header="  Current Location  " DisplayMemberBinding="{Binding Path=CurrentLocation, Converter={StaticResource DroneLocationConvert}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                <GridViewColumn Header="  Parcel Num Transferred  " DisplayMemberBinding="{Binding Path=ParcelNumIsTransferred,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
                                 <!-- buttons-->
 
                             </GridView>
@@ -65,10 +79,10 @@
                             <Style TargetType="{x:Type ListViewItem}">
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="Salmon"/>
+                                        <Setter Property="Background" Value="#DFA458"/>
                                     </Trigger>
                                     <Trigger  Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="LightSalmon" />
+                                        <Setter Property="Background" Value="#D48224" />
                                         <Setter Property="FontWeight" Value="Bold"/>
                                     </Trigger>
                                 </Style.Triggers>
@@ -80,12 +94,6 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Grid x:Name="userGrid" Grid.Row="0" >
-            <!--<Button x:Name="ChangeClient" Background="#FFD48224" Content="Enter as a client" Click="ChangeClient_Click" Height="40" VerticalAlignment="Top" Width="163" HorizontalAlignment="Left" Margin="290,10,0,0"/>
-            <Button Content="Change user" HorizontalAlignment="Left" Background="#FFD48224" Height="40" Margin="460,10,0,0" VerticalAlignment="Top" Width="163" Click="ChangeUser_Click"/>-->
-            <TextBlock x:Name="Permis" Text="{Binding Path=Admin, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="795,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
-            <TextBlock x:Name="userName" Text="{Binding Path=UserName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="893,34,-11,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
-
-        </Grid>
+        
     </Grid>
 </Window>
