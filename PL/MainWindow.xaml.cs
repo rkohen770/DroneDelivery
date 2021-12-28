@@ -46,7 +46,7 @@ namespace PL
            
             userGrid.DataContext = MyUser;
             //check the status of the drones
-            foreach (var d in listDrone) d.DroneStatus(1);
+          //  foreach (var d in listDrone) d.DroneStatus(1);
 
             LVListDrones.ItemsSource = listDrone;
 
