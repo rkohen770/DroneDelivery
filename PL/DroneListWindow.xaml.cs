@@ -57,7 +57,7 @@ namespace PL
         /// <param name="e"></param>
         private void AddDroneButton_Click(object sender, RoutedEventArgs e)
         {
-            new AddDroneWindow(bl, this).ShowDialog();
+            new DroneWindow(bl, this).ShowDialog();
             DronesListView.DataContext = bl.GetAllDronesBo();
             DronesListView.Items.Refresh();
         }
@@ -80,7 +80,7 @@ namespace PL
         private void ShowDronesButtom_Click(object sender, MouseButtonEventArgs e)
         {
             DroneForList drone = (DroneForList)((ListView)sender).SelectedItem;
-            new AddDroneWindow(bl, drone, this).Show();
+            new DroneWindow(bl, drone, this).Show();
             DronesListView.DataContext = bl.GetAllDronesBo();
             DronesListView.Items.Refresh();
         }

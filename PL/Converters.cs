@@ -19,6 +19,7 @@ namespace PL
             {
                 case BO.WeightCategories.Easy:
                     return "/Images/easy_24px.png";
+
                 case BO.WeightCategories.Intermediate:
                     return "/Images/medium_24px.png";
 
@@ -43,6 +44,7 @@ namespace PL
             {
                 case BO.DroneStatus.Available:
                     return "/Images/Check_Circle_24px.png";
+
                 case BO.DroneStatus.Maintenance:
                     return "/Images/maintenance_24px.png";
 

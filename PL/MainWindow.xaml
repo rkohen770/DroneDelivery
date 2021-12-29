@@ -19,6 +19,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid x:Name="userGrid" Grid.Row="0" >
@@ -26,9 +27,44 @@
             <Button Content="Change user" HorizontalAlignment="Left" Background="#FFD48224" Height="40" Margin="460,10,0,0" VerticalAlignment="Top" Width="163" Click="ChangeUser_Click"/>
             <TextBlock x:Name="Permis" Text="{Binding Path=Admin, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="795,34,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
             <TextBlock x:Name="userName" Text="{Binding Path=UserName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="893,34,-11,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
-
         </Grid>
-        <TabControl Margin="0,5,-0.4,0.4" Grid.Row="1" >
+        <Grid x:Name="sortedList" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Drone status" Grid.Column="0"
+                   Foreground="#FF4362AC"
+                   HorizontalAlignment="Stretch" 
+                   Margin="0,0,0,0" 
+                   VerticalAlignment="Stretch" 
+                   RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT" FontWeight="Regular" FontStyle="Oblique" FontStretch="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <ComboBox Name="StatusSelector" 
+                      BorderBrush="#FFCB8686"
+                      HorizontalAlignment= "Stretch"
+                      VerticalAlignment="Stretch"
+                      Grid.Column="1" 
+                      Margin="5,10,5,10" HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="statusSelector_SelectionChanged" >
+            </ComboBox>
+            <Label Content="Drone Max Weight" Grid.Column="2"
+                   HorizontalAlignment="Stretch" 
+                   Foreground="#FF4362AC"
+                   Margin="0,0,0,0" 
+                   VerticalAlignment="Stretch" 
+                   RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT"
+                   FontWeight="Regular" FontStyle="Oblique" FontStretch="Normal"
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <ComboBox Name="WeightSelector"
+                BorderBrush="#FFCB8686"
+                      HorizontalAlignment= "Stretch"
+                      VerticalAlignment="Stretch"
+                      Grid.Column="3" 
+                      Margin="5,10,5,10"  HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="weightSelector_SelectionChanged">
+            </ComboBox>
+        </Grid>
+        <TabControl Margin="0,5,-0.4,0.4" Grid.Row="2" >
             <!--#region Drone-->
             <TabItem Header="Drones" Foreground="#FF4362AC">
                 <Grid Margin="20">
@@ -42,11 +78,11 @@
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0" Grid.ColumnSpan="2" >
                         <Button x:Name="bAdd" MinWidth="120" Background="#FFD48224" Content="Add new drone" Click="AddDroneButton_Click" Height="45"/>
-                        <Label Margin="20,0,0,0"  Height="25" Content="Drone ID:" />
-                        <ComboBox x:Name="cmbDronesID"  Height="25"  Width="100" DisplayMemberPath = "DroneId" SelectedValuePath="DroneId" Margin="40,0,0,0"/>
+                        <!--<Label Margin="20,0,0,0"  Height="25" Content="Drone ID:" />
+                        <ComboBox x:Name="cmbDronesID"  Height="25"  Width="100" ItemsSource ="{Binding ElementName=LVListDrones, Path=Items, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedValuePath="DroneId" Margin="40,0,0,0"/>-->
                     </StackPanel>
 
-                    <ListView x:Name="LVListDrones" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"  >
+                    <ListView x:Name="LVListDrones" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" MouseDoubleClick="ShowDroneDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="-6,0,6,60" Grid.RowSpan="2" >
                         <ListView.View>
 
                             <GridView>
@@ -60,15 +96,19 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
                                 <GridViewColumn Header="  Battery  " DisplayMemberBinding="{Binding Path=DroneBattery, 
-                                    Converter={StaticResource DroneBatteryConvert}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                    Converter={StaticResource DroneBatteryConvert}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
                                 <GridViewColumn Header="  Status  ">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Image Width="30" Height="30" Source="{Binding Path=DroneStatus, Converter={StaticResource DroneStatusConvert}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                            <Image Width="30" Height="30">
+                                                <Image.Source>
+                                                    <BitmapImage UriSource="{Binding Path=DroneStatus, Converter={StaticResource DroneStatusConvert}, Mode=OneWay}"/>
+                                                </Image.Source>
+                                            </Image>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="  Current Location  " DisplayMemberBinding="{Binding Path=CurrentLocation, Converter={StaticResource DroneLocationConvert}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                <GridViewColumn Header="    Current Location    " DisplayMemberBinding="{Binding Path=CurrentLocation, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="  Parcel Num Transferred  " DisplayMemberBinding="{Binding Path=ParcelNumIsTransferred,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
                                 <!-- buttons-->
 
@@ -90,10 +130,26 @@
                             </Style>
 
                         </ListView.Resources>
+                        <ListView.LayoutTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="1" ScaleY="1" CenterY="0" CenterX="0"/>
+                                <SkewTransform CenterY="0" CenterX="0"/>
+                                <RotateTransform Angle="0" CenterY="0" CenterX="0"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ListView.LayoutTransform>
+                        <ListView.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="-2"/>
+                            </TransformGroup>
+                        </ListView.RenderTransform>
                     </ListView>
                 </Grid>
             </TabItem>
         </TabControl>
-        
+
     </Grid>
 </Window>
