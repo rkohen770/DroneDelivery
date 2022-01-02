@@ -35,7 +35,11 @@ namespace PL
         /// collection of drones
         /// </summary>
         ObservableCollection<DroneForList> listDrone;
-        
+        /// <summary>
+        /// collection of customers
+        /// </summary>
+        ObservableCollection<CustomerForList> listCustomers;
+
         public MainWindow(User user)
         {
             InitializeComponent();
@@ -47,6 +51,10 @@ namespace PL
             //reset the list of the drones   
             listDrone = new ObservableCollection<DroneForList>(bl.GetAllDronesBo());
             LVListDrones.ItemsSource = listDrone;
+
+            //reset list of customers
+            listCustomers = new ObservableCollection<CustomerForList>(bl.GetAllCustomersBo());
+            LVListCustomers.ItemsSource = listCustomers;
 
             ChangeClient.DataContext = MyUser;
             //check the status of the drones
@@ -69,6 +77,10 @@ namespace PL
             //reset the list of the base station  
             listStations = new ObservableCollection<BaseStationForList>(bl.GetAllBaseStationsBo());
             LVListBaseStation.ItemsSource = listStations;
+
+            //reset the list of the customers   
+            listCustomers = new ObservableCollection<CustomerForList>(bl.GetAllCustomersBo());
+            LVListCustomers.ItemsSource = listCustomers;
 
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
@@ -98,7 +110,7 @@ namespace PL
         }
 
         /// <summary>
-        /// an event to show the details line window
+        /// an event to show the details drone window
         /// </summary>
 
         private void ShowDroneDetails_Click(object sender, MouseButtonEventArgs e)
@@ -108,6 +120,17 @@ namespace PL
             LVListDrones.ItemsSource = bl.GetAllDronesBo();
             LVListDrones.Items.Refresh();
         }
+        #region Customer
+        private void ShowCustomerDetails_Click(object sender, MouseButtonEventArgs e)
+        {
+            CustomerForList customerDetails = ((ListView)sender).SelectedItem as CustomerForList;
+            new CustomerWindow(bl, customerDetails, this).ShowDialog();
+            LVListCustomers.ItemsSource = bl.GetAllCustomersBo();
+            LVListCustomers.Items.Refresh();
+        }
+
+        #endregion
+
         #region User 
         /// <summary>
         /// an event show the login window
@@ -154,5 +177,7 @@ namespace PL
             List<DroneForList> list = bl.GetDronesByPredicat(d => d.MaxWeight == weight).ToList();
             LVListDrones.ItemsSource = list;
         }
+
+        
     }
 }

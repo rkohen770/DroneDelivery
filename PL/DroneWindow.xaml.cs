@@ -24,7 +24,6 @@ namespace PL
     {
         private IBL bl = BLFactory.GetBL();
         private DroneForList drone { get; set; }
-        private DroneListWindow droneListWindow;
         private MainWindow mainWindow;
 
         public DroneWindow()
@@ -32,6 +31,11 @@ namespace PL
             DialogResult = true;
             InitializeComponent();
         }
+        /// <summary>
+        /// This constractor is for adding a drone
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="mainWindow"></param>
         public DroneWindow(IBL bl, MainWindow mainWindow)
         {
             InitializeComponent();
@@ -51,6 +55,12 @@ namespace PL
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
 
         }
+        /// <summary>
+        /// This constractor is for drone display
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="drone"></param>
+        /// <param name="mainWindow"></param>
         public DroneWindow(IBL bl, DroneForList drone, MainWindow mainWindow)
         {
             InitializeComponent();
@@ -84,59 +94,6 @@ namespace PL
             CurrentLocation.Text = drone.CurrentLocation.ToString();
         }
 
-
-        public DroneWindow(IBL bl, DroneListWindow droneListWindow)
-        {
-            InitializeComponent();
-            this.bl = bl;
-            this.droneListWindow = droneListWindow;
-
-            SaveClick.Visibility = Visibility.Visible;
-            Update.Visibility = Visibility.Hidden;
-            status.Visibility = Visibility.Hidden;
-            Status.Visibility = Visibility.Hidden;
-            Battery.Visibility = Visibility.Hidden;
-            battery.Visibility = Visibility.Hidden;
-            WeightSelector.Visibility = Visibility.Visible;
-            MaxWeight.Visibility = Visibility.Hidden;
-            currentLocation.Visibility = Visibility.Hidden;
-            CurrentLocation.Visibility = Visibility.Hidden;
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-
-        }
-        public DroneWindow(IBL bl, DroneForList drone, DroneListWindow droneListWindow)
-        {
-            InitializeComponent();
-            this.bl = bl;
-            this.drone = drone;
-            this.droneListWindow = droneListWindow;
-            SaveClick.Visibility = Visibility.Hidden;
-            Update.Visibility = Visibility.Visible;
-            Sending.Visibility = Visibility.Visible;
-            Release.Visibility = Visibility.Visible;
-            Send_Delivery.Visibility = Visibility.Visible;
-            Collection.Visibility = Visibility.Visible;
-            Parcel_Delivery.Visibility = Visibility.Visible;
-            status.Visibility = Visibility.Visible;
-            Status.Visibility = Visibility.Visible;
-            currentLocation.Visibility = Visibility.Visible;
-            CurrentLocation.Visibility = Visibility.Visible;
-            WeightSelector.Visibility = Visibility.Hidden;
-            MaxWeight.Visibility = Visibility.Visible;
-            ID.IsReadOnly = true;
-            ID.Text = drone.DroneId.ToString();
-            Model.Text = drone.DroneModel;
-            MaxWeight.Text = drone.MaxWeight.ToString();
-            Battery.Text = drone.DroneBattery.ToString();
-            Status.IsReadOnly = true;
-            Status.Text = drone.DroneStatus.ToString();
-            stationID.Width = 200;
-            stationID.Margin = new Thickness(30, 145, 0, 0);
-            stationID.Content = "Parcel Num Is Transferred";
-            StationID.Text = drone.ParcelNumIsTransferred.ToString();
-            CurrentLocation.Text = drone.CurrentLocation.Longitude.ToString();
-
-        }
 
         /// <summary>
         /// text box that allows only numbers to be entered
