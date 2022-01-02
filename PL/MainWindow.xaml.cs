@@ -30,7 +30,7 @@ namespace PL
         /// <summary>
         /// collection of stations
         /// </summary>
-        ObservableCollection<BaseStation> listStations;
+        ObservableCollection<BaseStationForList> listStations;
         /// <summary>
         /// collection of drones
         /// </summary>
@@ -41,17 +41,22 @@ namespace PL
             InitializeComponent();
             MyUser = user;
             //reset list of ststions
-            listStations = new ObservableCollection<BaseStation>((IEnumerable<BaseStation>)bl.GetAllBaseStationsBo());
+            listStations = new ObservableCollection<BaseStationForList>(bl.GetAllBaseStationsBo());
+            LVListBaseStation.ItemsSource = listStations;
 
             //reset the list of the drones   
             listDrone = new ObservableCollection<DroneForList>(bl.GetAllDronesBo());
+            LVListDrones.ItemsSource = listDrone;
 
             ChangeClient.DataContext = MyUser;
             //check the status of the drones
             //foreach (var d in listDrone) d.DroneStatus(1);
+            
+           // cmbDronesID.ItemsSource = listDrone;
+            userGrid.DataContext = MyUser;
 
-            LVListDrones.ItemsSource = listDrone;
-            // userGrid.DataContext = MyUser;
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
         }
         public MainWindow()
         {
@@ -60,7 +65,14 @@ namespace PL
             //reset the list of the drones   
             listDrone = new ObservableCollection<DroneForList>(bl.GetAllDronesBo());
             LVListDrones.ItemsSource = listDrone;
-            cmbDronesID.ItemsSource = listDrone;
+
+            //reset the list of the base station  
+            listStations = new ObservableCollection<BaseStationForList>(bl.GetAllBaseStationsBo());
+            LVListBaseStation.ItemsSource = listStations;
+
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            // cmbDronesID.ItemsSource = listDrone;
         }
         /// <summary>
         /// A button that opens a window for adding a drone
@@ -69,24 +81,33 @@ namespace PL
         /// <param name="e"></param>
         private void AddDroneButton_Click(object sender, RoutedEventArgs e)
         {
-            new AddDroneWindow(bl, this).ShowDialog();
+            new DroneWindow(bl, this).ShowDialog();
+            LVListDrones.ItemsSource = bl.GetAllDronesBo();
+            LVListDrones.Items.Refresh();
         }
 
-
-
-
         /// <summary>
-        /// A button that opens a window of the drone details
+        /// A button that refresh the list of drones.
         /// </summary>
         /// <param name="sender">Button type</param>
         /// <param name="e"></param>
-        private void ShowDroneButton_Click(object sender, RoutedEventArgs e)
+        private void RefreshDronesButton_Click(object sender, RoutedEventArgs e)
         {
-            new DroneListWindow(bl).Show();
+            LVListDrones.ItemsSource = bl.GetAllDronesBo().OrderBy(d=>d.DroneStatus);
+            LVListDrones.Items.Refresh();
         }
 
+        /// <summary>
+        /// an event to show the details line window
+        /// </summary>
 
-
+        private void ShowDroneDetails_Click(object sender, MouseButtonEventArgs e)
+        {
+            DroneForList droneDetails =((ListView)sender).SelectedItem as DroneForList;
+            new DroneWindow(bl, droneDetails, this).ShowDialog();
+            LVListDrones.ItemsSource = bl.GetAllDronesBo();
+            LVListDrones.Items.Refresh();
+        }
         #region User 
         /// <summary>
         /// an event show the login window
@@ -119,5 +140,19 @@ namespace PL
         }
 
         #endregion
+
+        private void statusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DroneStatus status = (DroneStatus)((ComboBox)sender).SelectedItem;
+            List<DroneForList> list = bl.GetDronesByPredicat(d => d.DroneStatus == status).ToList();
+            LVListDrones.ItemsSource = list;
+        }
+
+        private void weightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            WeightCategories weight = (WeightCategories)((ComboBox)sender).SelectedItem;
+            List<DroneForList> list = bl.GetDronesByPredicat(d => d.MaxWeight == weight).ToList();
+            LVListDrones.ItemsSource = list;
+        }
     }
 }

@@ -202,7 +202,7 @@ namespace BO
         /// </summary>
         /// <param name="droneId">drone id</param>
         /// <returns>drone</returns>
-        public BO.Drone GetDrone(int droneId)
+        public Drone GetDrone(int droneId)
         {
             try
             {
