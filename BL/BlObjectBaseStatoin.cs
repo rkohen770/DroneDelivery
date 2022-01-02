@@ -109,7 +109,7 @@ namespace BO
             }
             catch (DO.BadBaseStationIDException e)
             {
-                throw new BO.BadBaseStationIDException(e.ID, e.Message, e.InnerException);
+                throw new BadBaseStationIDException(e.ID, e.Message, e.InnerException);
             }
         }
         #endregion
