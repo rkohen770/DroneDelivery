@@ -43,8 +43,6 @@
                     <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="20,0,0,0" Grid.ColumnSpan="2" >
                         <Button x:Name="bAdd" MinWidth="120" Background="#FFD48224" Content="Add new drone" Click="AddDroneButton_Click" Height="45"/>
                         <Button x:Name="refresh" MinWidth="120" Background="#FFD48224" Content="refresh" Click="RefreshDronesButton_Click" Height="45"/>
-                        <!--<Label Margin="20,0,0,0"  Height="25" Content="Drone ID:" />
-                        <ComboBox x:Name="cmbDronesID"  Height="25"  Width="100" ItemsSource ="{Binding ElementName=LVListDrones, Path=Items, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedValuePath="DroneId" Margin="40,0,0,0"/>-->
                     </StackPanel>
                     <Grid x:Name="sortedList" Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -61,7 +59,7 @@
                    RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT" FontWeight="Regular" FontStyle="Oblique" FontStretch="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         <ComboBox Name="StatusSelector" 
                       BorderBrush="#FFCB8686" 
-                      Margin="162,10,35,10" HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="statusSelector_SelectionChanged" Grid.ColumnSpan="2" />
+                      Margin="162,10,35,10" HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="StatusSelector_SelectionChanged" Grid.ColumnSpan="2" />
                         <Label Content="Drone Max Weight" Grid.Column="1" 
                    Foreground="#FF4362AC"
                    Margin="150,0,175,0" 
@@ -73,7 +71,7 @@
                       HorizontalAlignment= "Stretch"
                       VerticalAlignment="Stretch"
                       Grid.Column="3" 
-                      Margin="5,10,5,10"  HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="weightSelector_SelectionChanged">
+                      Margin="5,10,5,10"  HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="WeightSelector_SelectionChanged">
                         </ComboBox>
                     </Grid>
                     <ListView x:Name="LVListDrones" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
@@ -152,8 +150,9 @@
             </TabItem>
             <!--#endregion Drone-->
 
-            <TabItem Header="Base Station" Foreground="#FF4362AC" Height="22" Margin="-2,0,-2,0" VerticalAlignment="Bottom">
-                <ListView x:Name="LVListBaseStation" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" MouseDoubleClick="ShowDroneDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="-6,0,6,60" Grid.RowSpan="2" >
+            <!--#region Base Station-->
+            <TabItem Header="Base Stations" Foreground="#FF4362AC" Height="22" Margin="-2,0,-2,0" VerticalAlignment="Bottom">
+                <ListView x:Name="LVListBaseStations" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" MouseDoubleClick="ShowBaseStationDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="-6,0,6,60" Grid.RowSpan="2" >
                     <ListView.View>
 
                         <GridView>
@@ -200,7 +199,7 @@
                     </ListView.RenderTransform>
                 </ListView>
             </TabItem>
-
+            <!--#endregion Base Station-->
         </TabControl>
 
     </Grid>

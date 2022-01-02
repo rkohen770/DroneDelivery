@@ -163,7 +163,6 @@ namespace DalApi
             return station;
         }
 
-
         /// <summary>
         /// A function that calculates the distance between a customer's location and a base station for charging
         /// </summary>

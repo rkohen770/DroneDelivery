@@ -35,14 +35,14 @@ namespace PL
         /// collection of drones
         /// </summary>
         ObservableCollection<DroneForList> listDrone;
-        
+
         public MainWindow(User user)
         {
             InitializeComponent();
             MyUser = user;
             //reset list of ststions
             listStations = new ObservableCollection<BaseStationForList>(bl.GetAllBaseStationsBo());
-            LVListBaseStation.ItemsSource = listStations;
+            LVListBaseStations.ItemsSource = listStations;
 
             //reset the list of the drones   
             listDrone = new ObservableCollection<DroneForList>(bl.GetAllDronesBo());
@@ -51,8 +51,8 @@ namespace PL
             ChangeClient.DataContext = MyUser;
             //check the status of the drones
             //foreach (var d in listDrone) d.DroneStatus(1);
-            
-           // cmbDronesID.ItemsSource = listDrone;
+
+            // cmbDronesID.ItemsSource = listDrone;
             userGrid.DataContext = MyUser;
 
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
@@ -68,12 +68,14 @@ namespace PL
 
             //reset the list of the base station  
             listStations = new ObservableCollection<BaseStationForList>(bl.GetAllBaseStationsBo());
-            LVListBaseStation.ItemsSource = listStations;
+            LVListBaseStations.ItemsSource = listStations;
 
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             // cmbDronesID.ItemsSource = listDrone;
         }
+
+        #region Drones
         /// <summary>
         /// A button that opens a window for adding a drone
         /// </summary>
@@ -93,21 +95,51 @@ namespace PL
         /// <param name="e"></param>
         private void RefreshDronesButton_Click(object sender, RoutedEventArgs e)
         {
-            LVListDrones.ItemsSource = bl.GetAllDronesBo().OrderBy(d=>d.DroneStatus);
+            LVListDrones.ItemsSource = bl.GetAllDronesBo().OrderBy(d => d.DroneStatus);
             LVListDrones.Items.Refresh();
         }
 
         /// <summary>
         /// an event to show the details line window
         /// </summary>
-
         private void ShowDroneDetails_Click(object sender, MouseButtonEventArgs e)
         {
-            DroneForList droneDetails =((ListView)sender).SelectedItem as DroneForList;
+            DroneForList droneDetails = ((ListView)sender).SelectedItem as DroneForList;
             new DroneWindow(bl, droneDetails, this).ShowDialog();
             LVListDrones.ItemsSource = bl.GetAllDronesBo();
             LVListDrones.Items.Refresh();
         }
+
+        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DroneStatus status = (DroneStatus)((ComboBox)sender).SelectedItem;
+            List<DroneForList> list = bl.GetDronesByPredicat(d => d.DroneStatus == status).ToList();
+            LVListDrones.ItemsSource = list;
+        }
+
+        private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            WeightCategories weight = (WeightCategories)((ComboBox)sender).SelectedItem;
+            List<DroneForList> list = bl.GetDronesByPredicat(d => d.MaxWeight == weight).ToList();
+            LVListDrones.ItemsSource = list;
+        }
+        #endregion
+
+        #region Base Station
+
+        /// <summary>
+        /// an event to show the details line window
+        /// </summary>
+        private void ShowBaseStationDetails_Click(object sender, MouseButtonEventArgs e)
+        {
+            BaseStationForList baseStationDetails = ((ListView)sender).SelectedItem as BaseStationForList;
+            new BaseStationWindow(bl, baseStationDetails, this).ShowDialog();
+            LVListBaseStations.ItemsSource = bl.GetAllBaseStationsBo();
+            LVListBaseStations.Items.Refresh();
+        }
+
+        #endregion
+
         #region User 
         /// <summary>
         /// an event show the login window
@@ -118,7 +150,7 @@ namespace PL
             try
             {
 
-                Login enter = new ();
+                Login enter = new();
                 enter.Show();
                 Close();
 
@@ -135,24 +167,12 @@ namespace PL
         private void ChangeClient_Click(object sender, RoutedEventArgs e)
         {
             PassengerOpen = true;
-            Client passenger = new (MyUser, this);
+            Client passenger = new(MyUser, this);
             passenger.Show();
         }
 
         #endregion
 
-        private void statusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            DroneStatus status = (DroneStatus)((ComboBox)sender).SelectedItem;
-            List<DroneForList> list = bl.GetDronesByPredicat(d => d.DroneStatus == status).ToList();
-            LVListDrones.ItemsSource = list;
-        }
 
-        private void weightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            WeightCategories weight = (WeightCategories)((ComboBox)sender).SelectedItem;
-            List<DroneForList> list = bl.GetDronesByPredicat(d => d.MaxWeight == weight).ToList();
-            LVListDrones.ItemsSource = list;
-        }
     }
 }
