@@ -27,7 +27,7 @@
             <TextBlock x:Name="Permis" Text="{Binding Path=Admin, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="477,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
             <TextBlock x:Name="userName" Text="{Binding Path=UserName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="591,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
         </Grid>
-       
+
 
 
         <TabControl Margin="0,5,-0.4,0.4" Grid.Row="2" >
@@ -61,13 +61,13 @@
                    RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT" FontWeight="Regular" FontStyle="Oblique" FontStretch="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         <ComboBox Name="StatusSelector" 
                       BorderBrush="#FFCB8686" 
-                      Margin="174,10,23,10" HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="statusSelector_SelectionChanged" Grid.ColumnSpan="2" />
+                      Margin="162,10,35,10" HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="statusSelector_SelectionChanged" Grid.ColumnSpan="2" />
                         <Label Content="Drone Max Weight" Grid.Column="1" 
                    Foreground="#FF4362AC"
-                   Margin="174,0,14,0" 
+                   Margin="150,0,175,0" 
                    RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT"
                    FontWeight="Regular" FontStyle="Oblique" FontStretch="Normal"
-                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="3"/>
                         <ComboBox Name="WeightSelector"
                 BorderBrush="#FFCB8686"
                       HorizontalAlignment= "Stretch"
