@@ -33,6 +33,7 @@ namespace PL
 
         public BaseStationWindow(IBL bl, BaseStationForList baseStationDetails, MainWindow mainWindow)
         {
+            InitializeComponent();
             this.bl = bl;
             this.baseStationDetails = baseStationDetails;
             this.mainWindow = mainWindow;

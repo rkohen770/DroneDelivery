@@ -152,7 +152,8 @@
 
             <!--#region Base Station-->
             <TabItem Header="Base Stations" Foreground="#FF4362AC" Height="22" Margin="-2,0,-2,0" VerticalAlignment="Bottom">
-                <ListView x:Name="LVListBaseStations" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" MouseDoubleClick="ShowBaseStationDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="-6,0,6,60" Grid.RowSpan="2" >
+                <ListView x:Name="LVListBaseStations" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"
+                          MouseDoubleClick="ShowBaseStationDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="-6,0,6,60" Grid.RowSpan="2" >
                     <ListView.View>
 
                         <GridView>
@@ -202,7 +203,11 @@
 
             <!--#region Customers-->
             <TabItem Header="Customers" Foreground="#FF4362AC" Height="22" Margin="-2,0,-2,0" VerticalAlignment="Bottom">
-                <ListView x:Name="LVListCustomers" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" MouseDoubleClick="ShowCustomerDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="-6,0,6,60" Grid.RowSpan="2" SelectionChanged="LVListCustomers_SelectionChanged" >
+                <ListView x:Name="LVListCustomers" 
+                          ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
+                          Grid.ColumnSpan="2" MouseDoubleClick="ShowCustomerDetails_Click"
+                          RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
+                          FontWeight="Normal" Margin="-6,0,6,60" Grid.RowSpan="2">
                     <ListView.View>
 
                         <GridView>

@@ -46,8 +46,8 @@ namespace PL
             NameOfCostomer.Visibility = Visibility.Visible;
             PhoneOfCustomer.Visibility = Visibility.Visible;
             LocationOfCustomer.Visibility = Visibility.Visible;
-            FromCustomer.Visibility = Visibility.Hidden;
-            ToCustomer.Visibility = Visibility.Hidden;
+            //FromCustomer.Visibility = Visibility.Hidden;
+            //ToCustomer.Visibility = Visibility.Hidden;
         }
         /// <summary>
         /// This constractor is for customer display
@@ -61,27 +61,27 @@ namespace PL
             this.bl = bl;
             this.customer = customerForList;
             this.mainWindow = mainWindow;
-
-
+            
+            
             ID.Visibility = Visibility.Visible;
             NameOfCostomer.Visibility = Visibility.Visible;
             PhoneOfCustomer.Visibility = Visibility.Visible;
             LocationOfCustomer.Visibility = Visibility.Visible;
-            FromCustomer.Visibility = Visibility.Hidden;
-            ToCustomer.Visibility = Visibility.Hidden;
+           //FromCustomer.Visibility = Visibility.Hidden;
+           //ToCustomer.Visibility = Visibility.Hidden;
 
-            ID.IsReadOnly = true;
-            ID.Text = drone.DroneId.ToString();
-            Model.Text = drone.DroneModel;
-            MaxWeight.Text = drone.MaxWeight.ToString();
-            Battery.Text = drone.DroneBattery.ToString();
-            Status.IsReadOnly = true;
-            Status.Text = drone.DroneStatus.ToString();
-            stationID.Width = 200;
-            stationID.Margin = new Thickness(30, 145, 0, 0);
-            stationID.Content = "Parcel Num Is Transferred";
-            StationID.Text = drone.ParcelNumIsTransferred.ToString();
-            CurrentLocation.Text = drone.CurrentLocation.ToString();
+            //ID.IsReadOnly = true;
+            //ID.Text = drone.DroneId.ToString();
+            //Model.Text = drone.DroneModel;
+            //MaxWeight.Text = drone.MaxWeight.ToString();
+            //Battery.Text = drone.DroneBattery.ToString();
+            //Status.IsReadOnly = true;
+            //Status.Text = drone.DroneStatus.ToString();
+            //stationID.Width = 200;
+            //stationID.Margin = new Thickness(30, 145, 0, 0);
+            //stationID.Content = "Parcel Num Is Transferred";
+            //StationID.Text = drone.ParcelNumIsTransferred.ToString();
+            //CurrentLocation.Text = drone.CurrentLocation.ToString();
         }
 
         private void CustomerIdTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
