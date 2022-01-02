@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow"  Height="700" Width="1245"
+        Title="MainWindow"  Height="700" Width="750"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         TextElement.FontWeight="Regular" TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto">
@@ -19,70 +19,71 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid x:Name="userGrid" Grid.Row="0" >
-            <Button x:Name="ChangeClient" Background="#FFD48224" Content="Enter as a client" Click="ChangeClient_Click" Height="40" VerticalAlignment="Top" Width="163" HorizontalAlignment="Left" Margin="290,10,0,0"/>
-            <Button Content="Change user" HorizontalAlignment="Left" Background="#FFD48224" Height="40" Margin="460,10,0,0" VerticalAlignment="Top" Width="163" Click="ChangeUser_Click"/>
-            <TextBlock x:Name="Permis" Text="{Binding Path=Admin, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="795,34,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
-            <TextBlock x:Name="userName" Text="{Binding Path=UserName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="893,34,-11,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
+            <Button x:Name="ChangeClient" Background="#FFD48224" Content="Enter as a client" Click="ChangeClient_Click" Height="40" VerticalAlignment="Center" Width="163" HorizontalAlignment="Left" Margin="56,0,0,0"/>
+            <Button Content="Change user" HorizontalAlignment="Left" Background="#FFD48224" Height="40" VerticalAlignment="Center" Width="164" Click="ChangeUser_Click" Margin="228,0,0,0"/>
+            <TextBlock x:Name="Permis" Text="{Binding Path=Admin, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="477,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
+            <TextBlock x:Name="userName" Text="{Binding Path=UserName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="591,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
         </Grid>
-        <Grid x:Name="sortedList" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Content="Drone status" Grid.Column="0"
+       
+
+
+        <TabControl Margin="0,5,-0.4,0.4" Grid.Row="2" >
+
+            <!--#region Drone-->
+            <TabItem Header="Drones" Foreground="#FF4362AC">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition  Height="Auto"/>
+                        <RowDefinition  Height="400"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="20,0,0,0" Grid.ColumnSpan="2" >
+                        <Button x:Name="bAdd" MinWidth="120" Background="#FFD48224" Content="Add new drone" Click="AddDroneButton_Click" Height="45"/>
+                        <Button x:Name="refresh" MinWidth="120" Background="#FFD48224" Content="refresh" Click="RefreshDronesButton_Click" Height="45"/>
+                        <!--<Label Margin="20,0,0,0"  Height="25" Content="Drone ID:" />
+                        <ComboBox x:Name="cmbDronesID"  Height="25"  Width="100" ItemsSource ="{Binding ElementName=LVListDrones, Path=Items, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedValuePath="DroneId" Margin="40,0,0,0"/>-->
+                    </StackPanel>
+                    <Grid x:Name="sortedList" Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Drone status" Grid.Column="0"
                    Foreground="#FF4362AC"
                    HorizontalAlignment="Stretch" 
                    Margin="0,0,0,0" 
                    VerticalAlignment="Stretch" 
                    RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT" FontWeight="Regular" FontStyle="Oblique" FontStretch="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <ComboBox Name="StatusSelector" 
-                      BorderBrush="#FFCB8686"
-                      HorizontalAlignment= "Stretch"
-                      VerticalAlignment="Stretch"
-                      Grid.Column="1" 
-                      Margin="5,10,5,10" HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="statusSelector_SelectionChanged" >
-            </ComboBox>
-            <Label Content="Drone Max Weight" Grid.Column="2"
-                   HorizontalAlignment="Stretch" 
+                        <ComboBox Name="StatusSelector" 
+                      BorderBrush="#FFCB8686" 
+                      Margin="174,10,23,10" HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="statusSelector_SelectionChanged" Grid.ColumnSpan="2" />
+                        <Label Content="Drone Max Weight" Grid.Column="1" 
                    Foreground="#FF4362AC"
-                   Margin="0,0,0,0" 
-                   VerticalAlignment="Stretch" 
+                   Margin="174,0,14,0" 
                    RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT"
                    FontWeight="Regular" FontStyle="Oblique" FontStretch="Normal"
-                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <ComboBox Name="WeightSelector"
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
+                        <ComboBox Name="WeightSelector"
                 BorderBrush="#FFCB8686"
                       HorizontalAlignment= "Stretch"
                       VerticalAlignment="Stretch"
                       Grid.Column="3" 
                       Margin="5,10,5,10"  HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="weightSelector_SelectionChanged">
-            </ComboBox>
-        </Grid>
-        <TabControl Margin="0,5,-0.4,0.4" Grid.Row="2" >
-            <!--#region Drone-->
-            <TabItem Header="Drones" Foreground="#FF4362AC">
-                <Grid Margin="20">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="28*"/>
-                        <ColumnDefinition Width="445*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition  Height="*"/>
-                        <RowDefinition  Height="60"/>
-                    </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0" Grid.ColumnSpan="2" >
-                        <Button x:Name="bAdd" MinWidth="120" Background="#FFD48224" Content="Add new drone" Click="AddDroneButton_Click" Height="45"/>
-                        <!--<Label Margin="20,0,0,0"  Height="25" Content="Drone ID:" />
-                        <ComboBox x:Name="cmbDronesID"  Height="25"  Width="100" ItemsSource ="{Binding ElementName=LVListDrones, Path=Items, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedValuePath="DroneId" Margin="40,0,0,0"/>-->
-                    </StackPanel>
-
-                    <ListView x:Name="LVListDrones" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" MouseDoubleClick="ShowDroneDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="-6,0,6,60" Grid.RowSpan="2" >
+                        </ComboBox>
+                    </Grid>
+                    <ListView x:Name="LVListDrones" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
+                              MouseDoubleClick="ShowDroneDetails_Click" 
+                              Grid.Row="1"
+                              RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal"
+                              Margin="-6,0,6,60" HorizontalAlignment="Stretch" 
+                              VerticalAlignment="Stretch"
+                              HorizontalContentAlignment="Stretch" 
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto" >
                         <ListView.View>
 
                             <GridView>
@@ -149,6 +150,57 @@
                     </ListView>
                 </Grid>
             </TabItem>
+            <!--#endregion Drone-->
+
+            <TabItem Header="Base Station" Foreground="#FF4362AC" Height="22" Margin="-2,0,-2,0" VerticalAlignment="Bottom">
+                <ListView x:Name="LVListBaseStation" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" MouseDoubleClick="ShowDroneDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="-6,0,6,60" Grid.RowSpan="2" >
+                    <ListView.View>
+
+                        <GridView>
+                            <GridViewColumn Header="  BaseStation Id  " 
+                                            DisplayMemberBinding="{Binding Path=BaseStationId,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                            <GridViewColumn Header="  Name  " 
+                                            DisplayMemberBinding="{Binding Path=NameBaseStation,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                            <GridViewColumn Header="  Num Of Available Charging  " 
+                                            DisplayMemberBinding="{Binding Path=NumOfAvailableChargingPositions,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                            <GridViewColumn Header="  Num Of Busy Charging  " 
+                                            DisplayMemberBinding="{Binding Path=NumOfBusyChargingPositions,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                        </GridView>
+                    </ListView.View>
+                    <ListView.Resources>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#DFA458"/>
+                                </Trigger>
+                                <Trigger  Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#D48224" />
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </Trigger>
+                            </Style.Triggers>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Style>
+
+                    </ListView.Resources>
+                    <ListView.LayoutTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1" ScaleY="1" CenterY="0" CenterX="0"/>
+                            <SkewTransform CenterY="0" CenterX="0"/>
+                            <RotateTransform Angle="0" CenterY="0" CenterX="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ListView.LayoutTransform>
+                    <ListView.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="-2"/>
+                        </TransformGroup>
+                    </ListView.RenderTransform>
+                </ListView>
+            </TabItem>
+
         </TabControl>
 
     </Grid>

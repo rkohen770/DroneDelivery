@@ -42,14 +42,16 @@ namespace PL
             MyUser = user;
             //reset list of ststions
             listStations = new ObservableCollection<BaseStationForList>(bl.GetAllBaseStationsBo());
+            LVListBaseStation.ItemsSource = listStations;
 
             //reset the list of the drones   
             listDrone = new ObservableCollection<DroneForList>(bl.GetAllDronesBo());
+            LVListDrones.ItemsSource = listDrone;
 
             ChangeClient.DataContext = MyUser;
             //check the status of the drones
             //foreach (var d in listDrone) d.DroneStatus(1);
-            LVListDrones.ItemsSource = listDrone;
+            
            // cmbDronesID.ItemsSource = listDrone;
             userGrid.DataContext = MyUser;
 
@@ -63,6 +65,11 @@ namespace PL
             //reset the list of the drones   
             listDrone = new ObservableCollection<DroneForList>(bl.GetAllDronesBo());
             LVListDrones.ItemsSource = listDrone;
+
+            //reset the list of the base station  
+            listStations = new ObservableCollection<BaseStationForList>(bl.GetAllBaseStationsBo());
+            LVListBaseStation.ItemsSource = listStations;
+
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             // cmbDronesID.ItemsSource = listDrone;
@@ -78,7 +85,17 @@ namespace PL
             LVListDrones.ItemsSource = bl.GetAllDronesBo();
             LVListDrones.Items.Refresh();
         }
-    
+
+        /// <summary>
+        /// A button that refresh the list of drones.
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void RefreshDronesButton_Click(object sender, RoutedEventArgs e)
+        {
+            LVListDrones.ItemsSource = bl.GetAllDronesBo().OrderBy(d=>d.DroneStatus);
+            LVListDrones.Items.Refresh();
+        }
 
         /// <summary>
         /// an event to show the details line window
