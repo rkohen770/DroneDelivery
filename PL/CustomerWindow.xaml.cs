@@ -2,6 +2,7 @@
 using BO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -25,6 +26,15 @@ namespace PL
         private IBL bl = BLFactory.GetBL();
         private CustomerForList customer { get; set; }
         private MainWindow mainWindow;
+        /// <summary>
+        /// collection of parcel that customers send
+        /// </summary>
+        ObservableCollection<ParcelAtCustomer> listForCustomers;
+        /// <summary>
+        /// collection of parcel that customers getting
+        /// </summary>
+        ObservableCollection<ParcelAtCustomer> listToCustomers;
+
 
         public CustomerWindow()
         {
@@ -46,8 +56,7 @@ namespace PL
             NameOfCostomer.Visibility = Visibility.Visible;
             PhoneOfCustomer.Visibility = Visibility.Visible;
             LocationOfCustomer.Visibility = Visibility.Visible;
-            //FromCustomer.Visibility = Visibility.Hidden;
-            //ToCustomer.Visibility = Visibility.Hidden;
+           
         }
         /// <summary>
         /// This constractor is for customer display
@@ -55,33 +64,32 @@ namespace PL
         /// <param name="bl"></param>
         /// <param name="drone"></param>
         /// <param name="mainWindow"></param>
-        public CustomerWindow(IBL bl, CustomerForList customerForList, MainWindow mainWindow)
+        public CustomerWindow(IBL bl, CustomerForList customerDetails, MainWindow mainWindow)
         {
             InitializeComponent();
             this.bl = bl;
-            this.customer = customerForList;
+            this.customer = customerDetails;
             this.mainWindow = mainWindow;
-            
-            
+            Customer customer = bl.GetCustomer(customerDetails.CustomerID);
+            ID.Text = customer.CustomerId.ToString();
+            NameOfCostomer.Text = customer.NameOfCustomer;
+            PhoneOfCustomer.Text = customer.PhoneOfCustomer.ToString();
+            LocationOfCustomer.Text = customer.LocationOfCustomer.ToString();
+            //reset list of parcel that customers send
+            listForCustomers = new ObservableCollection<ParcelAtCustomer>(customer.FromCustomer);
+            LVListForCustomers.ItemsSource = listForCustomers;
+            //reset list of parcel that customers getting
+            listToCustomers = new ObservableCollection<ParcelAtCustomer>(customer.ToCustomer);
+            LVListToCustomers.ItemsSource = listToCustomers;
+
+
             ID.Visibility = Visibility.Visible;
             NameOfCostomer.Visibility = Visibility.Visible;
             PhoneOfCustomer.Visibility = Visibility.Visible;
             LocationOfCustomer.Visibility = Visibility.Visible;
-           //FromCustomer.Visibility = Visibility.Hidden;
-           //ToCustomer.Visibility = Visibility.Hidden;
 
-            //ID.IsReadOnly = true;
-            //ID.Text = drone.DroneId.ToString();
-            //Model.Text = drone.DroneModel;
-            //MaxWeight.Text = drone.MaxWeight.ToString();
-            //Battery.Text = drone.DroneBattery.ToString();
-            //Status.IsReadOnly = true;
-            //Status.Text = drone.DroneStatus.ToString();
-            //stationID.Width = 200;
-            //stationID.Margin = new Thickness(30, 145, 0, 0);
-            //stationID.Content = "Parcel Num Is Transferred";
-            //StationID.Text = drone.ParcelNumIsTransferred.ToString();
-            //CurrentLocation.Text = drone.CurrentLocation.ToString();
+
+
         }
 
         private void CustomerIdTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -89,5 +97,6 @@ namespace PL
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
     }
 }

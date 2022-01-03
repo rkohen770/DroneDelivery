@@ -11,7 +11,7 @@
         TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto">
     <Window.Resources>
         <local:DroneStatusToImage x:Key="DroneStatusConvert"/>
-        <local:DroneWeightCategoriesToImage x:Key="DroneWeightConvert"/>
+        <local:WeightCategoriesToImage x:Key="DroneWeightConvert"/>
         <local:DroneBattery x:Key="DroneBatteryConvert"/>
         <local:DroneCurrentLocation x:Key="DroneLocationConvert"/>
     </Window.Resources>
@@ -84,7 +84,7 @@
                         <ListView.View>
 
                             <GridView>
-                                <GridViewColumn Header="  Drone Id  " DisplayMemberBinding="{Binding Path=DroneId,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                                <GridViewColumn Header="  Drone ID  " DisplayMemberBinding="{Binding Path=DroneId,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
                                 <GridViewColumn Header="  Model  " DisplayMemberBinding="{Binding Path=DroneModel,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="  Max Weight  "  >
                                     <GridViewColumn.CellTemplate>
@@ -220,14 +220,20 @@
                     <ListView.View>
 
                         <GridView>
-                            <GridViewColumn Header="  BaseStation Id  " 
-                                            DisplayMemberBinding="{Binding Path=BaseStationId,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-                            <GridViewColumn Header="  Name  " 
-                                            DisplayMemberBinding="{Binding Path=NameBaseStation,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                            <GridViewColumn Header="  Num Of Available Charging  " 
-                                            DisplayMemberBinding="{Binding Path=NumOfAvailableChargingPositions,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                            <GridViewColumn Header="  Num Of Busy Charging  " 
-                                            DisplayMemberBinding="{Binding Path=NumOfBusyChargingPositions,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                            <GridViewColumn Header="  Customer ID  " 
+                                            DisplayMemberBinding="{Binding Path=CustomerID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                            <GridViewColumn Header="  Customer name  " 
+                                            DisplayMemberBinding="{Binding Path=CustomerName,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                            <GridViewColumn Header="  Phone  " 
+                                            DisplayMemberBinding="{Binding Path=Phone,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                            <GridViewColumn Header="  sent and delivered  " 
+                                            DisplayMemberBinding="{Binding Path=SentAndDelivered,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                            <GridViewColumn Header="  sent and not delivered  " 
+                                            DisplayMemberBinding="{Binding Path=SentAndNotDelivered,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                            <GridViewColumn Header="  received  " 
+                                            DisplayMemberBinding="{Binding Path=Received,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                            <GridViewColumn Header="  On the way to customer  " 
+                                            DisplayMemberBinding="{Binding Path=OnTheWayToCustomer,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         </GridView>
                     </ListView.View>
                     <ListView.Resources>

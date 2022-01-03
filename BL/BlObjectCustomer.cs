@@ -109,7 +109,7 @@ namespace BO
                         (parcel.Scheduled != null) ? BO.ParcelStatus.Associated : BO.ParcelStatus.Defined;
                     ParcelAtCustomer parcelAt = new()
                     {
-                        ParcelId = parcel.Id,
+                        ParcelID = parcel.Id,
                         Weight = (BO.WeightCategories)parcel.Weight,
                         Priorities = (BO.Priorities)parcel.priority,
                         ParcelStatus = ParcelStatus,
@@ -134,7 +134,7 @@ namespace BO
                         (parcel.Scheduled != null) ? BO.ParcelStatus.Associated : BO.ParcelStatus.Defined;
                     ParcelAtCustomer parcelAt = new()
                     {
-                        ParcelId = parcel.Id,
+                        ParcelID = parcel.Id,
                         Weight = (BO.WeightCategories)parcel.Weight,
                         Priorities = (BO.Priorities)parcel.priority,
                         ParcelStatus = ParcelStatus,
@@ -209,13 +209,13 @@ namespace BO
         {
             return new()
             {
-                IdCustomer = customer.CustomerId,
-                NameOfCustomer = customer.NameOfCustomer,
+                CustomerID = customer.CustomerId,
+                CustomerName = customer.NameOfCustomer,
                 Phone = customer.PhoneOfCustomer,
-                NumParcelsSentAndNotDelivered = customer.FromCustomer.Where(p => p.ParcelStatus == ParcelStatus.Provided).Count(),
-                NumParcelsSentAndDelivered = customer.FromCustomer.Where(p => p.ParcelStatus != ParcelStatus.Provided).Count(),
-                NumParcelsReceived = customer.ToCustomer.Where(p => p.ParcelStatus == ParcelStatus.Provided).Count(),
-                SeveralParcelsOnTheWayToCustomer = customer.ToCustomer.Where(p => p.ParcelStatus != ParcelStatus.Provided).Count()
+                SentAndNotDelivered = customer.FromCustomer.Where(p => p.ParcelStatus == ParcelStatus.Provided).Count(),
+                SentAndDelivered = customer.FromCustomer.Where(p => p.ParcelStatus != ParcelStatus.Provided).Count(),
+                Received = customer.ToCustomer.Where(p => p.ParcelStatus == ParcelStatus.Provided).Count(),
+                OnTheWayToCustomer = customer.ToCustomer.Where(p => p.ParcelStatus != ParcelStatus.Provided).Count()
             };
         }
     
