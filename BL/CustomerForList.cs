@@ -8,13 +8,13 @@ namespace BO
 {
     public class CustomerForList
     {
-        public int IdCustomer { get; set; }
-        public string NameOfCustomer { get; set; }
+        public int CustomerID { get; set; }
+        public string CustomerName { get; set; }
         public string Phone { get; set; }
-        public int NumParcelsSentAndDelivered { get; set; }
-        public int NumParcelsSentAndNotDelivered { get; set; }
-        public int NumParcelsReceived { get; set; }
-        public int SeveralParcelsOnTheWayToCustomer { get; set; }
+        public int SentAndDelivered { get; set; }
+        public int SentAndNotDelivered { get; set; }
+        public int Received { get; set; }
+        public int OnTheWayToCustomer { get; set; }
 
         public override string ToString()
         {
