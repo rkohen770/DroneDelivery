@@ -2,7 +2,6 @@
 using BO;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -27,17 +26,9 @@ namespace PL
         private CustomerForList customer { get; set; }
         private MainWindow mainWindow;
 
-        /// <summary>
-        /// collection of parcel from customers
-        /// </summary>
-        ObservableCollection<CustomerForList> listFromCustomers;
-        /// <summary>
-        /// collection of parcel to customers
-        /// </summary>
-        ObservableCollection<CustomerForList> listToCustomers;
-
         public CustomerWindow()
         {
+            DialogResult = true;
             InitializeComponent();
         }
         /// <summary>
@@ -55,23 +46,14 @@ namespace PL
             NameOfCostomer.Visibility = Visibility.Visible;
             PhoneOfCustomer.Visibility = Visibility.Visible;
             LocationOfCustomer.Visibility = Visibility.Visible;
-            //.Visibility = Visibility.Hidden;
+            //FromCustomer.Visibility = Visibility.Hidden;
             //ToCustomer.Visibility = Visibility.Hidden;
-
-
-            //reset list of parcel from customers
-            listFromCustomers = new ObservableCollection<CustomerForList>(bl.GetAllCustomersBo());
-            LVListFromCustomers.ItemsSource = listFromCustomers;
-
-            //reset list of parcel to customers
-            listToCustomers = new ObservableCollection<CustomerForList>(bl.GetAllCustomersBo());
-            LVListToCustomers.ItemsSource = listToCustomers;
         }
         /// <summary>
         /// This constractor is for customer display
         /// </summary>
         /// <param name="bl"></param>
-        /// <param name="customerForList"></param>
+        /// <param name="drone"></param>
         /// <param name="mainWindow"></param>
         public CustomerWindow(IBL bl, CustomerForList customerForList, MainWindow mainWindow)
         {
@@ -85,18 +67,8 @@ namespace PL
             NameOfCostomer.Visibility = Visibility.Visible;
             PhoneOfCustomer.Visibility = Visibility.Visible;
             LocationOfCustomer.Visibility = Visibility.Visible;
-            //FromCustomer.Visibility = Visibility.Hidden;
-            //ToCustomer.Visibility = Visibility.Hidden;
-
-
-
-            //reset list of parcel from customers
-            listFromCustomers = new ObservableCollection<CustomerForList>(bl.GetAllCustomersBo());
-            LVListFromCustomers.ItemsSource = listFromCustomers;
-
-            //reset list of parcel to customers
-            listToCustomers = new ObservableCollection<CustomerForList>(bl.GetAllCustomersBo());
-            LVListToCustomers.ItemsSource = listToCustomers;
+           //FromCustomer.Visibility = Visibility.Hidden;
+           //ToCustomer.Visibility = Visibility.Hidden;
 
             //ID.IsReadOnly = true;
             //ID.Text = drone.DroneId.ToString();
@@ -117,7 +89,5 @@ namespace PL
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
-
-     
     }
 }

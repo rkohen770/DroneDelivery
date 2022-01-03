@@ -11,7 +11,7 @@
         TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto">
     <Window.Resources>
         <local:DroneStatusToImage x:Key="DroneStatusConvert"/>
-        <local:WeightCategoriesToImage x:Key="DroneWeightConvert"/>
+        <local:DroneWeightCategoriesToImage x:Key="DroneWeightConvert"/>
         <local:DroneBattery x:Key="DroneBatteryConvert"/>
         <local:DroneCurrentLocation x:Key="DroneLocationConvert"/>
     </Window.Resources>

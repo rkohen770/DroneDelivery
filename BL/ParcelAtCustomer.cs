@@ -8,7 +8,7 @@ namespace BO
 {
     public class ParcelAtCustomer
     {
-        public int ParcelID { get; set; }
+        public int ParcelId { get; set; }
         public WeightCategories Weight { get; set; }
         public Priorities Priorities { get; set; }
         public ParcelStatus ParcelStatus { get; set; }

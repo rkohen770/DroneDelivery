@@ -27,7 +27,7 @@ namespace BO
                 //add customer fields in BL.
                 BO.Customer customer = new BO.Customer()
                 {
-                    CustomerID = id,
+                    CustomerId = id,
                     NameOfCustomer = name,
                     PhoneOfCustomer = phone,
                     LocationOfCustomer = location
@@ -109,7 +109,7 @@ namespace BO
                         (parcel.Scheduled != null) ? BO.ParcelStatus.Associated : BO.ParcelStatus.Defined;
                     ParcelAtCustomer parcelAt = new()
                     {
-                        ParcelID = parcel.Id,
+                        ParcelId = parcel.Id,
                         Weight = (BO.WeightCategories)parcel.Weight,
                         Priorities = (BO.Priorities)parcel.priority,
                         ParcelStatus = ParcelStatus,
@@ -134,7 +134,7 @@ namespace BO
                         (parcel.Scheduled != null) ? BO.ParcelStatus.Associated : BO.ParcelStatus.Defined;
                     ParcelAtCustomer parcelAt = new()
                     {
-                        ParcelID = parcel.Id,
+                        ParcelId = parcel.Id,
                         Weight = (BO.WeightCategories)parcel.Weight,
                         Priorities = (BO.Priorities)parcel.priority,
                         ParcelStatus = ParcelStatus,
@@ -149,7 +149,7 @@ namespace BO
 
                 return new()
                 {
-                    CustomerID = customerId,
+                    CustomerId = customerId,
                     NameOfCustomer = customer.Name,
                     PhoneOfCustomer = customer.Phone,
                     LocationOfCustomer = new() { Lattitude = customer.Lattitude, Longitude = customer.Longitude },
@@ -209,7 +209,7 @@ namespace BO
         {
             return new()
             {
-                IdCustomer = customer.CustomerID,
+                IdCustomer = customer.CustomerId,
                 NameOfCustomer = customer.NameOfCustomer,
                 Phone = customer.PhoneOfCustomer,
                 NumParcelsSentAndNotDelivered = customer.FromCustomer.Where(p => p.ParcelStatus == ParcelStatus.Provided).Count(),
