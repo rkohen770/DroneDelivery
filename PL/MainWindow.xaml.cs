@@ -141,7 +141,7 @@ namespace PL
         #region Base Station
 
         /// <summary>
-        /// an event to show the details base station window
+        /// an event to show the details line window
         /// </summary>
         private void ShowBaseStationDetails_Click(object sender, MouseButtonEventArgs e)
         {

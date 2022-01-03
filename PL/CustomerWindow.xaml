@@ -6,12 +6,18 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="CustomerWindow" Height="500" Width="400">
+    <Window.Resources>
+        <local:WeightCategoriesToImage x:Key="CustomerWeightConvert"/>
+        <local:PriorityCategoriesToImage x:Key="PriorityCategories"/>
+        <local:ParcelStatusToImage x:Key="ParcelStatus"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
         <Label Content="Customer ID" Grid.Row="0" HorizontalAlignment="Left" Height="28" Margin="30,25,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
         <TextBox x:Name="ID" Grid.Row="0" HorizontalAlignment="Left" Height="31" Margin="205,25,0,0" TextWrapping="Wrap" Text="{Binding Path=CustomerId,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Width="133" MaxLength="4" PreviewTextInput="CustomerIdTextBox_PreviewTextInput" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         <Label Content="Name" Grid.Row="0" HorizontalAlignment="Left" Height="28" Margin="30,65,0,0" VerticalAlignment="Top" Width="136" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
@@ -20,12 +26,73 @@
         <TextBox x:Name="PhoneOfCustomer" Grid.Row="0" HorizontalAlignment="Left" Height="31" Margin="205,105,0,0" TextWrapping="Wrap" Text="{Binding Path=PhoneOfCustomer,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         <Label x:Name="Location" Grid.Row="0" Content="Location" HorizontalAlignment="Left" Height="28" Margin="30,145,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
         <TextBox x:Name="LocationOfCustomer" Grid.Row="0" HorizontalAlignment="Left" Height="31" Margin="205,145,0,0" Text="{Binding Path=LocationOfCustomer,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True" VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        </Grid>
+        <Label Content="Parcel from customer" Grid.Row="1" Grid.Column="0"
+               HorizontalAlignment="Left" Height="28" Margin="120,0,0,0" 
+               VerticalAlignment="Top" Width="170" RenderTransformOrigin="0.5,0.609"
+               FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2" />
+        <ListView x:Name="LVListFromCustomers" Grid.Row="1" 
+                  ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
+                  RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
+                  FontWeight="Normal" Margin="0,30,0,0" Grid.ColumnSpan="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="  Parcel ID  " DisplayMemberBinding="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                    <GridViewColumn Header="  Weight  " DisplayMemberBinding="{Binding Path=Weight, Converter={StaticResource CustomerWeightConvert}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }" />
+                    <GridViewColumn Header="  Priorities  " DisplayMemberBinding="{Binding Path=Priorities, Converter={StaticResource PriorityCategories}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }" />
+                    <GridViewColumn Header="  Parcel status  " DisplayMemberBinding="{Binding Path=ParcelStatus, Converter={StaticResource ParcelStatus}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }" />
+                    <GridViewColumn Header="  Source or target  " DisplayMemberBinding="{Binding Path=SourceOrTarget , UpdateSourceTrigger=PropertyChanged, Mode=OneWay }" />
+                </GridView>
+            </ListView.View>
 
-    <!--<Label Grid.Row="0" Content="From customer" HorizontalAlignment="Left" Height="28" Margin="30,185,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-        <TextBox x:Name="FromCustomer" Grid.Row="0" HorizontalAlignment="Left" Text="{Binding Path=FromCustomer,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Height="31" Margin="205,185,0,0"  VerticalAlignment="Top" TextWrapping="Wrap" IsReadOnlyCaretVisible="True" Width="133" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <Label x:Name="ToCustomer" Grid.Row="0" Content="To customer" HorizontalAlignment="Left" Height="28" Margin="30,225,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-        <TextBox Grid.Row="0" Text="{Binding Path=ToCustomer, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True" HorizontalAlignment="Left" Height="31" Margin="205,225,0,0"  VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />-->
+            <Label Content="Parcel to customer" Grid.Row="2" Grid.Column="0"
+               HorizontalAlignment="Left" Height="28" Margin="120,0,0,0" 
+               VerticalAlignment="Top" Width="170" RenderTransformOrigin="0.5,0.609"
+               FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2" />
 
-
+            <ListView x:Name="LVListToCustomers" Grid.Row="2" 
+                  ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
+                  RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
+                  FontWeight="Normal" Margin="0,30,0,0" Grid.ColumnSpan="2">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="  Parcel ID  " DisplayMemberBinding="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                        <GridViewColumn Header="  Weight  " DisplayMemberBinding="{Binding Path=Weight, Converter={StaticResource CustomerWeightConvert}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }" />
+                        <GridViewColumn Header="  Priorities  " DisplayMemberBinding="{Binding Path=Weight, Converter={StaticResource PriorityCategories}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }" />
+                        <GridViewColumn Header="  Parcel status  " DisplayMemberBinding="{Binding Path=Weight, Converter={StaticResource ParcelStatus}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }" />
+                        <GridViewColumn Header="  Source or target  " DisplayMemberBinding="{Binding Path=Weight , UpdateSourceTrigger=PropertyChanged, Mode=OneWay }" />
+                    </GridView>
+                </ListView.View>
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#DFA458"/>
+                            </Trigger>
+                            <Trigger  Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#D48224" />
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                        </Style.Triggers>
+                        <Setter Property="Foreground" Value="Black"/>
+                    </Style>
+                </ListView.Resources>
+                <ListView.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1" ScaleY="1" CenterY="0" CenterX="0"/>
+                        <SkewTransform CenterY="0" CenterX="0"/>
+                        <RotateTransform Angle="0" CenterY="0" CenterX="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ListView.LayoutTransform>
+                <ListView.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-2"/>
+                    </TransformGroup>
+                </ListView.RenderTransform>
+            </ListView>
+        </ListView>
+    </Grid>
 </Window>

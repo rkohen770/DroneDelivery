@@ -258,8 +258,8 @@ namespace BO
                 BO.Parcel parcel_BO = new BO.Parcel()
                 {
                     ParcelId = parcelId,
-                    SenderOfParcel = new() { CustomerId = sender.CustomerId, CustomerName = sender.NameOfCustomer },
-                    TargetToParcel = new() { CustomerId = target.CustomerId, CustomerName = target.NameOfCustomer },
+                    SenderOfParcel = new() { CustomerId = sender.CustomerID, CustomerName = sender.NameOfCustomer },
+                    TargetToParcel = new() { CustomerId = target.CustomerID, CustomerName = target.NameOfCustomer },
                     Weight = (BO.WeightCategories)parcel.Weight,
                     Priorities = (BO.Priorities)parcel.priority,
                     Requested = parcel.Requested,

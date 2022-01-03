@@ -10,8 +10,7 @@ using System.IO;
 
 namespace PL
 {
-   
-    public class DroneWeightCategoriesToImage : IValueConverter
+   public class WeightCategoriesToImage : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -27,7 +26,7 @@ namespace PL
                     return "/Images/liver_24px.png";
 
             }
-            return Enum.GetName(typeof(BO.DroneStatus), value) + ".png";
+            return Enum.GetName(typeof(BO.WeightCategories), value) + ".png";
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -85,4 +84,56 @@ namespace PL
 
         }
     }
+
+
+    public class PriorityCategoriesToImage : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            switch ((BO.Priorities)value)
+            {
+                case BO.Priorities.Normal:
+                    return "/Images/Normal_24px.png";
+
+                case BO.Priorities.Fast:
+                    return "/Images/Fast_24px.png";
+
+                case BO.Priorities.Emergency:
+                    return "/Images/Emergency_24px.png";
+
+            }
+            return Enum.GetName(typeof(BO.DroneStatus), value) + ".png";
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ParcelStatusToImage : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            switch ((BO.ParcelStatus)value)
+            {
+                case BO.ParcelStatus.Defined:
+                    return "/Images/Defined_24px.png";
+
+                case BO.ParcelStatus.Associated:
+                    return "/Images/Associated_24px.png";
+
+                case BO.ParcelStatus.WasCollected:
+                    return "/Images/WasCollected_24px.png";
+
+                case BO.ParcelStatus.Provided:
+                    return "/Images/Provided_24px.png";
+            }
+            return Enum.GetName(typeof(BO.ParcelStatus), value) + ".png";
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }
