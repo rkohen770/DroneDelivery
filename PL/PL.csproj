@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Images\charged_battery_24px.png" />
+    <None Remove="Images\charging_battery_24px.png" />
     <None Remove="Images\Check_Circle_24px.png" />
     <None Remove="Images\drone_image.jpeg" />
     <None Remove="Images\drone_in_delivery_24px.png" />
@@ -26,6 +27,7 @@
 
   <ItemGroup>
     <Resource Include="Images\charged_battery_24px.png" />
+    <Resource Include="Images\charging_battery_24px.png" />
     <Resource Include="Images\Check_Circle_24px.png" />
     <Resource Include="Images\drone_image.jpeg" />
     <Resource Include="Images\drone_in_delivery_24px.png" />

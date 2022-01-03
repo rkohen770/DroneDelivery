@@ -77,6 +77,7 @@
                VerticalContentAlignment="Center"/>
         <ListView x:Name="LVDroneInChargings" Grid.Row="1" 
                   ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
+                  MouseDoubleClick="ShowDroneDetails_Click"
                   RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
                   FontWeight="Normal" Margin="120,30,120,0"  >
             <ListView.View>

@@ -151,6 +151,29 @@ namespace PL
             LVListBaseStations.Items.Refresh();
         }
 
+        /// <summary>
+        /// A button that opens a window for adding a drone
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void AddBaseStationButton_Click(object sender, RoutedEventArgs e)
+        {
+            new BaseStationWindow(bl, this).ShowDialog();
+            LVListDrones.ItemsSource = bl.GetAllDronesBo();
+            LVListDrones.Items.Refresh();
+        }
+
+        /// <summary>
+        /// A button that refresh the list of base station.
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void RefreshBaseStationButton_Click(object sender, RoutedEventArgs e)
+        {
+            LVListBaseStations.ItemsSource = bl.GetAllBaseStationsBo().OrderBy(d => d.NumOfAvailableChargingPositions);
+            LVListBaseStations.Items.Refresh();
+        }
+
         #endregion
 
         #region Customer

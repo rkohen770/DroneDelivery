@@ -206,5 +206,13 @@ namespace BLApi
         BO.User GetUser(string userName);
         #endregion
 
+        #region clone
+        /// <summary>
+        /// Converts from object drone to object drone for list
+        /// </summary>
+        /// <param name="drone">drone</param>
+        /// <returns>drone for list</returns>
+        public DroneForList CloneDrone(BO.Drone drone);
+        #endregion
     }
 }

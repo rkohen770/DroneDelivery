@@ -279,7 +279,7 @@ namespace BO
                 List<DroneForList> list = new();
                 foreach (var drone_l in droneForLists)
                 {
-                    DroneForList droneFor = cloneDrone(GetDrone(drone_l.DroneId));
+                    DroneForList droneFor = CloneDrone(GetDrone(drone_l.DroneId));
                     if (drone_l.DroneStatus == DroneStatus.Delivery)
                     {
                         droneFor.ParcelNumIsTransferred = dal.GetAllParcelsWithoutSpecialDron(p => p.DroneId == drone_l.DroneId)
@@ -301,7 +301,7 @@ namespace BO
 
             foreach (var drone in droneForLists.FindAll(p))
             {
-                DroneForList droneFor = cloneDrone(GetDrone(drone.DroneId));
+                DroneForList droneFor = CloneDrone(GetDrone(drone.DroneId));
                 if (drone.DroneStatus == DroneStatus.Delivery)
                 {
                     droneFor.ParcelNumIsTransferred = dal.GetAllParcelsWithoutSpecialDron(p => p.DroneId == drone.DroneId)
@@ -318,7 +318,7 @@ namespace BO
         /// </summary>
         /// <param name="drone">drone</param>
         /// <returns>drone for list</returns>
-        private DroneForList cloneDrone(BO.Drone drone)
+        public DroneForList CloneDrone(BO.Drone drone)
         {
             return new DroneForList
             {

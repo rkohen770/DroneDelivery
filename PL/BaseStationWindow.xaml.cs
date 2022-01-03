@@ -31,6 +31,25 @@ namespace PL
             InitializeComponent();
         }
 
+        /// <summary>
+        /// constractor for update the base station
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="baseStationDetails"></param>
+        /// <param name="mainWindow"></param>
+        public BaseStationWindow(IBL bl, MainWindow mainWindow)
+        {
+            InitializeComponent();
+            this.bl = bl;
+            this.mainWindow = mainWindow;
+        }
+
+        /// <summary>
+        /// constractor for dysplay a base station
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="baseStationDetails"></param>
+        /// <param name="mainWindow"></param>
         public BaseStationWindow(IBL bl, BaseStationForList baseStationDetails, MainWindow mainWindow)
         {
             InitializeComponent();
@@ -57,6 +76,15 @@ namespace PL
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void ShowDroneDetails_Click(object sender, MouseButtonEventArgs e)
+        {
+            DroneInCharging droneDetails = ((ListView)sender).SelectedItem as DroneInCharging;
+            DroneForList drone= bl.CloneDrone(bl.GetDrone(droneDetails.DroneId));
+            new DroneWindow(bl, drone, mainWindow).ShowDialog();
+            LVDroneInChargings.ItemsSource = bl.GetAllDronesBo();
+            LVDroneInChargings.Items.Refresh();
         }
 
 
