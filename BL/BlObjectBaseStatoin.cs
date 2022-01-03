@@ -10,7 +10,7 @@ using DO;
 
 namespace BO
 {
-    public partial class BlObject : BLApi.IBL
+    public partial class BlObject : IBL
     {
         #region ADD
         /// <summary>

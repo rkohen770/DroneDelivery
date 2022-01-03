@@ -46,10 +46,10 @@ namespace PL
                     return "/Images/Check_Circle_24px.png";
 
                 case BO.DroneStatus.Maintenance:
-                    return "/Images/maintenance_24px.png";
+                    return "/Images/charged_battery_24px.png";
 
                 case BO.DroneStatus.Delivery:
-                    return "/Images/home_24px.png";
+                    return "/Images/drone_in_delivery_24px.png";
 
             }
             return Enum.GetName(typeof(BO.DroneStatus), value) + ".png";

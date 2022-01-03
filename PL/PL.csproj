@@ -7,9 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\charged_battery_24px.png" />
     <None Remove="Images\Check_Circle_24px.png" />
     <None Remove="Images\drone_image.jpeg" />
+    <None Remove="Images\drone_in_delivery_24px.png" />
     <None Remove="Images\easy_24px.png" />
+    <None Remove="Images\hand_box_24px.png" />
     <None Remove="Images\home_24px.png" />
     <None Remove="Images\home_address_24px.png" />
     <None Remove="Images\liver_24px.png" />
@@ -22,9 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\charged_battery_24px.png" />
     <Resource Include="Images\Check_Circle_24px.png" />
     <Resource Include="Images\drone_image.jpeg" />
+    <Resource Include="Images\drone_in_delivery_24px.png" />
     <Resource Include="Images\easy_24px.png" />
+    <Resource Include="Images\hand_box_24px.png" />
     <Resource Include="Images\home_24px.png" />
     <Resource Include="Images\home_address_24px.png" />
     <Resource Include="Images\liver_24px.png" />
