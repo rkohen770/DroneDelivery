@@ -20,37 +20,35 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
-            
-        
-        <Label Content="Base Station ID" Grid.Row="0" Grid.Column="0"
+
+            <Label Content="Base Station ID" Grid.Row="0" Grid.Column="0"
                HorizontalAlignment="Left" VerticalAlignment="Top"
                Height="28" Width="121" Margin="27,25,0,0" 
                RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-        <TextBox x:Name="ID" Grid.Row="0" Grid.Column="1" 
+            <TextBox x:Name="ID" Grid.Row="0" Grid.Column="1" 
                  HorizontalAlignment="Left" Height="31" Margin="30,25,0,0" 
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="133" MaxLength="5" 
                  Text="{Binding Path=BaseStationId,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                  PreviewTextInput="StationIdTextBox_PreviewTextInput" 
                  HorizontalContentAlignment="Center"
                  VerticalContentAlignment="Center" />
-        <Label Content="Name" Grid.Row="0" Grid.Column="0" 
+            <Label Content="Name" Grid.Row="0" Grid.Column="0" 
                HorizontalAlignment="Left" Height="28" 
                Margin="27,65,0,0" VerticalAlignment="Top" 
                Width="121" RenderTransformOrigin="0.326,0.754" 
                FontSize="14" FontWeight="Bold" />
-        <TextBox x:Name="Name" Grid.Row="0"  Grid.Column="1" 
+            <TextBox x:Name="Name" Grid.Row="0"  Grid.Column="1" 
                  HorizontalAlignment="Left" Height="31" Margin="30,65,0,0" 
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="133"
                  HorizontalContentAlignment="Center" 
                  VerticalContentAlignment="Center"
                  Text="{Binding Path=Name,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  />
-        <Label x:Name="currentLocation" Content="Current Location" 
+            <Label x:Name="currentLocation" Content="Current Location" 
                HorizontalAlignment="Left" Height="28" Grid.Column="0"
                Margin="27,105,0,0" VerticalAlignment="Top" 
                Width="121" RenderTransformOrigin="0.326,0.754" 
                FontSize="14" FontWeight="Bold" />
-        <TextBox x:Name="CurrentLocation" 
+            <TextBox x:Name="CurrentLocation" 
                  Grid.Row="0" Grid.Column="1"
                  HorizontalAlignment="Left" Height="31"
                  Margin="30,105,0,0" 
@@ -59,11 +57,11 @@
                  VerticalAlignment="Top" Width="133" 
                  HorizontalContentAlignment="Center" 
                  VerticalContentAlignment="Center" />
-        <Label Content="Num Available Charging" Grid.Row="0" Grid.Column="0"
+            <Label Content="Num Available Charging" Grid.Row="0" Grid.Column="0"
                HorizontalAlignment="Left" Height="28" Margin="27,145,0,0" 
                VerticalAlignment="Top" Width="170" RenderTransformOrigin="0.326,0.754"
                FontSize="14" FontWeight="Bold" />
-        <TextBox x:Name="NumOfAvailableChargingPositions" Grid.Row="0" Grid.Column="1"
+            <TextBox x:Name="NumOfAvailableChargingPositions" Grid.Row="0" Grid.Column="1"
                  Text="{Binding Path=NumOfAvailableChargingPositions,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                  TextWrapping="Wrap" IsReadOnly="True" 
                  HorizontalAlignment="Left" Height="31" 
@@ -71,14 +69,16 @@
                  Width="133" HorizontalContentAlignment="Center" 
                  VerticalContentAlignment="Center" />
         </Grid>
-        <Label Content="Drone In Chargings" Grid.Row="1" Grid.Column="0"
-               HorizontalAlignment="Left" Height="28" Margin="120,0,0,0" 
-               VerticalAlignment="Top" Width="170" RenderTransformOrigin="0.5,0.609"
-               FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2" />
+        <Label Content="Drone In Chargings" Grid.Row="1"
+               HorizontalAlignment="Center" Height="28" 
+               VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.5,0.609"
+               FontSize="14" FontWeight="Bold" 
+               HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Center"/>
         <ListView x:Name="LVDroneInChargings" Grid.Row="1" 
                   ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
                   RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
-                  FontWeight="Normal" Margin="77,30,77,0" Grid.ColumnSpan="2"  >
+                  FontWeight="Normal" Margin="120,30,120,0"  >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="  Drone ID  " DisplayMemberBinding="{Binding Path=DroneId,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />

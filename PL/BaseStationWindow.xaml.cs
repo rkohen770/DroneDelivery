@@ -37,8 +37,12 @@ namespace PL
             this.bl = bl;
             this.baseStationDetails = baseStationDetails;
             this.mainWindow = mainWindow;
+            BaseStation station = bl.GetBaseStation(baseStationDetails.BaseStationId);
+            ID.Text = station.BaseStationId.ToString();
+            Name.Text = station.NameBaseStation.ToString();
+            CurrentLocation.Text = station.Location.ToString();
+            NumOfAvailableChargingPositions.Text = station.NumOfAvailableChargingPositions.ToString();
 
-           BaseStation station = bl.GetBaseStation(baseStationDetails.BaseStationId);
             if (station.DroneInChargings.Count > 0)
                 LVDroneInChargings.ItemsSource = station.DroneInChargings;
 
