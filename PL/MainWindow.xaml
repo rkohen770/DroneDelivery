@@ -85,7 +85,7 @@
 
                             <GridView>
                                 <GridViewColumn Header="  Drone ID  " DisplayMemberBinding="{Binding Path=DroneId,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-                                <GridViewColumn Header="  Model  " DisplayMemberBinding="{Binding Path=DroneModel,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                <GridViewColumn Header="  Model  " DisplayMemberBinding="{Binding Path=DroneModel,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
                                 <GridViewColumn Header="  Max Weight  "  >
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -93,16 +93,24 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="  Battery  " DisplayMemberBinding="{Binding Path=DroneBattery, 
-                                    Converter={StaticResource DroneBatteryConvert}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
+                                <GridViewColumn Header="  Battery  " >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{Binding Path=DroneBattery,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Foreground="#FF186665" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                <Image Grid.Column="1" Width="15" Height="15" Source="/Images/%_24px.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                                 <GridViewColumn Header="  Status  ">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Image Width="30" Height="30">
-                                                <Image.Source>
-                                                    <BitmapImage UriSource="{Binding Path=DroneStatus, Converter={StaticResource DroneStatusConvert}, Mode=OneWay}"/>
-                                                </Image.Source>
-                                            </Image>
+                                            <Image Width="30" Height="30" Source="{Binding Path=DroneStatus, Converter={StaticResource DroneStatusConvert}, Mode=OneWay}"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -161,7 +169,7 @@
                         <Button x:Name="refreshBaseStation" MinWidth="120" Background="#FFD48224" Content="refresh" Click="RefreshBaseStationButton_Click" Height="45"/>
                     </StackPanel>
                     <ListView x:Name="LVListBaseStations" Grid.Row="0" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"
-                          MouseDoubleClick="ShowBaseStationDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="-6,0,0,60" >
+                          MouseDoubleClick="ShowBaseStationDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="0,0,0,60" >
                         <ListView.View>
 
                             <GridView>

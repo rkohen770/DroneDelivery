@@ -12,7 +12,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="150"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid>
@@ -79,7 +79,7 @@
                   ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
                   MouseDoubleClick="ShowDroneDetails_Click"
                   RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
-                  FontWeight="Normal" Margin="120,30,120,0"  >
+                  FontWeight="Normal" Margin="60,30,60,0"  >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="  Drone ID  " DisplayMemberBinding="{Binding Path=DroneId,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\%25_24px.png" />
     <None Remove="Images\Associated_24px.png" />
     <None Remove="Images\charged_battery_24px.png" />
     <None Remove="Images\charging_battery_24px.png" />
@@ -33,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\%_24px.png" />
     <Resource Include="Images\Associated_24px.png" />
     <Resource Include="Images\charged_battery_24px.png" />
     <Resource Include="Images\charging_battery_24px.png" />
