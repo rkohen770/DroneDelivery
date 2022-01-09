@@ -10,6 +10,8 @@
         <local:DroneStatusToImage x:Key="DroneStatusConvert"/>
         <local:WeightCategoriesToImage x:Key="DroneWeightConvert"/>
         <local:DroneBattery x:Key="DroneBatteryConvert"/>
+        <local:NotBooleanToVisibilityConverter x:Key="notBooleanToVisibilityConverter" />
+        <local:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -17,19 +19,71 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Content="Drone ID" Grid.Row="0" HorizontalAlignment="Left" Height="28" Margin="30,25,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-        <TextBox x:Name="ID" Grid.Row="0" HorizontalAlignment="Left" Height="31" Margin="205,25,0,0" TextWrapping="Wrap" Text="{Binding Path=DroneID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Width="133" MaxLength="4" PreviewTextInput="DroneIdTextBox_PreviewTextInput" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <TextBox x:Name="ID" Grid.Row="0" HorizontalAlignment="Left"
+                 Height="31" Margin="205,25,0,0" TextWrapping="Wrap" 
+                 Text="{Binding Path=DroneID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                 VerticalAlignment="Top" Width="133" MaxLength="4" 
+                 PreviewTextInput="DroneIdTextBox_PreviewTextInput" 
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                 IsReadOnly="{Binding Path=IsVisible, ElementName=CurrentLocation}"/>
         <Label Content="Model" Grid.Row="0" HorizontalAlignment="Left" Height="28" Margin="30,65,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-        <TextBox x:Name="Model" Grid.Row="0" HorizontalAlignment="Left" Height="31" Margin="205,65,0,0" TextWrapping="Wrap" Text="{Binding Path=Model,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <TextBox x:Name="Model" Grid.Row="0" HorizontalAlignment="Left"
+                 Height="31" Margin="205,65,0,0" TextWrapping="Wrap"
+                 Text="{Binding Path=Model,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                 VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center"
+                 VerticalContentAlignment="Center" />
         <Label Content="Max Weight" Grid.Row="0" HorizontalAlignment="Left" Height="28" Margin="30,105,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-        <TextBox x:Name="MaxWeight" Grid.Row="0" Text="{Binding Path=MaxWeight,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True" HorizontalAlignment="Left" Height="31" Margin="205,105,0,0"  VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <ComboBox Name="WeightSelector" Grid.Row="0" HorizontalAlignment= "Left"  Height="31" Margin="205,105,0,0"  StaysOpenOnEdit="True" VerticalAlignment="Top" SelectedIndex="-1" Width="133" Text="{Binding Path=MaxWeight,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <TextBox x:Name="Battery" Grid.Row="0" Text="{Binding Path=DroneBattery, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True" HorizontalAlignment="Left" Height="31" Margin="205,225,0,0"  VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <Label x:Name="battery" Grid.Row="0" Content="Battery" HorizontalAlignment="Left" Height="28" Margin="30,225,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-        <Label x:Name="status" Grid.Row="0" Content="Status" HorizontalAlignment="Left" Height="28" Margin="30,185,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-        <TextBox x:Name="Status" Grid.Row="0" HorizontalAlignment="Left" Text="{Binding Path=DroneStatus,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Height="31" Margin="205,185,0,0"  VerticalAlignment="Top" TextWrapping="Wrap" IsReadOnlyCaretVisible="True" Width="133" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <Label x:Name="stationID" Grid.Row="0" Content="Station ID" HorizontalAlignment="Left" Height="28" Margin="30,145,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-        <TextBox x:Name="StationID" Grid.Row="0" HorizontalAlignment="Left" Height="31" Margin="205,145,0,0" TextWrapping="Wrap" Text="{Binding Path=StationID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Width="133" MaxLength="5" PreviewTextInput="DroneIdTextBox_PreviewTextInput" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <Label x:Name="currentLocation" Grid.Row="0" Content="Current Location" HorizontalAlignment="Left" Height="28" Margin="30,265,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
+        <TextBox x:Name="MaxWeight" Grid.Row="0" 
+                 Text="{Binding Path=MaxWeight,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                 TextWrapping="Wrap" HorizontalAlignment="Left" Height="31"
+                 Margin="205,105,0,0"  VerticalAlignment="Top" Width="133"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                 IsReadOnly="{Binding Path=IsVisible, ElementName=CurrentLocation}"
+                 Visibility="{Binding Path=Visibility, ElementName=CurrentLocation}"/>
+        <ComboBox Name="WeightSelector" Grid.Row="0" HorizontalAlignment= "Left" 
+                  Height="31" Margin="205,105,0,0"  StaysOpenOnEdit="True" 
+                  VerticalAlignment="Top" SelectedIndex="-1" Width="133"
+                  Text="{Binding Path=MaxWeight,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                  Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation, Converter={StaticResource notBooleanToVisibilityConverter} }"/>
+        <TextBox x:Name="Battery" Grid.Row="0" 
+                 Text="{Binding Path=DroneBattery, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                 TextWrapping="Wrap" IsReadOnly="True" HorizontalAlignment="Left"
+                 Height="31" Margin="205,225,0,0"  VerticalAlignment="Top" Width="133"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                 Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation, Converter={StaticResource booleanToVisibilityConverter} }"/>
+        <Label x:Name="battery" Grid.Row="0" Content="Battery" 
+               HorizontalAlignment="Left" Height="28" Margin="30,225,0,0"
+               VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"
+               FontSize="14" FontWeight="Bold"
+               Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation, Converter={StaticResource booleanToVisibilityConverter} }"/>
+        <Label x:Name="status" Grid.Row="0" Content="Status" 
+               HorizontalAlignment="Left" Height="28" 
+               Margin="30,185,0,0" VerticalAlignment="Top" Width="121" 
+               RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold"
+               Visibility="{Binding Path=Visibility, ElementName=CurrentLocation}"/>
+        <TextBox x:Name="Status" Grid.Row="0" HorizontalAlignment="Left" 
+                 Text="{Binding Path=DroneStatus,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                 Height="31" Margin="205,185,0,0"  VerticalAlignment="Top"
+                 TextWrapping="Wrap" Width="133"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  
+                 IsReadOnly="{Binding Path=IsVisible, ElementName=CurrentLocation}"
+                 Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation, Converter={StaticResource booleanToVisibilityConverter} }" />
+        <Label x:Name="stationID" Grid.Row="0" Content="Station ID" 
+               HorizontalAlignment="Left" Height="28" Margin="30,145,0,0" 
+               VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754" 
+               FontSize="14" FontWeight="Bold"/>
+        <TextBox x:Name="StationID" Grid.Row="0" HorizontalAlignment="Left"
+                 Height="31" Margin="205,145,0,0" TextWrapping="Wrap"
+                 Text="{Binding Path=StationID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                 VerticalAlignment="Top" Width="133" MaxLength="5" 
+                 PreviewTextInput="DroneIdTextBox_PreviewTextInput" 
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label x:Name="currentLocation" Grid.Row="0" Content="Current Location"
+               HorizontalAlignment="Left" Height="28" Margin="30,265,0,0" 
+               VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"
+               FontSize="14" FontWeight="Bold"
+               Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"/>
         <TextBox x:Name="CurrentLocation" Grid.Row="0" HorizontalAlignment="Left" Height="31" Margin="205,265,0,0" Text="{Binding Path=Location,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True" VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -42,15 +96,37 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="SaveClick" Grid.Row="0" Grid.Column="0" Content="Save drone" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="SaveDroneButton_Click" />
-            <Button Content="Close" Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="CloseButton_Click" />
-            <Button x:Name="Update" Content="Update" Grid.Row="0" Grid.Column="0" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="UpdateDroneButton_Click" />
-            <Button x:Name="Sending" Content="Send for charging" Visibility="Hidden" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="SendingButton_Click" />
-            <Button x:Name="Release" Content="Release from charging" Visibility="Hidden" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="ReleaseButton_Click" />
-            <Button x:Name="Send_Delivery" Content="Sending for delivery" Visibility="Hidden" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="SendDeliveryButton_Click" />
-            <Button x:Name="Collection" Content="Parcel collection" Visibility="Hidden" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="CollectionButton_Click" />
-            <Button x:Name="Parcel_Delivery" Content="Parcel delivery" Visibility="Hidden" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="ParcelDeliveryButton_Click" />
+            <Button x:Name="SaveClick" Grid.Row="0" Grid.Column="0" 
+                    Content="Save drone" HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center" Click="SaveDroneButton_Click"
+                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource notBooleanToVisibilityConverter} }"/>
+            <Button Content="Close" Grid.Row="0" Grid.Column="1" 
+                    HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                    Click="CloseButton_Click" />
+            <Button x:Name="Update" Content="Update" Grid.Row="0" Grid.Column="0" 
+                    HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                    Click="UpdateDroneButton_Click"
+                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"/>
+            <Button x:Name="Sending" Content="Send for charging" Grid.Row="1" Grid.Column="0" 
+                    HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                    Click="SendingButton_Click"
+                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"/>
+            <Button x:Name="Release" Content="Release from charging" Grid.Row="1" 
+                    Grid.Column="1" HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Center" Click="ReleaseButton_Click"
+                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"/>
+            <Button x:Name="Send_Delivery" Content="Sending for delivery" Grid.Row="2"
+                    Grid.Column="0" HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Center" Click="SendDeliveryButton_Click"
+                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"/>
+            <Button x:Name="Collection" Content="Parcel collection"
+                    Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center" Click="CollectionButton_Click"
+                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"/>
+            <Button x:Name="Parcel_Delivery" Content="Parcel delivery" 
+                    Grid.Row="3" Grid.Column="0" HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Center" Click="ParcelDeliveryButton_Click" 
+                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"/>
         </Grid>
-        <!--IsEnabled="{Binding ElementName=Model Path=Text, UpdateSourceTrigger=PropertyChanged}"-->
     </Grid>
 </Window>
