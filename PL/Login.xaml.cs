@@ -77,7 +77,7 @@ namespace PL
                 {
                     user.password = passwordBox.Password;
                     user.UserName = username1.Text;
-                    if ((checkM.IsChecked == true) && (managerP.Password == "buses"))
+                    if ((checkM.IsChecked == true) && (managerP.Password == "drones"))
                     {
                         user.Admin = BO.Permission.Managment;
 

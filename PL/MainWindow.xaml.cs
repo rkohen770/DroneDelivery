@@ -184,6 +184,18 @@ namespace PL
             LVListCustomers.ItemsSource = bl.GetAllCustomersBo();
             LVListCustomers.Items.Refresh();
         }
+        /// <summary>
+        /// A button that opens a window for adding a customer
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void AddCustomerButton_Click(object sender, RoutedEventArgs e)
+        {
+            new CustomerWindow(bl, this).ShowDialog();
+            LVListCustomers.ItemsSource = bl.GetAllCustomersBo();
+            LVListCustomers.Items.Refresh();
+        }
+
 
         #endregion
 

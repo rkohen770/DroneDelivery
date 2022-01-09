@@ -38,7 +38,6 @@ namespace PL
 
         public CustomerWindow()
         {
-            DialogResult = true;
             InitializeComponent();
         }
         /// <summary>
@@ -51,12 +50,12 @@ namespace PL
             InitializeComponent();
             this.bl = bl;
             this.mainWindow = mainWindow;
+            CustomersLocation.Visibility = Visibility.Hidden;
+            longttitude.Visibility = Visibility.Visible;
+            Longttitude.Visibility = Visibility.Visible;
+            lattitude.Visibility = Visibility.Visible;
+            Lattitude.Visibility = Visibility.Visible;
 
-            ID.Visibility = Visibility.Visible;
-            NameOfCostomer.Visibility = Visibility.Visible;
-            PhoneOfCustomer.Visibility = Visibility.Visible;
-            LocationOfCustomer.Visibility = Visibility.Visible;
-           
         }
         /// <summary>
         /// This constractor is for customer display
@@ -72,22 +71,17 @@ namespace PL
             this.mainWindow = mainWindow;
             Customer customer = bl.GetCustomer(customerDetails.CustomerID);
             ID.Text = customer.CustomerId.ToString();
-            NameOfCostomer.Text = customer.NameOfCustomer;
-            PhoneOfCustomer.Text = customer.PhoneOfCustomer.ToString();
-            LocationOfCustomer.Text = customer.LocationOfCustomer.ToString();
+            CustomersName.Text = customer.NameOfCustomer.ToString();
+            CustomersPhone.Text = customer.PhoneOfCustomer.ToString();
+            CustomersLocation.Text = customer.LocationOfCustomer.ToString();
+            Update.Visibility = Visibility.Visible;
+
             //reset list of parcel that customers send
             listForCustomers = new ObservableCollection<ParcelAtCustomer>(customer.FromCustomer);
             LVListForCustomers.ItemsSource = listForCustomers;
             //reset list of parcel that customers getting
             listToCustomers = new ObservableCollection<ParcelAtCustomer>(customer.ToCustomer);
             LVListToCustomers.ItemsSource = listToCustomers;
-
-
-            ID.Visibility = Visibility.Visible;
-            NameOfCostomer.Visibility = Visibility.Visible;
-            PhoneOfCustomer.Visibility = Visibility.Visible;
-            LocationOfCustomer.Visibility = Visibility.Visible;
-
 
 
         }
@@ -98,5 +92,68 @@ namespace PL
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        /// <summary>
+        /// Button for saving the details of the new customer
+        /// </summary>
+        /// <param name="sender">button type</param>
+        /// <param name="e"></param>
+        private void SaveCustomerButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ID.Text == null || CustomersName.Text == null || CustomersPhone.Text == null)
+                    MessageBox.Show("Not all detalis are set");
+                else if (CustomersPhone.Text.Length > 10)
+                    MessageBox.Show("Phone number longs then 5 letters");
+                else
+                {
+                    Location location = new() { Lattitude = double.Parse(Lattitude.Text), Longitude = double.Parse(Longttitude.Text) };
+                    bl.AddCustomerBo(int.Parse(ID.Text), CustomersName.Text, CustomersPhone.Text, location);
+                }
+                MessageBox.Show("Adding a customer was completed successfully");
+
+            }
+            catch (BadCustomerIDException ex)
+            {
+                MessageBox.Show(ex.ID.ToString(), ex.Message + "\nAdding a customer was not completed successfully");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            mainWindow.LVListCustomers.Items.Refresh();
+            Close();
+        }
+
+        /// <summary>
+        /// Button for closing a window
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        /// <summary>
+        /// A button that opens a window for updating a customer
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void UpdateCustomerButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.UpdateCustomerData(int.Parse(ID.Text), CustomersName.Text, CustomersPhone.Text);
+                MessageBox.Show("Update a customer was completed successfully");
+                mainWindow.LVListCustomers.ItemsSource = bl.GetAllCustomersBo();
+                mainWindow.LVListCustomers.Items.Refresh();
+
+            }
+            catch (BadCustomerIDException ex)
+            {
+                MessageBox.Show(ex.ID.ToString(), ex.Message);
+            }
+        }
     }
 }
