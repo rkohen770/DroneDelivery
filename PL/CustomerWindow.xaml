@@ -5,58 +5,102 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="CustomerWindow" Height="496" Width="400">
+        Title="CustomerWindow" Height="591" Width="400">
     <Window.Resources>
         <local:WeightCategoriesToImage x:Key="ParcelAtCustomerWeightCategories"/>
         <local:PrioritiesToImage x:Key="ParcelAtCustomerPrioritiest"/>
         <local:ParcelStatusToImage x:Key="ParcelAtCustomerStatus"/>
+        <local:NotBooleanToVisibilityConverter x:Key="notBooleanToVisibilityConverter"/>
     </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="51*"/>
+            <ColumnDefinition Width="21*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid>
-        <Label Content="Customer ID" Grid.Row="0" HorizontalAlignment="Left" 
+        <Grid Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="188*"/>
+                <ColumnDefinition Width="33*"/>
+                <ColumnDefinition Width="179*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Customer ID" Grid.Row="0" HorizontalAlignment="Left" 
                Height="28" Margin="30,25,0,0" VerticalAlignment="Top" Width="121" 
                RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-        <TextBox x:Name="ID" Grid.Row="0" HorizontalAlignment="Left" Height="31" 
-                 Margin="205,25,0,0" TextWrapping="Wrap" Text="{Binding Path=CustomerId,
+            <TextBox x:Name="ID" Grid.Row="0" HorizontalAlignment="Left" Height="31" 
+                 Margin="17,25,0,0" TextWrapping="Wrap" Text="{Binding Path=CustomerId,
             UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Width="133" 
                  MaxLength="9" PreviewTextInput="CustomerIdTextBox_PreviewTextInput"
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <Label Content="Name" Grid.Row="0" HorizontalAlignment="Left" Height="28" 
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" />
+            <Label Content="Name" Grid.Row="0" HorizontalAlignment="Left" Height="28" 
                Margin="30,65,0,0" VerticalAlignment="Top" Width="136"
                RenderTransformOrigin="0.326,0.754" FontSize="14" FontWeight="Bold" />
-        <TextBox x:Name="NameOfCostomer" Grid.Row="0" HorizontalAlignment="Left" Height="31"
-                 Margin="205,65,0,0" TextWrapping="Wrap" Text="{Binding Path=NameOfCustomer,
+            <TextBox x:Name="CustomersName" Grid.Row="0" HorizontalAlignment="Left" Height="31"
+                 Margin="17,65,0,0" TextWrapping="Wrap" Text="{Binding Path=NameOfCustomer,
             UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Width="133"
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <Label Content="Phone" Grid.Row="0" HorizontalAlignment="Left" Height="28" Margin="30,105,0,0"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" />
+            <Label Content="Phone" Grid.Row="0" HorizontalAlignment="Left" Height="28" Margin="30,105,0,0"
                VerticalAlignment="Top" Width="136" RenderTransformOrigin="0.326,0.754"  FontSize="14" 
                FontWeight="Bold" />
-        <TextBox x:Name="PhoneOfCustomer" Grid.Row="0" HorizontalAlignment="Left" Height="31"
-                 Margin="205,105,0,0" TextWrapping="Wrap" Text="{Binding Path=PhoneOfCustomer,
+            <TextBox x:Name="CustomersPhone" Grid.Row="0" HorizontalAlignment="Left" Height="31"
+                 Margin="17,105,0,0" TextWrapping="Wrap" Text="{Binding Path=PhoneOfCustomer,
             UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Width="133" 
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="10" />
-        <Label x:Name="Location" Grid.Row="0" Content="Location" HorizontalAlignment="Left" Height="28" 
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="10" Grid.Column="1" Grid.ColumnSpan="2" />
+            <Label x:Name="Location" Grid.Row="0" Content="Location" HorizontalAlignment="Left" Height="28" 
                Margin="30,145,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-        <TextBox x:Name="LocationOfCustomer" Grid.Row="0" HorizontalAlignment="Left" Height="31" 
-                 Margin="205,145,0,0" Text="{Binding Path=LocationOfCustomer,
-            UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True"
-                 VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center" 
-                 VerticalContentAlignment="Center" />
+            <TextBox x:Name="CustomersLocation" 
+                 Grid.Row="0" Grid.Column="1"
+                 HorizontalAlignment="Left" Height="31"
+                 Margin="17,145,0,0" 
+                 Text="{Binding Path=Location,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="133" 
+                 HorizontalContentAlignment="Center" 
+                 VerticalContentAlignment="Center" Grid.ColumnSpan="2" />
+            <Label x:Name="longttitude" Content="Longttitude" 
+               Visibility="{Binding Path=IsVisible, ElementName=Location, Converter={StaticResource notBooleanToVisibilityConverter} }"
+               HorizontalAlignment="Left" Grid.Column="1"
+               Margin="0,140,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.326,0.754" 
+               FontSize="10" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="67" Grid.ColumnSpan="2" />
+            <TextBox x:Name="Longttitude" 
+                 Grid.Row="0"
+                 HorizontalAlignment="Left" Height="20"
+                 Visibility="{Binding Path=IsVisible, ElementName=Location, Converter={StaticResource notBooleanToVisibilityConverter} }"
+                 Margin="0,160,0,0" 
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="70" 
+                 HorizontalContentAlignment="Center" 
+                 VerticalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" />
+            <Label x:Name="lattitude" Content="Lattitude" 
+               HorizontalAlignment="Right" Grid.Column="2" 
+               Visibility="{Binding Path=IsVisible, ElementName=Location, Converter={StaticResource notBooleanToVisibilityConverter} }"
+               Margin="0,140,65,0" VerticalAlignment="Top" RenderTransformOrigin="0.326,0.754" 
+               FontSize="10" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" />
+            <TextBox x:Name="Lattitude" 
+                 Visibility="{Binding Path=IsVisible, ElementName=Location, Converter={StaticResource notBooleanToVisibilityConverter} }"
+                 Grid.Row="0" Grid.Column="2"
+                 HorizontalAlignment="Center" Height="20"
+                 Margin="0,160,0,0" 
+                 TextWrapping="Wrap"   
+                 VerticalAlignment="Top" Width="70" 
+                 HorizontalContentAlignment="Right" 
+                 VerticalContentAlignment="Top" />
+
         </Grid>
-        
-        <Label Content="Parcel for customer" Grid.Row="1" HorizontalAlignment="Center" Height="28" 
+
+        <Label Content="Parcel to: " Grid.Row="1" HorizontalAlignment="Left" Height="28" 
                VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.5,0.609" FontSize="14"
-               FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+               FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="80,0,0,0" Grid.Column="1"/>
         <ListView x:Name="LVListForCustomers" Grid.Row="1" 
                   ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
                   RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
-                  FontWeight="Normal" Margin="0,30,0,0" >
+                  FontWeight="Normal" Margin="0,30,0,0" Grid.ColumnSpan="3" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="  Parcel ID  " DisplayMemberBinding="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
@@ -117,13 +161,13 @@
             </ListView.RenderTransform>
         </ListView>
 
-        <Label Content="Parcel to customer" Grid.Row="2" HorizontalAlignment="Center" Height="28" 
+        <Label Content="Parcel from: " Grid.Row="1" HorizontalAlignment="Left" Height="28" 
                VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.5,0.609" FontSize="14"
-               FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+               FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="80,122,0,0" Grid.RowSpan="2" Grid.Column="1"/>
         <ListView x:Name="LVListToCustomers" Grid.Row="2" 
                   ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
                   RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
-                  FontWeight="Normal" Margin="0,30,0,0" >
+                  FontWeight="Normal" Margin="0,30,0,93" Grid.ColumnSpan="3" Grid.RowSpan="2" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="  Parcel ID  " DisplayMemberBinding="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
@@ -183,15 +227,15 @@
                 </TransformGroup>
             </ListView.RenderTransform>
         </ListView>
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="2" Grid.ColumnSpan="3" Margin="0,125,0,0" Grid.RowSpan="2">
             <Grid.ColumnDefinitions >
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Button x:Name="SaveClick" Grid.Row="4" Grid.Column="0" Content="Save customer" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-        <Button Content="Close" Grid.Row="4" Grid.Column="1"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="CloseButton_Click" />
-        <Button x:Name="Update" Content="Update" Grid.Row="4" Grid.Column="0" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="UpdateCustomerButton_Click" />
-         </Grid>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="SaveClick" Grid.Row="4" Grid.Column="0" Content="Save customer" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click = "SaveCustomerButton_Click" />
+            <Button Content="Close" Grid.Row="4" Grid.Column="1"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="CloseButton_Click" />
+            <Button x:Name="Update" Content="Update" Grid.Row="4" Grid.Column="0" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="UpdateCustomerButton_Click" />
+        </Grid>
 
 
     </Grid>

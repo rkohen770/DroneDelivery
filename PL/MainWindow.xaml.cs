@@ -195,18 +195,6 @@ namespace PL
             LVListCustomers.ItemsSource = bl.GetAllCustomersBo();
             LVListCustomers.Items.Refresh();
         }
-        /// <summary>
-        /// A button that refresh the list of customer.
-        /// </summary>
-        /// <param name="sender">Button type</param>
-        /// <param name="e"></param>
-        private void RefreshCustomerButton_Click(object sender, RoutedEventArgs e)
-        {
-            LVListCustomers.ItemsSource = bl.GetAllCustomersBo().OrderBy(c => c.CustomerID);
-            LVListCustomers.ItemsSource = bl.GetAllCustomersBo().OrderBy(c => c.CustomerName);
-            LVListCustomers.ItemsSource = bl.GetAllCustomersBo().OrderBy(c => c.Phone);
-            LVListCustomers.Items.Refresh();
-        }
 
 
         #endregion
