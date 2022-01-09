@@ -70,7 +70,7 @@ namespace PL
             this.customer = customerDetails;
             this.mainWindow = mainWindow;
             Customer customer = bl.GetCustomer(customerDetails.CustomerID);
-            ID.Text = customer.CustomerId.ToString();
+            ID.Text = customer.CustomerID.ToString();
             CustomersName.Text = customer.NameOfCustomer.ToString();
             CustomersPhone.Text = customer.PhoneOfCustomer.ToString();
             CustomersLocation.Text = customer.LocationOfCustomer.ToString();

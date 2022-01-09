@@ -8,7 +8,7 @@ namespace BO
 {
     public class BaseStation
     {
-        public int BaseStationId { get; set; }
+        public int BaseStationID { get; set; }
         public int NameBaseStation { get; set; }
         public Location Location { get; set; }
         public int NumOfAvailableChargingPositions { get; set; }

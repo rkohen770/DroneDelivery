@@ -20,7 +20,7 @@ namespace DalApi
         /// <param name="maxWeight">Weight category (light, medium, heavy)</param>
         public void AddDrone(int id, string model, WeightCategories maxWeight)
         {
-            if (DataSource.drones.Exists(drone => drone.Id == id))
+            if (DataSource.drones.Exists(drone => drone.DroneID == id))
             {
                 throw new DroneAlreadyExistException(id, model, "the drone exists allready");
             }
@@ -28,8 +28,8 @@ namespace DalApi
             {
                 Drone d = new Drone
                 {
-                    Id = id,
-                    Model = model,
+                    DroneID = id,
+                    DroneModel = model,
                     MaxWeight = maxWeight
                 };
                 DataSource.drones.Add(d); //Adding the new drone to the array
@@ -45,17 +45,17 @@ namespace DalApi
         /// <param name="stationId">Charging station ID</param>
         public int SendingDroneForCharging(int droneId, int stationId)
         {
-            if (!DataSource.drones.Exists(drone => drone.Id == droneId))
+            if (!DataSource.drones.Exists(drone => drone.DroneID == droneId))
             {
                 throw new BadDroneIDException(droneId, "the drone not exists in the list of drones");
             }
-            if (!DataSource.stations.Exists(station => station.Id == stationId))
+            if (!DataSource.stations.Exists(station => station.StationID == stationId))
             {
                 throw new BadBaseStationIDException(stationId, "the base station not exists in the list of station");
             }
             for (int sIndex = 0; sIndex < DataSource.stations.Count; sIndex++)
             {
-                if (DataSource.stations[sIndex].Id == stationId)//We found the place of the station in the array of stations
+                if (DataSource.stations[sIndex].StationID == stationId)//We found the place of the station in the array of stations
                 {
                     Station station = DataSource.stations[sIndex];
                     station.ChargeSlots--;//We will update the number of loading locations
@@ -63,7 +63,7 @@ namespace DalApi
                     break;
                 }
             }
-            DroneCharge droneCharge = new DroneCharge { DroneId = droneId, StationId = stationId };//Add a instance of an instance loading entity
+            DroneCharge droneCharge = new DroneCharge { DroneID = droneId, StationID = stationId };//Add a instance of an instance loading entity
             DataSource.droneCharges.Add(droneCharge);//Add a load of drones to the array
             return stationId;
         }
@@ -75,17 +75,17 @@ namespace DalApi
         /// <param name="stationId">Charging station ID</param>
         public void ReleasDroneFromCharging(int droneId, int stationId)
         {
-            if (!DataSource.drones.Exists(drone => drone.Id == droneId))
+            if (!DataSource.drones.Exists(drone => drone.DroneID == droneId))
             {
                 throw new BadDroneIDException(droneId, "the drone not exists in the list of drones");
             }
-            if (!DataSource.stations.Exists(station => station.Id == stationId))
+            if (!DataSource.stations.Exists(station => station.StationID == stationId))
             {
                 throw new BadBaseStationIDException(stationId, "the base station not exists in the list of station");
             }
             for (int sIndex = 0; sIndex < DataSource.stations.Count; sIndex++)
             {
-                if (DataSource.stations[sIndex].Id == stationId)//We found the place of the station in the array of stations
+                if (DataSource.stations[sIndex].StationID == stationId)//We found the place of the station in the array of stations
                 {
                     Station station = DataSource.stations[sIndex];
                     station.ChargeSlots++;//We will update the number of loading locations
@@ -95,7 +95,7 @@ namespace DalApi
             }
             for (int dCIndex = 0; dCIndex < DataSource.stations.Count; dCIndex++)
             {
-                if (DataSource.droneCharges[dCIndex].StationId == stationId && DataSource.droneCharges[dCIndex].DroneId == droneId)//We found the place of the station in the array of stations
+                if (DataSource.droneCharges[dCIndex].StationID == stationId && DataSource.droneCharges[dCIndex].DroneID == droneId)//We found the place of the station in the array of stations
                 {
                     DataSource.droneCharges.RemoveAt(dCIndex);//remove a load of drones to the array
                     break;
@@ -110,18 +110,18 @@ namespace DalApi
         /// <param name="model">new model</param>
         public void UpdateDroneModle(int droneId, string model)
         {
-            if (!DataSource.drones.Exists(drone => drone.Id == droneId))
+            if (!DataSource.drones.Exists(drone => drone.DroneID == droneId))
             {
                 throw new BadDroneIDException(droneId, "the drone not exists in the list of drones");
             }
             else
             {
-                int dIndex = DataSource.drones.FindIndex(d => d.Id == droneId);
+                int dIndex = DataSource.drones.FindIndex(d => d.DroneID == droneId);
 
-                if (DataSource.drones[dIndex].Model != model)
+                if (DataSource.drones[dIndex].DroneModel != model)
                 {
                     Drone drone = DataSource.drones[dIndex];
-                    drone.Model = model;
+                    drone.DroneModel = model;
                     DataSource.drones[dIndex] = drone;
                     return;
                 }
@@ -138,12 +138,12 @@ namespace DalApi
         /// <returns>drone to show</returns>
         public Drone GetDrone(int droneId)
         {
-            if (!DataSource.drones.Exists(drone => drone.Id == droneId))
+            if (!DataSource.drones.Exists(drone => drone.DroneID == droneId))
             {
                 throw new BadDroneIDException(droneId, "the drone not exists in the list of drones");
             }
             //find the place of the drone in the array of drones
-            return DataSource.drones.Find(d => d.Id == droneId);
+            return DataSource.drones.Find(d => d.DroneID == droneId);
         }
         #endregion
 
@@ -165,13 +165,13 @@ namespace DalApi
         /// <returns>List of drones loaded at a specific station</returns>
         public IEnumerable<int> GetDronesInChargingsAtStation(int stationId, Predicate<DroneCharge> p)
         {
-            if (!DataSource.stations.Exists(station => station.Id == stationId))
+            if (!DataSource.stations.Exists(station => station.StationID == stationId))
             {
                 throw new BadBaseStationIDException(stationId, "the base station not exists in the list of station");
             }
             return from droneCharge in DataSource.droneCharges
                    where p(droneCharge)
-                   select droneCharge.DroneId;
+                   select droneCharge.DroneID;
         }
 
         public IEnumerable<Drone> GetDronesByPredicat(Predicate<Drone> p)

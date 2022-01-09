@@ -9,14 +9,14 @@ namespace DO
 {
     public struct Drone
     {
-        public int Id { get; set; }
-        public string Model { get; set; }
+        public int DroneID { get; set; }
+        public string DroneModel { get; set; }
         public WeightCategories MaxWeight { get; set; }
 
 
         public override string ToString()
         {
-            return $"ID: {Id} \nModel: {Model} \nMaxWeight: {MaxWeight} \n";
+            return $"ID: {DroneID} \nModel: {DroneModel} \nMaxWeight: {MaxWeight} \n";
         }
     }
 }

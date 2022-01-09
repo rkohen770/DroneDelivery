@@ -8,7 +8,7 @@ namespace BO
 {
     public class DroneInParcel
     {
-        public int DroneId { get; set; }
+        public int DroneID { get; set; }
         public double DroneBattery { get; set; }
         public Location CurrentLocation { get; set; }
 

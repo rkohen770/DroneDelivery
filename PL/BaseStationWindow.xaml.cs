@@ -57,8 +57,8 @@ namespace PL
             this.bl = bl;
             this.baseStationDetails = baseStationDetails;
             this.mainWindow = mainWindow;
-            BaseStation station = bl.GetBaseStation(baseStationDetails.BaseStationId);
-            ID.Text = station.BaseStationId.ToString();
+            BaseStation station = bl.GetBaseStation(baseStationDetails.BaseStationID);
+            ID.Text = station.BaseStationID.ToString();
             Name.Text = station.NameBaseStation.ToString();
             CurrentLocation.Visibility = Visibility.Visible;
             CurrentLocation.Text = station.Location.ToString();
@@ -83,8 +83,10 @@ namespace PL
         private void ShowDroneDetails_Click(object sender, MouseButtonEventArgs e)
         {
             DroneInCharging droneDetails = ((ListView)sender).SelectedItem as DroneInCharging;
-            DroneForList drone = bl.CloneDrone(bl.GetDrone(droneDetails.DroneId));
+            DroneForList drone= bl.CloneDrone(bl.GetDrone(droneDetails.DroneID));
             new DroneWindow(bl, drone, mainWindow).ShowDialog();
+            LVDroneInChargings.ItemsSource = bl.GetAllDronesBo();
+            LVDroneInChargings.Items.Refresh();
         }
 
         /// <summary>

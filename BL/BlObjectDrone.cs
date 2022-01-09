@@ -25,7 +25,7 @@ namespace BO
                 Station s = dal.GetBaseStation(stationId);
                 DroneForList drone = new()
                 {
-                    DroneId = droneId,
+                    DroneID = droneId,
                     DroneModel = model,
                     MaxWeight = maxWeight,
                     DroneBattery = random.Next(20, 41),
@@ -71,7 +71,7 @@ namespace BO
                 dal.UpdateDroneModle(id, model);
 
                 //update in BL
-                int dIndex = droneForLists.FindIndex(d => d.DroneId == id);//Obtain an index for the location where the package ID is located
+                int dIndex = droneForLists.FindIndex(d => d.DroneID == id);//Obtain an index for the location where the package ID is located
                 if (droneForLists[dIndex].DroneModel != model)
                 {
                     DroneForList drone = droneForLists[dIndex];
@@ -95,7 +95,7 @@ namespace BO
             try
             {
                 dal.GetDrone(id);
-                DroneForList drone = droneForLists.Find(d => d.DroneId == id);
+                DroneForList drone = droneForLists.Find(d => d.DroneID == id);
                 if (drone != null)
                 {
                     if (drone.DroneStatus == DroneStatus.Available)
@@ -109,11 +109,11 @@ namespace BO
                             drone.CurrentLocation = new Location { Lattitude = station.Lattitude, Longitude = station.Longitude };
                             drone.DroneStatus = DroneStatus.Maintenance;
 
-                            int dIndex = droneForLists.FindIndex(d => d.DroneId == id);
+                            int dIndex = droneForLists.FindIndex(d => d.DroneID == id);
                             droneForLists[dIndex] = drone;
 
                             //update in DAL
-                            return dal.SendingDroneForCharging(id, station.Id);
+                            return dal.SendingDroneForCharging(id, station.StationID);
 
                         }
                         else
@@ -153,7 +153,7 @@ namespace BO
             try
             {
                 dal.GetDrone(id);
-                DroneForList drone = droneForLists.Find(d => d.DroneId == id);
+                DroneForList drone = droneForLists.Find(d => d.DroneID == id);
                 if (drone != null)
                 {
                     if (drone.DroneStatus == DroneStatus.Maintenance)
@@ -164,7 +164,7 @@ namespace BO
                             drone.DroneBattery = 100;
                         drone.DroneStatus = DroneStatus.Available;
 
-                        int dIndex = droneForLists.FindIndex(d => d.DroneId == id);
+                        int dIndex = droneForLists.FindIndex(d => d.DroneID == id);
                         droneForLists[dIndex] = drone;
 
                         //update in DAL 
@@ -172,7 +172,7 @@ namespace BO
                         Station station = dal.GetAllBaseStations().
                             Where(s => s.Lattitude == drone.CurrentLocation.Lattitude && s.Longitude == drone.CurrentLocation.Longitude).
                             FirstOrDefault();
-                        dal.ReleasDroneFromCharging(id, station.Id);//sending for dal
+                        dal.ReleasDroneFromCharging(id, station.StationID);//sending for dal
                     }
                     else
                     {
@@ -207,20 +207,20 @@ namespace BO
             try
             {
                 DO.Drone drone = dal.GetDrone(droneId);
-                DroneForList drone_l = droneForLists.Find(d => d.DroneId == droneId);
+                DroneForList drone_l = droneForLists.Find(d => d.DroneID == droneId);
                 if (drone_l.DroneStatus == DroneStatus.Delivery)
                 {
-                    var parcel = dal.GetAllParcels().ToList().Find(p => p.DroneId == droneId);
-                    var customer_sender = dal.GetCustomer(parcel.SenderId);
-                    var customer_target = dal.GetCustomer(parcel.TargetId);
+                    var parcel = dal.GetAllParcels().ToList().Find(p => p.DroneID == droneId);
+                    var customer_sender = dal.GetCustomer(parcel.SenderID);
+                    var customer_target = dal.GetCustomer(parcel.TargetID);
 
                     ParcelInTransfer parcelInTransfer = new ParcelInTransfer()
                     {
-                        ParcelId = parcel.Id,
+                        ParcelID = parcel.ParcelID,
                         Priorities = (BO.Priorities)parcel.priority,
                         Weight = (BO.WeightCategories)parcel.Weight,
-                        SenderOfParcel = new() { CustomerId = customer_sender.Id, CustomerName = customer_sender.Name },
-                        TargetToParcel = new() { CustomerId = customer_target.Id, CustomerName = customer_target.Name },
+                        SenderOfParcel = new() { CustomerID = customer_sender.CustomerID, CustomerName = customer_sender.Name },
+                        TargetToParcel = new() { CustomerID = customer_target.CustomerID, CustomerName = customer_target.Name },
                         Collection = new() { Lattitude = customer_sender.Lattitude, Longitude = customer_sender.Longitude },
                         DeliveryDestination = new() { Lattitude = customer_target.Lattitude, Longitude = customer_target.Longitude },
                         TransportDistance = getDistanceBetweenTwoPoints(customer_sender.Lattitude, customer_sender.Longitude, customer_target.Lattitude, customer_target.Longitude)
@@ -231,8 +231,8 @@ namespace BO
 
                     return new()
                     {
-                        DroneId = droneId,
-                        DroneModel = drone.Model,
+                        DroneID = droneId,
+                        DroneModel = drone.DroneModel,
                         Weight = drone_l.MaxWeight,
                         DroneBattery = drone_l.DroneBattery,
                         DroneStatus = drone_l.DroneStatus,
@@ -245,8 +245,8 @@ namespace BO
                 {
                     return new()
                     {
-                        DroneId = droneId,
-                        DroneModel = drone.Model,
+                        DroneID = droneId,
+                        DroneModel = drone.DroneModel,
                         Weight = drone_l.MaxWeight,
                         DroneBattery = drone_l.DroneBattery,
                         DroneStatus = drone_l.DroneStatus,
@@ -279,11 +279,11 @@ namespace BO
                 List<DroneForList> list = new();
                 foreach (var drone_l in droneForLists)
                 {
-                    DroneForList droneFor = CloneDrone(GetDrone(drone_l.DroneId));
+                    DroneForList droneFor = CloneDrone(GetDrone(drone_l.DroneID));
                     if (drone_l.DroneStatus == DroneStatus.Delivery)
                     {
-                        droneFor.ParcelNumIsTransferred = dal.GetAllParcelsWithoutSpecialDron(p => p.DroneId == drone_l.DroneId)
-                            .FirstOrDefault().Id;
+                        droneFor.ParcelNumIsTransferred = dal.GetAllParcelsWithoutSpecialDron(p => p.DroneID == drone_l.DroneID)
+                            .FirstOrDefault().ParcelID;
                     }
                     list.Add(droneFor);
                 }
@@ -301,11 +301,11 @@ namespace BO
 
             foreach (var drone in droneForLists.FindAll(p))
             {
-                DroneForList droneFor = CloneDrone(GetDrone(drone.DroneId));
+                DroneForList droneFor = CloneDrone(GetDrone(drone.DroneID));
                 if (drone.DroneStatus == DroneStatus.Delivery)
                 {
-                    droneFor.ParcelNumIsTransferred = dal.GetAllParcelsWithoutSpecialDron(p => p.DroneId == drone.DroneId)
-                        .FirstOrDefault().Id;
+                    droneFor.ParcelNumIsTransferred = dal.GetAllParcelsWithoutSpecialDron(p => p.DroneID == drone.DroneID)
+                        .FirstOrDefault().ParcelID;
                 }
                 list.Add(droneFor);
             }
@@ -322,7 +322,7 @@ namespace BO
         {
             return new DroneForList
             {
-                DroneId = drone.DroneId,
+                DroneID = drone.DroneID,
                 DroneModel = drone.DroneModel,
                 MaxWeight = (BO.WeightCategories)drone.Weight,
                 DroneBattery = drone.DroneBattery,

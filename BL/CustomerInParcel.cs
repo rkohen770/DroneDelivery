@@ -8,7 +8,7 @@ namespace BO
 {
     public class CustomerInParcel
     {
-        public int CustomerId { get; set; }
+        public int CustomerID { get; set; }
         public string CustomerName { get; set; }
 
         public override string ToString()

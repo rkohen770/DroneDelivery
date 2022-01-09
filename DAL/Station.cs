@@ -9,15 +9,15 @@ namespace DO
 {
     public struct Station
     {
-        public int Id { get; set; }
-        public int Name { get; set; }
+        public int StationID { get; set; }
+        public int StationName { get; set; }
         public double Longitude { get; set; }
         public double Lattitude { get; set; }
         public int ChargeSlots { get; set; }
 
         public override string ToString()
         {
-            return $"ID: {Id} \nName: {Name} \nLongitude: {Longitude} \n" +
+            return $"ID: {StationID} \nName: {StationName} \nLongitude: {Longitude} \n" +
                 $"Lattitude: {Lattitude} \nChargeSlots: {ChargeSlots}\n";
         }
     }
