@@ -98,5 +98,70 @@ namespace PL
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        /// <summary>
+        /// Button for saving the details of the new customer
+        /// </summary>
+        /// <param name="sender">button type</param>
+        /// <param name="e"></param>
+        private void SaveDroneButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ID.Text == null || NameOfCostomer.Text == null || PhoneOfCustomer.Text == null)
+                    MessageBox.Show("Not all detalis are set");
+                else if (PhoneOfCustomer.Text.Length > 10)
+                    MessageBox.Show("Phone number longs then 5 letters");
+                else
+                {
+                  //  Click = "SaveCustomerButton_Click"
+                   // Location location = new() { Lattitude = location.Lattitude }
+                   // bl.AddCustomerBo(int.Parse(ID.Text), NameOfCostomer.Text, PhoneOfCustomer.Text,Location.Visibility );
+                }
+                MessageBox.Show("Adding a customer was completed successfully");
+
+            }
+            catch (BadCustomerIDException ex)
+            {
+                MessageBox.Show(ex.ID.ToString(), ex.Message + "\nAdding a customer was not completed successfully");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            mainWindow.LVListCustomers.Items.Refresh();
+            Close();
+        }
+
+        /// <summary>
+        /// Button for closing a window
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        /// <summary>
+        /// A button that opens a window for updating a customer
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void UpdateCustomerButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.UpdateCustomerData(int.Parse(ID.Text), NameOfCostomer.Text,PhoneOfCustomer.Text);
+                MessageBox.Show("Update a customer was completed successfully");
+                mainWindow.LVListCustomers.ItemsSource = bl.GetAllCustomersBo();
+                mainWindow.LVListCustomers.Items.Refresh();
+
+            }
+            catch (BadCustomerIDException ex)
+            {
+                MessageBox.Show(ex.ID.ToString(), ex.Message);
+            }
+        }
+
     }
 }

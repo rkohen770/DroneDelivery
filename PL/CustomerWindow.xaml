@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="CustomerWindow" Height="450" Width="400">
+        Title="CustomerWindow" Height="496" Width="400">
     <Window.Resources>
         <local:WeightCategoriesToImage x:Key="ParcelAtCustomerWeightCategories"/>
         <local:PrioritiesToImage x:Key="ParcelAtCustomerPrioritiest"/>
@@ -16,6 +16,7 @@
             <RowDefinition Height="200"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid>
         <Label Content="Customer ID" Grid.Row="0" HorizontalAlignment="Left" 
@@ -24,7 +25,7 @@
         <TextBox x:Name="ID" Grid.Row="0" HorizontalAlignment="Left" Height="31" 
                  Margin="205,25,0,0" TextWrapping="Wrap" Text="{Binding Path=CustomerId,
             UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Width="133" 
-                 MaxLength="4" PreviewTextInput="CustomerIdTextBox_PreviewTextInput"
+                 MaxLength="9" PreviewTextInput="CustomerIdTextBox_PreviewTextInput"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         <Label Content="Name" Grid.Row="0" HorizontalAlignment="Left" Height="28" 
                Margin="30,65,0,0" VerticalAlignment="Top" Width="136"
@@ -39,10 +40,10 @@
         <TextBox x:Name="PhoneOfCustomer" Grid.Row="0" HorizontalAlignment="Left" Height="31"
                  Margin="205,105,0,0" TextWrapping="Wrap" Text="{Binding Path=PhoneOfCustomer,
             UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Width="133" 
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="10" />
         <Label x:Name="Location" Grid.Row="0" Content="Location" HorizontalAlignment="Left" Height="28" 
                Margin="30,145,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-            <TextBox x:Name="LocationOfCustomer" Grid.Row="0" HorizontalAlignment="Left" Height="31" 
+        <TextBox x:Name="LocationOfCustomer" Grid.Row="0" HorizontalAlignment="Left" Height="31" 
                  Margin="205,145,0,0" Text="{Binding Path=LocationOfCustomer,
             UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True"
                  VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center" 
@@ -182,7 +183,15 @@
                 </TransformGroup>
             </ListView.RenderTransform>
         </ListView>
-
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="SaveClick" Grid.Row="4" Grid.Column="0" Content="Save customer" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+        <Button Content="Close" Grid.Row="4" Grid.Column="1"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="CloseButton_Click" />
+        <Button x:Name="Update" Content="Update" Grid.Row="4" Grid.Column="0" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="UpdateCustomerButton_Click" />
+         </Grid>
 
 
     </Grid>
