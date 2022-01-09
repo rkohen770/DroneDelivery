@@ -11,6 +11,7 @@
         <local:PrioritiesToImage x:Key="ParcelAtCustomerPrioritiest"/>
         <local:ParcelStatusToImage x:Key="ParcelAtCustomerStatus"/>
         <local:NotBooleanToVisibilityConverter x:Key="notBooleanToVisibilityConverter"/>
+        <local:PhonePrint x:Key="CustomerPhonePrint"/>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -26,9 +27,8 @@
         </Grid.RowDefinitions>
         <Grid Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="188*"/>
-                <ColumnDefinition Width="33*"/>
-                <ColumnDefinition Width="179*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Customer ID" Grid.Row="0" HorizontalAlignment="Left" 
                Height="28" Margin="30,25,0,0" VerticalAlignment="Top" Width="121" 
@@ -49,8 +49,9 @@
                VerticalAlignment="Top" Width="136" RenderTransformOrigin="0.326,0.754"  FontSize="14" 
                FontWeight="Bold" />
             <TextBox x:Name="CustomersPhone" Grid.Row="0" HorizontalAlignment="Left" Height="31"
-                 Margin="17,105,0,0" TextWrapping="Wrap" Text="{Binding Path=PhoneOfCustomer,
-            UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Width="133" 
+                     Margin="17,105,0,0" TextWrapping="Wrap"
+                     Text="{Binding Path=PhoneOfCustomer, UpdateSourceTrigger=PropertyChanged,Converter={StaticResource CustomerPhonePrint}, Mode=OneWay}" 
+                     VerticalAlignment="Top" Width="133" 
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="10" Grid.Column="1" Grid.ColumnSpan="2" />
             <Label x:Name="Location" Grid.Row="0" Content="Location" HorizontalAlignment="Left" Height="28" 
                Margin="30,145,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />

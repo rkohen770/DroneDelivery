@@ -14,6 +14,7 @@
         <local:WeightCategoriesToImage x:Key="DroneWeightConvert"/>
         <local:DroneBattery x:Key="DroneBatteryConvert"/>
         <local:DroneCurrentLocation x:Key="DroneLocationConvert"/>
+        <local:PhonePrint x:Key="CustomerPhonePrint"/>
     </Window.Resources>
 
     <Grid>
@@ -160,13 +161,6 @@
             <!--#region Base Station-->
             <TabItem Header="Base Stations" Foreground="#FF4362AC" Height="22" Margin="0,0,0,0" VerticalAlignment="Bottom">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="115*"/>
-                        <ColumnDefinition Width="40*"/>
-                        <ColumnDefinition Width="30*"/>
-                        <ColumnDefinition Width="41*"/>
-                        <ColumnDefinition Width="518*"/>
-                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
                         <RowDefinition  Height="500"/>
                         <RowDefinition Height="Auto"/>
@@ -253,7 +247,7 @@
                                 <GridViewColumn Header="  Customer name  " 
                                             DisplayMemberBinding="{Binding Path=CustomerName,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="  Phone  " 
-                                            DisplayMemberBinding="{Binding Path=Phone,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                            DisplayMemberBinding="{Binding Path=Phone,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource CustomerPhonePrint}, Mode=OneWay}"/>
                                 <GridViewColumn Header="  Sent and delivered  " 
                                             DisplayMemberBinding="{Binding Path=SentAndDelivered,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="  Sent and not delivered  " 
