@@ -101,7 +101,7 @@ namespace BO
                     if (drone.DroneStatus == DroneStatus.Available)
                     {
                         Station station = dal.GetClosestStation(drone.CurrentLocation.Lattitude, drone.CurrentLocation.Longitude, true);
-                        double minDistans = getDistanceBetweenTwoPoints(drone.CurrentLocation.Lattitude, drone.CurrentLocation.Longitude, station.Lattitude, station.Longitude);
+                        double minDistans = (int)getDistanceBetweenTwoPoints(drone.CurrentLocation.Lattitude, drone.CurrentLocation.Longitude, station.Lattitude, station.Longitude);
                         if (drone.DroneBattery >= minDistans * dal.PowerConsumptionRequest()[0])
                         {
                             //update in BL
