@@ -58,7 +58,7 @@ namespace PL
             this.drone = drone;
             this.mainWindow = mainWindow;
             CurrentLocation.Visibility = Visibility.Visible;
-            ID.Text = drone.DroneId.ToString();
+            ID.Text = drone.DroneID.ToString();
             WeightSelector.Visibility = Visibility.Hidden;
             MaxWeight.Visibility = Visibility.Visible;
             ID.IsReadOnly = true;

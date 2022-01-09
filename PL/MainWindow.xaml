@@ -84,7 +84,7 @@
                         <ListView.View>
 
                             <GridView>
-                                <GridViewColumn Header="  Drone ID  " DisplayMemberBinding="{Binding Path=DroneId,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                                <GridViewColumn Header="  Drone ID  " DisplayMemberBinding="{Binding Path=DroneID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
                                 <GridViewColumn Header="  Model  " DisplayMemberBinding="{Binding Path=DroneModel,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
                                 <GridViewColumn Header="  Max Weight  "  >
                                     <GridViewColumn.CellTemplate>
@@ -181,7 +181,7 @@
 
                             <GridView>
                                 <GridViewColumn Header="  BaseStation Id  " 
-                                            DisplayMemberBinding="{Binding Path=BaseStationId,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                                            DisplayMemberBinding="{Binding Path=BaseStationID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
                                 <GridViewColumn Header="  Name  " 
                                             DisplayMemberBinding="{Binding Path=NameBaseStation,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="  Num Of Available Charging  " 
