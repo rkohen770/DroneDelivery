@@ -8,7 +8,7 @@ namespace BO
 {
     public class DroneForList
     {
-        public int DroneId { get; set; }
+        public int DroneID { get; set; }
         public string DroneModel { get; set; }
         public WeightCategories MaxWeight { get; set; }
         public double DroneBattery { get; set; }
@@ -18,7 +18,7 @@ namespace BO
 
         public override string ToString()
         {
-            return $"Drone ID: {DroneId},\n " +
+            return $"Drone ID: {DroneID},\n " +
                 $"Drone Model: {DroneModel},\n" +
                 $" Max Weight: {MaxWeight},\n" +
                 $" Drone Battery: {DroneBattery},\n " +

@@ -27,7 +27,7 @@ namespace BO
                 //add customer fields in BL.
                 BO.Customer customer = new BO.Customer()
                 {
-                    CustomerId = id,
+                    CustomerID = id,
                     NameOfCustomer = name,
                     PhoneOfCustomer = phone,
                     LocationOfCustomer = location
@@ -98,7 +98,7 @@ namespace BO
 
                 //The list of packages that the customer
                 List<DO.Parcel> parcel_From_Customer = dal.GetAllParcels().
-                    Where(p => p.SenderId == customerId).ToList();
+                    Where(p => p.SenderID == customerId).ToList();
 
                 List<ParcelAtCustomer> from_customer = new();
                 foreach (var parcel in parcel_From_Customer)
@@ -109,14 +109,14 @@ namespace BO
                         (parcel.Scheduled != null) ? BO.ParcelStatus.Associated : BO.ParcelStatus.Defined;
                     ParcelAtCustomer parcelAt = new()
                     {
-                        ParcelID = parcel.Id,
+                        ParcelID = parcel.ParcelID,
                         Weight = (BO.WeightCategories)parcel.Weight,
                         Priorities = (BO.Priorities)parcel.priority,
                         ParcelStatus = ParcelStatus,
                         SourceOrTarget = new()
                         {
-                            CustomerId = parcel.TargetId,
-                            CustomerName = dal.GetCustomer(parcel.TargetId).Name
+                            CustomerID = parcel.TargetID,
+                            CustomerName = dal.GetCustomer(parcel.TargetID).Name
                         }
                     };
                     from_customer.Add(parcelAt);
@@ -124,7 +124,7 @@ namespace BO
 
                 //The list of packages that the customer receives
                 List<DO.Parcel> parcel_To_Customer = dal.GetAllParcels().
-                    Where(p => p.TargetId == customerId).ToList();
+                    Where(p => p.TargetID == customerId).ToList();
                 List<ParcelAtCustomer> to_customer = new();
                 foreach (var parcel in parcel_To_Customer)
                 {
@@ -134,14 +134,14 @@ namespace BO
                         (parcel.Scheduled != null) ? BO.ParcelStatus.Associated : BO.ParcelStatus.Defined;
                     ParcelAtCustomer parcelAt = new()
                     {
-                        ParcelID = parcel.Id,
+                        ParcelID = parcel.ParcelID,
                         Weight = (BO.WeightCategories)parcel.Weight,
                         Priorities = (BO.Priorities)parcel.priority,
                         ParcelStatus = ParcelStatus,
                         SourceOrTarget = new()
                         {
-                            CustomerId = parcel.SenderId,
-                            CustomerName = dal.GetCustomer(parcel.SenderId).Name
+                            CustomerID = parcel.SenderID,
+                            CustomerName = dal.GetCustomer(parcel.SenderID).Name
                         }
                     };
                     to_customer.Add(parcelAt);
@@ -149,7 +149,7 @@ namespace BO
 
                 return new()
                 {
-                    CustomerId = customerId,
+                    CustomerID = customerId,
                     NameOfCustomer = customer.Name,
                     PhoneOfCustomer = customer.Phone,
                     LocationOfCustomer = new() { Lattitude = customer.Lattitude, Longitude = customer.Longitude },
@@ -176,7 +176,7 @@ namespace BO
                 List<CustomerForList> list = new();
                 foreach (var customer in dal.GetAllCustomers())
                 {
-                    CustomerForList customerForList = cloneCustomer(GetCustomer(customer.Id));
+                    CustomerForList customerForList = cloneCustomer(GetCustomer(customer.CustomerID));
                     list.Add(customerForList);
                 }
                 return list;
@@ -193,7 +193,7 @@ namespace BO
             List<CustomerForList> list = new();
             foreach (var customer in dal.GetAllCustomerByPredicate(p))
             {
-                CustomerForList customerForList = cloneCustomer(GetCustomer(customer.Id));
+                CustomerForList customerForList = cloneCustomer(GetCustomer(customer.CustomerID));
                 list.Add(customerForList);
             }
             return list;
@@ -209,7 +209,7 @@ namespace BO
         {
             return new()
             {
-                CustomerID = customer.CustomerId,
+                CustomerID = customer.CustomerID,
                 CustomerName = customer.NameOfCustomer,
                 Phone = customer.PhoneOfCustomer,
                 SentAndNotDelivered = customer.FromCustomer.Where(p => p.ParcelStatus == ParcelStatus.Provided).Count(),

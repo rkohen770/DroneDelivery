@@ -21,7 +21,7 @@ namespace DalApi
         /// <param name="chargeSlots">Several arguments</param>
         public void AddStation(int id, int name, double longitude, double lattitude, int chargeSlots)
         {
-            if (DataSource.stations.Exists(station => station.Id == id))
+            if (DataSource.stations.Exists(station => station.StationID == id))
             {
                 throw new BaseStationAlreadyExistException(id, name, "the station exists allready");
             }
@@ -29,8 +29,8 @@ namespace DalApi
             {
                 Station station = new Station
                 {
-                    Id = id,
-                    Name = name,
+                    StationID = id,
+                    StationName = name,
                     Longitude = longitude,
                     Lattitude = lattitude,
                     ChargeSlots = chargeSlots
@@ -49,17 +49,17 @@ namespace DalApi
         /// <param name="totalAmountOfChargingStations">Total amount of charging stations</param>
         public void UpdateBaseStationData(int id, int nameBaseStation, int totalAmountOfChargingStations)
         {
-            if (!DataSource.stations.Exists(s => s.Id == id))
+            if (!DataSource.stations.Exists(s => s.StationID == id))
             {
                 throw new BadBaseStationIDException(id, "the station not exists in the system");
             }
             else
             {
-                int sIndex = DataSource.stations.FindIndex(s => s.Id == id);
+                int sIndex = DataSource.stations.FindIndex(s => s.StationID == id);
                 Station station = DataSource.stations[sIndex];
-                station.Name = nameBaseStation;
+                station.StationName = nameBaseStation;
 
-                List<DroneCharge> charges = DataSource.droneCharges.FindAll(c => c.StationId == station.Id);
+                List<DroneCharge> charges = DataSource.droneCharges.FindAll(c => c.StationID == station.StationID);
                 station.ChargeSlots = totalAmountOfChargingStations - charges.Count();
                 DataSource.stations[sIndex] = station;
             }
@@ -72,16 +72,16 @@ namespace DalApi
         /// <param name="nameBaseStation">new Base Station name</param>
         public void UpdateBaseStationName(int id, int nameBaseStation)
         {
-            if (!DataSource.stations.Exists(s => s.Id == id))
+            if (!DataSource.stations.Exists(s => s.StationID == id))
             {
                 throw new BadBaseStationIDException(id, "the station not exists in the system");
             }
             else
             {
-                int sIndex = DataSource.stations.FindIndex(s => s.Id == id);
+                int sIndex = DataSource.stations.FindIndex(s => s.StationID == id);
 
                 Station station = DataSource.stations[sIndex];
-                station.Name = nameBaseStation;
+                station.StationName = nameBaseStation;
                 DataSource.stations[sIndex] = station;
             }
         }
@@ -93,16 +93,16 @@ namespace DalApi
         /// <param name="totalAmountOfChargingStations">Total amount of charging stations</param>
         public void UpdateBaseStationCharging(int id, int totalAmountOfChargingStations)
         {
-            if (!DataSource.stations.Exists(s => s.Id == id))
+            if (!DataSource.stations.Exists(s => s.StationID == id))
             {
                 throw new BadBaseStationIDException(id, "the station not exists in the list of stations");
             }
             else
             {
-                int sIndex = DataSource.stations.FindIndex(s => s.Id == id);
+                int sIndex = DataSource.stations.FindIndex(s => s.StationID == id);
                 Station station = DataSource.stations[sIndex];
 
-                List<DroneCharge> charges = DataSource.droneCharges.FindAll(c => c.StationId == station.Id);
+                List<DroneCharge> charges = DataSource.droneCharges.FindAll(c => c.StationID == station.StationID);
                 station.ChargeSlots = totalAmountOfChargingStations - charges.Count();
                 DataSource.stations[sIndex] = station;
             }
@@ -117,12 +117,12 @@ namespace DalApi
         /// <returns>statoin</returns>
         public Station GetBaseStation(int stationId)
         {
-            if (!DataSource.stations.Exists(station => station.Id == stationId))
+            if (!DataSource.stations.Exists(station => station.StationID == stationId))
             {
                 throw new BadBaseStationIDException(stationId, "the base station not exists in the list of station");
             }
             //find the station in the array of stations and return it.
-            return DataSource.stations.Find(s => s.Id == stationId);
+            return DataSource.stations.Find(s => s.StationID == stationId);
         }
 
         /// <summary>

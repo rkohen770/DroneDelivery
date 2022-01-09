@@ -32,8 +32,8 @@ namespace DalApi
             {
                 new Station
                 {
-                    Id = 11212,
-                    Name = 11,
+                    StationID = 11212,
+                    StationName = 11,
                     //Grills values that are within the borders of the State of Israel
                     Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                     Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
@@ -41,8 +41,8 @@ namespace DalApi
                 },
                 new Station
                 {
-                    Id = 22212,
-                    Name = 22,
+                    StationID = 22212,
+                    StationName = 22,
                     //Grills values that are within the borders of the State of Israel
                     Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                     Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
@@ -56,36 +56,36 @@ namespace DalApi
             {
                 new Drone
                 {
-                    Id = 7486,
-                    Model = "EG-574",
+                    DroneID = 7486,
+                    DroneModel = "EG-574",
                     MaxWeight = WeightCategories.Intermediate
 
                 },
                 new Drone
                 {
-                    Id = 7686,
-                    Model = "EG-574",
+                    DroneID = 7686,
+                    DroneModel = "EG-574",
                     MaxWeight = WeightCategories.Easy
 
                 },
                 new Drone
                 {
-                    Id = 7916,
-                    Model = "EG-474",
+                    DroneID = 7916,
+                    DroneModel = "EG-474",
                     MaxWeight = WeightCategories.Liver
                 },
                 new Drone
                 {
-                    Id = 7216,
-                    Model = "EG-474",
+                    DroneID = 7216,
+                    DroneModel = "EG-474",
                     MaxWeight = (WeightCategories)rand.Next(3),
                     //Status = (DroneStatuses)rand.Next(3),
                     //Battery = 75
                 },
                 new Drone
                 {
-                    Id = 7945,
-                    Model = "EG-474",
+                    DroneID = 7945,
+                    DroneModel = "EG-474",
                     MaxWeight = (WeightCategories)rand.Next(3),
                     //Status = (DroneStatuses)rand.Next(3),
                     //Battery = 98.9
@@ -98,7 +98,7 @@ namespace DalApi
             {
                 new Customer
                 {
-                  Id = 123456789,
+                  CustomerID = 123456789,
                   Name = "Eliya",
                   Phone = "0547689612",
                   //Grills values that are within the borders of the State of Israel
@@ -107,7 +107,7 @@ namespace DalApi
                 },
                 new Customer
                 {
-                  Id = 987654321,
+                  CustomerID = 987654321,
                   Name = "Devora",
                   Phone = "0512926771",
                   //Grills values that are within the borders of the State of Israel
@@ -117,7 +117,7 @@ namespace DalApi
 
                 new Customer
                 {
-                  Id = 234567891,
+                  CustomerID = 234567891,
                   Name = "Rachel Lea",
                   Phone = "0585848441",
                   //Grills values that are within the borders of the State of Israel
@@ -127,7 +127,7 @@ namespace DalApi
 
                 new Customer
                 {
-                  Id = 345678912,
+                  CustomerID = 345678912,
                   Name = "Yanir",
                   Phone = "0503344684",
                   //Grills values that are within the borders of the State of Israel
@@ -137,7 +137,7 @@ namespace DalApi
 
                 new Customer
                 {
-                  Id = 456789123,
+                  CustomerID = 456789123,
                   Name = "Reuven",
                   Phone = "0526795861",
                   //Grills values that are within the borders of the State of Israel
@@ -147,7 +147,7 @@ namespace DalApi
 
                 new Customer
                 {
-                  Id = 567891234,
+                  CustomerID = 567891234,
                   Name = "Ilana",
                   Phone = "0548596887",
                   //Grills values that are within the borders of the State of Israel
@@ -157,7 +157,7 @@ namespace DalApi
 
                 new Customer
                 {
-                   Id = 678912345,
+                   CustomerID = 678912345,
                    Name = "Dalya",
                    Phone = "0558724551",
                    //Grills values that are within the borders of the State of Israel
@@ -167,7 +167,7 @@ namespace DalApi
 
                 new Customer
                 {
-                  Id = 789123456,
+                  CustomerID = 789123456,
                   Name = "Aviya",
                   Phone = "0518846523",
                   //Grills values that are within the borders of the State of Israel
@@ -177,7 +177,7 @@ namespace DalApi
 
                 new Customer
                 {
-                  Id = 891234567,
+                  CustomerID = 891234567,
                   Name = "Baruch",
                   Phone = "0558742215",
                   //Grills values that are within the borders of the State of Israel
@@ -187,7 +187,7 @@ namespace DalApi
 
                 new Customer
                 {
-                  Id = 101123556,
+                  CustomerID = 101123556,
                   Name = "Chen",
                   Phone = "0589868554",
                   //Grills values that are within the borders of the State of Israel
@@ -203,13 +203,13 @@ namespace DalApi
             {
                 new Parcel
                 {
-                   Id = Config.OrdinalParcelNumber++, //serial number
-                   SenderId = 123456789,
-                   TargetId = 987654321,
+                   ParcelID = Config.OrdinalParcelNumber++, //serial number
+                   SenderID = 123456789,
+                   TargetID = 987654321,
                    Weight = (WeightCategories)rand.Next(3),
                    priority = (Priorities)rand.Next(3),
                    Requested = new DateTime(2021, 8,27,8,30,11),
-                   DroneId = 7486,
+                   DroneID = 7486,
                    Scheduled = new DateTime(2021, 8, 27, 13, 39, 53),
                    PickedUp = new DateTime(2021, 8, 27, 15, 30, 26),
                    Delivered = new DateTime(2021, 8, 27, 21, 46, 11),
@@ -217,26 +217,26 @@ namespace DalApi
 
                 new Parcel
                 {
-                   Id = Config.OrdinalParcelNumber++, //serial number
-                   SenderId = 987654321,
-                   TargetId = 234567891,
+                   ParcelID = Config.OrdinalParcelNumber++, //serial number
+                   SenderID = 987654321,
+                   TargetID = 234567891,
                    Weight = (WeightCategories)rand.Next(3),
                    priority = (Priorities)rand.Next(3),
                    Requested = new DateTime(2021, 8, 25, 7, 11, 26),
-                   DroneId = 7486,
+                   DroneID = 7486,
                    Scheduled = new DateTime(2021, 8, 25, 8, 30, 11),
 
                 },
 
                 new Parcel
                 {
-                  Id = Config.OrdinalParcelNumber++, //serial number
-                  SenderId = 345678912,
-                  TargetId = 456789123,
+                  ParcelID = Config.OrdinalParcelNumber++, //serial number
+                  SenderID = 345678912,
+                  TargetID = 456789123,
                   Weight = (WeightCategories)rand.Next(3),
                   priority = (Priorities)rand.Next(3),
                   Requested = new DateTime(2021, 8, 8, 5, 30, 11),
-                  DroneId = 7686,
+                  DroneID = 7686,
                   Scheduled = new DateTime(2021, 8, 8, 5, 56, 54),
                   PickedUp = new DateTime(2021, 8, 8, 7, 45, 18),
                   Delivered = new DateTime(2021, 8, 8, 15, 25, 48),
@@ -244,13 +244,13 @@ namespace DalApi
 
                 new Parcel
                 {
-                  Id = Config.OrdinalParcelNumber++, //serial number
-                  SenderId = 456789123,
-                  TargetId = 567891234,
+                  ParcelID = Config.OrdinalParcelNumber++, //serial number
+                  SenderID = 456789123,
+                  TargetID = 567891234,
                   Weight = (WeightCategories)rand.Next(3),
                   priority = (Priorities)rand.Next(3),
                   Requested = new DateTime(2021, 10, 15, 12, 28, 36),
-                  DroneId = 7686,
+                  DroneID = 7686,
                   Scheduled = new DateTime(2021, 10, 15, 13, 47, 16),
                   PickedUp = new DateTime(2021, 10, 15, 16, 25, 5),
                   Delivered = null,
@@ -258,13 +258,13 @@ namespace DalApi
 
                 new Parcel
                 {
-                  Id = Config.OrdinalParcelNumber++, //serial number
-                  SenderId = 567891234,
-                  TargetId = 678912345,
+                  ParcelID = Config.OrdinalParcelNumber++, //serial number
+                  SenderID = 567891234,
+                  TargetID = 678912345,
                   Weight = (WeightCategories)rand.Next(3),
                   priority = (Priorities)rand.Next(3),
                   Requested = new DateTime(2021, 10, 2, 15, 26, 16),
-                  DroneId = 7686,
+                  DroneID = 7686,
                   Scheduled = new DateTime(2021, 10, 2, 16, 47, 45),
                   PickedUp = new DateTime(2021, 10, 2, 21, 54, 13),
                   Delivered = new DateTime(2021, 10, 2, 22, 47, 25),
@@ -272,13 +272,13 @@ namespace DalApi
 
                 new Parcel
                 {
-                   Id = Config.OrdinalParcelNumber++, //serial number
-                   SenderId = 678912345,
-                   TargetId = 789123456,
+                   ParcelID = Config.OrdinalParcelNumber++, //serial number
+                   SenderID = 678912345,
+                   TargetID = 789123456,
                    Weight = (WeightCategories)rand.Next(3),
                    priority = (Priorities)rand.Next(3),
                    Requested = new DateTime(2021, 5, 4, 3, 36, 35),
-                   DroneId = 7916,
+                   DroneID = 7916,
                    Scheduled = new DateTime(2021, 5, 4, 6, 45, 12),
                    PickedUp = new DateTime(2021, 5, 4, 8, 52, 15),
                    Delivered = new DateTime(2021, 5, 4, 3, 36, 35),
@@ -286,13 +286,13 @@ namespace DalApi
 
                 new Parcel
                 {
-                   Id = Config.OrdinalParcelNumber++, //serial number
-                   SenderId = 789123456,
-                   TargetId = 123456789,
+                   ParcelID = Config.OrdinalParcelNumber++, //serial number
+                   SenderID = 789123456,
+                   TargetID = 123456789,
                    Weight = (WeightCategories)rand.Next(3),
                    priority = (Priorities)rand.Next(3),
                    Requested = new DateTime(2021, 12, 21, 12, 25, 35),
-                   DroneId = 7916,
+                   DroneID = 7916,
                    Scheduled = new DateTime(2021, 12, 21, 14, 25, 32),
                    PickedUp = new DateTime(2021, 12, 21, 16, 31, 35),
                    Delivered = new DateTime(2021, 12, 21, 14, 56, 23),
@@ -300,13 +300,13 @@ namespace DalApi
 
                 new Parcel
                 {
-                   Id = Config.OrdinalParcelNumber++, //serial number
-                   SenderId = 456789123,
-                   TargetId = 123456789,
+                   ParcelID = Config.OrdinalParcelNumber++, //serial number
+                   SenderID = 456789123,
+                   TargetID = 123456789,
                    Weight = (WeightCategories)rand.Next(3),
                    priority = (Priorities)rand.Next(3),
                    Requested = new DateTime(2021, 6, 29, 16, 25, 35),
-                   DroneId = 7216,
+                   DroneID = 7216,
                    Scheduled = new DateTime(2021, 6, 29, 18, 36, 35),
                    PickedUp = new DateTime(2021, 6, 29, 19, 25, 54),
                    Delivered = new DateTime(2021, 6, 29, 20, 12, 20),
@@ -314,13 +314,13 @@ namespace DalApi
 
                 new Parcel
                 {
-                  Id = Config.OrdinalParcelNumber++, //serial number
-                  SenderId = 234567891,
-                  TargetId = 891234567,
+                  ParcelID = Config.OrdinalParcelNumber++, //serial number
+                  SenderID = 234567891,
+                  TargetID = 891234567,
                   Weight = (WeightCategories)rand.Next(3),
                   priority = (Priorities)rand.Next(3),
                   Requested = new DateTime(2021, 4, 21, 11, 25, 45),
-                  DroneId = 7216,
+                  DroneID = 7216,
                   Scheduled = new DateTime(2021, 4, 21, 11, 58, 45),
                   PickedUp = new DateTime(2021, 4, 21, 14, 12, 11),
                   Delivered = new DateTime(2021, 4, 21, 16, 10, 17),
@@ -328,13 +328,13 @@ namespace DalApi
 
                 new Parcel
                 {
-                  Id = Config.OrdinalParcelNumber++, //serial number
-                  SenderId = 101123556,
-                  TargetId = 567891234,
+                  ParcelID = Config.OrdinalParcelNumber++, //serial number
+                  SenderID = 101123556,
+                  TargetID = 567891234,
                   Weight = (WeightCategories)rand.Next(3),
                   priority = (Priorities)rand.Next(3),
                   Requested = new DateTime(2021, 2, 2, 19, 52, 21),
-                  DroneId = 0,
+                  DroneID = 0,
                   Scheduled = null,
                   PickedUp = null,
                   Delivered =null,

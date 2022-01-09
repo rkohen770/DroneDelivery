@@ -42,13 +42,13 @@ namespace BO
             {
                 drone_BL = new DroneForList()
                 {
-                    DroneId = drone_DL.Id,
-                    DroneModel = drone_DL.Model,
+                    DroneID = drone_DL.DroneID,
+                    DroneModel = drone_DL.DroneModel,
                     MaxWeight = (BO.WeightCategories)drone_DL.MaxWeight
                 };
                 //If there is a package that has not yet been delivered but the drone has already been associated
-                var parcel = parcelsList.Find(p => p.DroneId == drone_BL.DroneId && p.Delivered == null);
-                if (parcel.Id != 0)
+                var parcel = parcelsList.Find(p => p.DroneID == drone_BL.DroneID && p.Delivered == null);
+                if (parcel.ParcelID != 0)
                 {
                     double minValueBattery = 0;
                     drone_BL.DroneStatus = DroneStatus.Delivery;
@@ -56,7 +56,7 @@ namespace BO
                     if (parcel.PickedUp == null)
                     {
                         // The location of the drone will be at the station closest to the sender
-                        int senderId = parcel.SenderId;
+                        int senderId = parcel.SenderID;
                         double senderLattitude = dal.GetCustomer(senderId).Lattitude;
                         double senderLongitude = dal.GetCustomer(senderId).Longitude;
                         Station st = dal.GetClosestStation(senderLattitude, senderLongitude);
@@ -66,13 +66,13 @@ namespace BO
                             Longitude = st.Longitude
                         };
                         minValueBattery = drone_BL.DroneBattery - getDistanceBetweenTwoPoints(senderLattitude, senderLongitude, st.Lattitude, st.Longitude)
-                           + dal.GetDistanceBetweenLocationsOfParcels(parcel.SenderId, parcel.TargetId)
-                           + dal.GetDistanceBetweenLocationAndClosestBaseStation(parcel.TargetId) * dal.PowerConsumptionRequest()[0] + 1;
+                           + dal.GetDistanceBetweenLocationsOfParcels(parcel.SenderID, parcel.TargetID)
+                           + dal.GetDistanceBetweenLocationAndClosestBaseStation(parcel.TargetID) * dal.PowerConsumptionRequest()[0] + 1;
                     }
                     else if (parcel.PickedUp != null && parcel.Delivered == null)
                     {
                         //The location of the drone will be at the location of the sender
-                        int senderId = parcel.SenderId;
+                        int senderId = parcel.SenderID;
                         double senderLattitude = dal.GetCustomer(senderId).Lattitude;
                         double senderLongitude = dal.GetCustomer(senderId).Longitude;
                         Station st = dal.GetClosestStation(senderLattitude, senderLongitude);
@@ -81,8 +81,8 @@ namespace BO
                             Lattitude = st.Lattitude,
                             Longitude = st.Longitude
                         };
-                        double distance = dal.GetDistanceBetweenLocationsOfParcels(parcel.SenderId, parcel.TargetId)
-                            + dal.GetDistanceBetweenLocationAndClosestBaseStation(parcel.TargetId);
+                        double distance = dal.GetDistanceBetweenLocationsOfParcels(parcel.SenderID, parcel.TargetID)
+                            + dal.GetDistanceBetweenLocationAndClosestBaseStation(parcel.TargetID);
                         switch (parcel.Weight)
                         {
                             case DO.WeightCategories.Easy:
@@ -122,11 +122,11 @@ namespace BO
                         int index = random.Next(0, parcelsDelivered.Count());
                         drone_BL.CurrentLocation = new()
                         {
-                            Lattitude = dal.GetCustomer(parcelsDelivered[index].TargetId).Lattitude,
-                            Longitude = dal.GetCustomer(parcelsDelivered[index].TargetId).Longitude
+                            Lattitude = dal.GetCustomer(parcelsDelivered[index].TargetID).Lattitude,
+                            Longitude = dal.GetCustomer(parcelsDelivered[index].TargetID).Longitude
                         };
                         // Battery mode will be recharged between a minimal charge that will allow it to reach the station closest to charging and a full charge
-                        double distance = dal.GetDistanceBetweenLocationAndClosestBaseStation(parcelsDelivered[index].TargetId);
+                        double distance = dal.GetDistanceBetweenLocationAndClosestBaseStation(parcelsDelivered[index].TargetID);
                         drone_BL.DroneBattery = random.Next((int)(distance * dal.PowerConsumptionRequest()[0] + 1), 101);
                     }
                 }

@@ -21,7 +21,7 @@ namespace DalApi
         /// <param name="lattitude">Lattitude within the borders of the Land of Israel</param>
         public void AddCustomer(int id, string name, string phone, double longitude, double lattitude)
         {
-            if (DataSource.customers.Exists(customer => customer.Id == id))
+            if (DataSource.customers.Exists(customer => customer.CustomerID == id))
             {
                 throw new CustomerAlreadyExistException(id, name, "the customer exists allready");
             }
@@ -29,7 +29,7 @@ namespace DalApi
             {
                 Customer customer = new Customer
                 {
-                    Id = id,
+                    CustomerID = id,
                     Name = name,
                     Phone = phone,
                     Longitude = longitude,
@@ -49,13 +49,13 @@ namespace DalApi
         /// <param name="newPhone">customer phone</param>
         public void UpdateCustomerData(int id, string newName, string newPhone)
         {
-            if (!DataSource.customers.Exists(c => c.Id == id))
+            if (!DataSource.customers.Exists(c => c.CustomerID == id))
             {
                 throw new BadCustomerIDException(id, "the customer not exists in the list of customers");
             }
             else
             {
-                int cIndex = DataSource.customers.FindIndex(c => c.Id == id);
+                int cIndex = DataSource.customers.FindIndex(c => c.CustomerID == id);
                 Customer customer = DataSource.customers[cIndex];
                 customer.Name = newName;
                 customer.Phone = newPhone;
@@ -70,13 +70,13 @@ namespace DalApi
         /// <param name="newName">customer name</param>
         public void UpdateCustomerName(int id, string newName)
         {
-            if (!DataSource.customers.Exists(c => c.Id == id))
+            if (!DataSource.customers.Exists(c => c.CustomerID == id))
             {
                 throw new BadCustomerIDException(id, "the customer not exists in the list of customers");
             }
             else
             {
-                int cIndex = DataSource.customers.FindIndex(c => c.Id == id);
+                int cIndex = DataSource.customers.FindIndex(c => c.CustomerID == id);
                 Customer customer = DataSource.customers[cIndex];
                 customer.Name = newName;
                 DataSource.customers[cIndex] = customer;
@@ -90,13 +90,13 @@ namespace DalApi
         /// <param name="newPhone">customer phone</param>
         public void UpdateCustomerPhone(int id, string newPhone)
         {
-            if (!DataSource.customers.Exists(c => c.Id == id))
+            if (!DataSource.customers.Exists(c => c.CustomerID == id))
             {
                 throw new BadCustomerIDException(id, "the customer not exists in the list of customers");
             }
             else
             {
-                int cIndex = DataSource.customers.FindIndex(c => c.Id == id);
+                int cIndex = DataSource.customers.FindIndex(c => c.CustomerID == id);
                 Customer customer = DataSource.customers[cIndex];
                 customer.Phone = newPhone;
                 DataSource.customers[cIndex] = customer;
@@ -112,12 +112,12 @@ namespace DalApi
         /// <returns>customer to show</returns>
         public Customer GetCustomer(int customerId)
         {
-            if (!DataSource.customers.Exists(customer => customer.Id == customerId))
+            if (!DataSource.customers.Exists(customer => customer.CustomerID == customerId))
             {
                 throw new BadCustomerIDException(customerId, "the customer not exists in the list of customers");
             }
             //find the place of the customer in the array of customers
-            return DataSource.customers.Find(c => c.Id == customerId);
+            return DataSource.customers.Find(c => c.CustomerID == customerId);
         }
         #endregion
 

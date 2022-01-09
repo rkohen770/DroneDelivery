@@ -27,7 +27,7 @@ namespace BO
                 //add baseStation fields in BL.
                 BaseStation baseStation = new BaseStation()
                 {
-                    BaseStationId = id,
+                    BaseStationID = id,
                     NameBaseStation = nameBaseStation,
                     Location = location,
                     NumOfAvailableChargingPositions = numOfAvailableChargingPositions
@@ -89,19 +89,19 @@ namespace BO
             try
             {
                 Station station = dal.GetBaseStation(baseStationId);
-                List<int> dronesIdInChrging = dal.GetDronesInChargingsAtStation(baseStationId, droneCharge => droneCharge.StationId == baseStationId).ToList();
+                List<int> dronesIdInChrging = dal.GetDronesInChargingsAtStation(baseStationId, droneCharge => droneCharge.StationID == baseStationId).ToList();
                 List<DroneInCharging> dronesInCarging = new();
                 foreach (var droneId in dronesIdInChrging)
                 {
-                    var drone_l = droneForLists.Find(d => d.DroneId == droneId);
-                    DroneInCharging drone_c = new() { DroneId = droneId, DroneBattery = drone_l.DroneBattery };
+                    var drone_l = droneForLists.Find(d => d.DroneID == droneId);
+                    DroneInCharging drone_c = new() { DroneID = droneId, DroneBattery = drone_l.DroneBattery };
                     dronesInCarging.Add(drone_c);
                 }
 
                 return new BaseStation()
                 {
-                    BaseStationId = baseStationId,
-                    NameBaseStation = station.Name,
+                    BaseStationID = baseStationId,
+                    NameBaseStation = station.StationName,
                     Location = new() { Lattitude = station.Lattitude, Longitude = station.Longitude },
                     NumOfAvailableChargingPositions = station.ChargeSlots,
                     DroneInChargings = dronesInCarging
@@ -124,7 +124,7 @@ namespace BO
             List<BaseStationForList> list = new();
             foreach (var station in dal.GetAllBaseStations())
             {
-                BaseStationForList stationForList = cloneBaseStation(GetBaseStation(station.Id));
+                BaseStationForList stationForList = cloneBaseStation(GetBaseStation(station.StationID));
                 list.Add(stationForList);
             }
             return list;
@@ -139,7 +139,7 @@ namespace BO
             List<BaseStationForList> list = new();
             foreach (var station in dal.GetAllStationsWithAvailableChargingStations(p))
             {
-                BaseStationForList stationForList = cloneBaseStation(GetBaseStation(station.Id));
+                BaseStationForList stationForList = cloneBaseStation(GetBaseStation(station.StationID));
                 list.Add(stationForList);
             }
             return list;
@@ -155,7 +155,7 @@ namespace BO
         {
             return new BaseStationForList
             {
-                BaseStationId = baseStation.BaseStationId,
+                BaseStationID = baseStation.BaseStationID,
                 NameBaseStation = baseStation.NameBaseStation.ToString(),
                 NumOfAvailableChargingPositions = baseStation.NumOfAvailableChargingPositions,
                 NumOfBusyChargingPositions = baseStation.DroneInChargings.Count()

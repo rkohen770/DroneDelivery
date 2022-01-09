@@ -9,7 +9,7 @@ namespace DO
 {
     public struct Customer
     {
-        public int Id { get; set; }
+        public int CustomerID { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
         public double Longitude { get; set; }
@@ -17,7 +17,7 @@ namespace DO
 
         public override string ToString()
         {
-            return $"ID: {Id} \nName: {Name} \nPhone {Phone} \n" +
+            return $"ID: {CustomerID} \nName: {Name} \nPhone {Phone} \n" +
                 $"{Lattitude:n3}°N, {Longitude:n3}°E\n";
         }
     }

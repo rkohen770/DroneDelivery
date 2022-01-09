@@ -81,7 +81,7 @@ namespace PL
             WeightSelector.Visibility = Visibility.Hidden;
             MaxWeight.Visibility = Visibility.Visible;
             ID.IsReadOnly = true;
-            ID.Text = drone.DroneId.ToString();
+            ID.Text = drone.DroneID.ToString();
             Model.Text = drone.DroneModel;
             MaxWeight.Text = drone.MaxWeight.ToString();
             Battery.Text = drone.DroneBattery.ToString();

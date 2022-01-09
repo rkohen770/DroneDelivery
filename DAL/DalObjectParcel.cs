@@ -22,11 +22,11 @@ namespace DalApi
         public int AddParcel(int senderId, int targetId, WeightCategories weight,
             Priorities priority, int droneId = 0)
         {
-            if (!(DataSource.customers.Exists(customer => customer.Id == senderId)))
+            if (!(DataSource.customers.Exists(customer => customer.CustomerID == senderId)))
             {
                 throw new BadCustomerIDException(senderId, "the sender not exists in the list of customers");
             }
-            if (!(DataSource.customers.Exists(customer => customer.Id == targetId)))
+            if (!(DataSource.customers.Exists(customer => customer.CustomerID == targetId)))
             {
                 throw new BadCustomerIDException(targetId, "the target not exists in the list of customers");
             }
@@ -34,16 +34,16 @@ namespace DalApi
             {
                 Parcel parcel = new Parcel
                 {
-                    Id = DataSource.Config.OrdinalParcelNumber++,
-                    SenderId = senderId,
-                    TargetId = targetId,
+                    ParcelID = DataSource.Config.OrdinalParcelNumber++,
+                    SenderID = senderId,
+                    TargetID = targetId,
                     Weight = weight,
                     priority = priority,
                     Requested = DateTime.Now,
-                    DroneId = droneId
+                    DroneID = droneId
                 };
                 DataSource.parcels.Add(parcel);//Adding the new parcel to the array
-                return parcel.Id;
+                return parcel.ParcelID;
             }
         }
         #endregion
@@ -55,11 +55,11 @@ namespace DalApi
         /// <param name="parcelId">Package ID for association</param>
         public void AssigningParcelToDrone(int parcelId, int droneId)
         {
-            if (!DataSource.parcels.Exists(parcel => parcel.Id == parcelId))
+            if (!DataSource.parcels.Exists(parcel => parcel.ParcelID == parcelId))
             {
                 throw new BadParcelIDException(parcelId, "the percel not exists in the list of parcels");
             }
-            if (!DataSource.drones.Exists(drone => drone.Id == droneId))
+            if (!DataSource.drones.Exists(drone => drone.DroneID == droneId))
             {
                 throw new BadDroneIDException(droneId, "the drone not exists in the list of drones");
             }
@@ -68,10 +68,10 @@ namespace DalApi
                 //We will go through the entire list of the drone, to find a available drone
                 for (int pIndex = 0; pIndex < DataSource.parcels.Count; pIndex++)
                 {
-                    if (DataSource.parcels[pIndex].Id == parcelId)
+                    if (DataSource.parcels[pIndex].ParcelID == parcelId)
                     {
                         Parcel parcel = DataSource.parcels[pIndex];//Obtain an index for the location where the package ID is located
-                        parcel.DroneId = droneId;//Update the droneid field in the drone package found
+                        parcel.DroneID = droneId;//Update the droneid field in the drone package found
                         parcel.Scheduled = DateTime.Now;//Update packet time association field to now.
                         DataSource.parcels[pIndex] = parcel;
                     }
@@ -85,13 +85,13 @@ namespace DalApi
         /// <param name="parcelId">Package ID for collection</param>
         public void PackagCollectionByDrone(int parcelId)
         {
-            if (!DataSource.parcels.Exists(parcel => parcel.Id == parcelId))
+            if (!DataSource.parcels.Exists(parcel => parcel.ParcelID == parcelId))
             {
                 throw new BadParcelIDException(parcelId, "the percel not exists in the list of parcels");
             }
             for (int i = 0; i < DataSource.parcels.Count; i++)
             {
-                if (DataSource.parcels[i].Id == parcelId)//Obtain an index for the location where the package ID is located
+                if (DataSource.parcels[i].ParcelID == parcelId)//Obtain an index for the location where the package ID is located
                 {
                     Parcel parcel = DataSource.parcels[i];
                     parcel.PickedUp = DateTime.Now;//Update packet time pickeup field to now.
@@ -108,13 +108,13 @@ namespace DalApi
         /// <param name="parcelId">Package ID for delivery</param>
         public void DeliveryPackageToCustomer(int parcelId)
         {
-            if (!DataSource.parcels.Exists(parcel => parcel.Id == parcelId))
+            if (!DataSource.parcels.Exists(parcel => parcel.ParcelID == parcelId))
             {
                 throw new BadParcelIDException(parcelId, "the percel not exists in the list of parcels");
             }
             for (int i = 0; i < DataSource.parcels.Count; i++)
             {
-                if (DataSource.parcels[i].Id == parcelId)//Obtain an index for the location where the package ID is located
+                if (DataSource.parcels[i].ParcelID == parcelId)//Obtain an index for the location where the package ID is located
                 {
                     Parcel parcel = DataSource.parcels[i];
                     parcel.Delivered = DateTime.Now;//Update packet time delivered field to now.
@@ -133,12 +133,12 @@ namespace DalApi
         /// <returns>parcel to show</returns>
         public Parcel GetParcel(int parcelId)
         {
-            if (!DataSource.parcels.Exists(parcel => parcel.Id == parcelId))
+            if (!DataSource.parcels.Exists(parcel => parcel.ParcelID == parcelId))
             {
                 throw new BadParcelIDException(parcelId, "the parcel not exists in the list of parcels");
             }
             //find the place of the parcel in the array of parcels
-            return DataSource.parcels.Find(p => p.Id == parcelId);
+            return DataSource.parcels.Find(p => p.ParcelID == parcelId);
         }
         #endregion
 
