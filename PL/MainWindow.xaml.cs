@@ -39,6 +39,10 @@ namespace PL
         /// collection of customers
         /// </summary>
         ObservableCollection<CustomerForList> listCustomers;
+        /// <summary>
+        /// collection of parcels
+        /// </summary>
+        ObservableCollection<ParcelForList> listParcels;
 
         public MainWindow(User user)
         {
@@ -55,6 +59,10 @@ namespace PL
             //reset list of customers
             listCustomers = new ObservableCollection<CustomerForList>(bl.GetAllCustomersBo());
             LVListCustomers.ItemsSource = listCustomers;
+
+            //reset list of parcels
+            listParcels = new ObservableCollection<ParcelForList>(bl.GetAllParcelsBo());
+            LVListParcels.ItemsSource = listParcels;
 
             ChangeClient.DataContext = MyUser;
             //check the status of the drones
@@ -81,6 +89,10 @@ namespace PL
             //reset the list of the customers   
             listCustomers = new ObservableCollection<CustomerForList>(bl.GetAllCustomersBo());
             LVListCustomers.ItemsSource = listCustomers;
+
+            //reset the list of the parcels   
+            listParcels = new ObservableCollection<ParcelForList>(bl.GetAllParcelsBo());
+            LVListParcels.ItemsSource = listParcels;
 
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
@@ -152,15 +164,15 @@ namespace PL
         }
 
         /// <summary>
-        /// A button that opens a window for adding a drone
+        /// A button that opens a window for adding a base station
         /// </summary>
         /// <param name="sender">Button type</param>
         /// <param name="e"></param>
         private void AddBaseStationButton_Click(object sender, RoutedEventArgs e)
         {
             new BaseStationWindow(bl, this).ShowDialog();
-            LVListDrones.ItemsSource = bl.GetAllDronesBo();
-            LVListDrones.Items.Refresh();
+            LVListBaseStations.ItemsSource = bl.GetAllBaseStationsBo();
+            LVListBaseStations.Items.Refresh();
         }
 
         /// <summary>
@@ -170,7 +182,7 @@ namespace PL
         /// <param name="e"></param>
         private void RefreshBaseStationButton_Click(object sender, RoutedEventArgs e)
         {
-            LVListBaseStations.ItemsSource = bl.GetAllBaseStationsBo().OrderBy(d => d.NumOfAvailableChargingPositions);
+            LVListBaseStations.ItemsSource = bl.GetAllBaseStationsBo().OrderBy(b => b.NumOfAvailableChargingPositions);
             LVListBaseStations.Items.Refresh();
         }
 
@@ -195,9 +207,54 @@ namespace PL
             LVListCustomers.ItemsSource = bl.GetAllCustomersBo();
             LVListCustomers.Items.Refresh();
         }
+        #endregion
+        /// <summary>
+        /// an event to show the details parcel window
+        /// </summary>
+        private void ShowParcelDetails_Click(object sender, MouseButtonEventArgs e)
+        {
+            ParcelForList parcelDetails = ((ListView)sender).SelectedItem as ParcelForList;
+            new ParcelWindow(bl, parcelDetails, this).ShowDialog();
+            LVListBaseStations.ItemsSource = bl.GetAllBaseStationsBo();
+            LVListBaseStations.Items.Refresh();
+        }
 
+        /// <summary>
+        /// A button that opens a window for adding a parcel
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void AddParcelsButton_Click(object sender, RoutedEventArgs e)
+        {
+            new ParcelWindow(bl, this).ShowDialog();
+            LVListParcels.ItemsSource = bl.GetAllCustomersBo();
+            LVListParcels.Items.Refresh();
+        }
+
+        /// <summary>
+        /// A button that refresh the list of parcels order by target customer
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void RefreshBaseParcelTargetButton_Click(object sender, RoutedEventArgs e)
+        {
+            LVListParcels.ItemsSource = bl.GetAllParcelsBo().OrderBy(p => p.CustomerNameTarget);
+            LVListParcels.Items.Refresh();
+        }
+         /// <summary>
+         /// A button that refresh the list of parcels order by send customer
+         /// </summary>
+         /// <param name="sender">Button type</param>
+         /// <param name="e"></param>
+        private void RefreshBaseParcelSendButton_Click(object sender, RoutedEventArgs e)
+        {
+            LVListParcels.ItemsSource = bl.GetAllParcelsBo().OrderBy(p => p.CustomerNameSend);
+            LVListParcels.Items.Refresh();
+        }
+        #region Customer
 
         #endregion
+
 
         #region User 
         /// <summary>

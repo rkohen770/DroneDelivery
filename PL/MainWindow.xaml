@@ -164,18 +164,19 @@
                         <ColumnDefinition Width="115*"/>
                         <ColumnDefinition Width="40*"/>
                         <ColumnDefinition Width="30*"/>
-                        <ColumnDefinition Width="559*"/>
+                        <ColumnDefinition Width="41*"/>
+                        <ColumnDefinition Width="518*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
                         <RowDefinition  Height="500"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0" Grid.ColumnSpan="4" >
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0" Grid.ColumnSpan="5" >
                         <Button x:Name="Add_Station_Button" MinWidth="130" Background="#FFD48224" Content="Add new base station" Click="AddBaseStationButton_Click" Height="45"/>
                         <Button x:Name="refreshBaseStation" MinWidth="120" Background="#FFD48224" Content="refresh" Click="RefreshBaseStationButton_Click" Height="45"/>
                     </StackPanel>
                     <ListView x:Name="LVListBaseStations" Grid.Row="0" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"
-                          MouseDoubleClick="ShowBaseStationDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="0,0,0,60" Grid.ColumnSpan="4" >
+                          MouseDoubleClick="ShowBaseStationDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="0,0,0,60" Grid.ColumnSpan="5" >
                         <ListView.View>
 
                             <GridView>
@@ -253,11 +254,11 @@
                                             DisplayMemberBinding="{Binding Path=CustomerName,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="  Phone  " 
                                             DisplayMemberBinding="{Binding Path=Phone,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  sent and delivered  " 
+                                <GridViewColumn Header="  Sent and delivered  " 
                                             DisplayMemberBinding="{Binding Path=SentAndDelivered,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  sent and not delivered  " 
+                                <GridViewColumn Header="  Sent and not delivered  " 
                                             DisplayMemberBinding="{Binding Path=SentAndNotDelivered,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  received  " 
+                                <GridViewColumn Header="  Received  " 
                                             DisplayMemberBinding="{Binding Path=Received,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="  On the way to customer  " 
                                             DisplayMemberBinding="{Binding Path=OnTheWayToCustomer,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
@@ -298,43 +299,44 @@
                 </Grid>
             </TabItem>
             <!--#endregion Customers-->
-            
+
             <!--#region Parcels-->
             <TabItem Header="Parcels" Foreground="#FF4362AC" Height="22" Margin="-2,0,-2,0" VerticalAlignment="Bottom">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="9*"/>
-                        <ColumnDefinition Width="18*"/>
-                        <ColumnDefinition Width="221*"/>
+                        <ColumnDefinition Width="27*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="77*"/>
+                        <ColumnDefinition Width="586*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
                         <RowDefinition  Height="500"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0" Grid.ColumnSpan="3" >
-                        <Button x:Name="Add_Parcel_Button" MinWidth="130" Background="#FFD48224" Content="Add new parcels" Click="AddParcelsButton_Click" Height="45"/>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0" Grid.ColumnSpan="4" >
+                        <Button x:Name="Add_Parcel_Button" MinWidth="130" Background="#FFD48224" Content="Add new parcel" Click="AddParcelsButton_Click" Height="45"/>
+                        <Button x:Name="refreshParcelByTarget" MinWidth="120" Background="#FFD48224" Content="refresh by target" Click="RefreshBaseParcelTargetButton_Click" Height="45"/>
+                        <Button x:Name="refreshParcelBySend" MinWidth="120" Background="#FFD48224" Content="refresh by send" Click="RefreshBaseParcelSendButton_Click" Height="45"/>
                     </StackPanel>
                     <ListView x:Name="LVListParcels" 
                           ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
-                          Grid.ColumnSpan="3" MouseDoubleClick="ShowCustomerDetails_Click"
+                          Grid.ColumnSpan="4" MouseDoubleClick="ShowParcelDetails_Click"
                           RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
                           FontWeight="Normal" Margin="-6,0,6,15">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="  Customer ID  " 
-                                            DisplayMemberBinding="{Binding Path=CustomerID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-                                <GridViewColumn Header="  Customer name  " 
-                                            DisplayMemberBinding="{Binding Path=CustomerName,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  Phone  " 
-                                            DisplayMemberBinding="{Binding Path=Phone,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  sent and delivered  " 
-                                            DisplayMemberBinding="{Binding Path=SentAndDelivered,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  sent and not delivered  " 
-                                            DisplayMemberBinding="{Binding Path=SentAndNotDelivered,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  received  " 
-                                            DisplayMemberBinding="{Binding Path=Received,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  On the way to customer  " 
-                                            DisplayMemberBinding="{Binding Path=OnTheWayToCustomer,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                <GridViewColumn Header="  Parcel ID  " 
+                                            DisplayMemberBinding="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                                <GridViewColumn Header="  Customer name send  " 
+                                            DisplayMemberBinding="{Binding Path=CustomerNameSend,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="150"/>
+                                <GridViewColumn Header="  Customer name target  " 
+                                            DisplayMemberBinding="{Binding Path=CustomerNameTarget,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="150"/>
+                                <GridViewColumn Header="  Weight  " 
+                                            DisplayMemberBinding="{Binding Path=Weight ,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                <GridViewColumn Header="  Priorities  " 
+                                            DisplayMemberBinding="{Binding Path=Priorities,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                <GridViewColumn Header="  Parcel status  " 
+                                            DisplayMemberBinding="{Binding Path=ParcelStatus,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="110"/>
                             </GridView>
                         </ListView.View>
                         <ListView.Resources>
