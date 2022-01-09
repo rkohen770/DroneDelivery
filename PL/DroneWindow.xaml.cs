@@ -41,16 +41,6 @@ namespace PL
             InitializeComponent();
             this.bl = bl;
             this.mainWindow = mainWindow;
-
-            SaveClick.Visibility = Visibility.Visible;
-            Update.Visibility = Visibility.Hidden;
-            status.Visibility = Visibility.Hidden;
-            Status.Visibility = Visibility.Hidden;
-            Battery.Visibility = Visibility.Hidden;
-            battery.Visibility = Visibility.Hidden;
-            WeightSelector.Visibility = Visibility.Visible;
-            MaxWeight.Visibility = Visibility.Hidden;
-            currentLocation.Visibility = Visibility.Hidden;
             CurrentLocation.Visibility = Visibility.Hidden;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
 
@@ -67,17 +57,8 @@ namespace PL
             this.bl = bl;
             this.drone = drone;
             this.mainWindow = mainWindow;
-            SaveClick.Visibility = Visibility.Hidden;
-            Update.Visibility = Visibility.Visible;
-            Sending.Visibility = Visibility.Visible;
-            Release.Visibility = Visibility.Visible;
-            Send_Delivery.Visibility = Visibility.Visible;
-            Collection.Visibility = Visibility.Visible;
-            Parcel_Delivery.Visibility = Visibility.Visible;
-            status.Visibility = Visibility.Visible;
-            Status.Visibility = Visibility.Visible;
-            currentLocation.Visibility = Visibility.Visible;
             CurrentLocation.Visibility = Visibility.Visible;
+            ID.Text = drone.DroneID.ToString();
             WeightSelector.Visibility = Visibility.Hidden;
             MaxWeight.Visibility = Visibility.Visible;
             ID.IsReadOnly = true;
@@ -85,7 +66,6 @@ namespace PL
             Model.Text = drone.DroneModel;
             MaxWeight.Text = drone.MaxWeight.ToString();
             Battery.Text = drone.DroneBattery.ToString();
-            Status.IsReadOnly = true;
             Status.Text = drone.DroneStatus.ToString();
             stationID.Width = 200;
             stationID.Margin = new Thickness(30, 145, 0, 0);
