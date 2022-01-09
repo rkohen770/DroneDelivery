@@ -250,17 +250,17 @@
                             <GridView>
                                 <GridViewColumn Header="  Customer ID  " 
                                             DisplayMemberBinding="{Binding Path=CustomerID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-                                <GridViewColumn Header="  Customer name  " 
+                                <GridViewColumn Header="  Customer Name  " 
                                             DisplayMemberBinding="{Binding Path=CustomerName,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="  Phone  " 
                                             DisplayMemberBinding="{Binding Path=Phone,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  Sent and delivered  " 
+                                <GridViewColumn Header="  Sent And Delivered  " 
                                             DisplayMemberBinding="{Binding Path=SentAndDelivered,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  Sent and not delivered  " 
+                                <GridViewColumn Header="  Sent And Not Delivered  " 
                                             DisplayMemberBinding="{Binding Path=SentAndNotDelivered,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="  Received  " 
                                             DisplayMemberBinding="{Binding Path=Received,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  On the way to customer  " 
+                                <GridViewColumn Header="  On The Way To Customer  " 
                                             DisplayMemberBinding="{Binding Path=OnTheWayToCustomer,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                             </GridView>
                         </ListView.View>
@@ -327,15 +327,15 @@
                             <GridView>
                                 <GridViewColumn Header="  Parcel ID  " 
                                             DisplayMemberBinding="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-                                <GridViewColumn Header="  Customer name send  " 
+                                <GridViewColumn Header="  Customer Name Send  " 
                                             DisplayMemberBinding="{Binding Path=CustomerNameSend,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="150"/>
-                                <GridViewColumn Header="  Customer name target  " 
+                                <GridViewColumn Header="  Customer Name Target  " 
                                             DisplayMemberBinding="{Binding Path=CustomerNameTarget,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="150"/>
                                 <GridViewColumn Header="  Weight  " 
                                             DisplayMemberBinding="{Binding Path=Weight ,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="  Priorities  " 
                                             DisplayMemberBinding="{Binding Path=Priorities,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  Parcel status  " 
+                                <GridViewColumn Header="  Parcel Status  " 
                                             DisplayMemberBinding="{Binding Path=ParcelStatus,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="110"/>
                             </GridView>
                         </ListView.View>

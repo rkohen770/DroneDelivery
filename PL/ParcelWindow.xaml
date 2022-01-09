@@ -5,8 +5,114 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ParcelWindow" Height="450" Width="800">
+        Title="ParcelWindow" Height="460" Width="400">
+    <Window.Resources>
+        <!--<local:NotBooleanToVisibilityConverter x:Key="notBooleanToVisibilityConverter" />
+        <local:DroneBattery x:Key="DroneBatteryConvert"/>-->
+    </Window.Resources>
+
     <Grid>
-        
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Parcel ID" Grid.Row="0" Grid.Column="0"
+               HorizontalAlignment="Left" VerticalAlignment="Top"
+               Height="28" Width="121" Margin="27,25,0,0" 
+               RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
+            <TextBox x:Name="ID" Grid.Row="0" Grid.Column="1" 
+                 HorizontalAlignment="Left" Height="31" Margin="30,25,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="133" MaxLength="5" 
+                 Text="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                 PreviewTextInput="ParcelTextBox_PreviewTextInput" 
+                 HorizontalContentAlignment="Center"
+                 VerticalContentAlignment="Center" />
+            <Label Content="Sender To Parcel" Grid.Row="0" Grid.Column="0" 
+               HorizontalAlignment="Left" Height="28" 
+               Margin="27,65,0,0" VerticalAlignment="Top" 
+               Width="121" RenderTransformOrigin="0.326,0.754" 
+               FontSize="14" FontWeight="Bold" />
+            <TextBox x:Name="SenderOfParcel" Grid.Row="0" 
+                 HorizontalAlignment="Left" Height="31" Margin="153,65,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="210"
+                 PreviewTextInput="ParcelTextBox_PreviewTextInput" 
+                 HorizontalContentAlignment="Left" 
+                 VerticalContentAlignment="Top"
+                 Text="{Binding Path=SenderOfParcel,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Grid.ColumnSpan="2"  />
+            <Label Content="Target To Parcel" Grid.Row="0" Grid.Column="0" 
+               HorizontalAlignment="Left" Height="28" 
+               Margin="27,105,0,0" VerticalAlignment="Top" 
+               Width="121" RenderTransformOrigin="0.326,0.754" 
+               FontSize="14" FontWeight="Bold" />
+            <TextBox x:Name="TargetToParcel" Grid.Row="0" 
+                 HorizontalAlignment="Left" Height="31" Margin="153,105,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="210"
+                 PreviewTextInput="ParcelTextBox_PreviewTextInput" 
+                 HorizontalContentAlignment="Left" 
+                 VerticalContentAlignment="Top"
+                 Text="{Binding Path=TargetToParcel,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Grid.ColumnSpan="2"  />
+            <Label Content="Weight" Grid.Row="0" HorizontalAlignment="Left"
+                   Height="28" Margin="30,145,0,0" VerticalAlignment="Top" Width="121"
+                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
+            <TextBox x:Name="Weight" Grid.Row="0" Text="{Binding Path=Weight
+                ,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap"
+                     IsReadOnly="True" HorizontalAlignment="Left" Height="31" Margin="30,145,0,0" 
+                     VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center" Grid.Column="1" />
+            <Label Content="Priorities" Grid.Row="0" HorizontalAlignment="Left"
+                   Height="28" Margin="30,185,0,0" VerticalAlignment="Top" Width="121"
+                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
+            <TextBox x:Name="Priorities" Grid.Row="0" Text="{Binding Path=Priorities
+                ,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap"
+                     IsReadOnly="True" HorizontalAlignment="Left" Height="31" Margin="30,185,0,0" 
+                     VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center" Grid.Column="1" />
+            <Label Content="Drone In Parcel" Grid.Row="0" HorizontalAlignment="Left"
+                   Height="28" Margin="30,225,0,0" VerticalAlignment="Top" Width="121"
+                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
+            <TextBox x:Name="DroneInParcel" Grid.Row="0" Text="{Binding Path=Priorities
+                ,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap"
+                     IsReadOnly="True" HorizontalAlignment="Left" Height="31" Margin="30,225,0,0" 
+                     VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center" Grid.Column="1" />
+            <Label Content="Requested" Grid.Row="0" HorizontalAlignment="Left"
+                   Height="28" Margin="30,265,0,0" VerticalAlignment="Top" Width="121"
+                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
+            <DatePicker x:Name="Requested" SelectedDate="{Binding  Requested}" 
+                        Grid.Column="1" Margin="30,265,0,0" Width="133" 
+                        Height="31" DisplayDate="{Binding Requested, Mode=TwoWay, 
+                UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+            <Label Content="Scheduled" Grid.Row="0" HorizontalAlignment="Left"
+                   Height="28" Margin="30,305,0,0" VerticalAlignment="Top" Width="121"
+                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
+            <DatePicker x:Name="Scheduled" SelectedDate="{Binding  Scheduled}" 
+                        Grid.Column="1" Margin="30,305,0,0" Width="133" 
+                        Height="31" DisplayDate="{Binding Scheduled, Mode=TwoWay, 
+                UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top"
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+            <Label Content="PickedUp" Grid.Row="0" HorizontalAlignment="Left"
+                   Height="28" Margin="30,345,0,0" VerticalAlignment="Top" Width="121"
+                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
+            <DatePicker x:Name="PickedUp" SelectedDate="{Binding  PickedUp}" 
+                        Grid.Column="1" Margin="30,345,0,0" Width="133" 
+                        Height="31" DisplayDate="{Binding PickedUp, Mode=TwoWay, 
+                UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+            <Label Content="ParcelDelivery" Grid.Row="0" HorizontalAlignment="Left"
+                   Height="28" Margin="30,385,0,0" VerticalAlignment="Top" Width="121"
+                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
+            <DatePicker x:Name="ParcelDelivery" SelectedDate="{Binding  ParcelDelivery}" 
+                        Grid.Column="1" Margin="30,385,0,0" Width="133" 
+                        Height="31" DisplayDate="{Binding ParcelDelivery, Mode=TwoWay, 
+                UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+        </Grid>
     </Grid>
+
 </Window>
