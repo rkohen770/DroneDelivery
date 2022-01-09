@@ -28,6 +28,7 @@
                RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
             <TextBox x:Name="ID" Grid.Row="0" Grid.Column="1" 
                  HorizontalAlignment="Left" Height="31" Margin="30,25,0,0" 
+                 IsReadOnly="{Binding Path=IsVisible, ElementName=CurrentLocation}"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="133" MaxLength="5" 
                  Text="{Binding Path=BaseStationId,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                  PreviewTextInput="StationIdTextBox_PreviewTextInput" 
@@ -53,7 +54,8 @@
             <TextBox x:Name="CurrentLocation" 
                  Grid.Row="0" Grid.Column="1"
                  HorizontalAlignment="Left" Height="31"
-                 Margin="30,105,0,0" 
+                 Margin="30,105,0,0"
+                 IsReadOnly="{Binding Path=IsVisible, ElementName=CurrentLocation}"
                  Text="{Binding Path=Location,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                  TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="133" 
@@ -153,8 +155,20 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="SaveClick" Grid.Row="0" Grid.Column="0" Content="Save Base Station" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="SaveBaseStationButton_Click" />
-            <Button Content="Close" Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="CloseButton_Click" />
+            <Button x:Name="SaveClick" Grid.Row="0" Grid.Column="0" 
+                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation, 
+                    Converter={StaticResource notBooleanToVisibilityConverter} }"
+                    Content="Save Base Station" HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center" Click="SaveBaseStationButton_Click" />
+            <Button x:Name="UpDateClick" Grid.Row="0" 
+                    Visibility="{Binding Path=IsVisible, ElementName=SaveClick,
+                    Converter={StaticResource notBooleanToVisibilityConverter}}"
+                    Grid.Column="0" Content="Update Base Station" 
+                    HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                    Click="UpdateBaseStationButton_Click" />
+            <Button Content="Close" Grid.Row="0" Grid.Column="1"  
+                    HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                    Click="CloseButton_Click" />
         </Grid>
     </Grid>
 </Window>

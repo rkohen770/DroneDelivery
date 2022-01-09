@@ -60,6 +60,7 @@ namespace PL
             BaseStation station = bl.GetBaseStation(baseStationDetails.BaseStationID);
             ID.Text = station.BaseStationID.ToString();
             Name.Text = station.NameBaseStation.ToString();
+            CurrentLocation.Visibility = Visibility.Visible;
             CurrentLocation.Text = station.Location.ToString();
             NumOfAvailableChargingPositions.Text = station.NumOfAvailableChargingPositions.ToString();
 
@@ -99,7 +100,7 @@ namespace PL
         }
 
         /// <summary>
-        /// Button for saving the details of the new drone
+        /// Button for saving the details of the new Base Station
         /// </summary>
         /// <param name="sender">button type</param>
         /// <param name="e"></param>
@@ -107,35 +108,54 @@ namespace PL
         {
             try
             {
-                if (ID.Text == null || Name.Text == null || CurrentLocation.Text == null || NumOfAvailableChargingPositions.Text == null)
+                if (ID.Text == null || Name.Text == null || Longttitude.Text == null || Lattitude.Text == null || NumOfAvailableChargingPositions.Text == null)
                     MessageBox.Show("Not all detalis are set");
-                else if (ID.Text.Length > 4)
-                    MessageBox.Show("Base Station ID longs then 4 letters");
+                else if (ID.Text.Length >5)
+                    MessageBox.Show("Base Station ID longs then 5 letters");
                 else if (Name.Text.Length > 5)
                     MessageBox.Show("Base Station Name longs then 5 letters");
-                //else
-                //{
-                //    bl.AddBaseStationBo(int.Parse(ID.Text), Name.Text,
-                //        CurrentLocation.Text, int.Parse(StationID.Text));
-                //}
-                MessageBox.Show("Adding a drone was completed successfully");
+                else
+                {
+                    Location location = new() { Lattitude = double.Parse(Lattitude.Text), Longitude = double.Parse(Longttitude.Text) };
+                    bl.AddBaseStationBo(int.Parse(ID.Text), int.Parse(Name.Text),
+                        location, int.Parse(NumOfAvailableChargingPositions.Text));
+                    MessageBox.Show("Adding a drone was completed successfully");
+                }
+               
 
-            }
-            catch (BadDroneIDException ex)
-            {
-                MessageBox.Show(ex.ID.ToString(), ex.Message + "\nAdding a drone was not completed successfully");
             }
             catch (BadBaseStationIDException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Code.ToString(), ex.Message + "\nAdding a Base Station was not completed successfully");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            mainWindow.LVListDrones.Items.Refresh();
+            mainWindow.LVListBaseStations.ItemsSource = bl.GetAllBaseStationsBo();
+            mainWindow.LVListBaseStations.Items.Refresh();
             Close();
         }
 
+        /// <summary>
+        /// A button that opens a window for updating a Base Station
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void UpdateBaseStationButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.UpdateBaseStationData(int.Parse(ID.Text),int.Parse( Name.Text), int.Parse(NumOfAvailableChargingPositions.Text));
+                MessageBox.Show("Update a Base Station was completed successfully");
+                mainWindow.LVListBaseStations.ItemsSource = bl.GetAllBaseStationsBo();
+                mainWindow.LVListBaseStations.Items.Refresh();
+
+            }
+            catch (BadDroneIDException ex)
+            {
+                MessageBox.Show(ex.ID.ToString(), ex.Message);
+            }
+        }
     }
 }

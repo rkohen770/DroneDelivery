@@ -101,7 +101,7 @@
                                                     <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <TextBlock Grid.Column="0" Text="{Binding Path=DroneBattery,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Foreground="#FF186665" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="0" Text="{Binding Path=DroneBattery,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Foreground="#FF186665" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" />
                                                 <Image Grid.Column="1" Width="15" Height="15" Source="/Images/%_24px.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
                                             </Grid>
                                         </DataTemplate>
