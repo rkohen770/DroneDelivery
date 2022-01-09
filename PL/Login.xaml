@@ -30,19 +30,19 @@
                     </Grid.Background>
 
 
-                    <TextBox x:Name="userName" HorizontalAlignment="Left" Height="32" Margin="130,30,0,0"  VerticalAlignment="Top" Width="114" MaxLength="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="David">
+                    <TextBox x:Name="userName" Width="132" HorizontalAlignment="Left" Height="32" Margin="130,30,0,0"  VerticalAlignment="Top" MaxLength="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="David">
                         <TextBox.Background>
                             <SolidColorBrush Color="White" Opacity="0.35"/>
                         </TextBox.Background>
                     </TextBox>
-                    <PasswordBox x:Name="password" HorizontalAlignment="Left" Height="33" Margin="130,80,0,0" VerticalAlignment="Top" Width="114" MaxLength="6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="David">
+                    <PasswordBox x:Name="password" HorizontalAlignment="Left" Height="32" Margin="130,80,0,0" VerticalAlignment="Top" Width="132" MaxLength="6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="David">
                         <PasswordBox.Background>
                             <SolidColorBrush Color="White" Opacity="0.35"/>
                         </PasswordBox.Background>
                     </PasswordBox>
-                    <Label Content="User name" HorizontalAlignment="Left" Height="38" Margin="14,30,0,0" VerticalAlignment="Top" Width="102" FontWeight="Bold" FontSize="16" Grid.ColumnSpan="2" FontFamily="David"/>
-                    <Label Content="Password" HorizontalAlignment="Left" Height="33" Margin="14,80,0,0" VerticalAlignment="Top" Width="102" FontWeight="Bold" FontSize="16" Grid.ColumnSpan="2" FontFamily="David"/>
-                    <Button x:Name="enter" Content="Enter" HorizontalAlignment="Center" Height="34" Margin="0,166,0,0" VerticalAlignment="Top" Width="148" Click="Enter_Click" FontSize="16" FontWeight="Bold" FontFamily="David">
+                    <Label Content="User name" HorizontalAlignment="Left" Height="32" Margin="15,30,0,0" VerticalAlignment="Top" Width="102" FontWeight="Bold" FontSize="16" FontFamily="David"/>
+                    <Label Content="Password" HorizontalAlignment="Left" Height="32" Margin="15,80,0,0" VerticalAlignment="Top" Width="102" FontWeight="Bold" FontSize="16" FontFamily="David"/>
+                    <Button x:Name="enter" Content="Enter" HorizontalAlignment="Center" Height="32" Margin="0,166,0,0" VerticalAlignment="Top" Width="148" Click="Enter_Click" FontSize="16" FontWeight="Bold" FontFamily="David">
                         <Button.Background>
                             <SolidColorBrush Color="#FFCCA36D" Opacity="1"/>
                         </Button.Background>
@@ -63,20 +63,20 @@
                         </PasswordBox.Background>
                     </PasswordBox>
 
-                    <Label Content="User name" HorizontalAlignment="Left" Height="32" Margin="14,30,0,0" VerticalAlignment="Top" Width="96" FontWeight="Bold" FontSize="16"/>
-                    <Label Content="Password" Height="33" Margin="14,80,229,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+                    <Label Content="User name" HorizontalAlignment="Left" Height="32" Margin="15,30,0,0" VerticalAlignment="Top" Width="96" FontWeight="Bold" FontSize="16"/>
+                    <Label Content="Password" Height="33" Margin="15,80,228,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
                     <Button x:Name="enter1" Content="Save and Enter" HorizontalAlignment="Left" Height="34" Margin="156,183,0,0" VerticalAlignment="Top" Width="148" Click="SaveEnter_Click" FontWeight="Bold" FontSize="16" Background="#FFCCA36D"/>
                     <CheckBox x:Name="checkM" Content="Menager" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top"  FontWeight="Bold" Margin="34,183,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                         <CheckBox.Background>
                             <SolidColorBrush Color="White" Opacity="0.35"/>
                         </CheckBox.Background>
                     </CheckBox>
-                    <PasswordBox x:Name="managerP" Margin="130,134,0,0"  IsEnabled="{Binding ElementName=checkM, Path=IsChecked}" HorizontalAlignment="Left" Height="28"  VerticalAlignment="Top" Width="100" FontSize="16" MaxLength="6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                    <PasswordBox x:Name="managerP"  Height="32" Width="132" Margin="130,130,0,0" IsEnabled="{Binding ElementName=checkM, Path=IsChecked}" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="16" MaxLength="6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                         <PasswordBox.Background>
                             <SolidColorBrush Color="White" Opacity="0.35"/>
                         </PasswordBox.Background>
                     </PasswordBox>
-                    <Label Content="Manager Pin" IsEnabled="{Binding ElementName=checkM, Path=IsChecked}" HorizontalAlignment="Left" Height="32"  Margin="14,130,0,0" VerticalAlignment="Top" Width="108" FontWeight="Bold" FontSize="16"/>
+                    <Label Content="Manager Pin" IsEnabled="{Binding ElementName=checkM, Path=IsChecked}" HorizontalAlignment="Left" Height="32"  Margin="15,130,0,0" VerticalAlignment="Top" Width="108" FontWeight="Bold" FontSize="16"/>
                     <TextBox x:Name="username1" HorizontalAlignment="Left" Height="32" Margin="130,30,0,0"  VerticalAlignment="Top" Width="132" MaxLength="10" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                         <TextBox.Background>
                             <SolidColorBrush Color="White" Opacity="0.35"/>

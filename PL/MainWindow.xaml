@@ -23,8 +23,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid x:Name="userGrid" Grid.Row="0" >
-            <Button x:Name="ChangeClient" Background="#FFD48224" Content="Enter as a client" Click="ChangeClient_Click" Height="40" VerticalAlignment="Center" Width="163" HorizontalAlignment="Left" Margin="56,0,0,0"/>
-            <Button Content="Change user" HorizontalAlignment="Left" Background="#FFD48224" Height="40" VerticalAlignment="Center" Width="164" Click="ChangeUser_Click" Margin="228,0,0,0"/>
+            <Button x:Name="ChangeClient" Background="#FFCCA36D" Content="Enter as a client" Click="ChangeClient_Click" Height="40" VerticalAlignment="Center" Width="163" HorizontalAlignment="Left" Margin="56,0,0,0"/>
+            <Button Content="Change user" HorizontalAlignment="Left" Background="#FFCCA36D" Height="40" VerticalAlignment="Center" Width="164" Click="ChangeUser_Click" Margin="228,0,0,0"/>
             <TextBlock x:Name="Permis" Text="{Binding Path=Admin, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="477,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
             <TextBlock x:Name="userName" Text="{Binding Path=UserName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="591,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
         </Grid>
@@ -42,8 +42,8 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="20,0,0,0" Grid.ColumnSpan="2" >
-                        <Button x:Name="Add_Drone_Button" MinWidth="120" Background="#FFD48224" Content="Add new drone" Click="AddDroneButton_Click" Height="45"/>
-                        <Button x:Name="refreshDrone" MinWidth="120" Background="#FFD48224" Content="refresh" Click="RefreshDronesButton_Click" Height="45"/>
+                        <Button x:Name="Add_Drone_Button" MinWidth="120" Background="#FFCCA36D" Content="Add new drone" Click="AddDroneButton_Click" Height="45"/>
+                        <Button x:Name="refreshDrone" MinWidth="120" Background="#FFCCA36D" Content="refresh" Click="RefreshDronesButton_Click" Height="45"/>
                     </StackPanel>
                     <Grid x:Name="sortedList" Grid.Row="0" Margin="0,0,0,400" Grid.RowSpan="2" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
@@ -59,7 +59,7 @@
                    VerticalAlignment="Stretch" 
                    RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT" FontWeight="Regular" FontStyle="Oblique" FontStretch="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         <ComboBox Name="StatusSelector" 
-                      BorderBrush="#FFCB8686" 
+                      BorderBrush="#FF4362AC" 
                       Margin="162,10,35,10" HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="StatusSelector_SelectionChanged" Grid.ColumnSpan="2" />
                         <Label Content="Drone Max Weight" Grid.Column="1" 
                    Foreground="#FF4362AC"
@@ -68,7 +68,7 @@
                    FontWeight="Regular" FontStyle="Oblique" FontStretch="Normal"
                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="3"/>
                         <ComboBox Name="WeightSelector"
-                BorderBrush="#FFCB8686"
+                BorderBrush="#FF4362AC"
                       HorizontalAlignment= "Stretch"
                       VerticalAlignment="Stretch"
                       Grid.Column="3" 
@@ -167,7 +167,7 @@
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0" Grid.ColumnSpan="5" >
                         <Button x:Name="Add_Station_Button" MinWidth="130" Background="#FFD48224" Content="Add new base station" Click="AddBaseStationButton_Click" Height="45"/>
-                        <Button x:Name="refreshBaseStation" MinWidth="120" Background="#FFD48224" Content="refresh" Click="RefreshBaseStationButton_Click" Height="45"/>
+                        <Button x:Name="refreshBaseStation" MinWidth="120" Background="#FFCCA36D" Content="refresh" Click="RefreshBaseStationButton_Click" Height="45"/>
                     </StackPanel>
                     <ListView x:Name="LVListBaseStations" Grid.Row="0" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"
                           MouseDoubleClick="ShowBaseStationDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="0,0,0,60" Grid.ColumnSpan="5" >
@@ -233,7 +233,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0" Grid.ColumnSpan="3" >
-                        <Button x:Name="Add_Customer_Button" MinWidth="130" Background="#FFD48224" Content="Add new customer" Click="AddCustomerButton_Click" Height="45"/>
+                        <Button x:Name="Add_Customer_Button" MinWidth="130" Background="#FFCCA36D" Content="Add new customer" Click="AddCustomerButton_Click" Height="45"/>
                     </StackPanel>
                     <ListView x:Name="LVListCustomers" 
                           ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
@@ -308,9 +308,9 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0" Grid.ColumnSpan="4" >
-                        <Button x:Name="Add_Parcel_Button" MinWidth="130" Background="#FFD48224" Content="Add new parcel" Click="AddParcelsButton_Click" Height="45"/>
-                        <Button x:Name="refreshParcelByTarget" MinWidth="120" Background="#FFD48224" Content="refresh by target" Click="RefreshBaseParcelTargetButton_Click" Height="45"/>
-                        <Button x:Name="refreshParcelBySend" MinWidth="120" Background="#FFD48224" Content="refresh by send" Click="RefreshBaseParcelSendButton_Click" Height="45"/>
+                        <Button x:Name="Add_Parcel_Button" MinWidth="130" Background="#FFCCA36D" Content="Add new parcel" Click="AddParcelsButton_Click" Height="45"/>
+                        <Button x:Name="refreshParcelByTarget" MinWidth="120" Background="#FFCCA36D" Content="refresh by target" Click="RefreshBaseParcelTargetButton_Click" Height="45"/>
+                        <Button x:Name="refreshParcelBySend" MinWidth="120" Background="#FFCCA36D" Content="refresh by send" Click="RefreshBaseParcelSendButton_Click" Height="45"/>
                     </StackPanel>
                     <ListView x:Name="LVListParcels" 
                           ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
