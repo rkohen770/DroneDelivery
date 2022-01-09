@@ -22,7 +22,16 @@ namespace BO
 
         public override string ToString()
         {
-            return this.ToStringProperty() + "\n";
+            return $"Parcel ID: {ParcelID},\n " +
+                $"Sender Of Parcel: {SenderOfParcel},\n" +
+                $"Target To Parcel: {TargetToParcel}, \n" +
+                $"Weight: {Weight},\n" +
+                $"Priorities: {Priorities},\n " +
+                $"Drone In Parcel: {DroneInParcel},\n" +
+                $"Requested: {Requested},\n " +
+                $"Scheduled: {Scheduled},\n " +
+                $"PickedUp: {PickedUp},\n " +
+                $"ParcelDelivery: {ParcelDelivery}";
         }
     }
 }
