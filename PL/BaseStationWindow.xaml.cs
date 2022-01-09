@@ -42,6 +42,7 @@ namespace PL
             InitializeComponent();
             this.bl = bl;
             this.mainWindow = mainWindow;
+            CurrentLocation.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -87,6 +88,54 @@ namespace PL
             LVDroneInChargings.Items.Refresh();
         }
 
+        /// <summary>
+        /// Button for closing a window
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        /// <summary>
+        /// Button for saving the details of the new drone
+        /// </summary>
+        /// <param name="sender">button type</param>
+        /// <param name="e"></param>
+        private void SaveBaseStationButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ID.Text == null || Name.Text == null || CurrentLocation.Text == null || NumOfAvailableChargingPositions.Text == null)
+                    MessageBox.Show("Not all detalis are set");
+                else if (ID.Text.Length > 4)
+                    MessageBox.Show("Base Station ID longs then 4 letters");
+                else if (Name.Text.Length > 5)
+                    MessageBox.Show("Base Station Name longs then 5 letters");
+                //else
+                //{
+                //    bl.AddBaseStationBo(int.Parse(ID.Text), Name.Text,
+                //        CurrentLocation.Text, int.Parse(StationID.Text));
+                //}
+                MessageBox.Show("Adding a drone was completed successfully");
+
+            }
+            catch (BadDroneIDException ex)
+            {
+                MessageBox.Show(ex.ID.ToString(), ex.Message + "\nAdding a drone was not completed successfully");
+            }
+            catch (BadBaseStationIDException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            mainWindow.LVListDrones.Items.Refresh();
+            Close();
+        }
 
     }
 }
