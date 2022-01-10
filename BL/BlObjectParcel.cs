@@ -335,13 +335,15 @@ namespace BO
         {
             List<ParcelForList> list = new();
 
-            foreach (var parcel in parcelForLists.FindAll(p))
+            foreach (var parcel in dal.GetAllParcels())
             {
                 ParcelForList parcelFor = cloneParcel(GetParcel(parcel.ParcelID));
                 list.Add(parcelFor);
             }
-            return list;
+            return list.FindAll(p);
         }
+
+       
         #endregion
 
         /// <summary>

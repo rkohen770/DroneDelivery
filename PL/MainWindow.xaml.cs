@@ -282,6 +282,8 @@ namespace PL
             List<ParcelForList> list = bl.GetParcelsByPredicat(p => p.ParcelStatus == status).ToList();
             LVListParcels.ItemsSource = list;
         }
+
+
         #endregion
 
 

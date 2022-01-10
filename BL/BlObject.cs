@@ -18,9 +18,6 @@ namespace BO
 
         List<DroneForList> droneForLists = new();
 
-        List<ParcelForList> parcelForLists = new();
-
-
         internal static IDal dal = DalFactory.GetDal("dalObject");
 
         public BlObject()
