@@ -114,7 +114,7 @@
                   FontWeight="Normal" Margin="60,30,60,0"  >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="  Drone ID  " DisplayMemberBinding="{Binding Path=DroneId,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                    <GridViewColumn Header="  Drone ID  " DisplayMemberBinding="{Binding Path=DroneID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
                     <GridViewColumn Header="  Drone Battery  " DisplayMemberBinding="{Binding Path=DroneBattery, Converter={StaticResource DroneBatteryConvert}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }" />
                 </GridView>
             </ListView.View>

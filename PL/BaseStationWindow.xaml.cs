@@ -85,7 +85,7 @@ namespace PL
             DroneInCharging droneDetails = ((ListView)sender).SelectedItem as DroneInCharging;
             DroneForList drone= bl.CloneDrone(bl.GetDrone(droneDetails.DroneID));
             new DroneWindow(bl, drone, mainWindow).ShowDialog();
-            LVDroneInChargings.ItemsSource = bl.GetAllDronesBo();
+            LVDroneInChargings.ItemsSource = bl.GetBaseStation(baseStationDetails.BaseStationID).DroneInChargings;
             LVDroneInChargings.Items.Refresh();
         }
 

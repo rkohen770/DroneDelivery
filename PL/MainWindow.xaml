@@ -60,7 +60,7 @@
                    RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT" FontWeight="Regular" FontStyle="Oblique" FontStretch="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         <ComboBox Name="StatusSelector" 
                       BorderBrush="#FF4362AC" 
-                      Margin="162,10,35,10" HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="StatusSelector_SelectionChanged" Grid.ColumnSpan="2" />
+                      Margin="162,10,35,10" HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FF4362AC" SelectionChanged="StatusSelector_SelectionChanged" Grid.ColumnSpan="2" />
                         <Label Content="Drone Max Weight" Grid.Column="1" 
                    Foreground="#FF4362AC"
                    Margin="150,0,175,0" 
@@ -72,7 +72,7 @@
                       HorizontalAlignment= "Stretch"
                       VerticalAlignment="Stretch"
                       Grid.Column="3" 
-                      Margin="5,10,5,10"  HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="WeightSelector_SelectionChanged">
+                      Margin="5,10,5,10"  HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FF4362AC" SelectionChanged="WeightSelector_SelectionChanged">
                         </ComboBox>
                     </Grid>
                     <ListView x:Name="LVListDrones" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 

@@ -10,6 +10,7 @@
     <None Remove="drone_login.png" />
     <None Remove="Images\%25_24px.png" />
     <None Remove="Images\Associated_24px.png" />
+    <None Remove="Images\box_24px.png" />
     <None Remove="Images\charged_battery_24px.png" />
     <None Remove="Images\charging_battery_24px.png" />
     <None Remove="Images\Check_Circle_24px.png" />
@@ -21,7 +22,9 @@
     <None Remove="Images\drone_login.png" />
     <None Remove="Images\easy_24px.png" />
     <None Remove="Images\Emergency_24px.png" />
+    <None Remove="Images\empty_battery_24px.png" />
     <None Remove="Images\Fast_24px.png" />
+    <None Remove="Images\full_battery_24px.png" />
     <None Remove="Images\hand_box_24px.png" />
     <None Remove="Images\home_24px.png" />
     <None Remove="Images\home_address_24px.png" />
@@ -30,8 +33,14 @@
     <None Remove="Images\medium_24px.png" />
     <None Remove="Images\Normal_24px.png" />
     <None Remove="Images\Provided_box_24px.png" />
+    <None Remove="Images\save_as_24px.png" />
     <None Remove="Images\update_24px.png" />
     <None Remove="Images\WasCollected_24px.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\box_24px.png" />
+    <Resource Include="Images\empty_battery_24px.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +63,7 @@
     <Resource Include="Images\easy_24px.png" />
     <Resource Include="Images\Emergency_24px.png" />
     <Resource Include="Images\Fast_24px.png" />
+    <Resource Include="Images\full_battery_24px.png" />
     <Resource Include="Images\hand_box_24px.png" />
     <Resource Include="Images\home_24px.png" />
     <Resource Include="Images\home_address_24px.png" />
@@ -62,6 +72,7 @@
     <Resource Include="Images\medium_24px.png" />
     <Resource Include="Images\Normal_24px.png" />
     <Resource Include="Images\Provided_box_24px.png" />
+    <Resource Include="Images\save_as_24px.png" />
     <Resource Include="Images\update_24px.png" />
     <Resource Include="Images\WasCollected_24px.png" />
   </ItemGroup>
