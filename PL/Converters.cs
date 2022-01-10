@@ -35,6 +35,21 @@ namespace PL
         }
     }
 
+    public class PhonePrint : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string PhoneNumber = (string)value;
+            string help = PhoneNumber.Substring(0, 3) + "-" + PhoneNumber.Substring(3, 7) ;
+            return help;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string PhoneNumber = (string)value;
+            string help = PhoneNumber.Substring(0, 3) + "-" + PhoneNumber.Substring(3, 7);
+            return help;
+        }
+    }
 
     public class DroneStatusToImage : IValueConverter
     {

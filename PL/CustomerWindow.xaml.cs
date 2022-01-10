@@ -72,7 +72,7 @@ namespace PL
             Customer customer = bl.GetCustomer(customerDetails.CustomerID);
             ID.Text = customer.CustomerID.ToString();
             CustomersName.Text = customer.NameOfCustomer.ToString();
-            CustomersPhone.Text = customer.PhoneOfCustomer.ToString();
+            CustomersPhone.Text = customer.PhoneOfCustomer.Substring(0, 3) + "-" + customer.PhoneOfCustomer.Substring(3, 7);
             CustomersLocation.Text = customer.LocationOfCustomer.ToString();
             Update.Visibility = Visibility.Visible;
 

@@ -34,7 +34,7 @@
                  VerticalContentAlignment="Center" />
         <Label Content="Max Weight" Grid.Row="0" HorizontalAlignment="Left" Height="28" Margin="30,105,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
         <TextBox x:Name="MaxWeight" Grid.Row="0" 
-                 Text="{Binding Path=MaxWeight,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                 Text="{Binding Path=MaxWeight,Converter={StaticResource DroneWeightConvert},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                  TextWrapping="Wrap" HorizontalAlignment="Left" Height="31"
                  Margin="205,105,0,0"  VerticalAlignment="Top" Width="133"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
@@ -100,13 +100,23 @@
                     Content="Save drone" HorizontalAlignment="Stretch"
                     VerticalAlignment="Center" Click="SaveDroneButton_Click"
                     Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource notBooleanToVisibilityConverter} }"/>
-            <Button Content="Close" Grid.Row="0" Grid.Column="1" 
-                    HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                    Click="CloseButton_Click" />
-            <Button x:Name="Update" Content="Update" Grid.Row="0" Grid.Column="0" 
-                    HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                    Click="UpdateDroneButton_Click"
-                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"/>
+            <Button Grid.Row="0" Grid.Column="1" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Click="CloseButton_Click" >
+                <Button.Background>
+                    <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+                </Button.Background>
+                <Image Source="/Images/close_24px.png" Width="30" Height="30"/>
+            </Button>
+            <Button x:Name="Update" Grid.Row="0" Grid.Column="0" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Click="UpdateDroneButton_Click" 
+                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }">
+                <Button.Background>
+                    <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+                </Button.Background>
+                <Image Source="/Images/update_24px.png" Width="30" Height="30"/>
+            </Button>
             <Button x:Name="Sending" Content="Send for charging" Grid.Row="1" Grid.Column="0" 
                     HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                     Click="SendingButton_Click"

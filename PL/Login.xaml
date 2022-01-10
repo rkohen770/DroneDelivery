@@ -5,54 +5,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen" Title="Login" Height="450" Width="450" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" Title="Login" Height="360" Width="350" ResizeMode="NoResize"
         TextElement.Foreground="Black"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Background="White"
-        >
+        Background="White">
     <Grid RenderTransformOrigin="0.506,0.216">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="151*"/>
-            <ColumnDefinition Width="42*"/>
-            <ColumnDefinition Width="162*"/>
-            <ColumnDefinition Width="39*"/>
-            <ColumnDefinition Width="56*"/>
-        </Grid.ColumnDefinitions>
 
-        <Label Content="Welcome to our Shipping System" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="25" FontWeight="Medium" FontFamily="Times New Roman" Foreground="#4362AC" Margin="40,17,0,0" Height="39" Width="350" Grid.ColumnSpan="4"/>
+        <Label Content="Welcome to our Shipping System" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="Medium" FontFamily="David" Foreground="#4362AC" Margin="0,17,0,0" Height="39" Width="350" Grid.ColumnSpan="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <TabControl Margin="0,49,0,0" Grid.ColumnSpan="5">
 
-            <TabItem Header="log in">
+            <TabItem Header="  log in  " FontFamily="David" FontSize="16" >
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" Opacity="0.5">
+                        <GradientStop Color="#FFF0F0F0" Offset="0.041"/>
+                        <GradientStop Color="#FFE5E5E5" Offset="0.878"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
                 <Grid>
+                    <Grid.Background>
+                        <ImageBrush TileMode="None" ImageSource="/drone_login.png" Opacity="0.5"/>
+                    </Grid.Background>
 
-                    <TextBox x:Name="userName" HorizontalAlignment="Left" Height="33" Margin="191,70,0,0"  VerticalAlignment="Top" Width="114" MaxLength="10"/>
-                    <PasswordBox x:Name="password" HorizontalAlignment="Left" Height="33" Margin="191,135,0,0" VerticalAlignment="Top" Width="114" MaxLength="6"/>
-                    <Label Content="User name" HorizontalAlignment="Left" Height="38" Margin="63,73,0,0" VerticalAlignment="Top" Width="102" FontWeight="Bold" FontSize="16"/>
-                    <Label Content="Password" HorizontalAlignment="Left" Height="33" Margin="63,137,0,0" VerticalAlignment="Top" Width="102" FontWeight="Bold" FontSize="16"/>
-                    <Button x:Name="enter" Content="Enter" HorizontalAlignment="Left" Height="34" Margin="158,216,0,0" VerticalAlignment="Top" Width="147" Click="Enter_Click" FontSize="16" FontWeight="Bold" Background="#FFD48224"/>
+
+                    <TextBox x:Name="userName" Width="132" HorizontalAlignment="Left" Height="32" Margin="130,30,0,0"  VerticalAlignment="Top" MaxLength="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="David">
+                        <TextBox.Background>
+                            <SolidColorBrush Color="White" Opacity="0.35"/>
+                        </TextBox.Background>
+                    </TextBox>
+                    <PasswordBox x:Name="password" HorizontalAlignment="Left" Height="32" Margin="130,80,0,0" VerticalAlignment="Top" Width="132" MaxLength="6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="David">
+                        <PasswordBox.Background>
+                            <SolidColorBrush Color="White" Opacity="0.35"/>
+                        </PasswordBox.Background>
+                    </PasswordBox>
+                    <Label Content="User name" HorizontalAlignment="Left" Height="32" Margin="15,30,0,0" VerticalAlignment="Top" Width="102" FontWeight="Bold" FontSize="16" FontFamily="David"/>
+                    <Label Content="Password" HorizontalAlignment="Left" Height="32" Margin="15,80,0,0" VerticalAlignment="Top" Width="102" FontWeight="Bold" FontSize="16" FontFamily="David"/>
+                    <Button x:Name="enter" Content="Enter" HorizontalAlignment="Center" Height="32" Margin="0,166,0,0" VerticalAlignment="Top" Width="148" Click="Enter_Click" FontSize="16" FontWeight="Bold" FontFamily="David">
+                        <Button.Background>
+                            <SolidColorBrush Color="#FFCCA36D" Opacity="1"/>
+                        </Button.Background>
+                    </Button>
 
                 </Grid>
             </TabItem>
-            <TabItem Header="sign up">
+            <TabItem Header="  sign up  " FontSize="16" FontFamily="David">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="14"/>
-                        <ColumnDefinition Width="83*"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid.Background>
+                        <ImageBrush TileMode="None" ImageSource="/drone_login.png" Opacity="0.5"/>
+                    </Grid.Background>
 
-                    <PasswordBox x:Name="passwordBox" MaxLength="6" Margin="129,95,148,220" Grid.Column="2"/>
 
-                    <Label Content="User name" HorizontalAlignment="Left" Height="32" Margin="14,40,0,0" VerticalAlignment="Top" Width="96" FontWeight="Bold" FontSize="16" Grid.ColumnSpan="3"/>
-                    <Label Content="Password" Height="33" Margin="9,95,316,0" VerticalAlignment="Top" FontWeight="Bold" Grid.ColumnSpan="2" FontSize="16" Grid.Column="1"/>
-                    <Button x:Name="enter1" Content="Save and Enter" HorizontalAlignment="Left" Height="34" Margin="114,254,0,0" VerticalAlignment="Top" Width="147" Click="SaveEnter_Click" FontWeight="Bold" FontSize="16" Background="#FFD48224" Grid.Column="2"/>
-                    <CheckBox x:Name="checkM" Content="Menager" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top"  FontWeight="Bold" FontSize="16" Margin="0,187,0,0" Grid.Column="1" Grid.ColumnSpan="2"/>
-                    <PasswordBox x:Name="managerP" Margin="247,181,0,132"  IsEnabled="{Binding ElementName=checkM, Path=IsChecked}" HorizontalAlignment="Left" Height="35"  VerticalAlignment="Top" Width="126" FontSize="16" MaxLength="6" Grid.Column="2"/>
-                    <Label Content="Manager Pin" HorizontalAlignment="Left" Height="32"  Margin="114,181,0,0" VerticalAlignment="Top" Width="108" FontWeight="Bold" FontSize="16" Grid.Column="2"/>
-                    <TextBox x:Name="username1" HorizontalAlignment="Left" Height="37" Margin="129,40,0,0"  VerticalAlignment="Top" Width="132" MaxLength="10" FontSize="16" Grid.Column="2"/>
+                    <PasswordBox x:Name="passwordBox" MaxLength="6" Margin="130,80,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Height="32">
+                        <PasswordBox.Background>
+                            <SolidColorBrush Color="White" Opacity="0.35"/>
+                        </PasswordBox.Background>
+                    </PasswordBox>
+
+                    <Label Content="User name" HorizontalAlignment="Left" Height="32" Margin="15,30,0,0" VerticalAlignment="Top" Width="96" FontWeight="Bold" FontSize="16"/>
+                    <Label Content="Password" Height="33" Margin="15,80,228,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+                    <Button x:Name="enter1" Content="Save and Enter" HorizontalAlignment="Left" Height="34" Margin="156,183,0,0" VerticalAlignment="Top" Width="148" Click="SaveEnter_Click" FontWeight="Bold" FontSize="16" Background="#FFCCA36D"/>
+                    <CheckBox x:Name="checkM" Content="Menager" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top"  FontWeight="Bold" Margin="34,183,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <CheckBox.Background>
+                            <SolidColorBrush Color="White" Opacity="0.35"/>
+                        </CheckBox.Background>
+                    </CheckBox>
+                    <PasswordBox x:Name="managerP"  Height="32" Width="132" Margin="130,130,0,0" IsEnabled="{Binding ElementName=checkM, Path=IsChecked}" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="16" MaxLength="6" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <PasswordBox.Background>
+                            <SolidColorBrush Color="White" Opacity="0.35"/>
+                        </PasswordBox.Background>
+                    </PasswordBox>
+                    <Label Content="Manager Pin" IsEnabled="{Binding ElementName=checkM, Path=IsChecked}" HorizontalAlignment="Left" Height="32"  Margin="15,130,0,0" VerticalAlignment="Top" Width="108" FontWeight="Bold" FontSize="16"/>
+                    <TextBox x:Name="username1" HorizontalAlignment="Left" Height="32" Margin="130,30,0,0"  VerticalAlignment="Top" Width="132" MaxLength="10" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <TextBox.Background>
+                            <SolidColorBrush Color="White" Opacity="0.35"/>
+                        </TextBox.Background>
+                    </TextBox>
                 </Grid>
             </TabItem>
 

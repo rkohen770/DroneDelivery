@@ -7,14 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="drone_login.png" />
     <None Remove="Images\%25_24px.png" />
     <None Remove="Images\Associated_24px.png" />
     <None Remove="Images\charged_battery_24px.png" />
     <None Remove="Images\charging_battery_24px.png" />
     <None Remove="Images\Check_Circle_24px.png" />
+    <None Remove="Images\close_24px.png" />
+    <None Remove="Images\clouds.png" />
     <None Remove="Images\Defined_24px.png" />
     <None Remove="Images\drone_image.jpeg" />
     <None Remove="Images\drone_in_delivery_24px.png" />
+    <None Remove="Images\drone_login.png" />
     <None Remove="Images\easy_24px.png" />
     <None Remove="Images\Emergency_24px.png" />
     <None Remove="Images\Fast_24px.png" />
@@ -26,6 +30,7 @@
     <None Remove="Images\medium_24px.png" />
     <None Remove="Images\Normal_24px.png" />
     <None Remove="Images\Provided_box_24px.png" />
+    <None Remove="Images\update_24px.png" />
     <None Remove="Images\WasCollected_24px.png" />
   </ItemGroup>
 
@@ -34,14 +39,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="drone_login.png" />
     <Resource Include="Images\%_24px.png" />
     <Resource Include="Images\Associated_24px.png" />
     <Resource Include="Images\charged_battery_24px.png" />
     <Resource Include="Images\charging_battery_24px.png" />
     <Resource Include="Images\Check_Circle_24px.png" />
+    <Resource Include="Images\close_24px.png" />
+    <Resource Include="Images\clouds.png" />
     <Resource Include="Images\Defined_24px.png" />
     <Resource Include="Images\drone_image.jpeg" />
     <Resource Include="Images\drone_in_delivery_24px.png" />
+    <Resource Include="Images\drone_login.png" />
     <Resource Include="Images\easy_24px.png" />
     <Resource Include="Images\Emergency_24px.png" />
     <Resource Include="Images\Fast_24px.png" />
@@ -53,6 +62,7 @@
     <Resource Include="Images\medium_24px.png" />
     <Resource Include="Images\Normal_24px.png" />
     <Resource Include="Images\Provided_box_24px.png" />
+    <Resource Include="Images\update_24px.png" />
     <Resource Include="Images\WasCollected_24px.png" />
   </ItemGroup>
 
