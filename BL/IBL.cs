@@ -179,6 +179,8 @@ namespace BLApi
 
         public IEnumerable<DroneForList> GetDronesByPredicat(Predicate<DroneForList> p);
 
+        public IEnumerable<ParcelForList> GetParcelsByPredicat(Predicate<ParcelForList> p);
+
 
         #endregion
 
