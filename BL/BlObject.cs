@@ -16,7 +16,10 @@ namespace BO
 
         static Random random = new ();
 
-        List<DroneForList> droneForLists = new ();
+        List<DroneForList> droneForLists = new();
+
+        List<ParcelForList> parcelForLists = new();
+
 
         internal static IDal dal = DalFactory.GetDal("dalObject");
 

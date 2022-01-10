@@ -73,6 +73,10 @@ namespace PL
 
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+
+            ParcelStatusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
+            ParcelPrioritiesSelector.ItemsSource = Enum.GetValues(typeof(Priorities));
+
         }
         public MainWindow()
         {
@@ -97,6 +101,9 @@ namespace PL
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             // cmbDronesID.ItemsSource = listDrone;
+
+            ParcelStatusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
+            ParcelPrioritiesSelector.ItemsSource = Enum.GetValues(typeof(Priorities));
         }
 
         #region Drones
@@ -135,7 +142,7 @@ namespace PL
             LVListDrones.Items.Refresh();
         }
 
-        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void DroneStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DroneStatus status = (DroneStatus)((ComboBox)sender).SelectedItem;
             List<DroneForList> list = bl.GetDronesByPredicat(d => d.DroneStatus == status).ToList();
@@ -208,6 +215,8 @@ namespace PL
             LVListCustomers.Items.Refresh();
         }
         #endregion
+
+        #region Parcel
         /// <summary>
         /// an event to show the details parcel window
         /// </summary>
@@ -236,7 +245,7 @@ namespace PL
         /// </summary>
         /// <param name="sender">Button type</param>
         /// <param name="e"></param>
-        private void RefreshBaseParcelTargetButton_Click(object sender, RoutedEventArgs e)
+        private void RefreshParcelByTargetButton_Click(object sender, RoutedEventArgs e)
         {
             LVListParcels.ItemsSource = bl.GetAllParcelsBo().OrderBy(p => p.CustomerNameTarget);
             LVListParcels.Items.Refresh();
@@ -246,13 +255,33 @@ namespace PL
          /// </summary>
          /// <param name="sender">Button type</param>
          /// <param name="e"></param>
-        private void RefreshBaseParcelSendButton_Click(object sender, RoutedEventArgs e)
+        private void RefreshParcelBySendButton_Click(object sender, RoutedEventArgs e)
         {
             LVListParcels.ItemsSource = bl.GetAllParcelsBo().OrderBy(p => p.CustomerNameSend);
             LVListParcels.Items.Refresh();
         }
-        #region Customer
-
+        /// <summary>
+        /// Filter a list by criterion - parcel priorities
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ParcelPrioritiesSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Priorities priority = (Priorities)((ComboBox)sender).SelectedItem;
+            List<ParcelForList> lists = bl.GetParcelsByPredicat(p => p.Priorities == priority).ToList();
+            LVListParcels.ItemsSource = lists;
+        }
+        /// <summary>
+        /// Filter a list by criterion - parcel status
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ParcelStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ParcelStatus status = (ParcelStatus)((ComboBox)sender).SelectedItem;
+            List<ParcelForList> list = bl.GetParcelsByPredicat(p => p.ParcelStatus == status).ToList();
+            LVListParcels.ItemsSource = list;
+        }
         #endregion
 
 

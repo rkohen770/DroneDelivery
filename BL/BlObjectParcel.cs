@@ -305,7 +305,7 @@ namespace BO
                 List<ParcelForList> ParcelForList = new();
                 foreach (var parcel in dal.GetAllParcels())
                 {
-                    ParcelForList parcelForList = clonParcel(GetParcel(parcel.ParcelID));
+                    ParcelForList parcelForList = cloneParcel(GetParcel(parcel.ParcelID));
                     ParcelForList.Add(parcelForList);
                 }
                 return ParcelForList;
@@ -325,8 +325,20 @@ namespace BO
             List<ParcelForList> list = new();
             foreach (var parcel in dal.GetAllParcelsWithoutSpecialDron(x => x.ParcelID > 0 && x.DroneID == 0))
             {
-                ParcelForList parcelForList = clonParcel(GetParcel(parcel.ParcelID));
+                ParcelForList parcelForList = cloneParcel(GetParcel(parcel.ParcelID));
                 list.Add(parcelForList);
+            }
+            return list;
+        }
+
+        public IEnumerable<ParcelForList> GetParcelsByPredicat(Predicate<ParcelForList> p)
+        {
+            List<ParcelForList> list = new();
+
+            foreach (var parcel in parcelForLists.FindAll(p))
+            {
+                ParcelForList parcelFor = cloneParcel(GetParcel(parcel.ParcelID));
+                list.Add(parcelFor);
             }
             return list;
         }
@@ -336,7 +348,7 @@ namespace BO
         /// Converts from object parcel to object parcel for list
         /// </summary>
         /// <param name="parcel">parcel</param>
-        private ParcelForList clonParcel(BO.Parcel parcel)
+        private ParcelForList cloneParcel(BO.Parcel parcel)
         {
             return new()
             {

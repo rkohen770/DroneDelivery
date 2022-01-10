@@ -272,13 +272,5 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
-
-
-
-
-        private void closing(object sender, ToolTipEventArgs e)
-        {
-
-        }
     }
 }
