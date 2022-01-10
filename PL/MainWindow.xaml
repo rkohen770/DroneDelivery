@@ -73,7 +73,7 @@
                       HorizontalAlignment= "Stretch"
                       VerticalAlignment="Stretch"
                       Grid.Column="3" 
-                      Margin="5,10,5,10"  HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FFFFEDC8" SelectionChanged="WeightSelector_SelectionChanged">
+                      Margin="5,10,5,10"  HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FF4362AC" SelectionChanged="WeightSelector_SelectionChanged">
                         </ComboBox>
                     </Grid>
                     <ListView x:Name="LVListDrones" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 

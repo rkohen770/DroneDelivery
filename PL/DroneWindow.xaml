@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneWindow" Height="500" Width="400">
+        Title="DroneWindow" Height="430" Width="450">
     <Window.Resources>
         <local:DroneStatusToImage x:Key="DroneStatusConvert"/>
         <local:WeightCategoriesToImage x:Key="DroneWeightConvert"/>
@@ -14,13 +14,10 @@
         <local:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="350"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+
         <Label Content="Drone ID" Grid.Row="0" HorizontalAlignment="Left" Height="28" Margin="30,25,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
         <TextBox x:Name="ID" Grid.Row="0" HorizontalAlignment="Left"
-                 Height="31" Margin="205,25,0,0" TextWrapping="Wrap" 
+                 Height="31" Margin="213,25,0,0" TextWrapping="Wrap" 
                  Text="{Binding Path=DroneID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                  VerticalAlignment="Top" Width="133" MaxLength="4" 
                  PreviewTextInput="DroneIdTextBox_PreviewTextInput" 
@@ -28,7 +25,7 @@
                  IsReadOnly="{Binding Path=IsVisible, ElementName=CurrentLocation}"/>
         <Label Content="Model" Grid.Row="0" HorizontalAlignment="Left" Height="28" Margin="30,65,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
         <TextBox x:Name="Model" Grid.Row="0" HorizontalAlignment="Left"
-                 Height="31" Margin="205,65,0,0" TextWrapping="Wrap"
+                 Height="31" Margin="213,65,0,0" TextWrapping="Wrap"
                  Text="{Binding Path=Model,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                  VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center"
                  VerticalContentAlignment="Center" />
@@ -36,12 +33,12 @@
         <TextBox x:Name="MaxWeight" Grid.Row="0" 
                  Text="{Binding Path=MaxWeight,Converter={StaticResource DroneWeightConvert},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                  TextWrapping="Wrap" HorizontalAlignment="Left" Height="31"
-                 Margin="205,105,0,0"  VerticalAlignment="Top" Width="133"
+                 Margin="213,105,0,0"  VerticalAlignment="Top" Width="133"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                  IsReadOnly="{Binding Path=IsVisible, ElementName=CurrentLocation}"
                  Visibility="{Binding Path=Visibility, ElementName=CurrentLocation}"/>
         <ComboBox Name="WeightSelector" Grid.Row="0" HorizontalAlignment= "Left" 
-                  Height="31" Margin="205,105,0,0"  StaysOpenOnEdit="True" 
+                  Height="31" Margin="213,105,0,0"  StaysOpenOnEdit="True" 
                   VerticalAlignment="Top" SelectedIndex="-1" Width="133"
                   Text="{Binding Path=MaxWeight,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
@@ -49,7 +46,7 @@
         <TextBox x:Name="Battery" Grid.Row="0" 
                  Text="{Binding Path=DroneBattery, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                  TextWrapping="Wrap" IsReadOnly="True" HorizontalAlignment="Left"
-                 Height="31" Margin="205,225,0,0"  VerticalAlignment="Top" Width="133"
+                 Height="31" Margin="213,225,0,0"  VerticalAlignment="Top" Width="133"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                  Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation, Converter={StaticResource booleanToVisibilityConverter} }"/>
         <Label x:Name="battery" Grid.Row="0" Content="Battery" 
@@ -64,7 +61,7 @@
                Visibility="{Binding Path=Visibility, ElementName=CurrentLocation}"/>
         <TextBox x:Name="Status" Grid.Row="0" HorizontalAlignment="Left" 
                  Text="{Binding Path=DroneStatus,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
-                 Height="31" Margin="205,185,0,0"  VerticalAlignment="Top"
+                 Height="31" Margin="213,185,0,0"  VerticalAlignment="Top"
                  TextWrapping="Wrap" Width="133"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  
                  IsReadOnly="{Binding Path=IsVisible, ElementName=CurrentLocation}"
@@ -74,7 +71,7 @@
                VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754" 
                FontSize="14" FontWeight="Bold"/>
         <TextBox x:Name="StationID" Grid.Row="0" HorizontalAlignment="Left"
-                 Height="31" Margin="205,145,0,0" TextWrapping="Wrap"
+                 Height="31" Margin="213,145,0,0" TextWrapping="Wrap"
                  Text="{Binding Path=StationID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                  VerticalAlignment="Top" Width="133" MaxLength="5" 
                  PreviewTextInput="DroneIdTextBox_PreviewTextInput" 
@@ -84,59 +81,148 @@
                VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"
                FontSize="14" FontWeight="Bold"
                Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"/>
-        <TextBox x:Name="CurrentLocation" Grid.Row="0" HorizontalAlignment="Left" Height="31" Margin="205,265,0,0" Text="{Binding Path=Location,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True" VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="SaveClick" Grid.Row="0" Grid.Column="0" 
-                    Content="Save drone" HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center" Click="SaveDroneButton_Click"
-                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource notBooleanToVisibilityConverter} }"/>
-            <Button Grid.Row="0" Grid.Column="1" 
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Click="CloseButton_Click" >
-                <Button.Background>
-                    <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
-                </Button.Background>
-                <Image Source="/Images/close_24px.png" Width="30" Height="30"/>
-            </Button>
-            <Button x:Name="Update" Grid.Row="0" Grid.Column="0" 
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Click="UpdateDroneButton_Click" 
-                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }">
-                <Button.Background>
-                    <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
-                </Button.Background>
-                <Image Source="/Images/update_24px.png" Width="30" Height="30"/>
-            </Button>
-            <Button x:Name="Sending" Content="Send for charging" Grid.Row="1" Grid.Column="0" 
-                    HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                    Click="SendingButton_Click"
-                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"/>
-            <Button x:Name="Release" Content="Release from charging" Grid.Row="1" 
-                    Grid.Column="1" HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Center" Click="ReleaseButton_Click"
-                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"/>
-            <Button x:Name="Send_Delivery" Content="Sending for delivery" Grid.Row="2"
-                    Grid.Column="0" HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Center" Click="SendDeliveryButton_Click"
-                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"/>
-            <Button x:Name="Collection" Content="Parcel collection"
-                    Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center" Click="CollectionButton_Click"
-                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"/>
-            <Button x:Name="Parcel_Delivery" Content="Parcel delivery" 
-                    Grid.Row="3" Grid.Column="0" HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Center" Click="ParcelDeliveryButton_Click" 
-                    Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"/>
-        </Grid>
+        <TextBox x:Name="CurrentLocation" Grid.Row="0" HorizontalAlignment="Left" Height="31" Margin="213,265,0,0" Text="{Binding Path=Location,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True" VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+
+
+
+        <Button x:Name="Update" HorizontalAlignment="Left"
+                VerticalAlignment="Top" Click="UpdateDroneButton_Click" 
+                Visibility="{Binding IsVisible, Converter={StaticResource booleanToVisibilityConverter}, ElementName=CurrentLocation}"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Width="50" Height="50" 
+                Margin="34,305,0,0">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="#FF707070" Opacity="0"/>
+            </Button.BorderBrush>
+            <Button.Foreground>
+                <SolidColorBrush Color="Black" Opacity="0"/>
+            </Button.Foreground>
+            <Button.Background>
+                <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+            </Button.Background>
+            <Canvas HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                <Image Source="/Images/update_24px.png" Width="33" 
+                       Height="33" Canvas.Left="-17" Canvas.Top="-1"/>
+                <Label Content="UpDate" 
+                       HorizontalContentAlignment="Stretch" 
+                       VerticalContentAlignment="Stretch" Canvas.Left="-25" 
+                       Canvas.Top="22" Width="50" Height="25"/>
+            </Canvas>
+        </Button>
+        <Button x:Name="SaveClick" HorizontalAlignment="Left"
+                VerticalAlignment="Top" Click="SaveDroneButton_Click" 
+                Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource notBooleanToVisibilityConverter} }"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Height="50" 
+                Margin="34,305,0,0">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="#FF707070" Opacity="0"/>
+            </Button.BorderBrush>
+            <Button.Foreground>
+                <SolidColorBrush Color="Black" Opacity="0"/>
+            </Button.Foreground>
+            <Button.Background>
+                <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+            </Button.Background>
+            <Canvas HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                <Image Source="/Images/save_as_24px.png" Width="33" 
+                       Height="33" Canvas.Left="-15" Canvas.Top="-25"/>
+                <Label Content="Save" HorizontalContentAlignment="Center" 
+                       VerticalContentAlignment="Center" Canvas.Left="-25" Width="50" Height="25"/>
+            </Canvas>
+        </Button>
+        <Button  x:Name="Close" Click="CloseButton_Click" 
+                 Margin="104,305,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="50" >
+            <Button.BorderBrush>
+                <SolidColorBrush Color="#FF707070" Opacity="0"/>
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+            </Button.Background>
+            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Image Source="/Images/close_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-24"/>
+                <Label Content="Close" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Canvas.Left="-25" Width="50" Height="24" Canvas.Top="1"/>
+            </Canvas>
+        </Button>
+        <Button x:Name="Sending" Grid.Column="0" 
+                VerticalAlignment="Top" 
+                Click="SendingButton_Click"
+                Visibility="{Binding IsVisible, Converter={StaticResource booleanToVisibilityConverter}, ElementName=CurrentLocation}" 
+                Margin="372,25,0,0" Width="50" Height="50" HorizontalAlignment="Left">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="#FF707070" Opacity="0"/>
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+            </Button.Background>
+            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Image Source="/Images/empty_battery_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-22"/>
+                <Label Content="charging" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="50" Height="27"/>
+            </Canvas>
+        </Button>
+        <Button x:Name="Release" Grid.Column="0" 
+                VerticalAlignment="Top" 
+                Click="ReleaseButton_Click"
+                Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"
+                Margin="372,82,0,0" Width="50" Height="50" HorizontalAlignment="Left">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="#FF707070" Opacity="0"/>
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+            </Button.Background>
+            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Image Source="/Images/full_battery_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-22"/>
+                <Label Content="Release" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="50" Height="27"/>
+            </Canvas>
+        </Button>
+        <Button x:Name="Send_Delivery" Grid.Column="0" 
+                VerticalAlignment="Top" Click="SendDeliveryButton_Click"
+                Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"
+                Margin="372,139,0,0" Width="50" Height="50" HorizontalAlignment="Left">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="#FF707070" Opacity="0"/>
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+            </Button.Background>
+            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Image Source="/Images/drone_in_delivery_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-24"/>
+                <Label Content="Send off" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" Canvas.Left="-28" Width="57" Height="27"/>
+            </Canvas>
+        </Button>
+        <Button x:Name="Collection" Grid.Column="0" 
+                VerticalAlignment="Top" Click="CollectionButton_Click"
+                Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"        
+                Margin="372,195,0,0" Width="50" Height="70" HorizontalAlignment="Left">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="#FF707070" Opacity="0"/>
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Opacity="0"/>
+            </Button.Background>
+            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Image Source="/Images/drone_in_delivery_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-33"/>
+                <Image Source="/Images/box_24px.png" Width="15" Height="15" Canvas.Left="-7" Canvas.Top="-13"/>
+                <Label Content="Collect a" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" Canvas.Left="-28" Width="57" Height="27" Canvas.Top="-5"/>
+                <Label Content="package" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" Canvas.Left="-28" Width="57" Height="27" Canvas.Top="8"/>
+            </Canvas>
+        </Button>
+        <Button x:Name="Parcel_Delivery" Grid.Column="0" 
+                VerticalAlignment="Top" Click="ParcelDeliveryButton_Click"
+                Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"
+                Margin="372,272,0,0" Width="50" Height="70" HorizontalAlignment="Left">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="#FF707070" Opacity="0"/>
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Opacity="0"/>
+            </Button.Background>
+            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Image Source="/Images/hand_box_24px.png" Width="30" Height="30" Canvas.Left="-15" Canvas.Top="-29"/>
+                <Label Content="Parcel" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Canvas.Left="-28" Width="57" Height="27" Canvas.Top="-5"/>
+                <Label Content="delivery" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Canvas.Left="-28" Width="57" Height="27" Canvas.Top="8"/>
+            </Canvas>
+        </Button>
     </Grid>
 </Window>
