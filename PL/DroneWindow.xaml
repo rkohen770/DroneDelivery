@@ -187,7 +187,7 @@
                 <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
             </Button.Background>
             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Image Source="/Images/drone_in_delivery_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-24"/>
+                <Image Source="/Images/drone_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-24"/>
                 <Label Content="Send off" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" Canvas.Left="-28" Width="57" Height="27"/>
             </Canvas>
         </Button>
@@ -202,7 +202,7 @@
                 <SolidColorBrush Opacity="0"/>
             </Button.Background>
             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Image Source="/Images/drone_in_delivery_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-33"/>
+                <Image Source="/Images/drone_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-33"/>
                 <Image Source="/Images/box_24px.png" Width="15" Height="15" Canvas.Left="-7" Canvas.Top="-13"/>
                 <Label Content="Collect a" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" Canvas.Left="-28" Width="57" Height="27" Canvas.Top="-5"/>
                 <Label Content="package" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" Canvas.Left="-28" Width="57" Height="27" Canvas.Top="8"/>

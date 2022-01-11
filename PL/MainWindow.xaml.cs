@@ -144,16 +144,41 @@ namespace PL
 
         private void DroneStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DroneStatus status = (DroneStatus)((ComboBox)sender).SelectedItem;
-            List<DroneForList> list = bl.GetDronesByPredicat(d => d.DroneStatus == status).ToList();
-            LVListDrones.ItemsSource = list;
+            if (((ComboBox)sender).SelectedItem == null)
+            {
+                LVListDrones.ItemsSource = listDrone;
+
+            }
+            else
+            {
+                DroneStatus status = (DroneStatus)((ComboBox)sender).SelectedItem;
+                List<DroneForList> list = bl.GetDronesByPredicat(d => d.DroneStatus == status).ToList();
+                LVListDrones.ItemsSource = list;
+            }
+
+        }
+        private void ClearFilledStatusSelectorComboBox_Click(object sender, RoutedEventArgs e)
+        {
+            StatusSelector.SelectedItem = null;
         }
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            WeightCategories weight = (WeightCategories)((ComboBox)sender).SelectedItem;
-            List<DroneForList> list = bl.GetDronesByPredicat(d => d.MaxWeight == weight).ToList();
-            LVListDrones.ItemsSource = list;
+            if (((ComboBox)sender).SelectedItem == null)
+            {
+                LVListDrones.ItemsSource = listDrone;
+
+            }
+            else
+            {
+                WeightCategories weight = (WeightCategories)((ComboBox)sender).SelectedItem;
+                List<DroneForList> list = bl.GetDronesByPredicat(d => d.MaxWeight == weight).ToList();
+                LVListDrones.ItemsSource = list;
+            }
+        }
+        private void ClearFilledWeightSelectorComboBox_Click(object sender, RoutedEventArgs e)
+        {
+            WeightSelector.SelectedItem = null;
         }
         #endregion
 
@@ -249,11 +274,11 @@ namespace PL
             LVListParcels.ItemsSource = bl.GetAllParcelsBo().OrderBy(p => p.CustomerNameTarget);
             LVListParcels.Items.Refresh();
         }
-         /// <summary>
-         /// A button that refresh the list of parcels order by send customer
-         /// </summary>
-         /// <param name="sender">Button type</param>
-         /// <param name="e"></param>
+        /// <summary>
+        /// A button that refresh the list of parcels order by send customer
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
         private void RefreshParcelBySendButton_Click(object sender, RoutedEventArgs e)
         {
             LVListParcels.ItemsSource = bl.GetAllParcelsBo().OrderBy(p => p.CustomerNameSend);

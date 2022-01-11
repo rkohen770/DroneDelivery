@@ -5,17 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow"  Height="700" Width="750"
+        Title="MainWindow"  Height="680" Width="880"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         TextElement.FontWeight="Regular" TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto">
+        TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto" FontFamily="David" FontSize="14">
     <Window.Resources>
         <local:DroneStatusToImage x:Key="DroneStatusConvert"/>
         <local:WeightCategoriesToImage x:Key="DroneWeightConvert"/>
         <local:DroneBattery x:Key="DroneBatteryConvert"/>
         <local:DroneCurrentLocation x:Key="DroneLocationConvert"/>
         <local:PhonePrint x:Key="CustomerPhonePrint"/>
-
     </Window.Resources>
 
     <Grid>
@@ -40,12 +39,40 @@
                     <Grid.RowDefinitions>
                         <RowDefinition  Height="60"/>
                         <RowDefinition  Height="400"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="20,0,0,0" Grid.ColumnSpan="2" >
-                        <Button x:Name="Add_Drone_Button" MinWidth="120" Background="#FFCCA36D" Content="Add new drone" Click="AddDroneButton_Click" Height="45"/>
-                        <Button x:Name="refreshDrone" MinWidth="120" Background="#FFCCA36D" Content="refresh" Click="RefreshDronesButton_Click" Height="45"/>
-                    </StackPanel>
+
+                    <Canvas Grid.Row="1" Margin="0,400,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="700" Height="100" >
+                        <Button x:Name="Add_Drone_Button" Grid.Column="0" 
+                                Click="AddDroneButton_Click" Width="79" 
+                                Height="50" Canvas.Top="25" Canvas.Left="262">
+                            <Button.BorderBrush>
+                                <SolidColorBrush Color="#FF707070" Opacity="0" />
+                            </Button.BorderBrush>
+                            <Button.Background>
+                                <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+                            </Button.Background>
+                            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="5"/>
+                                <Image Source="/Images/drone_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-26"/>
+                                <Label Content="Add drone" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-34" FlowDirection="LeftToRight" Canvas.Top="3"/>
+                            </Canvas>
+                        </Button>
+                        <Button x:Name="refreshDrone" Grid.Column="0" 
+                                Click="RefreshDronesButton_Click" Width="79" 
+                                Height="50" Canvas.Left="366" Canvas.Top="25">
+                            <Button.BorderBrush>
+                                <SolidColorBrush Color="#FF707070" Opacity="0" />
+                            </Button.BorderBrush>
+                            <Button.Background>
+                                <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+                            </Button.Background>
+                            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="/Images/Sorting_24px.png" Width="33" Height="33" Canvas.Left="-15" Canvas.Top="-25"/>
+                                <Label Content="Sort" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="3"/>
+                            </Canvas>
+                        </Button>
+                    </Canvas>
+
                     <Grid x:Name="sortedList" Grid.Row="0" Margin="0,0,0,400" Grid.RowSpan="2" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -54,48 +81,68 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Drone status" Grid.Column="0"
-                   Foreground="#FF4362AC"
-                   HorizontalAlignment="Stretch" 
-                   Margin="0,0,0,0" 
-                   VerticalAlignment="Stretch" 
-                   RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT" FontWeight="Regular" FontStyle="Oblique" FontStretch="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <ComboBox Name="StatusSelector" 
-                      BorderBrush="#FF4362AC" 
-                      Margin="162,10,35,10" HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FF4362AC" SelectionChanged="DroneStatusSelector_SelectionChanged" Grid.ColumnSpan="2" />
-                        <Label Content="Drone Max Weight" Grid.Column="1" 
-                   Foreground="#FF4362AC"
-                   Margin="150,0,175,0" 
-                   RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT"
-                   FontWeight="Regular" FontStyle="Oblique" FontStretch="Normal"
-                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="3"/>
-                        <ComboBox Name="WeightSelector"
-                BorderBrush="#FF4362AC"
-                      HorizontalAlignment= "Stretch"
-                      VerticalAlignment="Stretch"
-                      Grid.Column="3" 
-                      Margin="5,10,5,10"  HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print" FontSize="22" Foreground="#FF4362AC" SelectionChanged="WeightSelector_SelectionChanged">
-                        </ComboBox>
+                               Foreground="#FF4362AC" HorizontalAlignment="Stretch" 
+                               Margin="0,0,0,0" VerticalAlignment="Stretch" 
+                               RenderTransformOrigin="-11.049,0.494" 
+                               FontSize="22" FontWeight="Regular" 
+                               HorizontalContentAlignment="Center" 
+                               VerticalContentAlignment="Center"/>
+                        <Canvas Grid.Column="1">
+                            <Button Content="Clear"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Foreground="#FF4362AC"
+                                    Click="ClearFilledStatusSelectorComboBox_Click" Canvas.Left="114" />
+                            <ComboBox Name="StatusSelector" Margin="5,10,5,10" 
+                                      BorderBrush="#FF4362AC" HorizontalAlignment= "Stretch" 
+                                      VerticalAlignment="Stretch"
+                                      HorizontalContentAlignment="Center" 
+                                      StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5"
+                                      VerticalContentAlignment="Center" SelectedIndex="-1" FontSize="19"
+                                      Foreground="#FF4362AC"
+                                      SelectionChanged="DroneStatusSelector_SelectionChanged" Width="166.1" Height="40" />
+                        </Canvas>
+                        <Label Content="Drone Max Weight" Grid.Column="2" 
+                               Foreground="#FF4362AC"
+                               RenderTransformOrigin="-11.049,0.494" FontSize="22" 
+                               HorizontalAlignment="Left" 
+                               Margin="0,0,0,0" VerticalAlignment="Stretch" 
+                               HorizontalContentAlignment="Center" FontWeight="Regular"
+                               VerticalContentAlignment="Center" Grid.ColumnSpan="3"/>
+                        <Canvas Grid.Column="3">
+                            <Button Content="Clear"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Foreground="#FF4362AC"
+                                    Click="ClearFilledWeightSelectorComboBox_Click" Canvas.Left="114" />
+                            <ComboBox Name="WeightSelector" BorderBrush="#FF4362AC"
+                                  HorizontalAlignment= "Stretch" VerticalAlignment="Stretch"
+                                   Margin="5,10,5,10" 
+                                  HorizontalContentAlignment="Center" 
+                                  StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5"
+                                  VerticalContentAlignment="Center" SelectedIndex="-1" FontSize="19"
+                                  Foreground="#FF4362AC" SelectionChanged="WeightSelector_SelectionChanged" Width="166.1" Height="40">
+                            </ComboBox>
+                        </Canvas>
                     </Grid>
                     <ListView x:Name="LVListDrones" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
                               MouseDoubleClick="ShowDroneDetails_Click" 
                               Grid.Row="1"
                               RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal"
-                              Margin="-6,0,6,60"
-                              HorizontalContentAlignment="Stretch" 
-                              ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2" >
+                              Margin="0,0,0,60"
+                              HorizontalContentAlignment="Left" 
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Top" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                         <ListView.View>
 
                             <GridView>
-                                <GridViewColumn Header="  Drone ID  " DisplayMemberBinding="{Binding Path=DroneID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-                                <GridViewColumn Header="  Model  " DisplayMemberBinding="{Binding Path=DroneModel,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-                                <GridViewColumn Header="  Max Weight  "  >
+                                <GridViewColumn Header="Drone ID" DisplayMemberBinding="{Binding Path=DroneID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                                <GridViewColumn Header="Model" DisplayMemberBinding="{Binding Path=DroneModel,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                                <GridViewColumn Header="Max Weight"  >
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Image Width="30" Height="30" Source="{Binding Path=MaxWeight, Converter={StaticResource DroneWeightConvert}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="  Battery  " >
+                                <GridViewColumn Header="Battery" >
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Grid>
@@ -109,15 +156,15 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="  Status  ">
+                                <GridViewColumn Header="Status">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Image Width="30" Height="30" Source="{Binding Path=DroneStatus, Converter={StaticResource DroneStatusConvert}, Mode=OneWay}"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="    Current Location    " DisplayMemberBinding="{Binding Path=CurrentLocation, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  Parcel Num Transferred  " DisplayMemberBinding="{Binding Path=ParcelNumIsTransferred,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                                <GridViewColumn Header="Current Location" DisplayMemberBinding="{Binding Path=CurrentLocation, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                <GridViewColumn Header="Parcel In Transferred" DisplayMemberBinding="{Binding Path=ParcelNumIsTransferred,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
                                 <!-- buttons-->
 
                             </GridView>
@@ -160,18 +207,41 @@
             <!--#endregion Drone-->
 
             <!--#region Base Station-->
-            <TabItem Header="Base Stations" Foreground="#FF4362AC" Height="22" Margin="0,0,0,0" VerticalAlignment="Bottom">
+            <TabItem Header="Base Stations" Foreground="#FF4362AC" Height="22" Margin="0,0,0,0" VerticalAlignment="Stretch">
                 <Grid>
-                    <Grid.RowDefinitions >
-                        <RowDefinition  Height="500"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0" Grid.ColumnSpan="5" >
-                        <Button x:Name="Add_Station_Button" MinWidth="130" Background="#FFD48224" Content="Add new base station" Click="AddBaseStationButton_Click" Height="45"/>
-                        <Button x:Name="refreshBaseStation" MinWidth="120" Background="#FFCCA36D" Content="refresh" Click="RefreshBaseStationButton_Click" Height="45"/>
-                    </StackPanel>
+                    <Canvas Margin="0,400,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="700" Height="100" >
+                        <Button x:Name="Add_Station_Button" Grid.Column="0" 
+                                Click="AddBaseStationButton_Click" Width="79" 
+                                Height="50" Canvas.Top="25" Canvas.Left="262">
+                            <Button.BorderBrush>
+                                <SolidColorBrush Color="#FF707070" Opacity="0" />
+                            </Button.BorderBrush>
+                            <Button.Background>
+                                <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+                            </Button.Background>
+                            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="7"/>
+                                <Image Source="/Images/charging_station_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-25"/>
+                                <Label Content="Add base station" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-53" FlowDirection="LeftToRight" Canvas.Top="3"/>
+                            </Canvas>
+                        </Button>
+                        <Button x:Name="refreshBaseStation" Grid.Column="0" 
+                                Click="RefreshBaseStationButton_Click" Width="79" 
+                                Height="50" Canvas.Left="366" Canvas.Top="25">
+                            <Button.BorderBrush>
+                                <SolidColorBrush Color="#FF707070" Opacity="0" />
+                            </Button.BorderBrush>
+                            <Button.Background>
+                                <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+                            </Button.Background>
+                            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="/Images/Sorting_24px.png" Width="33" Height="33" Canvas.Left="-15" Canvas.Top="-25"/>
+                                <Label Content="Sort" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="3"/>
+                            </Canvas>
+                        </Button>
+                    </Canvas>
                     <ListView x:Name="LVListBaseStations" Grid.Row="0" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"
-                          MouseDoubleClick="ShowBaseStationDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="0,0,0,60" Grid.ColumnSpan="5" >
+                          MouseDoubleClick="ShowBaseStationDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="0,0,0,60" Grid.ColumnSpan="5" Height="430" VerticalAlignment="Top" >
                         <ListView.View>
 
                             <GridView>

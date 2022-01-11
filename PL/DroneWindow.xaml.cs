@@ -41,6 +41,9 @@ namespace PL
             InitializeComponent();
             this.bl = bl;
             this.mainWindow = mainWindow;
+            Height = 270;
+            Close.Margin= new Thickness(372, 55, 0, 0);
+            SaveClick.Margin= new Thickness(372, 105, 0, 0);
             CurrentLocation.Visibility = Visibility.Hidden;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
 
