@@ -14,8 +14,8 @@ namespace BO
 
         public override string ToString()
         {
-            return $"Drone ID: {DroneID}, Drone Battery: {DroneBattery},\n"+
-               $"Current Location: {CurrentLocation}";
+            return $"ID: {DroneID}, Battery: {DroneBattery}%, "+
+               $"Location: {CurrentLocation}";
         }
     }
 }

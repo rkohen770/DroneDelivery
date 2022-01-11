@@ -13,8 +13,7 @@ namespace BO
 
         public override string ToString()
         {
-             return $"Customer ID: {CustomerID},\n" +
-                $"Customer Name: {CustomerName}";
+             return $"{CustomerID}, {CustomerName}";
         }
     }
 }
