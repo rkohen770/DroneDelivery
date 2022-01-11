@@ -47,7 +47,7 @@
                  Text="{Binding Path=DroneBattery, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                  TextWrapping="Wrap" IsReadOnly="True" HorizontalAlignment="Left"
                  Height="31" Margin="213,225,0,0"  VerticalAlignment="Top" Width="133"
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                  Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation, Converter={StaticResource booleanToVisibilityConverter} }"/>
         <Label x:Name="battery" Grid.Row="0" Content="Battery" 
                HorizontalAlignment="Left" Height="28" Margin="30,225,0,0"
@@ -69,19 +69,40 @@
         <Label x:Name="stationID" Grid.Row="0" Content="Station ID" 
                HorizontalAlignment="Left" Height="28" Margin="30,145,0,0" 
                VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754" 
+               FontSize="14" FontWeight="Bold"
+               Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation, Converter={StaticResource notBooleanToVisibilityConverter} }"/>
+        <Label x:Name="Parcel_Num_Is_Transferred" Grid.Row="0" Content="Parcel Num Is Transferred" 
+               HorizontalAlignment="Left" Height="28" Margin="30,145,0,0" 
+               VerticalAlignment="Top" Width="178" RenderTransformOrigin="0.326,0.754" 
+               Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation, Converter={StaticResource booleanToVisibilityConverter} }"
                FontSize="14" FontWeight="Bold"/>
         <TextBox x:Name="StationID" Grid.Row="0" HorizontalAlignment="Left"
                  Height="31" Margin="213,145,0,0" TextWrapping="Wrap"
                  Text="{Binding Path=StationID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                  VerticalAlignment="Top" Width="133" MaxLength="5" 
                  PreviewTextInput="DroneIdTextBox_PreviewTextInput" 
+                 Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation, Converter={StaticResource notBooleanToVisibilityConverter} }"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="parcel_Num_Is_Transferred" Grid.Row="0" HorizontalAlignment="Left"
+                 Height="31" Margin="213,145,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="133" IsReadOnly="True"
+                 PreviewTextInput="DroneIdTextBox_PreviewTextInput" 
+                 MouseDoubleClick="parcel_Num_Is_Transferred_MouseDoubleClick"
+                 Text="{Binding Path=ParcelInTransfer,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                 Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation, Converter={StaticResource booleanToVisibilityConverter} }"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Label x:Name="currentLocation" Grid.Row="0" Content="Current Location"
                HorizontalAlignment="Left" Height="28" Margin="30,265,0,0" 
                VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"
                FontSize="14" FontWeight="Bold"
                Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation , Converter={StaticResource booleanToVisibilityConverter} }"/>
-        <TextBox x:Name="CurrentLocation" Grid.Row="0" HorizontalAlignment="Left" Height="31" Margin="213,265,0,0" Text="{Binding Path=Location,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True" VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <TextBox x:Name="CurrentLocation" Grid.Row="0" 
+                 HorizontalAlignment="Left" Height="31" 
+                 Margin="213,265,0,0" TextWrapping="Wrap" IsReadOnly="True"
+                 Text="{Binding Path=Location,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                 VerticalAlignment="Top" Width="133" 
+                 HorizontalContentAlignment="Center" 
+                 VerticalContentAlignment="Center" />
 
 
 
@@ -105,8 +126,8 @@
                        Height="33" Canvas.Left="-17" Canvas.Top="-1"/>
                 <Label Content="UpDate" 
                        HorizontalContentAlignment="Stretch" 
-                       VerticalContentAlignment="Stretch" Canvas.Left="-25" 
-                       Canvas.Top="22" Width="50" Height="25"/>
+                       VerticalContentAlignment="Stretch" Canvas.Left="-28" 
+                       Canvas.Top="22" Width="56" Height="25"/>
             </Canvas>
         </Button>
         <Button x:Name="SaveClick" HorizontalAlignment="Left"
@@ -157,7 +178,7 @@
             </Button.Background>
             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Image Source="/Images/empty_battery_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-22"/>
-                <Label Content="charging" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="50" Height="27"/>
+                <Label Content="charging" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Bottom" Canvas.Left="-30" Width="67" Height="27" FontSize="13"/>
             </Canvas>
         </Button>
         <Button x:Name="Release" Grid.Column="0" 
@@ -173,7 +194,7 @@
             </Button.Background>
             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Image Source="/Images/full_battery_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-22"/>
-                <Label Content="Release" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="50" Height="27"/>
+                <Label Content="Release" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Bottom" Canvas.Left="-29" Width="57" Height="27"/>
             </Canvas>
         </Button>
         <Button x:Name="Send_Delivery" Grid.Column="0" 
@@ -204,8 +225,8 @@
             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Image Source="/Images/drone_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-33"/>
                 <Image Source="/Images/box_24px.png" Width="15" Height="15" Canvas.Left="-7" Canvas.Top="-13"/>
-                <Label Content="Collect a" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" Canvas.Left="-28" Width="57" Height="27" Canvas.Top="-5"/>
-                <Label Content="package" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" Canvas.Left="-28" Width="57" Height="27" Canvas.Top="8"/>
+                <Label Content="Collect a" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" Canvas.Left="-29" Width="61" Height="27" Canvas.Top="-5" FontSize="13"/>
+                <Label Content="package" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" Canvas.Left="-28" Width="57" Height="27" Canvas.Top="8" FontSize="13"/>
             </Canvas>
         </Button>
         <Button x:Name="Parcel_Delivery" Grid.Column="0" 
@@ -221,7 +242,7 @@
             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Image Source="/Images/hand_box_24px.png" Width="30" Height="30" Canvas.Left="-15" Canvas.Top="-29"/>
                 <Label Content="Parcel" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Canvas.Left="-28" Width="57" Height="27" Canvas.Top="-5"/>
-                <Label Content="delivery" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Canvas.Left="-28" Width="57" Height="27" Canvas.Top="8"/>
+                <Label Content="delivery" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Canvas.Left="-30" Width="59" Height="27" Canvas.Top="8"/>
             </Canvas>
         </Button>
     </Grid>

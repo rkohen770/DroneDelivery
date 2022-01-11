@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="CustomerWindow" Height="591" Width="400">
+        Title="CustomerWindow" Height="750" Width="700">
     <Window.Resources>
         <local:WeightCategoriesToImage x:Key="ParcelAtCustomerWeightCategories"/>
         <local:PrioritiesToImage x:Key="ParcelAtCustomerPrioritiest"/>
@@ -14,47 +14,42 @@
         <local:PhonePrint x:Key="CustomerPhonePrint"/>
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="8*"/>
-            <ColumnDefinition Width="51*"/>
-            <ColumnDefinition Width="21*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="130*"/>
+            <RowDefinition Height="190*"/>
+            <RowDefinition Height="190*"/>
+            <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.ColumnSpan="3">
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="241*"/>
+                <ColumnDefinition Width="459*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Customer ID" Grid.Row="0" HorizontalAlignment="Left" 
-               Height="28" Margin="30,25,0,0" VerticalAlignment="Top" Width="121" 
-               RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
+                Height="28" Margin="100,25,0,0" VerticalAlignment="Top" Width="121" 
+                   FontSize="14" FontWeight="Bold" />
             <TextBox x:Name="ID" Grid.Row="0" HorizontalAlignment="Left" Height="31" 
                  Margin="17,25,0,0" TextWrapping="Wrap" Text="{Binding Path=CustomerId,
             UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Width="133" 
                  MaxLength="9" PreviewTextInput="CustomerIdTextBox_PreviewTextInput"
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" />
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1"  />
             <Label Content="Name" Grid.Row="0" HorizontalAlignment="Left" Height="28" 
-               Margin="30,65,0,0" VerticalAlignment="Top" Width="136"
-               RenderTransformOrigin="0.326,0.754" FontSize="14" FontWeight="Bold" />
+               Margin="100,65,0,0" VerticalAlignment="Top" Width="136"
+               FontSize="14" FontWeight="Bold" />
             <TextBox x:Name="CustomersName" Grid.Row="0" HorizontalAlignment="Left" Height="31"
                  Margin="17,65,0,0" TextWrapping="Wrap" Text="{Binding Path=NameOfCustomer,
             UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Width="133"
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" />
-            <Label Content="Phone" Grid.Row="0" HorizontalAlignment="Left" Height="28" Margin="30,105,0,0"
-               VerticalAlignment="Top" Width="136" RenderTransformOrigin="0.326,0.754"  FontSize="14" 
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" />
+            <Label Content="Phone" Grid.Row="0" HorizontalAlignment="Left" Height="28" Margin="100,105,0,0"
+               VerticalAlignment="Top" Width="136" FontSize="14" 
                FontWeight="Bold" />
             <TextBox x:Name="CustomersPhone" Grid.Row="0" HorizontalAlignment="Left" Height="31"
                      Margin="17,105,0,0" TextWrapping="Wrap"
                      Text="{Binding Path=PhoneOfCustomer, UpdateSourceTrigger=PropertyChanged,Converter={StaticResource CustomerPhonePrint}, Mode=OneWay}" 
                      VerticalAlignment="Top" Width="133" 
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="10" Grid.Column="1" Grid.ColumnSpan="2" />
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="10" Grid.Column="1" />
             <Label x:Name="Location" Grid.Row="0" Content="Location" HorizontalAlignment="Left" Height="28" 
-               Margin="30,145,0,0" VerticalAlignment="Top" Width="121" RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
+               Margin="100,145,0,0" VerticalAlignment="Top" Width="121" FontSize="14" FontWeight="Bold" />
             <TextBox x:Name="CustomersLocation" 
                  Grid.Row="0" Grid.Column="1"
                  HorizontalAlignment="Left" Height="31"
@@ -63,12 +58,12 @@
                  TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="133" 
                  HorizontalContentAlignment="Center" 
-                 VerticalContentAlignment="Center" Grid.ColumnSpan="2" />
+                 VerticalContentAlignment="Center" />
             <Label x:Name="longttitude" Content="Longttitude" 
                Visibility="{Binding Path=IsVisible, ElementName=Location, Converter={StaticResource notBooleanToVisibilityConverter} }"
                HorizontalAlignment="Left" Grid.Column="1"
                Margin="0,140,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.326,0.754" 
-               FontSize="10" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="67" Grid.ColumnSpan="2" />
+               FontSize="10" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="67" Height="21" />
             <TextBox x:Name="Longttitude" 
                  Grid.Row="0"
                  HorizontalAlignment="Left" Height="20"
@@ -77,15 +72,15 @@
                  TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="70" 
                  HorizontalContentAlignment="Center" 
-                 VerticalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" />
+                 VerticalContentAlignment="Center" Grid.Column="1" />
             <Label x:Name="lattitude" Content="Lattitude" 
-               HorizontalAlignment="Right" Grid.Column="2" 
+               HorizontalAlignment="Right" Grid.Column="1" 
                Visibility="{Binding Path=IsVisible, ElementName=Location, Converter={StaticResource notBooleanToVisibilityConverter} }"
                Margin="0,140,65,0" VerticalAlignment="Top" RenderTransformOrigin="0.326,0.754" 
-               FontSize="10" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" />
+               FontSize="10" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Height="21" Width="51" />
             <TextBox x:Name="Lattitude" 
                  Visibility="{Binding Path=IsVisible, ElementName=Location, Converter={StaticResource notBooleanToVisibilityConverter} }"
-                 Grid.Row="0" Grid.Column="2"
+                 Grid.Row="0" Grid.Column="1"
                  HorizontalAlignment="Center" Height="20"
                  Margin="0,160,0,0" 
                  TextWrapping="Wrap"   
@@ -95,38 +90,39 @@
 
         </Grid>
 
-        <Label Content="Parcel to: " Grid.Row="1" HorizontalAlignment="Left" Height="28" 
-               VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.5,0.609" FontSize="14"
-               FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="80,0,0,0" Grid.Column="1"/>
+        <Label Content="To Parcel: " Grid.Row="1" HorizontalAlignment="Left" Height="28" 
+               VerticalAlignment="Top" Width="160" FontSize="14"
+               FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="54,0,0,0"/>
         <ListView x:Name="LVListForCustomers" Grid.Row="1" 
                   ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
                   RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
-                  FontWeight="Normal" Margin="0,30,0,0" Grid.ColumnSpan="3" >
+                  FontWeight="Normal" Margin="0,30,0,0" HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center" MouseDoubleClick="ShowParcelDetails_Click">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="  Parcel ID  " DisplayMemberBinding="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-                    <GridViewColumn Header="  Weight  ">
+                    <GridViewColumn Header="Parcel ID" DisplayMemberBinding="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                    <GridViewColumn Header="Weight">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Image Width="30" Height="30" Source="{Binding Path=Weight, Converter={StaticResource ParcelAtCustomerWeightCategories}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="  Priorities  ">
+                    <GridViewColumn Header="Priorities">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Image Width="30" Height="30" Source="{Binding Path=Priorities, Converter={StaticResource ParcelAtCustomerPrioritiest}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="  Parcel status  ">
+                    <GridViewColumn Header="Parcel status">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Image Width="30" Height="30" Source="{Binding Path=ParcelStatus, Converter={StaticResource ParcelAtCustomerStatus}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="  Target  " DisplayMemberBinding="{Binding Path=SourceOrTarget, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }" />
+                    <GridViewColumn Header="Target" DisplayMemberBinding="{Binding Path=SourceOrTarget, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }" />
                 </GridView>
             </ListView.View>
             <ListView.Resources>
@@ -162,38 +158,40 @@
             </ListView.RenderTransform>
         </ListView>
 
-        <Label Content="Parcel from: " Grid.Row="1" HorizontalAlignment="Left" Height="28" 
+        <Label Content="Parcel from: " Grid.Row="2" HorizontalAlignment="Left" Height="28" 
                VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.5,0.609" FontSize="14"
-               FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="80,122,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+               FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="54,0,0,0"/>
         <ListView x:Name="LVListToCustomers" Grid.Row="2" 
                   ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
                   RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
-                  FontWeight="Normal" Margin="0,30,0,93" Grid.ColumnSpan="3" Grid.RowSpan="2" >
+                  MouseDoubleClick="ShowParcelDetails_Click" 
+                  FontWeight="Normal" Margin="0,30,0,3" HorizontalContentAlignment="Stretch"
+                  VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="  Parcel ID  " DisplayMemberBinding="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-                    <GridViewColumn Header="  Weight  ">
+                    <GridViewColumn Header="Parcel ID" DisplayMemberBinding="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                    <GridViewColumn Header="Weight">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Image Width="30" Height="30" Source="{Binding Path=Weight, Converter={StaticResource ParcelAtCustomerWeightCategories}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="  Priorities  ">
+                    <GridViewColumn Header="Priorities">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Image Width="30" Height="30" Source="{Binding Path=Priorities, Converter={StaticResource ParcelAtCustomerPrioritiest}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="  Parcel status  ">
+                    <GridViewColumn Header="Parcel status">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Image Width="30" Height="30" Source="{Binding Path=ParcelStatus, Converter={StaticResource ParcelAtCustomerStatus}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="  Source  " DisplayMemberBinding="{Binding Path=SourceOrTarget, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }" />
+                    <GridViewColumn Header="Source" DisplayMemberBinding="{Binding Path=SourceOrTarget, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }" />
                 </GridView>
             </ListView.View>
             <ListView.Resources>
@@ -228,7 +226,7 @@
                 </TransformGroup>
             </ListView.RenderTransform>
         </ListView>
-        <Grid Grid.Row="2" Grid.ColumnSpan="3" Margin="0,125,0,0" Grid.RowSpan="2">
+        <Grid Grid.Row="4" Grid.RowSpan="2">
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

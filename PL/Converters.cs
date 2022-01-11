@@ -61,7 +61,7 @@ namespace PL
                     return "/Images/Check_Circle_24px.png";
 
                 case BO.DroneStatus.Maintenance:
-                    return "/Images/charging_battery_24px.png";
+                    return "/Images/charging_station_24px.png";
 
                 case BO.DroneStatus.Delivery:
                     return "/Images/drone_24px.png";

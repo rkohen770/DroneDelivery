@@ -42,8 +42,8 @@ namespace PL
             this.bl = bl;
             this.mainWindow = mainWindow;
             Height = 270;
-            Close.Margin= new Thickness(372, 55, 0, 0);
-            SaveClick.Margin= new Thickness(372, 105, 0, 0);
+            Close.Margin = new Thickness(372, 55, 0, 0);
+            SaveClick.Margin = new Thickness(372, 105, 0, 0);
             CurrentLocation.Visibility = Visibility.Hidden;
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
 
@@ -68,8 +68,7 @@ namespace PL
             Status.Text = drone.DroneStatus.ToString();
             stationID.Width = 200;
             stationID.Margin = new Thickness(30, 145, 0, 0);
-            stationID.Content = "Parcel Num Is Transferred";
-            StationID.Text = drone.ParcelNumIsTransferred.ToString();
+            parcel_Num_Is_Transferred.Text = drone.ParcelNumIsTransferred.ToString();
             CurrentLocation.Text = drone.CurrentLocation.ToString();
         }
 
@@ -273,6 +272,15 @@ namespace PL
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void parcel_Num_Is_Transferred_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (int.Parse(parcel_Num_Is_Transferred.Text) !=0)
+            {
+                ParcelForList parcelDetails = bl.CloneParcel(bl.GetParcel(int.Parse(parcel_Num_Is_Transferred.Text)));
+                new ParcelWindow(bl, parcelDetails, mainWindow).ShowDialog();
             }
         }
     }

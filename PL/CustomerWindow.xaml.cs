@@ -155,5 +155,16 @@ namespace PL
                 MessageBox.Show(ex.ID.ToString(), ex.Message);
             }
         }
+
+        private void ShowParcelDetails_Click(object sender, MouseButtonEventArgs e)
+        {
+            ParcelAtCustomer parcel = ((ListView)sender).SelectedItem as ParcelAtCustomer;
+            new ParcelWindow(bl, bl.CloneParcel(bl.GetParcel(parcel.ParcelID)), mainWindow).ShowDialog();
+            Customer c = bl.GetCustomer(customer.CustomerID);
+            LVListForCustomers.ItemsSource = c.FromCustomer;
+            LVListForCustomers.Items.Refresh();
+            LVListToCustomers.ItemsSource = c.ToCustomer;
+            LVListToCustomers.Items.Refresh();
+        }
     }
 }

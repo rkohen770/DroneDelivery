@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow"  Height="680" Width="880"
+        Title="MainWindow"  Height="680" Width="1012"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         TextElement.FontWeight="Regular" TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto" FontFamily="David" FontSize="14">
@@ -127,9 +127,8 @@
                               MouseDoubleClick="ShowDroneDetails_Click" 
                               Grid.Row="1"
                               RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal"
-                              Margin="0,0,0,60"
-                              HorizontalContentAlignment="Left" 
-                              ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Top" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                              HorizontalContentAlignment="Center" 
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,50" >
                         <ListView.View>
 
                             <GridView>
@@ -241,17 +240,17 @@
                         </Button>
                     </Canvas>
                     <ListView x:Name="LVListBaseStations" Grid.Row="0" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"
-                          MouseDoubleClick="ShowBaseStationDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="0,0,0,60" Grid.ColumnSpan="5" Height="430" VerticalAlignment="Top" >
+                          MouseDoubleClick="ShowBaseStationDetails_Click" RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal" Margin="30,27,30,138" >
                         <ListView.View>
 
                             <GridView>
-                                <GridViewColumn Header="  BaseStation Id  " 
+                                <GridViewColumn Header="BaseStation Id" 
                                             DisplayMemberBinding="{Binding Path=BaseStationID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-                                <GridViewColumn Header="  Name  " 
+                                <GridViewColumn Header="Name" 
                                             DisplayMemberBinding="{Binding Path=NameBaseStation,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  Num Of Available Charging  " 
+                                <GridViewColumn Header="Num Of Available Charging" 
                                             DisplayMemberBinding="{Binding Path=NumOfAvailableChargingPositions,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  Num Of Busy Charging  " 
+                                <GridViewColumn Header="Num Of Busy Charging" 
                                             DisplayMemberBinding="{Binding Path=NumOfBusyChargingPositions,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                             </GridView>
                         </ListView.View>
@@ -294,11 +293,6 @@
             <!--#region Customers-->
             <TabItem Header="Customers" Foreground="#FF4362AC" Height="22" Margin="-2,0,-2,0" VerticalAlignment="Bottom">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="9*"/>
-                        <ColumnDefinition Width="18*"/>
-                        <ColumnDefinition Width="221*"/>
-                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions >
                         <RowDefinition  Height="500"/>
                         <RowDefinition Height="Auto"/>
@@ -310,23 +304,28 @@
                           ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
                           Grid.ColumnSpan="3" MouseDoubleClick="ShowCustomerDetails_Click"
                           RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
-                          FontWeight="Normal" Margin="-6,0,6,15">
+                          FontWeight="Normal" Margin="-6,0,6,15" HorizontalContentAlignment="Center">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="  Customer ID  " 
+                                <GridViewColumn Header="Customer ID" 
                                             DisplayMemberBinding="{Binding Path=CustomerID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
-                                <GridViewColumn Header="  Customer Name  " 
+                                <GridViewColumn Header="Customer Name" 
                                             DisplayMemberBinding="{Binding Path=CustomerName,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  Phone  " 
+                                <GridViewColumn Header="Phone" 
                                             DisplayMemberBinding="{Binding Path=Phone,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource CustomerPhonePrint}, Mode=OneWay}"/>
-                                <GridViewColumn Header="  Sent and delivered  " 
+                                <GridViewColumn Header="Sent and delivered" 
                                             DisplayMemberBinding="{Binding Path=SentAndDelivered,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  Sent And Not Delivered  " 
+                                <GridViewColumn Header="Sent And Not Delivered" 
                                             DisplayMemberBinding="{Binding Path=SentAndNotDelivered,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  Received  " 
+                                <GridViewColumn Header="Received" 
                                             DisplayMemberBinding="{Binding Path=Received,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="  On The Way To Customer  " 
-                                            DisplayMemberBinding="{Binding Path=OnTheWayToCustomer,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=OnTheWayToCustomer,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"> 
+                                    <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Image Source="/Images/drone_24px.png" Width="50" Height="50" Canvas.Left="-21" Canvas.Top="-27"/>
+                                    <Image Source="/Images/box_24px.png" Width="25" Height="25" Canvas.Left="-7" Canvas.Top="5"/>
+                                 </Canvas>
+                                
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                         <ListView.Resources>
