@@ -9,6 +9,7 @@
     <Window.Resources>
         <local:NotBooleanToVisibilityConverter x:Key="notBooleanToVisibilityConverter" />
         <local:DroneBattery x:Key="DroneBatteryConvert"/>
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
 
     <Grid>
@@ -16,8 +17,8 @@
         <Grid HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="175*"/>
-                <ColumnDefinition Width="214*"/>
-                <ColumnDefinition Width="111*"/>
+                <ColumnDefinition Width="224*"/>
+                <ColumnDefinition Width="101*"/>
             </Grid.ColumnDefinitions>
 
             <Label Name="id" Content="Parcel ID" Grid.Row="0"
@@ -30,8 +31,18 @@
                  Text="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                  PreviewTextInput="ParcelTextBox_PreviewTextInput" 
                  HorizontalContentAlignment="Center"
-                 VerticalContentAlignment="Center" />
-            <Label Content="Sender To Parcel" Grid.Row="0" 
+                 VerticalContentAlignment="Center"
+                 IsReadOnly="{Binding Path=IsVisible, ElementName=SenderOfParcel}"
+                 Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <TextBox x:Name="sender_ID" Grid.Row="0" Grid.Column="1" 
+                 HorizontalAlignment="Left" Height="31" Margin="0,25,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="133" MaxLength="9" 
+                 PreviewTextInput="ParcelTextBox_PreviewTextInput" 
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                 Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                Converter={StaticResource notBooleanToVisibilityConverter}}"/>
+            <Label Name="sender_Of_Parcel" Content="Sender To Parcel" Grid.Row="0" 
                HorizontalAlignment="Center" Height="28" 
                Margin="0,65,0,0" VerticalAlignment="Top" 
                Width="120" RenderTransformOrigin="0.326,0.754" 
@@ -42,20 +53,33 @@
                  PreviewTextInput="ParcelTextBox_PreviewTextInput" 
                  HorizontalContentAlignment="Left" 
                  VerticalContentAlignment="Top"
-                 Text="{Binding Path=SenderOfParcel,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Grid.Column="1"  />
-            <Label Content="Target To Parcel" Grid.Row="0" 
+                 IsReadOnly="{Binding Path=IsVisible, ElementName=SenderOfParcel}"
+                 Text="{Binding Path=SenderOfParcel,UpdateSourceTrigger=PropertyChanged,
+                Mode=OneWay}" Grid.Column="1" TextChanged="SenderOfParcel_TextChanged" HorizontalScrollBarVisibility="Visible"  />
+            <TextBox x:Name="target_ID" Grid.Row="0" Grid.Column="1" 
+                 HorizontalAlignment="Left" Height="31" Margin="0,65,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="133" MaxLength="9" 
+                 PreviewTextInput="ParcelTextBox_PreviewTextInput" 
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                 Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                Converter={StaticResource notBooleanToVisibilityConverter}}"/>
+            <Label Name="target_To_Parcel" Content="Target To Parcel" Grid.Row="0" 
                HorizontalAlignment="Center" Height="28" 
                Margin="0,105,0,0" VerticalAlignment="Top" 
                Width="120" RenderTransformOrigin="0.326,0.754" 
                FontSize="14" FontWeight="Bold" />
-            <TextBox x:Name="TargetToParcel" Grid.Column="1" 
+            <TextBox x:Name="TargetToParcel" Grid.Row="0" 
                  HorizontalAlignment="Left" Height="31" Margin="0,105,0,0" 
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="210"
                  PreviewTextInput="ParcelTextBox_PreviewTextInput" 
                  HorizontalContentAlignment="Left" 
                  VerticalContentAlignment="Top"
-                 Text="{Binding Path=TargetToParcel,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  />
-            <Label Content="Weight" Grid.Row="0" HorizontalAlignment="Center"
+                 IsReadOnly="{Binding Path=IsVisible, ElementName=SenderOfParcel}"
+                 Text="{Binding Path=TargetToParcel,UpdateSourceTrigger=PropertyChanged,
+                 Mode=OneWay}" Grid.Column="1" TextChanged="SenderOfParcel_TextChanged"  
+                 Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalScrollBarVisibility="Visible"/>
+            <Label Name="weight" Content="Weight" Grid.Row="0" HorizontalAlignment="Center"
                    Height="28" Margin="0,145,0,0" VerticalAlignment="Top" Width="121"
                    RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
             <TextBox x:Name="Weight" Grid.Row="0" Text="{Binding Path=Weight
@@ -63,68 +87,92 @@
                      IsReadOnly="True" HorizontalAlignment="Left" Height="31" Margin="0,145,0,0" 
                      VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center"
                      VerticalContentAlignment="Center" Grid.Column="1" />
-            <ComboBox Name="Wight_Selector" Grid.Row="0" Text="{Binding Path=Weight
+            <ComboBox Name="Wight_Selector" Margin="0,105,0,0" 
+                 HorizontalAlignment="Left" Height="31"
+                 Width="133" Grid.Row="0" Text="{Binding Path=Weight
                 ,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
-                     IsReadOnly="True" HorizontalAlignment="Left" Height="31" Margin="0,145,0,0" 
-                     VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center" Grid.Column="1" />
+                 IsReadOnly="{Binding Path=IsVisible, ElementName=SenderOfParcel}"   
+                 VerticalAlignment="Top" HorizontalContentAlignment="Center"
+                 VerticalContentAlignment="Center" Grid.Column="1" 
+                 Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                Converter={StaticResource notBooleanToVisibilityConverter}}"/>
             <Label Content="Priorities" Grid.Row="0" HorizontalAlignment="Center"
                    Height="28" Margin="0,185,0,0" VerticalAlignment="Top" Width="121"
-                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
+                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" 
+                   Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                   Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <TextBox x:Name="Priorities" Grid.Row="0" Text="{Binding Path=Priorities
                 ,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap"
-                     IsReadOnly="True" HorizontalAlignment="Left" Height="31" Margin="0,185,0,0" 
+                     IsReadOnly="{Binding Path=IsVisible, ElementName=SenderOfParcel}" HorizontalAlignment="Left" Height="31" Margin="0,185,0,0" 
                      VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center" Grid.Column="1" />
+                     VerticalContentAlignment="Center" Grid.Column="1" 
+                      Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                   Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <ComboBox Name="Priorities_Selector" Grid.Row="0" Text="{Binding Path=Priorities
                 ,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
-                     IsReadOnly="True" HorizontalAlignment="Left" Height="31" Margin="0,185,0,0" 
+                     IsReadOnly="True" HorizontalAlignment="Left" Height="31" Margin="0,145,0,0"  
                      VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center" Grid.Column="1"/>
+                     VerticalContentAlignment="Center" Grid.Column="1"  
+                     Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                     Converter={StaticResource notBooleanToVisibilityConverter}}"/>
             <Label Name="droneInParcel" Content="Drone In Parcel" Grid.Row="0" HorizontalAlignment="Center"
                    Height="28" Margin="0,225,0,0" VerticalAlignment="Top" Width="121"
-                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
+                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" 
+                    Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                   Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <TextBox x:Name="DroneInParcel" Grid.Row="0" Text="{Binding Path=DroneInParcel
                 ,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap"
-                     IsReadOnly="True" HorizontalAlignment="Left" Height="31" Margin="0,225,0,0" 
-                     VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center" Grid.Column="1" />
-            <TextBox x:Name="TargetID" Grid.Row="0" TextWrapping="Wrap"
                      HorizontalAlignment="Left" Height="31" Margin="0,225,0,0" 
-                     VerticalAlignment="Top" Width="133" HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center" Grid.Column="1" />
+                     VerticalAlignment="Top" Width="210" HorizontalContentAlignment="Left"
+                     VerticalContentAlignment="Top" Grid.Column="1"
+                     Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                     Converter={StaticResource BooleanToVisibilityConverter}}"
+                     IsReadOnly="{Binding Path=IsVisible, ElementName=SenderOfParcel}"/>
             <Label Content="Requested" Grid.Row="0" HorizontalAlignment="Center"
                    Height="28" Margin="0,265,0,0" VerticalAlignment="Top" Width="121"
-                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-            <DatePicker x:Name="Requested" SelectedDate="{Binding  Requested}" 
-                        Grid.Column="1" Margin="0,265,0,0" Width="133" 
-                        Height="31" DisplayDate="{Binding Requested, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-
+                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold"
+                    Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                   Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <TextBox x:Name="Requested" Grid.Column="1" Margin="0,265,0,0" Width="133" Height="31"  
+                        HorizontalAlignment="Left" VerticalAlignment="Top" 
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                      Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                      Converter={StaticResource BooleanToVisibilityConverter}}"
+                      IsReadOnly="{Binding Path=IsVisible, ElementName=SenderOfParcel}"/>
             <Label Content="Scheduled" Grid.Row="0" HorizontalAlignment="Center"
                    Height="28" Margin="0,305,0,0" VerticalAlignment="Top" Width="121"
-                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-            <DatePicker x:Name="Scheduled" SelectedDate="{Binding  Scheduled}" 
-                        Grid.Column="1" Margin="0,305,0,0" Width="133" 
-                        Height="31" DisplayDate="{Binding Scheduled, Mode=TwoWay, 
-                UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top"
-                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-
+                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold"
+                      Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                   Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <TextBox x:Name="Scheduled" Grid.Column="1" Margin="0,305,0,0"
+                     Width="133" Height="31" HorizontalAlignment="Left" 
+                     VerticalAlignment="Top" HorizontalContentAlignment="Center" 
+                     VerticalContentAlignment="Center"
+                     Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                   Converter={StaticResource BooleanToVisibilityConverter}}"
+                    IsReadOnly="{Binding Path=IsVisible, ElementName=SenderOfParcel}"/>
             <Label Content="PickedUp" Grid.Row="0" HorizontalAlignment="Center"
                    Height="28" Margin="0,345,0,0" VerticalAlignment="Top" Width="121"
-                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-            <DatePicker x:Name="PickedUp" SelectedDate="{Binding  PickedUp}" 
-                        Grid.Column="1" Margin="0,345,0,0" Width="133" 
-                        Height="31" DisplayDate="{Binding PickedUp, Mode=TwoWay, 
-                UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-
+                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold"
+                    Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                   Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <TextBox x:Name="PickedUp" Grid.Column="1" Margin="0,345,0,0"
+                     Width="133" Height="31" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                      Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                   Converter={StaticResource BooleanToVisibilityConverter}}"
+                     IsReadOnly="{Binding Path=IsVisible, ElementName=SenderOfParcel}"/>
             <Label Content="ParcelDelivery" Grid.Row="0" HorizontalAlignment="Center"
                    Height="28" Margin="0,385,0,0" VerticalAlignment="Top" Width="121"
-                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
-            <DatePicker x:Name="ParcelDelivery" SelectedDate="{Binding  ParcelDelivery}" 
-                        Grid.Column="1" Margin="0,385,0,0" Width="133" 
-                        Height="31" DisplayDate="{Binding ParcelDelivery, Mode=TwoWay, 
-                UpdateSourceTrigger=LostFocus}" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                   RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold"
+                    Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                   Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <TextBox x:Name="ParcelDelivery" Grid.Column="1" Margin="0,385,0,0" Width="133" 
+                        Height="31" HorizontalAlignment="Left" VerticalAlignment="Top"
+                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                      Visibility="{Binding Path=IsVisible, ElementName=SenderOfParcel,
+                   Converter={StaticResource BooleanToVisibilityConverter}}"
+                   IsReadOnly="{Binding Path=IsVisible, ElementName=SenderOfParcel}"/>
 
             <Grid Grid.Column="2">
                 <Button x:Name="SaveClick" Grid.Column="2" 

@@ -41,7 +41,9 @@ namespace PL
             this.bl = bl;
             this.mainWindow = mainWindow;
             id.Content = "Sender ID";
-            droneInParcel.Content = "Target ID";
+            sender_Of_Parcel.Content = "Target ID";
+            target_To_Parcel.Content = "Wight";
+            weight.Content = "priority";
             Wight_Selector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             Priorities_Selector.ItemsSource = Enum.GetValues(typeof(Priorities));
             SenderOfParcel.Visibility = Visibility.Hidden;
@@ -66,7 +68,7 @@ namespace PL
             TargetToParcel.Text = parcel.TargetToParcel.ToString();
             if(parcel.DroneInParcel!=null)
                 DroneInParcel.Text = parcel.DroneInParcel.ToString();
-            Requested.DisplayDate =parcel.Requested.Value;
+            Requested.Text =parcel.Requested.ToString();
             Scheduled.Text = parcel.Scheduled.ToString();
             PickedUp.Text = parcel.PickedUp.ToString();
             ParcelDelivery.Text = parcel.ParcelDelivery.ToString();
@@ -103,20 +105,18 @@ namespace PL
         {
             try
             {
-                if (ID.Text==null || TargetID.Text == null || Wight_Selector.SelectedItem == null || Priorities_Selector.SelectedItem == null)
+                if (sender_ID.Text==null || target_ID.Text == null || Wight_Selector.SelectedItem == null || Priorities_Selector.SelectedItem == null)
                     MessageBox.Show("Not all detalis are set");
-                else if (ID.Text.Length > 9 || ID.Text.Length < 9)
+                else if (sender_ID.Text.Length !=9 )
                     MessageBox.Show("Sender ID longer or shorter than 9 letters");
-                else if (TargetID.Text.Length > 9 || TargetID.Text.Length < 9)
+                else if (target_ID.Text.Length != 9 )
                     MessageBox.Show("Target ID longer or shorter than 9 letters");
                 else
                 {
-                    bl.AddParcelBo(int.Parse(ID.Text), int.Parse(TargetID.Text),
+                    bl.AddParcelBo(int.Parse(sender_ID.Text), int.Parse(target_ID.Text),
                          (WeightCategories)Wight_Selector.SelectedItem, (Priorities)Priorities_Selector.SelectedItem);
                     MessageBox.Show("Adding a parcel was completed successfully");
                 }
-
-
             }
             catch (BadCustomerIDException ex)
             {
@@ -129,6 +129,11 @@ namespace PL
             mainWindow.LVListParcels.ItemsSource = bl.GetAllParcelsBo();
             mainWindow.LVListParcels.Items.Refresh();
             Close();
+        }
+
+        private void SenderOfParcel_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
 
         ///// <summary>

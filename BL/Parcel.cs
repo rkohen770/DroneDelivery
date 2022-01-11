@@ -23,8 +23,7 @@ namespace BO
         public override string ToString()
         {
             return $"Parcel ID: {ParcelID},\n " +
-                $"Sender Of Parcel: {SenderOfParcel},\n" +
-                $"Target To Parcel: {TargetToParcel}, \n" +
+                $"Sender Of Parcel: {SenderOfParcel}, Target To Parcel: {TargetToParcel}, \n" +
                 $"Weight: {Weight},\n" +
                 $"Priorities: {Priorities},\n " +
                 $"Drone In Parcel: {DroneInParcel},\n" +

@@ -123,6 +123,21 @@ namespace DalApi
                 }
             }
         }
+
+       
+        public void UpdateParcelData(int id, int droneID)
+        {
+            if (!DataSource.parcels.Exists(p => p.ParcelID == id))
+            {
+                throw new BadParcelIDException(id, "the parcel not exists in the system");
+            }
+            else
+            {
+                int pIndex = DataSource.parcels.FindIndex(p => p.ParcelID == id);
+                Parcel parcel = DataSource.parcels[pIndex];
+                parcel.DroneID = droneID;
+            }
+        }
         #endregion
 
         #region Get item

@@ -14,7 +14,8 @@ namespace BO
 
         public override string ToString()
         {
-            return this.ToStringProperty() + "\n";
+            return $"Drone ID: {DroneID}, Drone Battery: {DroneBattery},\n"+
+               $"Current Location: {CurrentLocation}";
         }
     }
 }

@@ -20,7 +20,7 @@ namespace BO
 
         public override string ToString()
         {
-            return this.ToStringProperty() + "\n";
+            return this.ToStringProperty()+"\n";
         }
     }
 }

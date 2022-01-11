@@ -218,6 +218,17 @@ namespace PL
 
         #region Parcel
         /// <summary>
+        /// A button that opens a window for adding a parcel
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void AddParcelsButton_Click(object sender, RoutedEventArgs e)
+        {
+            new ParcelWindow(bl, this).ShowDialog();
+            LVListParcels.ItemsSource = bl.GetAllParcelsBo();
+            LVListParcels.Items.Refresh();
+        }
+        /// <summary>
         /// an event to show the details parcel window
         /// </summary>
         private void ShowParcelDetails_Click(object sender, MouseButtonEventArgs e)
@@ -226,18 +237,6 @@ namespace PL
             new ParcelWindow(bl, parcelDetails, this).ShowDialog();
             LVListBaseStations.ItemsSource = bl.GetAllBaseStationsBo();
             LVListBaseStations.Items.Refresh();
-        }
-
-        /// <summary>
-        /// A button that opens a window for adding a parcel
-        /// </summary>
-        /// <param name="sender">Button type</param>
-        /// <param name="e"></param>
-        private void AddParcelsButton_Click(object sender, RoutedEventArgs e)
-        {
-            new ParcelWindow(bl, this).ShowDialog();
-            LVListParcels.ItemsSource = bl.GetAllCustomersBo();
-            LVListParcels.Items.Refresh();
         }
 
         /// <summary>

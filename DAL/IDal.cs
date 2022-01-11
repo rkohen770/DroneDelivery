@@ -134,6 +134,12 @@ namespace DalApi
         /// <param name="id">customer id</param>
         /// <param name="newPhone">customer phone</param>
         void UpdateCustomerPhone(int id, string newPhone);
+        /// <summary>
+        /// Update assign drone id to parcel
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="droneID"></param>
+        void UpdateParcelData(int id, int droneID);
 
         #endregion
 
@@ -269,5 +275,6 @@ namespace DalApi
         /// </summary>
         /// <returns>array of numbers of double type</returns>
         double[] PowerConsumptionRequest();
+
     }
 }

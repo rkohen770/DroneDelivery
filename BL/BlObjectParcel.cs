@@ -275,7 +275,10 @@ namespace BO
                     droneInParcel.DroneID = drone.DroneID;
                     droneInParcel.DroneBattery = drone.DroneBattery;
                     droneInParcel.CurrentLocation = drone.CurrentLocation;
+                    dal.UpdateParcelData(parcelId, parcel.DroneID);
                 }
+                
+                parcel_BO.DroneInParcel = droneInParcel;
                 return parcel_BO;
             }
             catch (DO.BadParcelIDException e)
