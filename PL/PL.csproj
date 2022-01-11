@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="drone_login.png" />
     <None Remove="Images\%25_24px.png" />
     <None Remove="Images\add_24px.png" />
     <None Remove="Images\Associated_24px.png" />
@@ -42,6 +41,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Images\add_24px.png" />
     <Resource Include="Images\box_24px.png" />
     <Resource Include="Images\charging_station_24px.png" />
@@ -53,7 +56,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="drone_login.png" />
     <Resource Include="Images\%_24px.png" />
     <Resource Include="Images\Associated_24px.png" />
     <Resource Include="Images\charged_battery_24px.png" />
