@@ -10,6 +10,7 @@
         <local:NotBooleanToVisibilityConverter x:Key="notBooleanToVisibilityConverter" />
         <local:DroneBattery x:Key="DroneBatteryConvert"/>
         <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <local:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
     </Window.Resources>
 
     <Grid>
@@ -23,7 +24,9 @@
             <Label Name="id" Content="Parcel ID:"
                HorizontalAlignment="Right" VerticalAlignment="Top"
                Height="28" Width="120" Margin="40,25,0,0" 
-               RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
+               RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold"
+               Visibility="{Binding Path=IsVisible, ElementName=senderParcel
+                , Converter={StaticResource booleanToVisibilityConverter} }"/>
             <TextBox x:Name="ID"
                  HorizontalAlignment="Left" Height="31" Margin="7,25,0,0" 
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="133" MaxLength="9" 
@@ -173,7 +176,7 @@
                  HorizontalContentAlignment="Center" 
                  VerticalContentAlignment="Bottom"
                  IsReadOnly="{Binding Path=IsVisible, ElementName=senderParcel}"
-                 Text="{Binding DroneInParcel.DroneID,UpdateSourceTrigger=PropertyChanged,
+                 Text="{Binding UpdateSourceTrigger=PropertyChanged,
                 Mode=OneWay}" HorizontalScrollBarVisibility="Visible" Grid.Column="1"/>
             <Label Name="drone_Battery" Content="Battery:" 
                HorizontalAlignment="Left" Height="28" 
@@ -186,7 +189,7 @@
                  HorizontalContentAlignment="Center" 
                  VerticalContentAlignment="Bottom"
                  IsReadOnly="{Binding Path=IsVisible, ElementName=senderParcel}"
-                 Text="{Binding DroneInParcel.DroneBattery,UpdateSourceTrigger=PropertyChanged,
+                 Text="{Binding UpdateSourceTrigger=PropertyChanged,
                 Mode=OneWay}" HorizontalScrollBarVisibility="Visible" Grid.Column="1"/>
             <Label Name="drone_Location" Content="Location:" 
                HorizontalAlignment="Left" Height="28" 
@@ -266,8 +269,44 @@
 
 
 
+            <!--#region add window-->
+
+            <Label Name="senderParcelAdd" Content="Sender Details:"
+               HorizontalAlignment="Right" Height="28" 
+               Margin="40,25,0,0"  VerticalAlignment="Top" 
+               Width="120" RenderTransformOrigin="0.326,0.754" 
+               FontSize="14" FontWeight="Bold" 
+               Visibility="{Binding Path=IsVisible, ElementName=senderParcel
+                , Converter={StaticResource notBooleanToVisibilityConverter} }"/>
+            <Label Name="sender_Id_Add" 
+               HorizontalAlignment="Left" Height="28" 
+               Margin="82,90,0,0" VerticalAlignment="Top" 
+               Width="80" RenderTransformOrigin="0.326,0.754" 
+               FontSize="14" VerticalContentAlignment="Top" Content="ID:"/>
+            <TextBox x:Name="Sender_Id_Add" 
+                 HorizontalAlignment="Left" Height="31" Margin="7,80,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="133"
+                 HorizontalContentAlignment="Center" 
+                 VerticalContentAlignment="Bottom"
+                 IsReadOnly="{Binding Path=IsVisible, ElementName=senderParcel}"
+                 Text="{Binding SenderOfParcel ,UpdateSourceTrigger=PropertyChanged,
+                Mode=OneWay}" HorizontalScrollBarVisibility="Visible" Grid.Column="1"/>
+            <Label Name="sender_Name_Add" Content="Name:" 
+               HorizontalAlignment="Left" Height="28" 
+               Margin="82,115,0,0" VerticalAlignment="Top" 
+               Width="106" RenderTransformOrigin="0.326,0.754" 
+               FontSize="14" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="Sender_Name_Add"
+                 HorizontalAlignment="Left" Height="31" Margin="7,105,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="133"
+                 HorizontalContentAlignment="Center" 
+                 VerticalContentAlignment="Bottom"
+                 IsReadOnly="{Binding Path=IsVisible, ElementName=senderParcel}"
+                 Text="{Binding SenderOfParcel,UpdateSourceTrigger=PropertyChanged,
+                Mode=OneWay}" HorizontalScrollBarVisibility="Visible" Grid.Column="1"/>
 
 
+            <!--#endregion-->
 
             <!--<TextBox Grid.Row="0" 
                  HorizontalAlignment="Left" Height="31" Margin="241,25,0,0" 
@@ -329,7 +368,7 @@
                     Visibility="{Binding Path=IsVisible, ElementName=SaveClick,
                     Converter={StaticResource notBooleanToVisibilityConverter}}"
                     Grid.Column="1" Content="Collection" VerticalAlignment="Top"
-                    Click="UpdateColectionParcelButton_Click" Margin="193,566,28,0" Height="42" />
+                    Click="UpdateColectionParcelButton_Click" Margin="237,359,0,0" Height="35" />
             <Button Content="Close" Grid.Column="1" VerticalAlignment="Center" 
                     Click="CloseButton_Click" Margin="237,0,0,0" Height="32" />
         </Grid>

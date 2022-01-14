@@ -33,6 +33,7 @@
     <None Remove="Images\maintenance_24px.png" />
     <None Remove="Images\medium_24px.png" />
     <None Remove="Images\Normal_24px.png" />
+    <None Remove="Images\parcel_24px.png" />
     <None Remove="Images\Provided_box_24px.png" />
     <None Remove="Images\save_as_24px.png" />
     <None Remove="Images\Sorting_24px.png" />
@@ -79,6 +80,7 @@
     <Resource Include="Images\maintenance_24px.png" />
     <Resource Include="Images\medium_24px.png" />
     <Resource Include="Images\Normal_24px.png" />
+    <Resource Include="Images\parcel_24px.png" />
     <Resource Include="Images\Provided_box_24px.png" />
     <Resource Include="Images\save_as_24px.png" />
     <Resource Include="Images\Sorting_24px.png" />

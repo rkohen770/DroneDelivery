@@ -156,9 +156,9 @@ namespace BO
                     {
                         //update in BL
                         DO.Customer customer = dal.GetCustomer(parcel.SenderID);//finds the sender 
-                                                                                //calculate the distance frome the current location of the drone- to the customer
+                        //calculate the distance frome the current location of the drone- to the customer
                         double distance = getDistanceBetweenTwoPoints(drone_l.CurrentLocation.Lattitude, drone_l.CurrentLocation.Longitude, customer.Lattitude, customer.Longitude);
-                        // update the location of the drone to where the senderk
+                        //update the location of the drone to where the senderk
                         drone_l.CurrentLocation = new Location { Lattitude = customer.Lattitude, Longitude = customer.Longitude };
                         drone_l.DroneBattery -= distance * dal.PowerConsumptionRequest()[(int)parcel.Weight + 1];
                         int dIndex = droneForLists.FindIndex(d => d.DroneID == droneId);

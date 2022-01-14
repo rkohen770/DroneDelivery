@@ -269,7 +269,7 @@ namespace PL
         /// </summary>
         /// <param name="sender">Button type</param>
         /// <param name="e"></param>
-        private void RefreshParcelByTargetButton_Click(object sender, RoutedEventArgs e)
+        private void SortParcelByTargetButton_Click(object sender, RoutedEventArgs e)
         {
             LVListParcels.ItemsSource = bl.GetAllParcelsBo().OrderBy(p => p.CustomerNameTarget);
             LVListParcels.Items.Refresh();
@@ -279,7 +279,7 @@ namespace PL
         /// </summary>
         /// <param name="sender">Button type</param>
         /// <param name="e"></param>
-        private void RefreshParcelBySendButton_Click(object sender, RoutedEventArgs e)
+        private void SortParcelBySenderButton_Click(object sender, RoutedEventArgs e)
         {
             LVListParcels.ItemsSource = bl.GetAllParcelsBo().OrderBy(p => p.CustomerNameSend);
             LVListParcels.Items.Refresh();
@@ -291,9 +291,14 @@ namespace PL
         /// <param name="e"></param>
         private void ParcelPrioritiesSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Priorities priority = (Priorities)((ComboBox)sender).SelectedItem;
-            List<ParcelForList> lists = bl.GetParcelsByPredicat(p => p.Priorities == priority).ToList();
-            LVListParcels.ItemsSource = lists;
+            if (((ComboBox)sender).SelectedItem == null)
+                LVListParcels.ItemsSource = listParcels;
+            else
+            {
+                Priorities priority = (Priorities)((ComboBox)sender).SelectedItem;
+                List<ParcelForList> lists = bl.GetParcelsByPredicat(p => p.Priorities == priority).ToList();
+                LVListParcels.ItemsSource = lists;
+            }
         }
         /// <summary>
         /// Filter a list by criterion - parcel status
@@ -302,11 +307,24 @@ namespace PL
         /// <param name="e"></param>
         private void ParcelStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ParcelStatus status = (ParcelStatus)((ComboBox)sender).SelectedItem;
-            List<ParcelForList> list = bl.GetParcelsByPredicat(p => p.ParcelStatus == status).ToList();
-            LVListParcels.ItemsSource = list;
-        }
 
+            if (((ComboBox)sender).SelectedItem == null)
+                LVListParcels.ItemsSource = listParcels;
+            else
+            {
+                ParcelStatus status = (ParcelStatus)((ComboBox)sender).SelectedItem;
+                List<ParcelForList> list = bl.GetParcelsByPredicat(p => p.ParcelStatus == status).ToList();
+                LVListParcels.ItemsSource = list;
+            }
+        }
+        private void ClearFilledParcelStatusSelectorComboBox_Click(object sender, RoutedEventArgs e)
+        {
+            ParcelStatusSelector.SelectedItem = null;
+        }
+        private void ClearFilledPrioritySelectorComboBox_Click(object sender, RoutedEventArgs e)
+        {
+            ParcelPrioritiesSelector.SelectedItem = null;
+        }
 
         #endregion
 

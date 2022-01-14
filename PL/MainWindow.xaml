@@ -36,12 +36,16 @@
             <!--#region Drone-->
             <TabItem Header="Drones" Foreground="#FF4362AC">
                 <Grid Margin="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="104*"/>
+                        <ColumnDefinition Width="379*"/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition  Height="60"/>
                         <RowDefinition  Height="400"/>
                     </Grid.RowDefinitions>
 
-                    <Canvas Grid.Row="1" Margin="0,400,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="700" Height="100" >
+                    <Canvas Grid.Row="1" Margin="133,350,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="700" Height="100" Grid.ColumnSpan="2" >
                         <Button x:Name="Add_Drone_Button" Grid.Column="0" 
                                 Click="AddDroneButton_Click" Width="79" 
                                 Height="50" Canvas.Top="25" Canvas.Left="262">
@@ -73,7 +77,7 @@
                         </Button>
                     </Canvas>
 
-                    <Grid x:Name="sortedList" Grid.Row="0" Margin="0,0,0,400" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <Grid x:Name="sortedList" Grid.Row="0" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -81,46 +85,43 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Drone status" Grid.Column="0"
-                               Foreground="#FF4362AC" HorizontalAlignment="Stretch" 
-                               Margin="0,0,0,0" VerticalAlignment="Stretch" 
+                               Foreground="#FF4362AC" 
+                               Margin="4,2,237,-2" 
                                RenderTransformOrigin="-11.049,0.494" 
                                FontSize="22" FontWeight="Regular" 
                                HorizontalContentAlignment="Center" 
-                               VerticalContentAlignment="Center"/>
+                               VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
                         <Canvas Grid.Column="1">
                             <Button Content="Clear"
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     Foreground="#FF4362AC"
-                                    Click="ClearFilledStatusSelectorComboBox_Click" Canvas.Left="114" />
+                                    Click="ClearFilledStatusSelectorComboBox_Click" Canvas.Left="78" Canvas.Top="-6" />
                             <ComboBox Name="StatusSelector" Margin="5,10,5,10" 
-                                      BorderBrush="#FF4362AC" HorizontalAlignment= "Stretch" 
-                                      VerticalAlignment="Stretch"
+                                      BorderBrush="#FF4362AC"
                                       HorizontalContentAlignment="Center" 
                                       StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5"
                                       VerticalContentAlignment="Center" SelectedIndex="-1" FontSize="19"
                                       Foreground="#FF4362AC"
-                                      SelectionChanged="DroneStatusSelector_SelectionChanged" Width="166.1" Height="40" />
+                                      SelectionChanged="DroneStatusSelector_SelectionChanged" Width="166" Height="40" Canvas.Left="-57" Canvas.Top="-8" />
                         </Canvas>
                         <Label Content="Drone Max Weight" Grid.Column="2" 
                                Foreground="#FF4362AC"
                                RenderTransformOrigin="-11.049,0.494" FontSize="22" 
                                HorizontalAlignment="Left" 
-                               Margin="0,0,0,0" VerticalAlignment="Stretch" 
+                               Margin="12,0,0,0" 
                                HorizontalContentAlignment="Center" FontWeight="Regular"
-                               VerticalContentAlignment="Center" Grid.ColumnSpan="3"/>
+                               VerticalContentAlignment="Center"/>
                         <Canvas Grid.Column="3">
                             <Button Content="Clear"
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     Foreground="#FF4362AC"
-                                    Click="ClearFilledWeightSelectorComboBox_Click" Canvas.Left="114" />
+                                    Click="ClearFilledWeightSelectorComboBox_Click" Canvas.Left="90" Canvas.Top="-8" />
                             <ComboBox Name="WeightSelector" BorderBrush="#FF4362AC"
-                                  HorizontalAlignment= "Stretch" VerticalAlignment="Stretch"
                                    Margin="5,10,5,10" 
                                   HorizontalContentAlignment="Center" 
                                   StaysOpenOnEdit="True" RenderTransformOrigin="0.5,0.5"
                                   VerticalContentAlignment="Center" SelectedIndex="-1" FontSize="19"
-                                  Foreground="#FF4362AC" SelectionChanged="WeightSelector_SelectionChanged" Width="166.1" Height="40">
-                            </ComboBox>
+                                  Foreground="#FF4362AC" SelectionChanged="WeightSelector_SelectionChanged" Width="166" Height="40" Canvas.Left="-45" Canvas.Top="-10"/>
                         </Canvas>
                     </Grid>
                     <ListView x:Name="LVListDrones" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
@@ -128,7 +129,7 @@
                               Grid.Row="1"
                               RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal"
                               HorizontalContentAlignment="Center" 
-                              ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,50" >
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Margin="0,0,0,50" Grid.ColumnSpan="2" >
                         <ListView.View>
 
                             <GridView>
@@ -297,6 +298,8 @@
                         <RowDefinition  Height="500"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
+                    
+                    
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0" Grid.ColumnSpan="3" >
                         <Button x:Name="Add_Customer_Button" MinWidth="130" Background="#FFCCA36D" Content="Add new customer" Click="AddCustomerButton_Click" Height="45"/>
                     </StackPanel>
@@ -319,13 +322,8 @@
                                             DisplayMemberBinding="{Binding Path=SentAndNotDelivered,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="Received" 
                                             DisplayMemberBinding="{Binding Path=Received,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=OnTheWayToCustomer,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"> 
-                                    <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                    <Image Source="/Images/drone_24px.png" Width="50" Height="50" Canvas.Left="-21" Canvas.Top="-27"/>
-                                    <Image Source="/Images/box_24px.png" Width="25" Height="25" Canvas.Left="-7" Canvas.Top="5"/>
-                                 </Canvas>
-                                
-                                </GridViewColumn>
+                                <GridViewColumn Header="On The Way" 
+                                            DisplayMemberBinding="{Binding Path=Received,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                             </GridView>
                         </ListView.View>
                         <ListView.Resources>
@@ -368,41 +366,105 @@
             <TabItem Header="Parcels" Foreground="#FF4362AC" Margin="-2,0,-2,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="55*"/>
-                        <ColumnDefinition Width="131*"/>
+                        <ColumnDefinition Width="287*"/>
+                        <ColumnDefinition Width="156*"/>
+                        <ColumnDefinition Width="564*"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
                         <RowDefinition  Height="60"/>
-                        <RowDefinition  Height="400"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition  Height="*"/>
+                        <RowDefinition Height="Auto" MinHeight="149"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="20,0,0,0" Grid.ColumnSpan="2" >
+
+                    <Canvas Grid.Row="2" Margin="-6,10,0,0" HorizontalAlignment="Left" 
+                            VerticalAlignment="Top" Width="1002" Height="100" Grid.ColumnSpan="3" >
+                        <Button x:Name="Add_Parcel_Button" Grid.Column="0" 
+                                Click="AddParcelsButton_Click" Width="79" 
+                                Height="56" Canvas.Top="33" Canvas.Left="400">
+                            <Button.BorderBrush>
+                                <SolidColorBrush Color="#FF707070" Opacity="0" />
+                            </Button.BorderBrush>
+                            <Button.Background>
+                                <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+                            </Button.Background>
+                            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="5"/>
+                                <Image Source="/Images/parcel_24px.png" Width="33" Height="33" Canvas.Top="-30" Canvas.Left="-10" />
+                                <Label Content="Add parcel" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                                       Canvas.Left="-34" FlowDirection="LeftToRight" Canvas.Top="3"/>
+                            </Canvas>
+                        </Button>
+                        <Button x:Name="SortParcelBySenderButton" Grid.Column="0" 
+                                Click="SortParcelBySenderButton_Click" Width="79" 
+                                Height="65" Canvas.Left="500" Canvas.Top="25">
+                            <Button.BorderBrush>
+                                <SolidColorBrush Color="#FF707070" Opacity="0" />
+                            </Button.BorderBrush>
+                            <Button.Background>
+                                <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+                            </Button.Background>
+                            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="/Images/Sorting_24px.png" Width="33" Height="33" Canvas.Left="-15" Canvas.Top="-25"/>
+                                <Label Content="Sort by" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="3"/>
+                                <Label Content="Sender" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="15"/>
+                            </Canvas>
+                        </Button>
+                        <Button x:Name="SortParcelByTargetButton" Grid.Column="0" 
+                                Click="SortParcelByTargetButton_Click" Width="81" 
+                                Height="65" Canvas.Left="600" Canvas.Top="25">
+                            <Button.BorderBrush>
+                                <SolidColorBrush Color="#FF707070" Opacity="0" />
+                            </Button.BorderBrush>
+                            <Button.Background>
+                                <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+                            </Button.Background>
+                            <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image Source="/Images/Sorting_24px.png" Width="33" Height="33" Canvas.Left="-15" Canvas.Top="-25"/>
+                                <Label Content="Sort By" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="3" Width="51"/>
+                                <Label Content="Target" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="15" Width="51" Height="22"/>
+                            </Canvas>
+                        </Button>
+                    </Canvas>
+
+                    <!--<StackPanel Orientation="Horizontal" Grid.Row="2" Margin="20,0,0,0" Grid.ColumnSpan="2" >
                         <Button x:Name="Add_Parcel_Button" MinWidth="130" Background="#FFCCA36D" Content="Add new parcel" Click="AddParcelsButton_Click" Height="45"/>
                         <Button x:Name="refreshParcelByTarget" MinWidth="120" Background="#FFCCA36D" Content="refresh by target" Click="RefreshParcelByTargetButton_Click" Height="45"/>
                         <Button x:Name="refreshParcelBySend" MinWidth="120" Background="#FFCCA36D" Content="refresh by send" Click="RefreshParcelBySendButton_Click" Height="45"/>
-                    </StackPanel>
+                    </StackPanel>-->
                     <Label Content="Parcel Priorities" Foreground="#FF4362AC"
-                           HorizontalAlignment="Left" Margin="21,10,0,0" 
+                           HorizontalAlignment="Left" Margin="71,23,0,0" 
                            RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT"
                            FontWeight="Regular" FontStyle="Oblique" FontStretch="Normal" 
-                           HorizontalContentAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top"/>
-                    <ComboBox Name="ParcelPrioritiesSelector" BorderBrush="#FFCB8686" 
-                              Margin="194,10,384,10" HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" 
+                           HorizontalContentAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Height="34" Width="169"/>
+                    <Canvas Grid.Column="1">
+                        <Button Content="Clear"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Foreground="#FF4362AC"
+                                    Click="ClearFilledPrioritySelectorComboBox_Click" Canvas.Left="84" Canvas.Top="-6" />
+                        <ComboBox Name="ParcelPrioritiesSelector" BorderBrush="#FF4362AC" 
+                              Margin="222,10,55,10" HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" 
                               RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" 
                               FontFamily="Segoe Print" FontSize="22" Foreground="#FF4362AC" 
-                              SelectionChanged="ParcelPrioritiesSelector_SelectionChanged" Grid.ColumnSpan="2" />
-
+                              SelectionChanged="ParcelPrioritiesSelector_SelectionChanged" Grid.ColumnSpan="2" Width="166" Canvas.Left="-272" Canvas.Top="-6"/>
+                    </Canvas>
                     <Label Content="Parcel Status" Foreground="#FF4362AC"
-                           Margin="182,-2,0,2" RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT"
+                           Margin="154,8,0,352" RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT"
                            FontWeight="Regular" FontStyle="Oblique" FontStretch="Normal"
-                           HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
-                    <ComboBox Name="ParcelStatusSelector" BorderBrush="#FFCB8686" Margin="325,8,31,12"  HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" 
+                           HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Grid.Column="2" Width="131" Grid.RowSpan="2"/>
+                    <Canvas Grid.Column="1">
+                        <Button Content="Clear"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Foreground="#FF4362AC"
+                                    Click="ClearFilledParcelStatusSelectorComboBox_Click" Canvas.Left="574" Canvas.Top="-6" />
+                        <ComboBox Name="ParcelStatusSelector" BorderBrush="#FF4362AC" Margin="300,8,97,12"  HorizontalContentAlignment="Center" Cursor="" StaysOpenOnEdit="True" 
                               RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" SelectedIndex="-1" FontFamily="Segoe Print"
-                              FontSize="22" Foreground="#FF4362AC" SelectionChanged="ParcelStatusSelector_SelectionChanged" Grid.Column="1"/>
+                              FontSize="22" Foreground="#FF4362AC" SelectionChanged="ParcelStatusSelector_SelectionChanged" Grid.Column="2" Width="166" Canvas.Left="148" Canvas.Top="-6"/>
+                    </Canvas>
+
                     <ListView x:Name="LVListParcels" Grid.Row="1"
                           ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
-                          Grid.ColumnSpan="2" MouseDoubleClick="ShowParcelDetails_Click"
+                          Grid.ColumnSpan="3" MouseDoubleClick="ShowParcelDetails_Click"
                           RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
                           FontWeight="Normal" Margin="-6,0,6,15">
                         <ListView.View>

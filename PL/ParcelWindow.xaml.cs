@@ -62,6 +62,14 @@ namespace PL
             this.parcelDetails = parcelDetails;
             this.mainWindow = mainWindow;
             DataContext = parcelDetails;
+            if(parcelDetails.ParcelStatus==ParcelStatus.Associated)
+            {
+                CollectionParcelClick.IsEnabled = true;
+            }
+            else
+            {
+                CollectionParcelClick.IsEnabled = false;
+            }
             Parcel parcel = bl.GetParcel(parcelDetails.ParcelID);
             ID.Text = parcel.ParcelID.ToString();
             Sender_Id.Text = parcel.SenderOfParcel.CustomerID.ToString();
@@ -135,10 +143,6 @@ namespace PL
             mainWindow.LVListParcels.Items.Refresh();
             Close();
         }
-
-
-
-
         /// <summary>
         /// A button that opens a window for updating a Base Station
         /// </summary>
@@ -152,14 +156,11 @@ namespace PL
                 MessageBox.Show("Collection the parcel by drone was completed successfully");
                 mainWindow.LVListParcels.ItemsSource = bl.GetAllParcelsBo();
                 mainWindow.LVListParcels.Items.Refresh();
-
             }
-            catch (BadDroneIDException ex)
+            catch (BadParcelIDException ex)
             {
                 MessageBox.Show(ex.ID.ToString(), ex.Message);
             }
         }
-
-
     }
 }
