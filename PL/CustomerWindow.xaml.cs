@@ -51,11 +51,12 @@ namespace PL
             this.bl = bl;
             this.mainWindow = mainWindow;
             CustomersLocation.Visibility = Visibility.Hidden;
-            longttitude.Visibility = Visibility.Visible;
-            Longttitude.Visibility = Visibility.Visible;
-            lattitude.Visibility = Visibility.Visible;
-            Lattitude.Visibility = Visibility.Visible;
-            Update.Visibility = Visibility.Hidden;
+            Height = 400;
+            Width = 500;
+            b.Height = new GridLength(0);
+            c.Height = new GridLength(0);
+            Close.Margin = new Thickness(250, 0, 0, 0);
+            SaveClick.Margin = new Thickness(150, 45, 0, 0);
 
         }
         /// <summary>
@@ -75,6 +76,7 @@ namespace PL
             CustomersName.Text = customer.NameOfCustomer.ToString();
             CustomersPhone.Text = customer.PhoneOfCustomer.Substring(0, 3) + "-" + customer.PhoneOfCustomer.Substring(3, 7);
             CustomersLocation.Text = customer.LocationOfCustomer.ToString();
+            CustomersLocation.Visibility = Visibility.Visible;
 
             //reset list of parcel that customers send
             listForCustomers = new ObservableCollection<ParcelAtCustomer>(customer.FromCustomer);
@@ -82,7 +84,6 @@ namespace PL
             //reset list of parcel that customers getting
             listToCustomers = new ObservableCollection<ParcelAtCustomer>(customer.ToCustomer);
             LVListToCustomers.ItemsSource = listToCustomers;
-            SaveClick.Visibility = Visibility.Hidden;
 
         }
 

@@ -13,12 +13,12 @@
         <local:NotBooleanToVisibilityConverter x:Key="notBooleanToVisibilityConverter"/>
         <local:PhonePrint x:Key="CustomerPhonePrint"/>
     </Window.Resources>
-    <Grid>
+    <Grid x:Name="AllGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="160*"/>
-            <RowDefinition Height="150*"/>
-            <RowDefinition Height="150*"/>
-            <RowDefinition Height="100*"/>
+            <RowDefinition Height="160*" x:Name="a"/>
+            <RowDefinition Height="150*" x:Name="b"/>
+            <RowDefinition Height="150*" x:Name="c"/>
+            <RowDefinition Height="100*" x:Name="d"/>
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -60,44 +60,47 @@
                  HorizontalContentAlignment="Center" 
                  VerticalContentAlignment="Center" />
             <Label x:Name="longttitude" Content="Longttitude" 
-               Visibility="{Binding Path=IsVisible, ElementName=Location, Converter={StaticResource notBooleanToVisibilityConverter} }"
+               Visibility="{Binding Path=IsVisible, ElementName=CustomersLocation, Converter={StaticResource notBooleanToVisibilityConverter} }"
                HorizontalAlignment="Left" Grid.Column="1"
                Margin="0,140,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.326,0.754" 
                FontSize="10" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="67" Height="21" />
             <TextBox x:Name="Longttitude" 
                  Grid.Row="0"
                  HorizontalAlignment="Left" Height="20"
-                 Visibility="{Binding Path=IsVisible, ElementName=Location, Converter={StaticResource notBooleanToVisibilityConverter} }"
-                 Margin="0,160,0,0" 
+                 Visibility="{Binding Path=IsVisible, ElementName=CustomersLocation, Converter={StaticResource notBooleanToVisibilityConverter} }"
+                 Margin="0,165,0,0" 
                  TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="70" 
                  HorizontalContentAlignment="Center" 
-                 VerticalContentAlignment="Center" Grid.Column="1" />
+                 VerticalContentAlignment="Top" Grid.Column="1" Padding="0,0,0,0" />
             <Label x:Name="lattitude" Content="Lattitude" 
-               HorizontalAlignment="Right" Grid.Column="1" 
-               Visibility="{Binding Path=IsVisible, ElementName=Location, Converter={StaticResource notBooleanToVisibilityConverter} }"
-               Margin="0,140,200,0" VerticalAlignment="Top" RenderTransformOrigin="0.326,0.754" 
+               HorizontalAlignment="Left" Grid.Column="1" 
+               Visibility="{Binding Path=IsVisible, ElementName=CustomersLocation, Converter={StaticResource notBooleanToVisibilityConverter} }"
+               Margin="150,140,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.326,0.754" 
                FontSize="10" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Height="21" Width="51" />
             <TextBox x:Name="Lattitude" 
-                 Visibility="{Binding Path=IsVisible, ElementName=Location, Converter={StaticResource notBooleanToVisibilityConverter} }"
+                 Visibility="{Binding Path=IsVisible, ElementName=CustomersLocation, Converter={StaticResource notBooleanToVisibilityConverter} }"
                  Grid.Row="0" Grid.Column="1"
-                 HorizontalAlignment="Center" Height="20"
-                 Margin="0,160,0,0" 
+                 HorizontalAlignment="Left" Height="20"
+                 Margin="145,165,0,0" 
                  TextWrapping="Wrap"   
                  VerticalAlignment="Top" Width="70" 
-                 HorizontalContentAlignment="Right" 
-                 VerticalContentAlignment="Top" />
+                 HorizontalContentAlignment="Center" 
+                 VerticalContentAlignment="Top" Padding="0,0,0,0" />
 
         </Grid>
 
         <Label Content="To Parcel: " Grid.Row="1" HorizontalAlignment="Left" Height="28" 
                VerticalAlignment="Top" Width="160" FontSize="14"
-               FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="54,0,0,0"/>
+               FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="54,0,0,0"
+               Visibility="{Binding Path=IsVisible, ElementName=CustomersLocation, Converter={StaticResource BooleanToVisibilityConverter} }"/>
         <ListView x:Name="LVListForCustomers" Grid.Row="1" 
                   ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
                   RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
                   FontWeight="Normal" Margin="0,30,0,0" HorizontalContentAlignment="Center"
-                  VerticalContentAlignment="Center" MouseDoubleClick="ShowParcelDetails_Click">
+                  VerticalContentAlignment="Center" MouseDoubleClick="ShowParcelDetails_Click"
+                  Visibility="{Binding Path=IsVisible, ElementName=CustomersLocation, Converter={StaticResource BooleanToVisibilityConverter} }"
+>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Parcel ID" DisplayMemberBinding="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
@@ -160,13 +163,16 @@
 
         <Label Content="Parcel from: " Grid.Row="2" HorizontalAlignment="Left" Height="28" 
                VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.5,0.609" FontSize="14"
-               FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="54,0,0,0"/>
+               FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="54,0,0,0"
+               Visibility="{Binding Path=IsVisible, ElementName=CustomersLocation, Converter={StaticResource BooleanToVisibilityConverter} }"/>
         <ListView x:Name="LVListToCustomers" Grid.Row="2" 
                   ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
                   RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
                   MouseDoubleClick="ShowParcelDetails_Click" 
                   FontWeight="Normal" Margin="0,30,0,3" HorizontalContentAlignment="Stretch"
-                  VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                  VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                  Visibility="{Binding Path=IsVisible, ElementName=CustomersLocation, Converter={StaticResource BooleanToVisibilityConverter} }"
+>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Parcel ID" DisplayMemberBinding="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
@@ -226,11 +232,12 @@
                 </TransformGroup>
             </ListView.RenderTransform>
         </ListView>
-        <Grid Grid.Row="4" Grid.RowSpan="2">
-            <Button x:Name="Update" 
-                VerticalAlignment="Center" Click="UpdateCustomerButton_Click" 
+        <Canvas Grid.Row="3">
+            <Button x:Name="Update" Click="UpdateCustomerButton_Click" 
                 HorizontalContentAlignment="Center" 
-                    VerticalContentAlignment="Top" Height="50" Margin="289,0,339,0" >
+                 VerticalContentAlignment="Top" Height="50" Margin="289,0,339,0" Width="50" 
+                 Visibility="{Binding Path=IsVisible, ElementName=CustomersLocation, Converter={StaticResource BooleanToVisibilityConverter} }" Canvas.Left="10" Canvas.Top="45"
+>
                 <Button.BorderBrush>
                     <SolidColorBrush Color="#FF707070" Opacity="0"/>
                 </Button.BorderBrush>
@@ -251,10 +258,9 @@
                 </Canvas>
             </Button>
 
-            <Button  x:Name="Close" Click="CloseButton_Click" Height="50" Margin="361,0,263,0"
-                VerticalAlignment="Center" 
+            <Button  x:Name="Close" Click="CloseButton_Click" Height="50" Margin="361,0,263,0" Width="50"
                  HorizontalContentAlignment="Center" 
-                    VerticalContentAlignment="Top"   >
+                    VerticalContentAlignment="Top" Canvas.Left="58" Canvas.Top="48"   >
                 <Button.BorderBrush>
                     <SolidColorBrush Color="#FF707070" Opacity="0"/>
                 </Button.BorderBrush>
@@ -266,10 +272,12 @@
                     <Label Content="Close" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Canvas.Left="-25" Width="50" Height="24" Canvas.Top="19"/>
                 </Canvas>
             </Button>
-            <Button x:Name="SaveClick" HorizontalAlignment="Left"
-                VerticalAlignment="Top" Click="SaveCustomerButton_Click" 
+
+            <Button x:Name="SaveClick" Click="SaveCustomerButton_Click" 
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="50" Height="50" 
-                Margin="289,50,339,0" >
+                Margin="289,50,339,0" Visibility="{Binding Path=IsVisible, ElementName=CustomersLocation, 
+                    Converter={StaticResource notBooleanToVisibilityConverter} }" Canvas.Left="10"
+>
                 <Button.BorderBrush>
                     <SolidColorBrush Color="#FF707070" Opacity="0"/>
                 </Button.BorderBrush>
@@ -287,7 +295,7 @@
                        VerticalContentAlignment="Center" Canvas.Left="-25" Width="50" Height="25"/>
                 </Canvas>
             </Button>
-        </Grid>
+        </Canvas>
 
 
     </Grid>
