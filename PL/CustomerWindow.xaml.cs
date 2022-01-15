@@ -55,6 +55,7 @@ namespace PL
             Longttitude.Visibility = Visibility.Visible;
             lattitude.Visibility = Visibility.Visible;
             Lattitude.Visibility = Visibility.Visible;
+            Update.Visibility = Visibility.Hidden;
 
         }
         /// <summary>
@@ -74,7 +75,6 @@ namespace PL
             CustomersName.Text = customer.NameOfCustomer.ToString();
             CustomersPhone.Text = customer.PhoneOfCustomer.Substring(0, 3) + "-" + customer.PhoneOfCustomer.Substring(3, 7);
             CustomersLocation.Text = customer.LocationOfCustomer.ToString();
-            Update.Visibility = Visibility.Visible;
 
             //reset list of parcel that customers send
             listForCustomers = new ObservableCollection<ParcelAtCustomer>(customer.FromCustomer);
@@ -82,7 +82,7 @@ namespace PL
             //reset list of parcel that customers getting
             listToCustomers = new ObservableCollection<ParcelAtCustomer>(customer.ToCustomer);
             LVListToCustomers.ItemsSource = listToCustomers;
-
+            SaveClick.Visibility = Visibility.Hidden;
 
         }
 

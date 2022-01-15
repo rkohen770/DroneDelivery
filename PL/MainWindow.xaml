@@ -211,8 +211,8 @@
                 <Grid>
                     <Canvas Margin="0,400,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="700" Height="100" >
                         <Button x:Name="Add_Station_Button" Grid.Column="0" 
-                                Click="AddBaseStationButton_Click" Width="79" 
-                                Height="50" Canvas.Top="25" Canvas.Left="262">
+                                Click="AddBaseStationButton_Click" Width="97" 
+                                Height="65" Canvas.Top="25" Canvas.Left="244">
                             <Button.BorderBrush>
                                 <SolidColorBrush Color="#FF707070" Opacity="0" />
                             </Button.BorderBrush>
@@ -226,8 +226,8 @@
                             </Canvas>
                         </Button>
                         <Button x:Name="refreshBaseStation" Grid.Column="0" 
-                                Click="RefreshBaseStationButton_Click" Width="79" 
-                                Height="50" Canvas.Left="366" Canvas.Top="25">
+                                Click="RefreshBaseStationButton_Click" Width="73" 
+                                Height="65" Canvas.Left="366" Canvas.Top="25">
                             <Button.BorderBrush>
                                 <SolidColorBrush Color="#FF707070" Opacity="0" />
                             </Button.BorderBrush>
@@ -295,18 +295,30 @@
             <TabItem Header="Customers" Foreground="#FF4362AC" Height="22" Margin="-2,0,-2,0" VerticalAlignment="Bottom">
                 <Grid>
                     <Grid.RowDefinitions >
-                        <RowDefinition  Height="500"/>
+                        <RowDefinition  Height="450"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    
-                    
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0" Grid.ColumnSpan="3" >
-                        <Button x:Name="Add_Customer_Button" MinWidth="130" Background="#FFCCA36D" Content="Add new customer" Click="AddCustomerButton_Click" Height="45"/>
-                    </StackPanel>
+
+                    <Button x:Name="Add_Customer_Button" Grid.Row="1"
+                                Click="AddCustomerButton_Click" Width="100" 
+                                Height="70" Canvas.Top="25" Canvas.Left="262" Margin="453,18,453,-18">
+                        <Button.BorderBrush>
+                            <SolidColorBrush Color="#FF707070" Opacity="0" />
+                        </Button.BorderBrush>
+                        <Button.Background>
+                            <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+                        </Button.Background>
+                        <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="7"/>
+                            <Image Source="/Images/customer_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-25"/>
+                            <Label Content="Add Customer" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-53" FlowDirection="LeftToRight" Canvas.Top="3"/>
+                        </Canvas>
+                    </Button>
+
                     <ListView x:Name="LVListCustomers" 
                           ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
                           Grid.ColumnSpan="3" MouseDoubleClick="ShowCustomerDetails_Click"
-                          RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
+                          RenderTransformOrigin="0.504,0.648" FontStretch="Normal" 
                           FontWeight="Normal" Margin="-6,0,6,15" HorizontalContentAlignment="Center">
                         <ListView.View>
                             <GridView>

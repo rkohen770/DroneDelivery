@@ -17,6 +17,7 @@
     <None Remove="Images\Check_Circle_24px.png" />
     <None Remove="Images\close_24px.png" />
     <None Remove="Images\clouds.png" />
+    <None Remove="Images\customer_24px.png" />
     <None Remove="Images\Defined_24px.png" />
     <None Remove="Images\drone_24px.png" />
     <None Remove="Images\drone_image.jpeg" />
@@ -50,6 +51,7 @@
     <Resource Include="Images\add_24px.png" />
     <Resource Include="Images\box_24px.png" />
     <Resource Include="Images\charging_station_24px.png" />
+    <Resource Include="Images\customer_24px.png" />
     <Resource Include="Images\empty_battery_24px.png" />
   </ItemGroup>
 

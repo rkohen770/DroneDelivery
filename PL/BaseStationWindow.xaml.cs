@@ -43,6 +43,7 @@ namespace PL
             this.bl = bl;
             this.mainWindow = mainWindow;
             CurrentLocation.Visibility = Visibility.Hidden;
+            UpDateClick.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
