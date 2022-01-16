@@ -10,7 +10,7 @@ using System.IO;
 
 namespace PL
 {
-   
+
     public class WeightCategoriesToImage : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -18,13 +18,36 @@ namespace PL
             switch ((BO.WeightCategories)value)
             {
                 case BO.WeightCategories.Easy:
-                    return "/Images/easy_24px.png";
+                    return "/Images/weigh_24px.png";
 
                 case BO.WeightCategories.Intermediate:
-                    return "/Images/medium_24px.png";
+                    return "/Images/intermediate_24px.png";
 
                 case BO.WeightCategories.Liver:
                     return "/Images/liver_24px.png";
+
+            }
+            return Enum.GetName(typeof(BO.WeightCategories), value) + ".png";
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class WeightCategoriesConvert : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            switch ((BO.WeightCategories)value)
+            {
+                case BO.WeightCategories.Easy:
+                    return "Easy";
+
+                case BO.WeightCategories.Intermediate:
+                    return "Intermediate";
+
+                case BO.WeightCategories.Liver:
+                    return "Liver";
 
             }
             return Enum.GetName(typeof(BO.WeightCategories), value) + ".png";
@@ -74,6 +97,31 @@ namespace PL
             throw new NotImplementedException();
         }
     }
+
+    public class DroneStatusConvert : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            switch ((BO.DroneStatus)value)
+            {
+                case BO.DroneStatus.Available:
+                    return "Available";
+
+                case BO.DroneStatus.Maintenance:
+                    return "Maintenance";
+
+                case BO.DroneStatus.Delivery:
+                    return "Delivery";
+
+            }
+            return Enum.GetName(typeof(BO.DroneStatus), value) + ".png";
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class DroneBattery : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -124,6 +172,29 @@ namespace PL
             throw new NotImplementedException();
         }
     }
+    public class PrioritiesConvert : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            switch ((BO.Priorities)value)
+            {
+                case BO.Priorities.Normal:
+                    return "Normal";
+
+                case BO.Priorities.Fast:
+                    return "Fast";
+
+                case BO.Priorities.Emergency:
+                    return "Emergency";
+
+            }
+            return Enum.GetName(typeof(BO.Priorities), value) + ".png";
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     public class ParcelStatusToImage : IValueConverter
     {
@@ -141,7 +212,33 @@ namespace PL
                     return "/Images/WasCollected_24px.png";
                 
                 case BO.ParcelStatus.Provided:
-                    return "/Images/Provided_box_24px.png";
+                    return "/Images/deliverd_box_24px.png";
+            }
+            return Enum.GetName(typeof(BO.ParcelStatus), value) + ".png";
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ParcelStatusConvert : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            switch ((BO.ParcelStatus)value)
+            {
+                case BO.ParcelStatus.Defined:
+                    return "Defined";
+
+                case BO.ParcelStatus.Associated:
+                    return "Associated";
+
+                case BO.ParcelStatus.WasCollected:
+                    return "Was Collected";
+
+                case BO.ParcelStatus.Provided:
+                    return "Provided";
             }
             return Enum.GetName(typeof(BO.ParcelStatus), value) + ".png";
         }
