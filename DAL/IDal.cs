@@ -268,7 +268,7 @@ namespace DalApi
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        DO.User GetUser(string userName, string password);
+        DO.User GetUser(string userName, string password=null);
         #endregion
         /// <summary>
         /// A method of requesting power consumption by a drone  

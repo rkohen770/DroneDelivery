@@ -45,8 +45,8 @@ namespace PL
                         }
                         else
                         {
-                            Client passenger = new (user);
-                            passenger.Show();
+                            Client client = new (user);
+                            client.Show();
                         }
                         Close();
                     }
@@ -92,14 +92,16 @@ namespace PL
                     else if (checkM.IsChecked == true) MessageBox.Show("Incorrect manager pin");
                     else
                     {
-                        user.Admin = BO.Permission.Passenger;
+                        user.Admin = BO.Permission.Client;
                         user.Password = passwordBox.Password;
                         bl.AddUser(user);
                         MessageBox.Show("Client user:" + user.UserName + " added succsesfully!");
                         checkM.IsChecked = false;
                         passwordBox.Password = "";
-                        Client passenger = new (user);
-                        passenger.Show();
+                        Details details = new Details(user);
+                        details.ShowDialog();
+                        Client client = new (user);
+                        client.Show();
                         Close();
                     }
                 }

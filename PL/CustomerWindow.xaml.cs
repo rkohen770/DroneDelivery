@@ -63,7 +63,7 @@ namespace PL
         /// This constractor is for customer display
         /// </summary>
         /// <param name="bl"></param>
-        /// <param name="drone"></param>
+        /// <param name="customerDetails"></param>
         /// <param name="mainWindow"></param>
         public CustomerWindow(IBL bl, CustomerForList customerDetails, MainWindow mainWindow)
         {

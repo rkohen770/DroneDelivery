@@ -30,7 +30,11 @@
             <TextBlock x:Name="Permis" Text="{Binding Path=Admin, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="477,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
             <TextBlock x:Name="userName" Text="{Binding Path=UserName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="591,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
             <Label Name="lblTime" Grid.Row="0" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="782,0,0,0" FontWeight="Bold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="90" Height="30"  />
-            <Label Name="lDate" Grid.Row="0" HorizontalAlignment="Left" Height="30" Margin="678,0,0,0" VerticalAlignment="Top" Width="90" FontWeight="Bold" VerticalContentAlignment="Center"/>
+            <Label Name="lDate" Grid.Row="0" 
+                   HorizontalAlignment="Left" Height="30"
+                   Margin="678,0,0,0" VerticalAlignment="Top" 
+                   Width="90" FontWeight="Bold" 
+                   VerticalContentAlignment="Center"/>
         </Grid>
 
 

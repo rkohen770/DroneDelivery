@@ -39,8 +39,19 @@ namespace PL
         /// collection of parcel that customers getting
         /// </summary>
         ObservableCollection<ParcelAtCustomer> listToCustomers;
+        //public Client(User user)
+        //{
+        //    InitializeComponent();
+        //    timer = new DispatcherTimer();
+        //    timer.Interval = TimeSpan.FromSeconds(1);
+        //    timer.Tick += timer_Tick;
+        //    timer.Start();
+        //    MyUser = user;
+        //    lUser.DataContext = MyUser;
+        //    lDate.Content = DateTime.Now.ToString("dd/MM/yy");
+        //}
 
-        public Client(BO.User user, MainWindow w = default)
+        public Client(User user, MainWindow w = default)
         {
             InitializeComponent();
             MyUser = user;
@@ -53,13 +64,24 @@ namespace PL
             last = w;
 
             customerForList = bl.GetAllCustomerByPredicate(c => c.Name == user.UserName).FirstOrDefault();
-            Customer customer= bl.GetCustomer(customerForList.CustomerID);
+
+            Customer customer = bl.GetCustomer(customerForList.CustomerID);
             //reset list of parcel that customers send
             listForCustomers = new ObservableCollection<ParcelAtCustomer>(customer.FromCustomer);
             LVListForCustomers.ItemsSource = listForCustomers;
             //reset list of parcel that customers getting
             listToCustomers = new ObservableCollection<ParcelAtCustomer>(customer.ToCustomer);
             LVListToCustomers.ItemsSource = listToCustomers;
+
+            ID.Text = customer.CustomerID.ToString();
+            CustomersName.Text = customer.NameOfCustomer.ToString();
+            CustomersPhone.Text = customer.PhoneOfCustomer.Substring(0, 3) + "-" + customer.PhoneOfCustomer.Substring(3, 7);
+            CustomersLocation.Text = customer.LocationOfCustomer.ToString();
+            CustomersLocation.Visibility = Visibility.Visible;
+
+
+
+
         }
 
         /// <summary>
@@ -81,18 +103,39 @@ namespace PL
         private void ShowParcelDetails_Click(object sender, MouseButtonEventArgs e)
         {
             ParcelAtCustomer parcel = ((ListView)sender).SelectedItem as ParcelAtCustomer;
-            new ParcelWindow(bl, bl.CloneParcel(bl.GetParcel(parcel.ParcelID)), last).ShowDialog();
-            Customer c = bl.GetCustomer(customerForList.CustomerID);
-            LVListForCustomers.ItemsSource = c.FromCustomer;
-            LVListForCustomers.Items.Refresh();
-            LVListToCustomers.ItemsSource = c.ToCustomer;
-            LVListToCustomers.Items.Refresh();
+            new ParcelDetails(bl, bl.CloneParcel(bl.GetParcel(parcel.ParcelID))).ShowDialog();
         }
 
         /// <summary>
+        /// A button that opens a window for adding a parcel
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void AddParcelsButton_Click(object sender, RoutedEventArgs e)
+        {
+            new ParcelWindow(bl, last).ShowDialog();
+        }
+
+        /// <summary>
+        /// A button that opens a window for updating a customer
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void UpdateCustomerButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.UpdateCustomerData(int.Parse(ID.Text), CustomersName.Text, CustomersPhone.Text);
+                MessageBox.Show("Update a customer was completed successfully");
+            }
+            catch (BadCustomerIDException ex)
+            {
+                MessageBox.Show(ex.ID.ToString(), ex.Message);
+            }
+        }
+        /// <summary>
         /// an event show the login window
         /// </summary>
-
         private void ChangeUser_Click(object sender, RoutedEventArgs e)
         {
             try

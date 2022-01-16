@@ -9,7 +9,7 @@ using DalApi;
 
 namespace DalApi
 {
-     partial class DalObject: IDal 
+    partial class DalObject : IDal
     {
         /// <summary>
         /// users XElement
@@ -22,14 +22,17 @@ namespace DalApi
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public User GetUser(string userName, string password)
+        public User GetUser(string userName, string password = null)
         {
             //List<User> users = Tools.LoadListFromXMLSerializer<User>(UseresPath);
-            if (!DataSource.users.Exists(u => u.UserName == userName&&u.Password==password))
+            if (password != null)
             {
-                throw new BadUserNameException(userName, "the user not exists in the list of users");
+                if (!DataSource.users.Exists(u => u.UserName == userName && u.Password == password))
+                {
+                    throw new BadUserNameException(userName, "the user not exists in the list of users");
+                }
             }
-            //find the place of the customer in the array of customers
+            //find user in the array of users
             return DataSource.users.Find(c => c.UserName == userName);
 
         }
@@ -60,7 +63,7 @@ namespace DalApi
         /// <param name="user"></param>
         public void AddUser(User user)
         {
-            if (DataSource.users.Exists(u=>u.UserName==user.UserName && u.Admin==user.Admin && u.Password==user.Password))
+            if (DataSource.users.Exists(u => u.UserName == user.UserName && u.Admin == user.Admin && u.Password == user.Password))
             {
                 throw new BadUserNameException(user.UserName, "the user exists allready");
             }
@@ -85,8 +88,8 @@ namespace DalApi
             List<User> users = Tools.LoadListFromXMLSerializer<User>(UseresPath);
 
             User? user = (from u in users
-                         where u.UserName == userName
-                         select u).FirstOrDefault();
+                          where u.UserName == userName
+                          select u).FirstOrDefault();
 
             if (user != null)
             {
@@ -106,9 +109,9 @@ namespace DalApi
         {
             //List<User> users = Tools.LoadListFromXMLSerializer<User>(UseresPath);
             List<User> users = DataSource.users;
-            User ? user1 = (from u in users
-                          where u.UserName == user.UserName
-                          select u).FirstOrDefault();
+            User? user1 = (from u in users
+                           where u.UserName == user.UserName
+                           select u).FirstOrDefault();
 
             if (user1 != null)
             {

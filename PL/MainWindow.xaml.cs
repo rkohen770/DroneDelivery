@@ -49,14 +49,15 @@ namespace PL
         ObservableCollection<ParcelForList> listParcels;
 
         public MainWindow(User user)
-        {
+        { 
+            InitializeComponent();
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
             timer.Start();
             lDate.Content = DateTime.Now.ToString("dd/MM/yy");
 
-            InitializeComponent();
+            
             MyUser = user;
             //reset list of ststions
             listStations = new ObservableCollection<BaseStationForList>(bl.GetAllBaseStationsBo());

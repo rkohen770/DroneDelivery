@@ -70,7 +70,14 @@ namespace BO
                     {
                         dal.UpdateCustomerName(id, newName);
                     }
-                    User user;
+                    User User = GetUser(newName,null);
+                    User newUser = new()
+                    {
+                        UserName = newName,
+                        Admin= User.Admin,
+                        Password= User.Password
+                    };
+                    UpdateUser(newUser);
                 }
                 else
                 {
@@ -79,9 +86,12 @@ namespace BO
             }
             catch (DO.BadCustomerIDException e)
             {
-                throw new BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
+                throw new BadCustomerIDException(e.ID, e.Message, e.InnerException);
             }
-
+            catch (DO.BadUserNameException e)
+            {
+                throw new BadUserNameException( e.Message, e.InnerException);
+            }
         }
         #endregion
 
