@@ -158,19 +158,24 @@ namespace PL
             Close();
         }
 
-        private void ShowDroneDetails_Click(object sender, MouseButtonEventArgs e)
+        private void ShowDroneDetails_Click(object sender, RoutedEventArgs e)
         {
             DroneForList drone = bl.CloneDrone(bl.GetDrone(int.Parse(Drone_Id.Text)));
             new DroneWindow(bl, drone, mainWindow).ShowDialog();
         }
 
-        //private void ShowTargetDetails_Click(object sender, MouseButtonEventArgs e)
-        //{
-        //    CustomerForList TargetCustomer =bl.clon( bl.GetCustomer(int.Parse(Target_Id.Text)));
-        //    new CustomerWindow(bl, mainWindow).ShowDialog();
-        //    DroneForList drone = bl.CloneDrone(bl.GetDrone(int.Parse(Drone_Id.Text)));
-        //    new DroneWindow(bl, drone, mainWindow).ShowDialog();
-        //}
+        private void ShowSenderDetails_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerForList SenderCustomer = bl.CloneCustomer(bl.GetCustomer(int.Parse(Sender_Id.Text)));
+            new CustomerWindow(bl, SenderCustomer, mainWindow).ShowDialog();
+
+        }
+        private void ShowTargetDetails_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerForList TargetCustomer = bl.CloneCustomer(bl.GetCustomer(int.Parse(Target_Id.Text)));
+            new CustomerWindow(bl, TargetCustomer, mainWindow).ShowDialog();
+
+        }
         /// <summary>
         /// A button that opens a window for updating parcel
         /// </summary>

@@ -501,7 +501,7 @@
                        VerticalContentAlignment="Center" Canvas.Left="-25" Width="50" Height="26" Canvas.Top="-2"/>
                 </Canvas>
             </Button>
-            <Button x:Name="SenderCustomer" Click="ShowDroneDetails_Click" Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}, 
+            <Button x:Name="SenderCustomer" Click="ShowSenderDetails_Click" Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}, 
                 ElementName=senderParcel}" Grid.Column="1" Margin="268,274,0,0" Height="73"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="72">
                 <Button.BorderBrush>
                     <SolidColorBrush Color="#FF707070" Opacity="0"/>
