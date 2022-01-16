@@ -72,8 +72,8 @@
                                 <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
                             </Button.Background>
                             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="5"/>
                                 <Image Source="/Images/drone_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-26"/>
+                                <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="5"/>
                                 <Label Content="Add Drone" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-34" FlowDirection="LeftToRight" Canvas.Top="3"  Foreground="#FF4362AC"/>
                             </Canvas>
                         </Button>
@@ -256,8 +256,8 @@
                                 <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
                             </Button.Background>
                             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="7"/>
                                 <Image Source="/Images/charging_station_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-25"/>
+                                <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="7"/>
                                 <Label Content="Add Base Station" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-53" FlowDirection="LeftToRight" Canvas.Top="3" Foreground="#FF4362AC"/>
                             </Canvas>
                         </Button>
@@ -345,8 +345,8 @@
                             <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
                         </Button.Background>
                         <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="7"/>
                             <Image Source="/Images/customer_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-25"/>
+                            <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="7"/>
                             <Label Content="Add Customer" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-41" FlowDirection="LeftToRight" Canvas.Top="3" Foreground="#FF4362AC"/>
                         </Canvas>
                     </Button>
@@ -437,8 +437,8 @@
                                 <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
                             </Button.Background>
                             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="5"/>
                                 <Image Source="/Images/parcel_24px.png" Width="33" Height="33" Canvas.Top="-30" Canvas.Left="-10" />
+                                <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="5"/>
                                 <Label Content="Add parcel" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                                        Foreground="#FF4362AC" Canvas.Left="-34" FlowDirection="LeftToRight" Canvas.Top="3"/>
                             </Canvas>
