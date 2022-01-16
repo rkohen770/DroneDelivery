@@ -226,7 +226,7 @@
                 <Image Source="/Images/drone_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-33"/>
                 <Image Source="/Images/box_24px.png" Width="15" Height="15" Canvas.Left="-7" Canvas.Top="-13"/>
                 <Label Content="Collect a" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" Canvas.Left="-29" Width="61" Height="27" Canvas.Top="-5" FontSize="13"/>
-                <Label Content="package" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" Canvas.Left="-28" Width="57" Height="27" Canvas.Top="8" FontSize="13"/>
+                <Label Content="parcel" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" Canvas.Left="-22" Width="57" Height="27" Canvas.Top="8" FontSize="13"/>
             </Canvas>
         </Button>
         <Button x:Name="Parcel_Delivery" Grid.Column="0" 

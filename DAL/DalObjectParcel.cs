@@ -24,11 +24,11 @@ namespace DalApi
         {
             if (!(DataSource.customers.Exists(customer => customer.CustomerID == senderId)))
             {
-                throw new BadCustomerIDException(senderId, "the sender not exists in the list of customers");
+                throw new BadCustomerIDException(senderId, "The sender not exists in the list of customers");
             }
             if (!(DataSource.customers.Exists(customer => customer.CustomerID == targetId)))
             {
-                throw new BadCustomerIDException(targetId, "the target not exists in the list of customers");
+                throw new BadCustomerIDException(targetId, "The target not exists in the list of customers");
             }
             else
             {

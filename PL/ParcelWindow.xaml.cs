@@ -40,13 +40,11 @@ namespace PL
             InitializeComponent();
             this.bl = bl;
             this.mainWindow = mainWindow;
-           // id.Content = "Sender ID";
-            //sender_Of_Parcel.Content = "Target ID";
-            //target_To_Parcel.Content = "Wight";
-            //weight.Content = "priority";
             Weight_Selector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             Priorities_Selector.ItemsSource = Enum.GetValues(typeof(Priorities));
             senderParcel.Visibility = Visibility.Hidden;
+            Height = 400;
+         
         }
 
         /// <summary>
@@ -61,8 +59,8 @@ namespace PL
             this.bl = bl;
             this.parcelDetails = parcelDetails;
             this.mainWindow = mainWindow;
-            DataContext = parcelDetails;
-            if(parcelDetails.ParcelStatus==ParcelStatus.Associated)
+            DataContext = bl.GetParcel(parcelDetails.ParcelID);
+            if (parcelDetails.ParcelStatus == ParcelStatus.Associated)
             {
                 CollectionParcelClick.IsEnabled = true;
             }
@@ -70,6 +68,16 @@ namespace PL
             {
                 CollectionParcelClick.IsEnabled = false;
             }
+
+            if (parcelDetails.ParcelStatus == ParcelStatus.WasCollected)
+            {
+                DeliveryParcelByDrone.IsEnabled = true;
+            }
+            else
+            {
+                DeliveryParcelByDrone.IsEnabled = false;
+            }
+
             Parcel parcel = bl.GetParcel(parcelDetails.ParcelID);
             ID.Text = parcel.ParcelID.ToString();
             Sender_Id.Text = parcel.SenderOfParcel.CustomerID.ToString();
@@ -78,9 +86,17 @@ namespace PL
             Target_Name.Text = parcel.TargetToParcel.CustomerName;
             if(parcel.DroneInParcel.DroneID!=0)
             {
+                ShowDroneDetails.IsEnabled = true;
                 Drone_Id.Text = parcel.DroneInParcel.DroneID.ToString();
                 Drone_Battery.Text = parcel.DroneInParcel.DroneBattery.ToString()+"%";
                 Drone_Location.Text = parcel.DroneInParcel.CurrentLocation.ToString();
+            }
+            else
+            {
+                ShowDroneDetails.IsEnabled = false;
+                Drone_Id.Text = "0";
+                Drone_Battery.Text = "0%";
+                Drone_Location.Text = null;
             }
             Requested.Text =parcel.Requested.ToString();
             Scheduled.Text = parcel.Scheduled.ToString();
@@ -118,15 +134,13 @@ namespace PL
         {
             try
             {
-                if (Sender_Id.Text==null || Target_Id.Text == null || Weight_Selector.SelectedItem == null || Priorities_Selector.SelectedItem == null)
+                if (Sender_Id_Add.Text==null || Target_Id_Add.Text == null || Weight_Selector.SelectedItem== null || Priorities_Selector.SelectedItem == null)
                     MessageBox.Show("Not all detalis are set");
-                else if (Sender_Id.Text.Length !=9 )
-                    MessageBox.Show("Sender ID longer or shorter than 9 letters");
-                else if (Target_Id.Text.Length != 9 )
-                    MessageBox.Show("Target ID longer or shorter than 9 letters");
-                else
+                 else
                 {
-                    bl.AddParcelBo(int.Parse(Sender_Id.Text), int.Parse(Target_Id.Text),
+                    int.TryParse(Sender_Id_Add.Text, out int sender_Id);
+                    int.TryParse(Target_Id_Add.Text, out int target_Id);
+                    bl.AddParcelBo(sender_Id,target_Id,
                          (WeightCategories)Weight_Selector.SelectedItem, (Priorities)Priorities_Selector.SelectedItem);
                     MessageBox.Show("Adding a parcel was completed successfully");
                 }
@@ -135,16 +149,30 @@ namespace PL
             {
                 MessageBox.Show(ex.ID.ToString(), ex.Message + "\nThe customer does not exist in the system");
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
             mainWindow.LVListParcels.ItemsSource = bl.GetAllParcelsBo();
             mainWindow.LVListParcels.Items.Refresh();
             Close();
         }
+
+        private void ShowDroneDetails_Click(object sender, MouseButtonEventArgs e)
+        {
+            DroneForList drone = bl.CloneDrone(bl.GetDrone(int.Parse(Drone_Id.Text)));
+            new DroneWindow(bl, drone, mainWindow).ShowDialog();
+        }
+
+        //private void ShowTargetDetails_Click(object sender, MouseButtonEventArgs e)
+        //{
+        //    CustomerForList TargetCustomer =bl.clon( bl.GetCustomer(int.Parse(Target_Id.Text)));
+        //    new CustomerWindow(bl, mainWindow).ShowDialog();
+        //    DroneForList drone = bl.CloneDrone(bl.GetDrone(int.Parse(Drone_Id.Text)));
+        //    new DroneWindow(bl, drone, mainWindow).ShowDialog();
+        //}
         /// <summary>
-        /// A button that opens a window for updating a Base Station
+        /// A button that opens a window for updating parcel
         /// </summary>
         /// <param name="sender">Button type</param>
         /// <param name="e"></param>
@@ -154,6 +182,24 @@ namespace PL
             {
                 bl.UpdateCollectionParcelByDrone(int.Parse(Drone_Id.Text));
                 MessageBox.Show("Collection the parcel by drone was completed successfully");
+                mainWindow.LVListParcels.ItemsSource = bl.GetAllParcelsBo();
+                mainWindow.LVListParcels.Items.Refresh();
+            }
+            catch (BadParcelIDException ex)
+            {
+                MessageBox.Show(ex.ID.ToString(), ex.Message);
+            }
+        }/// <summary>
+         /// A button that opens a window for updating a parcel
+         /// </summary>
+         /// <param name="sender">Button type</param>
+         /// <param name="e"></param>
+        private void UpdateDeliveryParcelByDroneButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.UpdateDeliveryParcelByDrone(int.Parse(Drone_Id.Text));
+                MessageBox.Show("Delivery the parcel by drone was completed successfully");
                 mainWindow.LVListParcels.ItemsSource = bl.GetAllParcelsBo();
                 mainWindow.LVListParcels.Items.Refresh();
             }

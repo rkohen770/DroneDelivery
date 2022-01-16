@@ -397,7 +397,7 @@
                             VerticalAlignment="Top" Width="1002" Height="100" Grid.ColumnSpan="3" >
                         <Button x:Name="Add_Parcel_Button" Grid.Column="0" 
                                 Click="AddParcelsButton_Click" Width="79" 
-                                Height="56" Canvas.Top="33" Canvas.Left="400">
+                                Height="56" Canvas.Top="37" Canvas.Left="400">
                             <Button.BorderBrush>
                                 <SolidColorBrush Color="#FF707070" Opacity="0" />
                             </Button.BorderBrush>
@@ -488,15 +488,15 @@
                                 <GridViewColumn Header="   Parcel ID   " 
                                             DisplayMemberBinding="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
                                 <GridViewColumn Header="   Customer Name Send   " 
-                                            DisplayMemberBinding="{Binding Path=CustomerNameSend,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="150"/>
+                                            DisplayMemberBinding="{Binding Path=CustomerNameSend,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="200"/>
                                 <GridViewColumn Header="   Customer Name Target   " 
-                                            DisplayMemberBinding="{Binding Path=CustomerNameTarget,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="150"/>
+                                            DisplayMemberBinding="{Binding Path=CustomerNameTarget,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="200"/>
                                 <GridViewColumn Header="   Weight   " 
                                             DisplayMemberBinding="{Binding Path=Weight ,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="   Priorities   " 
                                             DisplayMemberBinding="{Binding Path=Priorities,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="   Parcel Status   " 
-                                            DisplayMemberBinding="{Binding Path=ParcelStatus,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="110"/>
+                                            DisplayMemberBinding="{Binding Path=ParcelStatus,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="300"/>
                             </GridView>
                         </ListView.View>
                         <ListView.Resources>
