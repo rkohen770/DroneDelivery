@@ -5,4 +5,181 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Client"  Height="510.178" Width="917.561" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"/>
+        Title="Client"  Height="510.178" Width="917.561"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        TextElement.FontWeight="Regular" TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto" 
+        FontFamily="David" FontSize="14">
+    <Window.Resources>
+        <local:WeightCategoriesToImage x:Key="ParcelAtCustomerWeightCategories"/>
+        <local:PrioritiesToImage x:Key="ParcelAtCustomerPrioritiest"/>
+        <local:ParcelStatusToImage x:Key="ParcelAtCustomerStatus"/>
+        <local:NotBooleanToVisibilityConverter x:Key="notBooleanToVisibilityConverter"/>
+        <local:PhonePrint x:Key="CustomerPhonePrint"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="Welcome" FontSize="20" HorizontalAlignment="Left" Height="44" Margin="10,10,0,0" VerticalAlignment="Top" Width="104" FontWeight="Bold"/>
+        <Label Name="lUser" Grid.Row="0" Content="{Binding Path=UserName}" FontSize="20" HorizontalAlignment="Left" Height="44" Margin="114,10,0,0" VerticalAlignment="Top" Width="115" FontWeight="Bold"/>
+        <Button Content="Change user" HorizontalAlignment="Left" Background="#FFCCA36D" Height="40" VerticalAlignment="Top" Width="164" Click="ChangeUser_Click" Margin="349,7,0,0"/>
+        <Label Name="lblTime" Grid.Row="0" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="782,0,0,0" FontWeight="Bold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="90" Height="30"  />
+        <Label Name="lDate" Grid.Row="0" HorizontalAlignment="Left" Height="30" Margin="696,0,0,0" VerticalAlignment="Top" Width="90" FontWeight="Bold" VerticalContentAlignment="Center"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Label Content="To Parcel: " Grid.Row="0" HorizontalAlignment="Left" Height="28" 
+               VerticalAlignment="Top" Width="160" FontSize="14"
+               FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="54,0,0,0"/>
+                <ListView x:Name="LVListForCustomers" Grid.Row="0" 
+                  ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
+                  RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
+                  FontWeight="Normal" Margin="0,22,0,0" HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  MouseDoubleClick="ShowParcelDetails_Click">
+
+
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Parcel ID" DisplayMemberBinding="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                            <GridViewColumn Header="Weight">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Width="30" Height="30" Source="{Binding Path=Weight, Converter={StaticResource ParcelAtCustomerWeightCategories}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Priorities">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Width="30" Height="30" Source="{Binding Path=Priorities, Converter={StaticResource ParcelAtCustomerPrioritiest}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Parcel status">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Width="30" Height="30" Source="{Binding Path=ParcelStatus, Converter={StaticResource ParcelAtCustomerStatus}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Target" DisplayMemberBinding="{Binding Path=SourceOrTarget, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }" />
+                        </GridView>
+                    </ListView.View>
+                    <ListView.Resources>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#DFA458"/>
+                                </Trigger>
+                                <Trigger  Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#D48224" />
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </Trigger>
+                            </Style.Triggers>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Style>
+
+                    </ListView.Resources>
+                    <ListView.LayoutTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1" ScaleY="1" CenterY="0" CenterX="0"/>
+                            <SkewTransform CenterY="0" CenterX="0"/>
+                            <RotateTransform Angle="0" CenterY="0" CenterX="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ListView.LayoutTransform>
+                    <ListView.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="-2"/>
+                        </TransformGroup>
+                    </ListView.RenderTransform>
+                </ListView>
+
+                <Label Content="Parcel from: " Grid.Row="1" HorizontalAlignment="Left" Height="28" 
+               VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.5,0.609" FontSize="14"
+               FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="54,0,0,0" />
+                <ListView x:Name="LVListToCustomers" Grid.Row="1" 
+                  ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" 
+                  RenderTransformOrigin="0.5,0.5" FontStretch="Normal" 
+                  FontWeight="Normal" Margin="0,22,0,0" HorizontalContentAlignment="Stretch"
+                  VerticalContentAlignment="Stretch" Grid.RowSpan="2" 
+                    MouseDoubleClick="ShowParcelDetails_Click">
+
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Parcel ID" DisplayMemberBinding="{Binding Path=ParcelID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                            <GridViewColumn Header="Weight">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Width="30" Height="30" Source="{Binding Path=Weight, Converter={StaticResource ParcelAtCustomerWeightCategories}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Priorities">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Width="30" Height="30" Source="{Binding Path=Priorities, Converter={StaticResource ParcelAtCustomerPrioritiest}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Parcel status">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Width="30" Height="30" Source="{Binding Path=ParcelStatus, Converter={StaticResource ParcelAtCustomerStatus}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Source" DisplayMemberBinding="{Binding Path=SourceOrTarget, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }" />
+                        </GridView>
+                    </ListView.View>
+                    <ListView.Resources>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#DFA458"/>
+                                </Trigger>
+                                <Trigger  Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#D48224" />
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </Trigger>
+                            </Style.Triggers>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Style>
+
+                    </ListView.Resources>
+                    <ListView.LayoutTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1" ScaleY="1" CenterY="0" CenterX="0"/>
+                            <SkewTransform CenterY="0" CenterX="0"/>
+                            <RotateTransform Angle="0" CenterY="0" CenterX="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ListView.LayoutTransform>
+                    <ListView.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="-2"/>
+                        </TransformGroup>
+                    </ListView.RenderTransform>
+                </ListView>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

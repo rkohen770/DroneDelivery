@@ -70,6 +70,7 @@ namespace BO
                     {
                         dal.UpdateCustomerName(id, newName);
                     }
+                    User user;
                 }
                 else
                 {
@@ -176,7 +177,7 @@ namespace BO
                 List<CustomerForList> list = new();
                 foreach (var customer in dal.GetAllCustomers())
                 {
-                    CustomerForList customerForList = cloneCustomer(GetCustomer(customer.CustomerID));
+                    CustomerForList customerForList = CloneCustomer(GetCustomer(customer.CustomerID));
                     list.Add(customerForList);
                 }
                 return list;
@@ -193,7 +194,7 @@ namespace BO
             List<CustomerForList> list = new();
             foreach (var customer in dal.GetAllCustomerByPredicate(p))
             {
-                CustomerForList customerForList = cloneCustomer(GetCustomer(customer.CustomerID));
+                CustomerForList customerForList = CloneCustomer(GetCustomer(customer.CustomerID));
                 list.Add(customerForList);
             }
             return list;
@@ -205,7 +206,7 @@ namespace BO
         /// </summary>
         /// <param name="customer">customer</param>
         /// <returns>customer for list</returns>
-        private CustomerForList cloneCustomer(BO.Customer customer)
+        public CustomerForList CloneCustomer(BO.Customer customer)
         {
             return new()
             {

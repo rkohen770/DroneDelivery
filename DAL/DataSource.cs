@@ -10,7 +10,7 @@ namespace DalApi
         internal static List<Station> stations = new List<Station>(5);
         internal static List<Customer> customers = new List<Customer>(100);
         internal static List<Parcel> parcels = new List<Parcel>(1000);
-        internal static List<User> users = new List<User>(1000);
+        internal static List<User> users = new List<User>(10000);
         internal static List<DroneCharge> droneCharges = new List<DroneCharge>(5);
         static Random rand = new();
 
@@ -341,6 +341,82 @@ namespace DalApi
                 }
             };
 
+            #endregion
+
+            #region user
+            users = new List<User>
+            {
+                new User()
+                {
+                    UserName="Eliya",
+                    Admin = Permission.Client,
+                    Password ="1111",
+                    Available =true
+                },
+                new User()
+                {
+                    UserName="Devora",
+                    Admin = Permission.Managment,
+                    Password ="315",
+                    Available =true,
+                },
+                new User()
+                {
+                    UserName="Rachel Lea",
+                    Admin = Permission.Managment,
+                    Password ="770770",
+                    Available =true,
+                },
+                new User()
+                {
+                    UserName="Yanir",
+                    Admin = Permission.Client,
+                    Password ="2222",
+                    Available =true,
+                },
+                new User()
+                {
+                    UserName="Reuven",
+                    Admin = Permission.Client,
+                    Password ="3333",
+                    Available =true,
+                },
+                new User()
+                {
+                    UserName="Ilana",
+                    Admin = Permission.Client,
+                    Password ="4444",
+                    Available =true,
+                },
+                new User()
+                {
+                    UserName="Dalya",
+                    Admin = Permission.Client,
+                    Password ="5555",
+                    Available =true,
+                },
+                new User()
+                {
+                    UserName="Aviya",
+                    Admin = Permission.Client,
+                    Password ="6666",
+                    Available =true,
+                },
+                new User()
+                {
+                    UserName="Baruch",
+                    Admin = Permission.Client,
+                    Password ="7777",
+                    Available =true,
+                },
+                new User()
+                {
+                    UserName="Chen",
+                    Admin = Permission.Client,
+                    Password ="8888",
+                    Available =true,
+                },
+            };
             #endregion
 
         }

@@ -33,7 +33,7 @@ namespace BO
                 {
                     UserName = user.UserName,
                     Admin = (DO.Permission)user.Admin,
-                    Password = user.password,
+                    Password = user.Password,
                 };
                 //Add baseStation in DAL to data source.
                 dal.AddUser(user1);
@@ -67,12 +67,12 @@ namespace BO
                 throw new BadUserNameException(ex.Message, ex);
             }
         }
-        public User GetUser(string userName)
+        public User GetUser(string userName,string password)
         {
             DO.User userDO;
             try
             {
-                userDO = dal.GetUser(userName);
+                userDO = dal.GetUser(userName, password);
             }
             catch (DO.BadUserNameException ex)
             {

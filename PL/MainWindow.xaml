@@ -8,7 +8,9 @@
         Title="MainWindow"  Height="680" Width="1012"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         TextElement.FontWeight="Regular" TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto" FontFamily="David" FontSize="14">
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto" 
+        FontFamily="David" FontSize="14">
     <Window.Resources>
         <local:DroneStatusToImage x:Key="DroneStatusConvert"/>
         <local:WeightCategoriesToImage x:Key="DroneWeightConvert"/>
@@ -27,6 +29,8 @@
             <Button Content="Change user" HorizontalAlignment="Left" Background="#FFCCA36D" Height="40" VerticalAlignment="Center" Width="164" Click="ChangeUser_Click" Margin="228,0,0,0"/>
             <TextBlock x:Name="Permis" Text="{Binding Path=Admin, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="477,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
             <TextBlock x:Name="userName" Text="{Binding Path=UserName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="26" Margin="591,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontSize="16" FontWeight="Bold" Foreground="#FFC56853" />
+            <Label Name="lblTime" Grid.Row="0" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="782,0,0,0" FontWeight="Bold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="90" Height="30"  />
+            <Label Name="lDate" Grid.Row="0" HorizontalAlignment="Left" Height="30" Margin="678,0,0,0" VerticalAlignment="Top" Width="90" FontWeight="Bold" VerticalContentAlignment="Center"/>
         </Grid>
 
 
@@ -311,7 +315,7 @@
                         <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="7"/>
                             <Image Source="/Images/customer_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-25"/>
-                            <Label Content="Add Customer" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-53" FlowDirection="LeftToRight" Canvas.Top="3"/>
+                            <Label Content="Add Customer" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-41" FlowDirection="LeftToRight" Canvas.Top="3"/>
                         </Canvas>
                     </Button>
 

@@ -205,7 +205,7 @@ namespace BLApi
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        BO.User GetUser(string userName);
+        BO.User GetUser(string userName, string password);
         #endregion
 
         #region Clone
@@ -221,6 +221,13 @@ namespace BLApi
         /// </summary>
         /// <param name="parcel">parcel</param>
         public ParcelForList CloneParcel(BO.Parcel parcel);
+
+        /// <summary>
+        ///  Converts from object customer to object customer for list
+        /// </summary>
+        /// <param name="customer">customer</param>
+        /// <returns>customer for list</returns>
+        public CustomerForList CloneCustomer(BO.Customer customer);
         #endregion
     }
 }

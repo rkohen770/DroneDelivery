@@ -20,16 +20,17 @@ namespace DalApi
         /// returns user by the user name from the file
         /// </summary>
         /// <param name="userName"></param>
+        /// <param name="password"></param>
         /// <returns></returns>
-        public User GetUser(string userName)
+        public User GetUser(string userName, string password)
         {
-            List<User> users = Tools.LoadListFromXMLSerializer<User>(UseresPath);
-
-            User? user = users.FirstOrDefault(u => u.UserName == userName && u.Available == true);
-            if (user != null)
-                return (User)user; //no need to Clone()
-            else
-                throw new BadUserNameException(userName, $"bad User Name: {userName}");
+            //List<User> users = Tools.LoadListFromXMLSerializer<User>(UseresPath);
+            if (!DataSource.users.Exists(u => u.UserName == userName&&u.Password==password))
+            {
+                throw new BadUserNameException(userName, "the user not exists in the list of users");
+            }
+            //find the place of the customer in the array of customers
+            return DataSource.users.Find(c => c.UserName == userName);
 
         }
         /// <summary>
@@ -38,8 +39,8 @@ namespace DalApi
         /// <returns></returns>
         public IEnumerable<DO.User> GetAllUseres()
         {
-            List<User> users = Tools.LoadListFromXMLSerializer<User>(UseresPath);
-            return users.AsEnumerable();
+            //List<User> users = Tools.LoadListFromXMLSerializer<User>(UseresPath);
+            return DataSource.users.AsEnumerable();
         }
         /// <summary>
         /// returns all users by predicate from the file
@@ -103,9 +104,9 @@ namespace DalApi
         /// <param name="user"></param>
         public void UpdateUser(DO.User user)
         {
-            List<User> users = Tools.LoadListFromXMLSerializer<User>(UseresPath);
-
-            User? user1 = (from u in users
+            //List<User> users = Tools.LoadListFromXMLSerializer<User>(UseresPath);
+            List<User> users = DataSource.users;
+            User ? user1 = (from u in users
                           where u.UserName == user.UserName
                           select u).FirstOrDefault();
 

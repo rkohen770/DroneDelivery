@@ -30,13 +30,13 @@ namespace PL
         {
             //if the user did not fill in the name or password 
             if (password.Password.Length == 0 || userName.Text == "")
-                MessageBox.Show("Please enter user name and password");
+                MessageBox.Show("Please enter user name and Password");
             else
             {
                 try
                 {
-                    user = bl.GetUser(userName.Text);
-                    if (user.UserName == userName.Text && user.password == password.Password)
+                    user = bl.GetUser(userName.Text, password.Password);
+                    if (user.UserName == userName.Text && user.Password == password.Password)
                     {
                         if (user.Admin == BO.Permission.Managment)
                         {
@@ -50,7 +50,7 @@ namespace PL
                         }
                         Close();
                     }
-                    else MessageBox.Show("Incorrect username or password");
+                    else MessageBox.Show("Incorrect username or Password");
                 }
                 catch (BO.BadUserNameException ex)
                 {
@@ -68,14 +68,14 @@ namespace PL
         {
 
             if (passwordBox.Password.Length == 0 || username1.Text == "")
-                MessageBox.Show("Please enter user name and password");
+                MessageBox.Show("Please enter user name and Password");
             else
             {
                 if (user == null)
                     user = new BO.User();
                 try
                 {
-                    user.password = passwordBox.Password;
+                    user.Password = passwordBox.Password;
                     user.UserName = username1.Text;
                     if ((checkM.IsChecked == true) && (managerP.Password == "drones"))
                     {
@@ -93,9 +93,9 @@ namespace PL
                     else
                     {
                         user.Admin = BO.Permission.Passenger;
-                        user.password = passwordBox.Password;
+                        user.Password = passwordBox.Password;
                         bl.AddUser(user);
-                        MessageBox.Show("Passenger user:" + user.UserName + " added succsesfully!");
+                        MessageBox.Show("Client user:" + user.UserName + " added succsesfully!");
                         checkM.IsChecked = false;
                         passwordBox.Password = "";
                         Client passenger = new (user);

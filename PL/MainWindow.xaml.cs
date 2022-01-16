@@ -16,6 +16,7 @@ using BO;
 using BLApi;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows.Threading;
 
 namespace PL
 {
@@ -26,7 +27,10 @@ namespace PL
     {
         private readonly IBL bl = BLFactory.GetBL();
         public User MyUser { get; set; }
-        public bool PassengerOpen { get; set; }
+        public bool ClientOpen { get; set; }
+        public ObservableCollection<PO.ViewTimes> times = new ObservableCollection<PO.ViewTimes>();
+        public TimeSpan second = new TimeSpan(0, 0, 0, 1);
+        DispatcherTimer timer;
         /// <summary>
         /// collection of stations
         /// </summary>
@@ -46,6 +50,12 @@ namespace PL
 
         public MainWindow(User user)
         {
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += timer_Tick;
+            timer.Start();
+            lDate.Content = DateTime.Now.ToString("dd/MM/yy");
+
             InitializeComponent();
             MyUser = user;
             //reset list of ststions
@@ -82,6 +92,12 @@ namespace PL
         {
             InitializeComponent();
 
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += timer_Tick;
+            timer.Start();
+            lDate.Content = DateTime.Now.ToString("dd/MM/yy");
+
             //reset the list of the drones   
             listDrone = new ObservableCollection<DroneForList>(bl.GetAllDronesBo());
             LVListDrones.ItemsSource = listDrone;
@@ -105,6 +121,24 @@ namespace PL
             ParcelStatusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
             ParcelPrioritiesSelector.ItemsSource = Enum.GetValues(typeof(Priorities));
         }
+
+        #region Time
+        /// <summary>
+        /// an event that shows the timer
+        /// </summary>
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            lblTime.Content = DateTime.Now.ToLongTimeString();
+
+            for (int i = 0; i < times.Count(); i++)
+            {
+                if (times[i].LastTime == TimeSpan.Zero)
+                    times.Remove(times[i]);
+                else times[i].LastTime -= second;
+            }
+
+        }
+        #endregion
 
         #region Drones
         /// <summary>
@@ -355,7 +389,7 @@ namespace PL
 
         private void ChangeClient_Click(object sender, RoutedEventArgs e)
         {
-            PassengerOpen = true;
+            ClientOpen = true;
             Client passenger = new(MyUser, this);
             passenger.Show();
         }
