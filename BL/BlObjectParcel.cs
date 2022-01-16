@@ -128,11 +128,6 @@ namespace BO
             }
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="droneId"></param>
         public void UpdateCollectionParcelByDrone(int droneId)
         {
             try
@@ -140,34 +135,34 @@ namespace BO
                 //the drone collect a parcel only if the parcel has been assigned to it and haven't picked up yet
                 var drone = dal.GetDrone(droneId);
                 var drone_l = droneForLists.Find(d => d.DroneID == droneId && d.DroneStatus == DroneStatus.Delivery);
-                foreach (var parcel in dal.GetAllParcelsWithoutSpecialDron(p => p.DroneID == droneId && p.Delivered == null))
-                {
+                var parcel = dal.GetAllParcelsWithoutSpecialDron(p => p.DroneID == droneId && p.Delivered == null).FirstOrDefault();
+                
                     //check if the parcel was assigned
                     if (parcel.Scheduled == null)
                     {
                         throw new Exception("the parcel wasn't assigned to the drone!");
                     }
-                    //check if the parcel was picked up
-                    if (parcel.PickedUp != null)
-                    {
-                        throw new Exception("the parcel was picked up already!");
-                    }
-                    else
-                    {
-                        //update in BL
-                        DO.Customer customer = dal.GetCustomer(parcel.SenderID);//finds the sender 
-                        //calculate the distance frome the current location of the drone- to the customer
-                        double distance = getDistanceBetweenTwoPoints(drone_l.CurrentLocation.Lattitude, drone_l.CurrentLocation.Longitude, customer.Lattitude, customer.Longitude);
-                        //update the location of the drone to where the senderk
-                        drone_l.CurrentLocation = new Location { Lattitude = customer.Lattitude, Longitude = customer.Longitude };
-                        drone_l.DroneBattery -= distance * dal.PowerConsumptionRequest()[(int)parcel.Weight + 1];
-                        int dIndex = droneForLists.FindIndex(d => d.DroneID == droneId);
-                        droneForLists[dIndex] = drone_l;
-
-                        //update in dal
-                        dal.PackagCollectionByDrone(parcel.ParcelID);
-                    }
+                //check if the parcel was picked up
+                if (parcel.PickedUp != null)
+                {
+                    throw new Exception("the parcel was picked up already!");
                 }
+                else
+                {
+                    //update in BL
+                    DO.Customer customer = dal.GetCustomer(parcel.SenderID);//finds the sender 
+                                                                            //calculate the distance frome the current location of the drone- to the customer
+                    double distance = getDistanceBetweenTwoPoints(drone_l.CurrentLocation.Lattitude, drone_l.CurrentLocation.Longitude, customer.Lattitude, customer.Longitude);
+                    //update the location of the drone to where the senderk
+                    drone_l.CurrentLocation = new Location { Lattitude = customer.Lattitude, Longitude = customer.Longitude };
+                    drone_l.DroneBattery -= distance * dal.PowerConsumptionRequest()[(int)parcel.Weight + 1];
+                    int dIndex = droneForLists.FindIndex(d => d.DroneID == droneId);
+                    droneForLists[dIndex] = drone_l;
+
+                    //update in dal
+                    dal.PackagCollectionByDrone(parcel.ParcelID);
+                }
+                
             }
             catch (DO.BadParcelIDException e)
             {
@@ -195,36 +190,28 @@ namespace BO
                 //the drone collect a parcel only if the parcel has been assigned to it and hasn't been picked up yet
                 var drone = dal.GetDrone(droneId);
                 var drone_l = droneForLists.Find(d => d.DroneID == droneId && d.DroneStatus == DroneStatus.Delivery);
-
-                foreach (var parcel in dal.GetAllParcelsWithoutSpecialDron(p => p.DroneID == droneId))
-                {
-
+                var parcel = dal.GetAllParcelsWithoutSpecialDron(p => p.DroneID == droneId && p.Delivered==null && p.PickedUp!=null).FirstOrDefault();
                     //check if the parcel was assigned
-                    if (parcel.PickedUp == null)
-                    {
-                        throw new Exception("the parcel wasn't picked up yet!");
-                    }
-                    //check if the parcel was picked up
-                    if (parcel.Delivered != null)
-                    {
-                        throw new Exception("the parcel delivered already!");
-                    }
-                    else
-                    {
-                        //update in BL
-                        DO.Customer customer = dal.GetCustomer(parcel.TargetID);//finds the sender 
-                                                                                //calculate the distance frome the current location of the drone- to the customer
-                        double distance = dal.GetDistanceBetweenLocationsOfParcels(parcel.SenderID, parcel.TargetID);
-                        // update the location of the drone to where the senderk
-                        drone_l.CurrentLocation = new Location { Lattitude = customer.Lattitude, Longitude = customer.Longitude };
-                        drone_l.DroneBattery -= distance * dal.PowerConsumptionRequest()[0];
-                        drone_l.DroneStatus = DroneStatus.Available;
-                        int dIndex = droneForLists.FindIndex(d => d.DroneID == droneId);
-                        droneForLists[dIndex] = drone_l;
+                if(parcel.ParcelID==null)
+                {
+                    throw new Exception("The parcel wasn't picked up yet! or the parcel delivered already");
+                }
 
-                        //update in dal
-                        dal.DeliveryPackageToCustomer(parcel.ParcelID);
-                    }
+                else
+                {
+                    //update in BL
+                    DO.Customer customer = dal.GetCustomer(parcel.TargetID);//finds the sender 
+                                                                            //calculate the distance frome the current location of the drone- to the customer
+                    double distance = dal.GetDistanceBetweenLocationsOfParcels(parcel.SenderID, parcel.TargetID);
+                    // update the location of the drone to where the senderk
+                    drone_l.CurrentLocation = new Location { Lattitude = customer.Lattitude, Longitude = customer.Longitude };
+                    drone_l.DroneBattery -= distance * dal.PowerConsumptionRequest()[0];
+                    drone_l.DroneStatus = DroneStatus.Available;
+                    int dIndex = droneForLists.FindIndex(d => d.DroneID == droneId);
+                    droneForLists[dIndex] = drone_l;
+
+                    //update in dal
+                    dal.DeliveryPackageToCustomer(parcel.ParcelID);
                 }
             }
             catch (DO.BadParcelIDException e)

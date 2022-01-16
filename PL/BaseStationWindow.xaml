@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="BaseStationWindow" Height="450" Width="400">
+        Title="BaseStationWindow" Height="450" Width="400"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <local:NotBooleanToVisibilityConverter x:Key="notBooleanToVisibilityConverter" />
         <local:DroneBattery x:Key="DroneBatteryConvert"/>
@@ -172,13 +173,13 @@
                     <Image Source="/Images/save_as_24px.png" Width="33" 
                        Height="33" Canvas.Left="-15" Canvas.Top="-25"/>
                     <Label Content="Save" HorizontalContentAlignment="Center" 
-                       VerticalContentAlignment="Center" Canvas.Left="-25" Width="50" Height="25"/>
+                       VerticalContentAlignment="Center" Foreground="#FF4362AC" Canvas.Left="-25" Width="50" Height="25"/>
                 </Canvas>
             </Button>
             <Button x:Name="UpDateClick" 
-                VerticalAlignment="Center" Click="UpdateBaseStationButton_Click" 
+                VerticalAlignment="Top" Click="UpdateBaseStationButton_Click" 
                  HorizontalContentAlignment="Center" 
-                    VerticalContentAlignment="Top" Height="64" Margin="114,0,200,0">
+                    VerticalContentAlignment="Top" Height="64" Margin="114,6,200,0">
                 <Button.BorderBrush>
                     <SolidColorBrush Color="#FF707070" Opacity="0"/>
                 </Button.BorderBrush>
@@ -195,7 +196,7 @@
                     <Label Content="UpDate" 
                        HorizontalContentAlignment="Stretch" 
                        VerticalContentAlignment="Stretch" Canvas.Left="-37" 
-                       Canvas.Top="22" Width="65" Height="25"/>
+                       Canvas.Top="22" Width="65" Height="25" Foreground="#FF4362AC"/>
                 </Canvas>
             </Button>
 
@@ -209,7 +210,8 @@
                 </Button.Background>
                 <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Image Source="/Images/close_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-24"/>
-                    <Label Content="Close" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Canvas.Left="-25" Width="50" Height="24" Canvas.Top="1"/>
+                    <Label Content="Close" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Canvas.Left="-25"
+                           Width="50" Height="24" Canvas.Top="1" Foreground="#FF4362AC"/>
                 </Canvas>
             </Button>
 

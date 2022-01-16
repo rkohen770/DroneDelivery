@@ -13,10 +13,18 @@
         FontFamily="David" FontSize="14">
     <Window.Resources>
         <local:DroneStatusToImage x:Key="DroneStatusConvert"/>
+        <local:DroneStatusConvert x:Key="DroneStatusConverter"/>
         <local:WeightCategoriesToImage x:Key="DroneWeightConvert"/>
         <local:DroneBattery x:Key="DroneBatteryConvert"/>
         <local:DroneCurrentLocation x:Key="DroneLocationConvert"/>
         <local:PhonePrint x:Key="CustomerPhonePrint"/>
+        <local:WeightCategoriesConvert x:Key="WeightCategoriesConverter"/>
+        <local:WeightCategoriesToImage x:Key="ParcelAtCustomerWeightCategories"/>
+        <local:WeightCategoriesConvert x:Key="WeightCategoriesConvert"/>
+        <local:PrioritiesToImage x:Key="ParcelAtCustomerPrioritiest"/>
+        <local:PrioritiesConvert x:Key="ParcelAtCustomerPrioritiestConvert"/>
+        <local:ParcelStatusToImage x:Key="ParcelAtCustomerStatus"/>
+        <local:ParcelStatusConvert x:Key="ParcelAtCustomerStatusConvert"/>
     </Window.Resources>
 
     <Grid>
@@ -66,7 +74,7 @@
                             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="5"/>
                                 <Image Source="/Images/drone_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-26"/>
-                                <Label Content="Add drone" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-34" FlowDirection="LeftToRight" Canvas.Top="3"/>
+                                <Label Content="Add Drone" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-34" FlowDirection="LeftToRight" Canvas.Top="3"  Foreground="#FF4362AC"/>
                             </Canvas>
                         </Button>
                         <Button x:Name="refreshDrone" Grid.Column="0" 
@@ -80,7 +88,7 @@
                             </Button.Background>
                             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <Image Source="/Images/Sorting_24px.png" Width="33" Height="33" Canvas.Left="-15" Canvas.Top="-25"/>
-                                <Label Content="Sort" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="3"/>
+                                <Label Content="Sort" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-20" FlowDirection="LeftToRight" Canvas.Top="3" Foreground="#FF4362AC"/>
                             </Canvas>
                         </Button>
                     </Canvas>
@@ -92,7 +100,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Drone status" Grid.Column="0"
+                        <Label Content="Drone Status" Grid.Column="0"
                                Foreground="#FF4362AC" 
                                Margin="4,2,237,-2" 
                                RenderTransformOrigin="-11.049,0.494" 
@@ -137,7 +145,7 @@
                               Grid.Row="1"
                               RenderTransformOrigin="0.5,0.5" FontStretch="Normal" FontWeight="Normal"
                               HorizontalContentAlignment="Center" 
-                              ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Margin="0,0,0,50" Grid.ColumnSpan="2" >
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Margin="0,0,0,50" Grid.ColumnSpan="2" FontSize="14" >
                         <ListView.View>
 
                             <GridView>
@@ -146,7 +154,18 @@
                                 <GridViewColumn Header="Max Weight"  >
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Image Width="30" Height="30" Source="{Binding Path=MaxWeight, Converter={StaticResource DroneWeightConvert}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                            
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="3*"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Grid.Row="1" Content="{Binding Path=MaxWeight, Converter={StaticResource WeightCategoriesConverter},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
+                                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="80" Height="24" Canvas.Top="1" Foreground="#FF4362AC" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                                 <Image Grid.Row="0" Width="30" Height="30" Source="{Binding Path=MaxWeight, Converter={StaticResource DroneWeightConvert},
+                                                 UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                                
+                                            </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -159,7 +178,7 @@
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
                                                 <TextBlock Grid.Column="0" Text="{Binding Path=DroneBattery,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Foreground="#FF186665" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" />
-                                                <Image Grid.Column="1" Width="15" Height="15" Source="/Images/%_24px.png" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                                                <Image Grid.Column="1" Width="15" Height="15" Source="/Images/%_24px.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
@@ -167,7 +186,16 @@
                                 <GridViewColumn Header="Status">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Image Width="30" Height="30" Source="{Binding Path=DroneStatus, Converter={StaticResource DroneStatusConvert}, Mode=OneWay}"/>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="3*"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Grid.Row="1" Content="{Binding Path=DroneStatus, Converter={StaticResource DroneStatusConverter},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
+                                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="80" Height="24" Canvas.Top="1" Foreground="#FF4362AC" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                                <Image Grid.Row="0" Width="30" Height="30" Source="{Binding Path=DroneStatus, Converter={StaticResource DroneStatusConvert},
+                                                 UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                            </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -230,7 +258,7 @@
                             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="7"/>
                                 <Image Source="/Images/charging_station_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-25"/>
-                                <Label Content="Add base station" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-53" FlowDirection="LeftToRight" Canvas.Top="3"/>
+                                <Label Content="Add Base Station" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-53" FlowDirection="LeftToRight" Canvas.Top="3" Foreground="#FF4362AC"/>
                             </Canvas>
                         </Button>
                         <Button x:Name="refreshBaseStation" Grid.Column="0" 
@@ -244,7 +272,7 @@
                             </Button.Background>
                             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <Image Source="/Images/Sorting_24px.png" Width="33" Height="33" Canvas.Left="-15" Canvas.Top="-25"/>
-                                <Label Content="Sort" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="3"/>
+                                <Label Content="Sort" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-20" FlowDirection="LeftToRight" Canvas.Top="3" Foreground="#FF4362AC"/>
                             </Canvas>
                         </Button>
                     </Canvas>
@@ -253,8 +281,8 @@
                         <ListView.View>
 
                             <GridView>
-                                <GridViewColumn Header="BaseStation Id" 
-                                            DisplayMemberBinding="{Binding Path=BaseStationID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                                <GridViewColumn Header="Base Station ID" 
+                                            DisplayMemberBinding="{Binding Path=BaseStationID,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="150" />
                                 <GridViewColumn Header="Name" 
                                             DisplayMemberBinding="{Binding Path=NameBaseStation,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="Num Of Available Charging" 
@@ -319,7 +347,7 @@
                         <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="7"/>
                             <Image Source="/Images/customer_24px.png" Width="33" Height="33" Canvas.Left="-17" Canvas.Top="-25"/>
-                            <Label Content="Add Customer" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-41" FlowDirection="LeftToRight" Canvas.Top="3"/>
+                            <Label Content="Add Customer" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-41" FlowDirection="LeftToRight" Canvas.Top="3" Foreground="#FF4362AC"/>
                         </Canvas>
                     </Button>
 
@@ -336,7 +364,7 @@
                                             DisplayMemberBinding="{Binding Path=CustomerName,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="Phone" 
                                             DisplayMemberBinding="{Binding Path=Phone,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource CustomerPhonePrint}, Mode=OneWay}"/>
-                                <GridViewColumn Header="Sent and delivered" 
+                                <GridViewColumn Header="Sent And Delivered" 
                                             DisplayMemberBinding="{Binding Path=SentAndDelivered,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <GridViewColumn Header="Sent And Not Delivered" 
                                             DisplayMemberBinding="{Binding Path=SentAndNotDelivered,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
@@ -412,7 +440,7 @@
                                 <Image Source="/Images/add_24px.png" Width="17" Height="17" Canvas.Top="-8" Canvas.Left="5"/>
                                 <Image Source="/Images/parcel_24px.png" Width="33" Height="33" Canvas.Top="-30" Canvas.Left="-10" />
                                 <Label Content="Add parcel" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                                       Canvas.Left="-34" FlowDirection="LeftToRight" Canvas.Top="3"/>
+                                       Foreground="#FF4362AC" Canvas.Left="-34" FlowDirection="LeftToRight" Canvas.Top="3"/>
                             </Canvas>
                         </Button>
                         <Button x:Name="SortParcelBySenderButton" Grid.Column="0" 
@@ -426,8 +454,8 @@
                             </Button.Background>
                             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <Image Source="/Images/Sorting_24px.png" Width="33" Height="33" Canvas.Left="-15" Canvas.Top="-25"/>
-                                <Label Content="Sort by" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="3"/>
-                                <Label Content="Sender" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="15"/>
+                                <Label Content="Sort by" Foreground="#FF4362AC" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="3"/>
+                                <Label Content="Sender" Foreground="#FF4362AC" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="15"/>
                             </Canvas>
                         </Button>
                         <Button x:Name="SortParcelByTargetButton" Grid.Column="0" 
@@ -441,17 +469,13 @@
                             </Button.Background>
                             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <Image Source="/Images/Sorting_24px.png" Width="33" Height="33" Canvas.Left="-15" Canvas.Top="-25"/>
-                                <Label Content="Sort By" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="3" Width="51"/>
-                                <Label Content="Target" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="15" Width="51" Height="22"/>
+                                <Label Content="Sort By" Foreground="#FF4362AC" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="3" Width="51"/>
+                                <Label Content="Target"  Foreground="#FF4362AC" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Canvas.Left="-16" FlowDirection="LeftToRight" Canvas.Top="15" Width="51" Height="22"/>
                             </Canvas>
                         </Button>
                     </Canvas>
 
-                    <!--<StackPanel Orientation="Horizontal" Grid.Row="2" Margin="20,0,0,0" Grid.ColumnSpan="2" >
-                        <Button x:Name="Add_Parcel_Button" MinWidth="130" Background="#FFCCA36D" Content="Add new parcel" Click="AddParcelsButton_Click" Height="45"/>
-                        <Button x:Name="refreshParcelByTarget" MinWidth="120" Background="#FFCCA36D" Content="refresh by target" Click="RefreshParcelByTargetButton_Click" Height="45"/>
-                        <Button x:Name="refreshParcelBySend" MinWidth="120" Background="#FFCCA36D" Content="refresh by send" Click="RefreshParcelBySendButton_Click" Height="45"/>
-                    </StackPanel>-->
+                   
                     <Label Content="Parcel Priorities" Foreground="#FF4362AC"
                            HorizontalAlignment="Left" Margin="71,23,0,0" 
                            RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT"
@@ -495,12 +519,55 @@
                                             DisplayMemberBinding="{Binding Path=CustomerNameSend,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="200"/>
                                 <GridViewColumn Header="   Customer Name Target   " 
                                             DisplayMemberBinding="{Binding Path=CustomerNameTarget,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="200"/>
-                                <GridViewColumn Header="   Weight   " 
-                                            DisplayMemberBinding="{Binding Path=Weight ,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="   Priorities   " 
-                                            DisplayMemberBinding="{Binding Path=Priorities,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <GridViewColumn Header="   Parcel Status   " 
-                                            DisplayMemberBinding="{Binding Path=ParcelStatus,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="300"/>
+
+                                <GridViewColumn Header="Weight">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="3*"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Grid.Row="1" Content="{Binding Path=Weight, Converter={StaticResource WeightCategoriesConvert},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
+                                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="80" Height="24" Canvas.Top="1" Foreground="#FF4362AC" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                                                <Image Grid.Row="0" Width="30" Height="30" Source="{Binding Path=Weight, Converter={StaticResource ParcelAtCustomerWeightCategories},
+                                                 UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Priorities">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="3*"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Grid.Row="1" Content="{Binding Path=Priorities, Converter={StaticResource ParcelAtCustomerPrioritiestConvert},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
+                                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="80" Height="24" Canvas.Top="1" Foreground="#FF4362AC" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                                <Image Grid.Row="0" Width="30" Height="30" Source="{Binding Path=Priorities, Converter={StaticResource ParcelAtCustomerPrioritiest},
+                                                 UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Parcel status">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="3*"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Grid.Row="1" Content="{Binding Path=Weight, Converter={StaticResource ParcelAtCustomerStatusConvert},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
+                                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="80" Height="24" Canvas.Top="1" Foreground="#FF4362AC" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                                                <Image Grid.Row="0" Width="30" Height="30" Source="{Binding Path=Weight, Converter={StaticResource ParcelAtCustomerStatus},
+                                                 UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                         <ListView.Resources>
