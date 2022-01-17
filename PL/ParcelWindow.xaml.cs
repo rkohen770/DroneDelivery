@@ -2,6 +2,7 @@
 using BO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -25,7 +26,8 @@ namespace PL
         private IBL bl;
         private ParcelForList parcelDetails;
         private MainWindow mainWindow;
-
+        private Client client;
+        private Customer customerDetails;
         public ParcelWindow()
         {
             InitializeComponent();
@@ -105,6 +107,32 @@ namespace PL
 
         }
         /// <summary>
+        /// constactor for add parcel in client detalis
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="parcelDetails"></param>
+        /// <param name="client"></param>
+        public ParcelWindow(IBL bl, Customer customer, Client client)
+        {
+            InitializeComponent();
+            this.bl = bl;
+            this.client = client;
+            this.customerDetails = customer;
+            Weight_Selector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            Priorities_Selector.ItemsSource = Enum.GetValues(typeof(Priorities));
+            senderParcel.Visibility = Visibility.Hidden;
+            Height = 400;
+         
+            Sender_Id_Add.Text = customer.CustomerID.ToString();
+            Sender_Name_Add.Text = customer.NameOfCustomer;
+            Sender_Id_Add.IsReadOnly = true;
+            Sender_Name_Add.IsReadOnly = true;
+            
+
+        }
+
+
+        /// <summary>
         /// text box that allows only numbers to be entered
         /// </summary>
         /// <param name="sender">TextBox type</param>
@@ -149,15 +177,21 @@ namespace PL
             {
                 MessageBox.Show(ex.ID.ToString(), ex.Message + "\nThe customer does not exist in the system");
             }
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+
             if (mainWindow != null)
             {
                 mainWindow.LVListParcels.ItemsSource = bl.GetAllParcelsBo();
                 mainWindow.LVListParcels.Items.Refresh();
             }
+            if (client != null)
+            {
+                customerDetails = bl.GetCustomer(customerDetails.CustomerID);
+                client.LVListForCustomers.ItemsSource = new ObservableCollection<ParcelAtCustomer>(customerDetails.FromCustomer);
+                client.LVListForCustomers.Items.Refresh();
+                client.LVListToCustomers.ItemsSource = new ObservableCollection<ParcelAtCustomer>(customerDetails.ToCustomer);
+                client.LVListToCustomers.Items.Refresh();
+            }
+
             Close();
         }
 
