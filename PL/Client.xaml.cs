@@ -104,14 +104,13 @@ namespace PL
         {
             new ParcelWindow(bl, last).ShowDialog();
 
-           //customerForList = bl.GetAllCustomerByPredicate(c => c.Name == MyUser.UserName).FirstOrDefault();
-           //Customer customer = bl.GetCustomer(customerForList.CustomerID);
-           //
-           //listForCustomers = new ObservableCollection<ParcelAtCustomer>(customer.FromCustomer);
-           //LVListForCustomers.Items.Refresh();
-           //
-           //listToCustomers = new ObservableCollection<ParcelAtCustomer>(customer.ToCustomer);
-           //LVListToCustomers.Items.Refresh();
+            Customer customer = bl.GetCustomer(customerForList.CustomerID);
+
+            LVListForCustomers.ItemsSource = new ObservableCollection<ParcelAtCustomer>(customer.FromCustomer);
+            LVListForCustomers.Items.Refresh();
+
+            LVListToCustomers.ItemsSource = new ObservableCollection<ParcelAtCustomer>(customer.ToCustomer);
+            LVListToCustomers.Items.Refresh();
         }
 
         /// <summary>
