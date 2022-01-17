@@ -11,14 +11,17 @@
     <None Remove="Images\add_24px.png" />
     <None Remove="Images\Associated_24px.png" />
     <None Remove="Images\box_24px.png" />
+    <None Remove="Images\brake_warning_24px.png" />
     <None Remove="Images\charged_battery_24px.png" />
     <None Remove="Images\charging_battery_24px.png" />
     <None Remove="Images\charging_station_24px.png" />
     <None Remove="Images\Check_Circle_24px.png" />
     <None Remove="Images\close_24px.png" />
     <None Remove="Images\clouds.png" />
+    <None Remove="Images\countdown_24px.png" />
     <None Remove="Images\customer_24px.png" />
     <None Remove="Images\Defined_24px.png" />
+    <None Remove="Images\delivered_box_24px.png" />
     <None Remove="Images\drone_24px.png" />
     <None Remove="Images\drone_image.jpeg" />
     <None Remove="Images\drone_login.png" />
@@ -26,14 +29,17 @@
     <None Remove="Images\empty_battery_24px.png" />
     <None Remove="Images\Fast_24px.png" />
     <None Remove="Images\full_battery_24px.png" />
+    <None Remove="Images\handcart_24px.png" />
     <None Remove="Images\hand_box_24px.png" />
     <None Remove="Images\home_24px.png" />
     <None Remove="Images\home_address_24px.png" />
     <None Remove="Images\intermediate_24px.png" />
+    <None Remove="Images\last_24_hours_24px.png" />
     <None Remove="Images\liver_24px.png" />
     <None Remove="Images\maintenance_24px.png" />
     <None Remove="Images\Normal_24px.png" />
     <None Remove="Images\parcel_24px.png" />
+    <None Remove="Images\product_management_24px.png" />
     <None Remove="Images\save_as_24px.png" />
     <None Remove="Images\Sorting_24px.png" />
     <None Remove="Images\update_24px.png" />
@@ -49,8 +55,11 @@
   <ItemGroup>
     <Resource Include="Images\add_24px.png" />
     <Resource Include="Images\box_24px.png" />
+    <Resource Include="Images\brake_warning_24px.png" />
     <Resource Include="Images\charging_station_24px.png" />
+    <Resource Include="Images\countdown_24px.png" />
     <Resource Include="Images\customer_24px.png" />
+    <Resource Include="Images\delivered_box_24px.png" />
     <Resource Include="Images\empty_battery_24px.png" />
   </ItemGroup>
 
@@ -73,14 +82,17 @@
     <Resource Include="Images\Emergency_24px.png" />
     <Resource Include="Images\Fast_24px.png" />
     <Resource Include="Images\full_battery_24px.png" />
+    <Resource Include="Images\handcart_24px.png" />
     <Resource Include="Images\hand_box_24px.png" />
     <Resource Include="Images\home_24px.png" />
     <Resource Include="Images\home_address_24px.png" />
     <Resource Include="Images\intermediate_24px.png" />
+    <Resource Include="Images\last_24_hours_24px.png" />
     <Resource Include="Images\liver_24px.png" />
     <Resource Include="Images\maintenance_24px.png" />
     <Resource Include="Images\Normal_24px.png" />
     <Resource Include="Images\parcel_24px.png" />
+    <Resource Include="Images\product_management_24px.png" />
     <Resource Include="Images\save_as_24px.png" />
     <Resource Include="Images\Sorting_24px.png" />
     <Resource Include="Images\update_24px.png" />

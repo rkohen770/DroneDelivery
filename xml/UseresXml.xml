@@ -61,6 +61,12 @@
     <Available>true</Available>
   </User>
   <User>
+    <UserName>נועה</UserName>
+    <Admin>Client</Admin>
+    <Password>1121</Password>
+    <Available>false</Available>
+  </User>
+  <User>
     <Admin>Managment</Admin>
     <Available>false</Available>
   </User>

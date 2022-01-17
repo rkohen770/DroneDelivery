@@ -153,8 +153,11 @@ namespace PL
             //{
             //    MessageBox.Show(ex.Message);
             //}
-            mainWindow.LVListParcels.ItemsSource = bl.GetAllParcelsBo();
-            mainWindow.LVListParcels.Items.Refresh();
+            if (mainWindow != null)
+            {
+                mainWindow.LVListParcels.ItemsSource = bl.GetAllParcelsBo();
+                mainWindow.LVListParcels.Items.Refresh();
+            }
             Close();
         }
 

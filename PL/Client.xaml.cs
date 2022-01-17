@@ -39,17 +39,6 @@ namespace PL
         /// collection of parcel that customers getting
         /// </summary>
         ObservableCollection<ParcelAtCustomer> listToCustomers;
-        //public Client(User user)
-        //{
-        //    InitializeComponent();
-        //    timer = new DispatcherTimer();
-        //    timer.Interval = TimeSpan.FromSeconds(1);
-        //    timer.Tick += timer_Tick;
-        //    timer.Start();
-        //    MyUser = user;
-        //    lUser.DataContext = MyUser;
-        //    lDate.Content = DateTime.Now.ToString("dd/MM/yy");
-        //}
 
         public Client(User user, MainWindow w = default)
         {
