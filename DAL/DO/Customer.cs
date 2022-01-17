@@ -14,7 +14,7 @@ namespace DO
         public string Phone { get; set; }
         public double Longitude { get; set; }
         public double Lattitude { get; set; }
-
+        public bool Available { get; set; }
         public override string ToString()
         {
             return $"ID: {CustomerID} \nName: {Name} \nPhone {Phone} \n" +
