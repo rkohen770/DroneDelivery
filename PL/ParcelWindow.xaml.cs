@@ -25,7 +25,7 @@ namespace PL
         private IBL bl;
         private ParcelForList parcelDetails;
         private MainWindow mainWindow;
-
+        private Client Client;
         public ParcelWindow()
         {
             InitializeComponent();
@@ -104,6 +104,32 @@ namespace PL
             ParcelDelivery.Text = parcel.ParcelDelivery.ToString();
 
         }
+        /// <summary>
+        /// constactor for add parcel in client detalis
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="parcelDetails"></param>
+        /// <param name="client"></param>
+        public ParcelWindow(IBL bl, Customer customer, Client client)
+        {
+            InitializeComponent();
+            this.bl = bl;
+            this.Client = client;
+           // DataContext = customer;
+            Weight_Selector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            Priorities_Selector.ItemsSource = Enum.GetValues(typeof(Priorities));
+            senderParcel.Visibility = Visibility.Hidden;
+            Height = 400;
+         
+            Sender_Id.Text = customer.CustomerID.ToString();
+            Sender_Name.Text = customer.NameOfCustomer;
+            Sender_Id.IsReadOnly = true;
+            Sender_Name.IsReadOnly = true;
+            
+
+        }
+
+
         /// <summary>
         /// text box that allows only numbers to be entered
         /// </summary>

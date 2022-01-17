@@ -102,9 +102,10 @@ namespace PL
         /// <param name="e"></param>
         private void AddParcelsButton_Click(object sender, RoutedEventArgs e)
         {
-            new ParcelWindow(bl, last).ShowDialog();
-
             Customer customer = bl.GetCustomer(customerForList.CustomerID);
+
+            new ParcelWindow(bl,customer, this).ShowDialog();
+
 
             LVListForCustomers.ItemsSource = new ObservableCollection<ParcelAtCustomer>(customer.FromCustomer);
             LVListForCustomers.Items.Refresh();
