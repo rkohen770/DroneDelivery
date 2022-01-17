@@ -2,6 +2,7 @@
 using BO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -25,7 +26,8 @@ namespace PL
         private IBL bl;
         private ParcelForList parcelDetails;
         private MainWindow mainWindow;
-        private Client Client;
+        private Client client;
+        private Customer customerDetails;
         public ParcelWindow()
         {
             InitializeComponent();
@@ -114,17 +116,17 @@ namespace PL
         {
             InitializeComponent();
             this.bl = bl;
-            this.Client = client;
-           // DataContext = customer;
+            this.client = client;
+            this.customerDetails = customer;
             Weight_Selector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             Priorities_Selector.ItemsSource = Enum.GetValues(typeof(Priorities));
             senderParcel.Visibility = Visibility.Hidden;
             Height = 400;
          
-            Sender_Id.Text = customer.CustomerID.ToString();
-            Sender_Name.Text = customer.NameOfCustomer;
-            Sender_Id.IsReadOnly = true;
-            Sender_Name.IsReadOnly = true;
+            Sender_Id_Add.Text = customer.CustomerID.ToString();
+            Sender_Name_Add.Text = customer.NameOfCustomer;
+            Sender_Id_Add.IsReadOnly = true;
+            Sender_Name_Add.IsReadOnly = true;
             
 
         }
@@ -175,15 +177,21 @@ namespace PL
             {
                 MessageBox.Show(ex.ID.ToString(), ex.Message + "\nThe customer does not exist in the system");
             }
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+
             if (mainWindow != null)
             {
                 mainWindow.LVListParcels.ItemsSource = bl.GetAllParcelsBo();
                 mainWindow.LVListParcels.Items.Refresh();
             }
+            if (client != null)
+            {
+                customerDetails = bl.GetCustomer(customerDetails.CustomerID);
+                client.LVListForCustomers.ItemsSource = new ObservableCollection<ParcelAtCustomer>(customerDetails.FromCustomer);
+                client.LVListForCustomers.Items.Refresh();
+                client.LVListToCustomers.ItemsSource = new ObservableCollection<ParcelAtCustomer>(customerDetails.ToCustomer);
+                client.LVListToCustomers.Items.Refresh();
+            }
+
             Close();
         }
 

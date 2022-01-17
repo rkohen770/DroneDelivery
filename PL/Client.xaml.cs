@@ -67,10 +67,6 @@ namespace PL
             CustomersPhone.Text = customer.PhoneOfCustomer.Substring(0, 3) + "-" + customer.PhoneOfCustomer.Substring(3, 7);
             CustomersLocation.Text = customer.LocationOfCustomer.ToString();
             CustomersLocation.Visibility = Visibility.Visible;
-
-
-
-
         }
 
         /// <summary>
@@ -105,13 +101,6 @@ namespace PL
             Customer customer = bl.GetCustomer(customerForList.CustomerID);
 
             new ParcelWindow(bl,customer, this).ShowDialog();
-
-
-            LVListForCustomers.ItemsSource = new ObservableCollection<ParcelAtCustomer>(customer.FromCustomer);
-            LVListForCustomers.Items.Refresh();
-
-            LVListToCustomers.ItemsSource = new ObservableCollection<ParcelAtCustomer>(customer.ToCustomer);
-            LVListToCustomers.Items.Refresh();
         }
 
         /// <summary>
