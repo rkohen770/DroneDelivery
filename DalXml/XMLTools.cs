@@ -2,33 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace DO
+namespace DL
 {
     /// <summary>
-    /// Help tools for the data base layer
+    /// Help class for xml
     /// </summary>
-    public static class Tools
+    public class XMLTools
     {
-        static Random R = new Random();
-        public static string ToStringProperty<T>(this T t)
-        {
-            string str = "";
-            foreach (PropertyInfo item in typeof(T).GetProperties())
-                str += "\n" + item.Name + ": " + item.GetValue(t, null);
-            return str;
-        }
-        /// <summary>
-        /// Help class for xml
-        /// </summary>
-
         static string dir = @"xml/";
-        static Tools()
+        static XMLTools()
         {
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
