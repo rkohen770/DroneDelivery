@@ -12,6 +12,9 @@
         TextOptions.TextRenderingMode="Auto" 
         FontFamily="David" FontSize="14">
     <Window.Resources>
+        <local:WeightCategoriesConvert x:Key="WeightCategoriesConvert"/>
+        <local:PrioritiesConvert x:Key="ParcelAtCustomerPrioritiestConvert"/>
+        <local:ParcelStatusConvert x:Key="ParcelAtCustomerStatusConvert"/>
         <local:WeightCategoriesToImage x:Key="ParcelAtCustomerWeightCategories"/>
         <local:PrioritiesToImage x:Key="ParcelAtCustomerPrioritiest"/>
         <local:ParcelStatusToImage x:Key="ParcelAtCustomerStatus"/>
@@ -56,21 +59,48 @@
                             <GridViewColumn Header="Weight">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Width="30" Height="30" Source="{Binding Path=Weight, Converter={StaticResource ParcelAtCustomerWeightCategories}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="3*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="1" Content="{Binding Path=Weight, Converter={StaticResource WeightCategoriesConvert},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
+                                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="80" Height="24" Canvas.Top="1" Foreground="#FF4362AC" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                                            <Image Grid.Row="0" Width="30" Height="30" Source="{Binding Path=Weight, Converter={StaticResource ParcelAtCustomerWeightCategories},
+                                                 UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                        </Grid>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="Priorities">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Width="30" Height="30" Source="{Binding Path=Priorities, Converter={StaticResource ParcelAtCustomerPrioritiest}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="3*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="1" Content="{Binding Path=Priorities, Converter={StaticResource ParcelAtCustomerPrioritiestConvert},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
+                                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="80" Height="24" Canvas.Top="1" Foreground="#FF4362AC" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                            <Image Grid.Row="0" Width="30" Height="30" Source="{Binding Path=Priorities, Converter={StaticResource ParcelAtCustomerPrioritiest},
+                                                 UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                        </Grid>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="Parcel status">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Width="30" Height="30" Source="{Binding Path=ParcelStatus, Converter={StaticResource ParcelAtCustomerStatus}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="3*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="1" Content="{Binding Path=ParcelStatus, Converter={StaticResource ParcelAtCustomerStatusConvert},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
+                                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="80" Height="24" Canvas.Top="1" Foreground="#FF4362AC" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                                            <Image Grid.Row="0" Width="30" Height="30" Source="{Binding Path=ParcelStatus, Converter={StaticResource ParcelAtCustomerStatus},
+                                                 UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                        </Grid>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -126,21 +156,48 @@
                             <GridViewColumn Header="Weight">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Width="30" Height="30" Source="{Binding Path=Weight, Converter={StaticResource ParcelAtCustomerWeightCategories}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="3*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="1" Content="{Binding Path=Weight, Converter={StaticResource WeightCategoriesConvert},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
+                                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="80" Height="24" Canvas.Top="1" Foreground="#FF4362AC" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                                            <Image Grid.Row="0" Width="30" Height="30" Source="{Binding Path=Weight, Converter={StaticResource ParcelAtCustomerWeightCategories},
+                                                 UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                        </Grid>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="Priorities">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Width="30" Height="30" Source="{Binding Path=Priorities, Converter={StaticResource ParcelAtCustomerPrioritiest}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="3*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="1" Content="{Binding Path=Priorities, Converter={StaticResource ParcelAtCustomerPrioritiestConvert},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
+                                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="80" Height="24" Canvas.Top="1" Foreground="#FF4362AC" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                            <Image Grid.Row="0" Width="30" Height="30" Source="{Binding Path=Priorities, Converter={StaticResource ParcelAtCustomerPrioritiest},
+                                                 UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                        </Grid>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="Parcel status">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Width="30" Height="30" Source="{Binding Path=ParcelStatus, Converter={StaticResource ParcelAtCustomerStatus}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay }"/>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="3*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="1" Content="{Binding Path=ParcelStatus, Converter={StaticResource ParcelAtCustomerStatusConvert},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
+                                                       HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="80" Height="24" Canvas.Top="1" Foreground="#FF4362AC" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                                            <Image Grid.Row="0" Width="30" Height="30" Source="{Binding Path=ParcelStatus, Converter={StaticResource ParcelAtCustomerStatus},
+                                                 UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                        </Grid>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

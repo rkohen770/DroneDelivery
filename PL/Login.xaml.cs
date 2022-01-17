@@ -98,7 +98,7 @@ namespace PL
                         MessageBox.Show("Client user:" + user.UserName + " added succsesfully!");
                         checkM.IsChecked = false;
                         passwordBox.Password = "";
-                        Details details = new Details(user);
+                        DetailsUser details = new DetailsUser(user);
                         details.ShowDialog();
                         Client client = new (user);
                         client.Show();

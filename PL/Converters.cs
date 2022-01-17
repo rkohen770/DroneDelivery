@@ -212,7 +212,7 @@ namespace PL
                     return "/Images/WasCollected_24px.png";
                 
                 case BO.ParcelStatus.Provided:
-                    return "/Images/deliverd_box_24px.png";
+                    return "/Images/delivered_box_24px.png";
             }
             return Enum.GetName(typeof(BO.ParcelStatus), value) + ".png";
         }

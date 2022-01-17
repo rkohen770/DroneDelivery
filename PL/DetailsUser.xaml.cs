@@ -18,12 +18,12 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for Details.xaml
+    /// Interaction logic for DetailsUser.xaml
     /// </summary>
-    public partial class Details : Window
+    public partial class DetailsUser : Window
     {
         private IBL bl = BLFactory.GetBL();
-        public Details(User user)
+        public DetailsUser(User user)
         {
             InitializeComponent();
             CustomersName.Text = user.UserName;
