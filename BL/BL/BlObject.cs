@@ -18,7 +18,7 @@ namespace BL
 
         List<DroneForList> droneForLists = new();
 
-        internal static IDal dal = DLFactory.GetDal();
+        internal static IDal dal = DalFactory.GetDal();
 
         public BlObject()
         {
