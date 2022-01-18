@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BO
+namespace BL
 {
     public partial class BlObject : BLApi.IBL
     {

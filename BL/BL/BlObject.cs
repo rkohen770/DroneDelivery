@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BO;
 using DalApi;
 using DO;
-namespace BO
+namespace BL
 {
     public sealed partial class BlObject : BLApi.IBL
     {
@@ -18,7 +18,7 @@ namespace BO
 
         List<DroneForList> droneForLists = new();
 
-        internal static IDal dal = DalFactory.GetDal("dalObject");
+        internal static IDal dal = DLFactory.GetDal();
 
         public BlObject()
         {

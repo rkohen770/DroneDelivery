@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using DalApi;
 using DO;
 
@@ -77,6 +78,24 @@ namespace DL
                 throw new BadUserNameException(userName, $"bad User Name: {userName}");
 
         }
+
+        ///// <summary>
+        ///// returns user by the user name from the file
+        ///// </summary>
+        ///// <param name="userName"></param>
+        ///// <returns></returns>
+        //public User GetUser(string userName)
+        //{
+        //    XElement dalUserId= XElement.Load(CustomersPath);
+
+        //    User dalUser = (from User in dalUserId.Elements()
+        //                 where User.Element("id").Value==
+        //    if (user.UserName != null)
+        //        return user; //no need to Clone()
+        //    else
+        //        throw new BadUserNameException(userName, $"bad User Name: {userName}");
+
+        //}
         /// <summary>
         /// returns all users from the file
         /// </summary>
@@ -91,6 +110,14 @@ namespace DL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
+        //public IEnumerable<User> GetAllUseresBy(Predicate<DO.User> predicate)
+        //{
+        //    List<User> users = XMLTools.LoadListFromXMLSerializer<User>(UseresPath);
+        //    return from u1 in users
+        //           where predicate(u1) && u1.Available == true
+        //           select u1;
+        //}
+
         public IEnumerable<User> GetAllUseresBy(Predicate<DO.User> predicate)
         {
             List<User> users = XMLTools.LoadListFromXMLSerializer<User>(UseresPath);
@@ -98,6 +125,8 @@ namespace DL
                    where predicate(u1) && u1.Available == true
                    select u1;
         }
+
+
         /// <summary>
         /// adds new user to the file
         /// </summary>
@@ -973,6 +1002,48 @@ namespace DL
                    where p(parcel)
                    select parcel.Clone();
         }
+        /// <summary>
+        /// return customer by customer id 
+        /// </summary>
+        /// <param name="customerId">customer id</param>
+        /// <returns>get customer</returns>
+        public Customer GetCustomer(int customerId)
+        {
+            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
+            var c = (from item in ListCustomer
+                     where item.CustomerID == customerId && item.Available
+                     select item).FirstOrDefault();
+            if (c.CustomerID == 0)
+                throw new BadCustomerIDException(customerId, "the customer not exists in the list of customers");
+            return c;
+        }
+
+        /// <summary>
+        /// return a list of actual customer
+        /// </summary>
+        /// <returns>list of customers</returns>
+        public IEnumerable<Customer> GetAllCustomers()
+        {
+            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
+            return from item in ListCustomer
+                   where item.Available
+                   select item;
+        }
+
+        /// <summary>
+        /// return customers by predicat
+        /// </summary>
+        /// <param name="p">predicat</param>
+        /// <returns>customers by predicat</returns>
+        public IEnumerable<Customer> GetAllCustomerByPredicate(Predicate<Customer> p)
+        {
+            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
+
+            return from customer in ListCustomer
+                   where p(customer)
+                   select customer;
+        }
+
         #endregion
 
         #endregion

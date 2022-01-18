@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using BO;
-using DO;
 using System.Threading;
 using BLApi;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml.Linq;
-namespace BO
+namespace BL
 {
     public partial class BlObject: IBL
     {

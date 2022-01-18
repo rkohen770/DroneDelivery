@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using DalApi;
 
-namespace DalApi
+namespace DL
 {
     partial class DalObject : IDal
     {
