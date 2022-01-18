@@ -716,56 +716,84 @@ namespace DL
             ListCustomer.Add(c);
             XMLTools.SaveListToXMLSerializer(ListCustomer, CustomersPath);
         }
+        /// <summary>
+        /// Update Customer data
+        /// </summary>
+        /// <param name="id">Customer id</param>
+        /// <param name="newName"></param>
+        /// <param name="newPhone"></param>
+        public void UpdateCustomerData(int id, string newName, string newPhone)
+        {
+            List<Customer> listCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
 
+            var CustomerAdd = (from item in listCustomer
+                              where item.CustomerID == id && item.Available
+                              select item).FirstOrDefault();
+            if (CustomerAdd.CustomerID != 0)
+            {
+                Customer c = CustomerAdd;
+                c.Name = newName;
+                c.Phone = newPhone;
 
+                listCustomer.Remove(CustomerAdd);
+                listCustomer.Add(c);
+                XMLTools.SaveListToXMLSerializer(listCustomer, CustomersPath);
+            }
+            else throw new BadCustomerIDException(id, $"The customer: {id} doesn't exist");
+        }
+        /// <summary>
+        /// update customer name
+        /// </summary>
+        /// <param name="id">customer id</param>
+        /// <param name="newName">customer name</param>
+        public void UpdateCustomerName(int id, string newName)
+        {
+            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
 
-        ///// <summary>
-        ///// Update Base Station Model
-        ///// </summary>
-        ///// <param name="id">Base Station id</param>
-        ///// <param name="nameBaseStation">new Base Station name</param>
-        //public void UpdateCustomerData(int id, string newName, string newPhone)
-        //{
-        //    List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
-        //    var CustomerAdd = (from item in ListStation
-        //                      where item.StationID == id && &item.availble
-        //                      select item).FirstOrDefault();
-        //    if (StationAdd.StationID != 0)
-        //    {
-        //        Station s = StationAdd;
-        //        s.StationName = nameBaseStation;
-        //        s.ChargeSlots = totalAmountOfChargingStations - listCharge.Count();
+            var CustomerAdd = (from item in ListCustomer
+                              where item.CustomerID == id && item.Available
+                              select item).FirstOrDefault();
 
-        //        ListStation.Remove(StationAdd);
-        //        ListStation.Add(s);
-        //        XMLTools.SaveListToXMLSerializer(ListStation, StationsPath);
-        //    }
-        //    else throw new BadBaseStationIDException(id, $"The station: {id} doesn't exist");
-        //}
+            if (CustomerAdd.CustomerID != 0)
+            {
+                Customer c = CustomerAdd;
+                c.Name = newName;
 
+                ListCustomer.Remove(CustomerAdd);
+                ListCustomer.Add(c);
+                XMLTools.SaveListToXMLSerializer(ListCustomer, CustomersPath);
+            }
+            throw new BadCustomerIDException(id, $"The customer doesn't exist in the system");
+        }
 
-        //public void UpdateBaseStationName(int id, int nameBaseStation)
-        //{
-        //    List<Station> ListStation = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
+        /// <summary>
+        /// customer phone
+        /// </summary>
+        /// <param name="id">customer id</param>
+        /// <param name="newPhone">customer name</param>
+        public void UpdateCustomerPhone(int id, string newPhone)
+        {
+            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
 
-        //    var StationAdd = (from item in ListStation
-        //                      where item.StationID == id
-        //                      select item).FirstOrDefault();
+            var CustomerAdd = (from item in ListCustomer
+                               where item.CustomerID == id && item.Available
+                               select item).FirstOrDefault();
 
-        //    if (StationAdd.StationID != 0)
-        //    {
-        //        update(StationAdd);
-        //        XMLTools.SaveListToXMLSerializer(ListStation, StationsPath);
-        //    }
-        //    throw new DO.BadBaseStationIDException(id, $"The station doesn't exist in the system");
-        //}
+            if (CustomerAdd.CustomerID != 0)
+            {
+                Customer c = CustomerAdd;
+                c.Phone = newPhone;
 
-
-
+                ListCustomer.Remove(CustomerAdd);
+                ListCustomer.Add(c);
+                XMLTools.SaveListToXMLSerializer(ListCustomer, CustomersPath);
+            }
+            throw new BadCustomerIDException(id, $"The customer doesn't exist in the system");
+        }
         /// <summary>
         /// deletes customer by the id number from the file
         /// </summary>
-        /// <param name="customerId"></param>
+        /// <param name="customerId">customer id</param>
         public void DeleteCustomer(int customerId)
         {
             List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
@@ -781,6 +809,48 @@ namespace DL
             }
             else throw new BadCustomerIDException(customerId, $"The customer: {customerId} doesn't exist");
         }
+        /// <summary>
+        /// return customer by customer id 
+        /// </summary>
+        /// <param name="customerId">customer id</param>
+        /// <returns>get customer</returns>
+        public Customer GetCustomer(int customerId)
+        {
+            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
+            var c = (from item in ListCustomer
+                     where item.CustomerID == customerId && item.Available
+                     select item).FirstOrDefault();
+            if (c.CustomerID == 0)
+                throw new BadCustomerIDException(customerId, "the customer not exists in the list of customers");
+            return c;
+        }
+
+        /// <summary>
+        /// return a list of actual customer
+        /// </summary>
+        /// <returns>list of customers</returns>
+        public IEnumerable<Customer> GetAllCustomers()
+        {
+            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
+            return from item in ListCustomer
+                   where item.Available
+                   select item;
+        }
+
+        /// <summary>
+        /// return customers by predicat
+        /// </summary>
+        /// <param name="p">predicat</param>
+        /// <returns>customers by predicat</returns>
+        public IEnumerable<Customer> GetAllCustomerByPredicate(Predicate<Customer> p)
+        {
+            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
+
+            return from customer in ListCustomer
+                   where p(customer)
+                   select customer;
+        }
+
         #endregion
     }
 }
