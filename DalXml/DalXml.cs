@@ -69,6 +69,7 @@ namespace DL
         /// <returns></returns>
         public User GetUser(string userName)
         {
+          
             List<User> users = XMLTools.LoadListFromXMLSerializer<User>(UseresPath);
 
             User user = users.Find(u => u.UserName == userName && u.Available == true);
@@ -79,23 +80,6 @@ namespace DL
 
         }
 
-        ///// <summary>
-        ///// returns user by the user name from the file
-        ///// </summary>
-        ///// <param name="userName"></param>
-        ///// <returns></returns>
-        //public User GetUser(string userName)
-        //{
-        //    XElement dalUserId= XElement.Load(CustomersPath);
-
-        //    User dalUser = (from User in dalUserId.Elements()
-        //                 where User.Element("id").Value==
-        //    if (user.UserName != null)
-        //        return user; //no need to Clone()
-        //    else
-        //        throw new BadUserNameException(userName, $"bad User Name: {userName}");
-
-        //}
         /// <summary>
         /// returns all users from the file
         /// </summary>
@@ -110,14 +94,6 @@ namespace DL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        //public IEnumerable<User> GetAllUseresBy(Predicate<DO.User> predicate)
-        //{
-        //    List<User> users = XMLTools.LoadListFromXMLSerializer<User>(UseresPath);
-        //    return from u1 in users
-        //           where predicate(u1) && u1.Available == true
-        //           select u1;
-        //}
-
         public IEnumerable<User> GetAllUseresBy(Predicate<DO.User> predicate)
         {
             List<User> users = XMLTools.LoadListFromXMLSerializer<User>(UseresPath);
