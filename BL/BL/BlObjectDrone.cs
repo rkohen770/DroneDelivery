@@ -216,7 +216,7 @@ namespace BL
                     ParcelInTransfer parcelInTransfer = new ParcelInTransfer()
                     {
                         ParcelID = parcel.ParcelID,
-                        Priorities = (BO.Priorities)parcel.priority,
+                        Priorities = (BO.Priorities)parcel.Priority,
                         Weight = (BO.WeightCategories)parcel.Weight,
                         SenderOfParcel = new() { CustomerID = customer_sender.CustomerID, CustomerName = customer_sender.Name },
                         TargetToParcel = new() { CustomerID = customer_target.CustomerID, CustomerName = customer_target.Name },

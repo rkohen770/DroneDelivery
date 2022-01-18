@@ -121,7 +121,7 @@ namespace BL
                     {
                         ParcelID = parcel.ParcelID,
                         Weight = (BO.WeightCategories)parcel.Weight,
-                        Priorities = (BO.Priorities)parcel.priority,
+                        Priorities = (BO.Priorities)parcel.Priority,
                         ParcelStatus = ParcelStatus,
                         SourceOrTarget = new()
                         {
@@ -146,7 +146,7 @@ namespace BL
                     {
                         ParcelID = parcel.ParcelID,
                         Weight = (BO.WeightCategories)parcel.Weight,
-                        Priorities = (BO.Priorities)parcel.priority,
+                        Priorities = (BO.Priorities)parcel.Priority,
                         ParcelStatus = ParcelStatus,
                         SourceOrTarget = new()
                         {

@@ -14,16 +14,7 @@ namespace DL
         internal static List<DroneCharge> droneCharges = new List<DroneCharge>(5);
         static Random rand = new();
 
-        internal class Config
-        {
-            public static int OrdinalParcelNumber = 10000;
-
-            public static double vacant = 0.01;
-            public static double CarriesLightWeight = 0.015;
-            public static double CarriesMediumWeight = 0.018;
-            public static double CarriesHeavyWeight = 0.02;
-            public static double DroneChargingRate = 0.003;
-        }
+        
 
         public static void Initialize()
         {
@@ -203,11 +194,11 @@ namespace DL
             {
                 new Parcel
                 {
-                   ParcelID = Config.OrdinalParcelNumber++, //serial number
+                   ParcelID =Config.OrdinalParcelNumber++, //serial number
                    SenderID = 123456789,
                    TargetID = 987654321,
                    Weight = (WeightCategories)rand.Next(3),
-                   priority = (Priorities)rand.Next(3),
+                   Priority = (Priorities)rand.Next(3),
                    Requested = new DateTime(2021, 8,27,8,30,11),
                    DroneID = 7486,
                    Scheduled = new DateTime(2021, 8, 27, 13, 39, 53),
@@ -221,7 +212,7 @@ namespace DL
                    SenderID = 987654321,
                    TargetID = 234567891,
                    Weight = (WeightCategories)rand.Next(3),
-                   priority = (Priorities)rand.Next(3),
+                   Priority = (Priorities)rand.Next(3),
                    Requested = new DateTime(2021, 8, 25, 7, 11, 26),
                    DroneID = 7486,
                    Scheduled = new DateTime(2021, 8, 25, 8, 30, 11),
@@ -234,7 +225,7 @@ namespace DL
                   SenderID = 345678912,
                   TargetID = 456789123,
                   Weight = (WeightCategories)rand.Next(3),
-                  priority = (Priorities)rand.Next(3),
+                  Priority = (Priorities)rand.Next(3),
                   Requested = new DateTime(2021, 8, 8, 5, 30, 11),
                   DroneID = 7686,
                   Scheduled = new DateTime(2021, 8, 8, 5, 56, 54),
@@ -248,7 +239,7 @@ namespace DL
                   SenderID = 456789123,
                   TargetID = 567891234,
                   Weight = (WeightCategories)rand.Next(3),
-                  priority = (Priorities)rand.Next(3),
+                  Priority = (Priorities)rand.Next(3),
                   Requested = new DateTime(2021, 10, 15, 12, 28, 36),
                   DroneID = 7686,
                   Scheduled = new DateTime(2021, 10, 15, 13, 47, 16),
@@ -262,7 +253,7 @@ namespace DL
                   SenderID = 567891234,
                   TargetID = 678912345,
                   Weight = (WeightCategories)rand.Next(3),
-                  priority = (Priorities)rand.Next(3),
+                  Priority = (Priorities)rand.Next(3),
                   Requested = new DateTime(2021, 10, 2, 15, 26, 16),
                   DroneID = 7686,
                   Scheduled = new DateTime(2021, 10, 2, 16, 47, 45),
@@ -276,7 +267,7 @@ namespace DL
                    SenderID = 678912345,
                    TargetID = 789123456,
                    Weight = (WeightCategories)rand.Next(3),
-                   priority = (Priorities)rand.Next(3),
+                   Priority = (Priorities)rand.Next(3),
                    Requested = new DateTime(2021, 5, 4, 3, 36, 35),
                    DroneID = 7916,
                    Scheduled = new DateTime(2021, 5, 4, 6, 45, 12),
@@ -290,7 +281,7 @@ namespace DL
                    SenderID = 789123456,
                    TargetID = 123456789,
                    Weight = (WeightCategories)rand.Next(3),
-                   priority = (Priorities)rand.Next(3),
+                   Priority = (Priorities)rand.Next(3),
                    Requested = new DateTime(2021, 12, 21, 12, 25, 35),
                    DroneID = 7916,
                    Scheduled = new DateTime(2021, 12, 21, 14, 25, 32),
@@ -304,7 +295,7 @@ namespace DL
                    SenderID = 456789123,
                    TargetID = 123456789,
                    Weight = (WeightCategories)rand.Next(3),
-                   priority = (Priorities)rand.Next(3),
+                   Priority = (Priorities)rand.Next(3),
                    Requested = new DateTime(2021, 6, 29, 16, 25, 35),
                    DroneID = 7216,
                    Scheduled = new DateTime(2021, 6, 29, 18, 36, 35),
@@ -318,7 +309,7 @@ namespace DL
                   SenderID = 234567891,
                   TargetID = 891234567,
                   Weight = (WeightCategories)rand.Next(3),
-                  priority = (Priorities)rand.Next(3),
+                  Priority = (Priorities)rand.Next(3),
                   Requested = new DateTime(2021, 4, 21, 11, 25, 45),
                   DroneID = 7216,
                   Scheduled = new DateTime(2021, 4, 21, 11, 58, 45),
@@ -332,7 +323,7 @@ namespace DL
                   SenderID = 101123556,
                   TargetID = 567891234,
                   Weight = (WeightCategories)rand.Next(3),
-                  priority = (Priorities)rand.Next(3),
+                  Priority = (Priorities)rand.Next(3),
                   Requested = new DateTime(2021, 2, 2, 19, 52, 21),
                   DroneID = 0,
                   Scheduled = null,

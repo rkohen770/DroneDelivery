@@ -12,7 +12,7 @@ namespace DO
         public int SenderID { get; set; }
         public int TargetID { get; set; }
         public WeightCategories Weight { get; set; }
-        public Priorities priority { get; set; }
+        public Priorities Priority { get; set; }
         public int DroneID { get; set; }
         public DateTime? Requested { get; set; }
         public DateTime? Scheduled { get; set; }
@@ -25,7 +25,7 @@ namespace DO
         public override string ToString()
         {
             return $"ID: {ParcelID} \nSenderId: {SenderID} \nTargetId {TargetID} \n" +
-                $"Weight {Weight} \npriority {priority} \nRequested {Requested} \n" +
+                $"Weight {Weight} \npriority {Priority} \nRequested {Requested} \n" +
                 $"DroneId {DroneID} \nscheduled {Scheduled} \nPickedUp {PickedUp} \nDelivered {Delivered}\n";
         }
     }

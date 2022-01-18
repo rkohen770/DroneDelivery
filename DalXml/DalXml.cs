@@ -838,18 +838,17 @@ namespace DL
             XMLTools.SaveListToXMLSerializer(ListDroneCharge, DroneChargePath);
         }
 
-        //}
-        ///// <summary>
-        ///// Method of applying drone power
-        ///// </summary>
-        ///// <returns>An array of the amount of power consumption of a drone for each situation</returns>
-        //public double[] PowerConsumptionRequest()
-        //{
-        //    double[] result = {DataSource.Config.vacant, DataSource.Config.CarriesLightWeight,
-        //        DataSource.Config.CarriesMediumWeight, DataSource.Config.CarriesHeavyWeight,
-        //        DataSource.Config.DroneChargingRate };
-        //    return result;
-        //}
+        /// <summary>
+        /// Method of applying drone power
+        /// </summary>
+        /// <returns>An array of the amount of power consumption of a drone for each situation</returns>
+        public double[] PowerConsumptionRequest()
+        {
+            double[] result = {GetConfigNumber("vacant"), GetConfigNumber("CarriesLightWeight"),
+                GetConfigNumber("CarriesMediumWeight"), GetConfigNumber("CarriesHeavyWeight"),
+                GetConfigNumber("DroneChargingRate") };
+            return result;
+        }
         #endregion
 
         #region Parcel
@@ -869,10 +868,10 @@ namespace DL
             List<Parcel> ListParcel = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
             List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
 
-            var castomer= (from item in ListCustomer
-                           where item.CustomerID == senderId
-                           select item).FirstOrDefault();
-            if(castomer.CustomerID==0||!castomer.Available)
+            var castomer = (from item in ListCustomer
+                            where item.CustomerID == senderId
+                            select item).FirstOrDefault();
+            if (castomer.CustomerID == 0 || !castomer.Available)
                 throw new BadCustomerIDException(senderId, "The sender not exists in the file of customers");
 
             castomer = (from item in ListCustomer
@@ -885,11 +884,11 @@ namespace DL
             {
                 Parcel p = new()
                 {
-                    ParcelID = DataSource.Config.OrdinalParcelNumber++,
+                    ParcelID = GetConfigNumber("OrdinalParcelNumber"),
                     SenderID = senderId,
                     TargetID = targetId,
                     Weight = weight,
-                    priority = priority,
+                    Priority = priority,
                     Requested = DateTime.Now,
                     DroneID = droneId
                 };
@@ -911,39 +910,24 @@ namespace DL
             List<Drone> ListDrone = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
 
             var parcel = (from item in ListParcel
-                            where item.ParcelID == parcelId
-                            select item).FirstOrDefault();
-            if (parcel.ParcelID == 0 || !parcel.Available)
-                throw new BadCustomerIDException(parcelId, "The parcel not exists in the file of parcels");
-
-            castomer = (from item in ListCustomer
-                        where item.CustomerID == targetId
-                        select item).FirstOrDefault();
-            if (castomer.CustomerID == 0 || !castomer.Available)
-                throw new BadCustomerIDException(targetId, "The target not exists in the file of customers");
-
-            if (!DataSource.parcels.Exists(parcel => parcel.ParcelID == parcelId))
-            {
+                          where item.ParcelID == parcelId && item.Available
+                          select item).FirstOrDefault();
+            if (parcel.ParcelID == 0)
                 throw new BadParcelIDException(parcelId, "the percel not exists in the list of parcels");
-            }
-            if (!DataSource.drones.Exists(drone => drone.DroneID == droneId))
-            {
+
+            var drone = (from item in ListDrone
+                         where item.DroneID == droneId && item.Available
+                         select item).FirstOrDefault();
+            if (drone.DroneID == 0)
                 throw new BadDroneIDException(droneId, "the drone not exists in the list of drones");
-            }
-            else
-            {
-                //We will go through the entire list of the drone, to find a available drone
-                for (int pIndex = 0; pIndex < DataSource.parcels.Count; pIndex++)
-                {
-                    if (DataSource.parcels[pIndex].ParcelID == parcelId)
-                    {
-                        Parcel parcel = DataSource.parcels[pIndex];//Obtain an index for the location where the package ID is located
-                        parcel.DroneID = droneId;//Update the droneid field in the drone package found
-                        parcel.Scheduled = DateTime.Now;//Update packet time association field to now.
-                        DataSource.parcels[pIndex] = parcel;
-                    }
-                }
-            }
+
+            Parcel p = parcel;
+            p.DroneID = droneId;//Update the droneid field in the drone package found
+            p.Scheduled = DateTime.Now;//Update packet time association field to now.
+            ListParcel.Remove(parcel);
+            ListParcel.Add(p);
+            XMLTools.SaveListToXMLSerializer(ListParcel, ParcelsPath);
+
         }
 
         /// <summary>
@@ -952,20 +936,18 @@ namespace DL
         /// <param name="parcelId">Package ID for collection</param>
         public void PackagCollectionByDrone(int parcelId)
         {
-            if (!DataSource.parcels.Exists(parcel => parcel.ParcelID == parcelId))
-            {
+            List<Parcel> ListParcel = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+
+            var parcel = (from item in ListParcel
+                          where item.ParcelID == parcelId && item.Available
+                          select item).FirstOrDefault();
+            if (parcel.ParcelID == 0)
                 throw new BadParcelIDException(parcelId, "the percel not exists in the list of parcels");
-            }
-            for (int i = 0; i < DataSource.parcels.Count; i++)
-            {
-                if (DataSource.parcels[i].ParcelID == parcelId)//Obtain an index for the location where the package ID is located
-                {
-                    Parcel parcel = DataSource.parcels[i];
-                    parcel.PickedUp = DateTime.Now;//Update packet time pickeup field to now.
-                    DataSource.parcels[i] = parcel;
-                    return;
-                }
-            }
+            Parcel p = parcel;
+            parcel.PickedUp = DateTime.Now;//Update packet time pickeup field to now.
+            ListParcel.Remove(parcel);
+            ListParcel.Add(p);
+            XMLTools.SaveListToXMLSerializer(ListParcel, ParcelsPath);
         }
 
 
@@ -975,35 +957,35 @@ namespace DL
         /// <param name="parcelId">Package ID for delivery</param>
         public void DeliveryPackageToCustomer(int parcelId)
         {
-            if (!DataSource.parcels.Exists(parcel => parcel.ParcelID == parcelId))
-            {
+            List<Parcel> ListParcel = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+
+            var parcel = (from item in ListParcel
+                          where item.ParcelID == parcelId && item.Available
+                          select item).FirstOrDefault();
+            if (parcel.ParcelID == 0)
                 throw new BadParcelIDException(parcelId, "the percel not exists in the list of parcels");
-            }
-            for (int i = 0; i < DataSource.parcels.Count; i++)
-            {
-                if (DataSource.parcels[i].ParcelID == parcelId)//Obtain an index for the location where the package ID is located
-                {
-                    Parcel parcel = DataSource.parcels[i];
-                    parcel.Delivered = DateTime.Now;//Update packet time delivered field to now.
-                    DataSource.parcels[i] = parcel;
-                    return;
-                }
-            }
+            Parcel p = parcel;
+            parcel.Delivered = DateTime.Now;//Update packet time delivered field to now.
+            ListParcel.Remove(parcel);
+            ListParcel.Add(p);
+            XMLTools.SaveListToXMLSerializer(ListParcel, ParcelsPath);
+
         }
-
-
         public void UpdateParcelData(int id, int droneID)
         {
-            if (!DataSource.parcels.Exists(p => p.ParcelID == id))
-            {
-                throw new BadParcelIDException(id, "the parcel not exists in the system");
-            }
-            else
-            {
-                int pIndex = DataSource.parcels.FindIndex(p => p.ParcelID == id);
-                Parcel parcel = DataSource.parcels[pIndex];
-                parcel.DroneID = droneID;
-            }
+            List<Parcel> ListParcel = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+
+            var parcel = (from item in ListParcel
+                          where item.ParcelID == id && item.Available
+                          select item).FirstOrDefault();
+            if (parcel.ParcelID == 0)
+                throw new BadParcelIDException(id, "the percel not exists in the list of parcels");
+            Parcel p = parcel;
+            parcel.DroneID = droneID;
+            ListParcel.Remove(parcel);
+            ListParcel.Add(p);
+            XMLTools.SaveListToXMLSerializer(ListParcel, ParcelsPath);
+            
         }
         #endregion
 
@@ -1015,12 +997,16 @@ namespace DL
         /// <returns>parcel to show</returns>
         public Parcel GetParcel(int parcelId)
         {
-            if (!DataSource.parcels.Exists(parcel => parcel.ParcelID == parcelId))
-            {
-                throw new BadParcelIDException(parcelId, "the parcel not exists in the list of parcels");
-            }
+            List<Parcel> ListParcel = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+
+            var parcel = (from item in ListParcel
+                          where item.ParcelID == parcelId && item.Available
+                          select item).FirstOrDefault();
+            if (parcel.ParcelID == 0)
+                throw new BadParcelIDException(parcelId, "the percel not exists in the list of parcels");
+
             //find the place of the parcel in the array of parcels
-            return DataSource.parcels.Find(p => p.ParcelID == parcelId);
+            return parcel;
         }
         #endregion
 
@@ -1031,7 +1017,10 @@ namespace DL
         /// <returns>list of parcels</returns>
         public IEnumerable<Parcel> GetAllParcels()
         {
-            return (IEnumerable<Parcel>)DataSource.parcels;
+            List<Parcel> ListParcel = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+            return from item in ListParcel
+                   where item.Available
+                   select item;
         }
 
         /// <summary>
@@ -1040,18 +1029,62 @@ namespace DL
         /// <returns>list of parcel without special dron</returns>
         public IEnumerable<Parcel> GetAllParcelsWithoutSpecialDron(Predicate<Parcel> p)
         {
+            List<Parcel> ListParcel = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
             //return all the parcels without special drone
-            return from parcel in DataSource.parcels
-                   where p(parcel)
-                   select parcel.Clone();
+            return from parcel in ListParcel
+                   where p(parcel)&& parcel.Available
+                   select parcel;
         }
-       
-        
-
-       
         #endregion
 
         #endregion
+
+        #region Config
+        /// <summary>
+        /// returns line station ID from file
+        /// </summary>
+        /// <returns></returns>
+        public int GetConfigNumber(string name)
+        {
+            List<Config> ListConfig = XMLTools.LoadListFromXMLSerializer<Config>(ConfigPath);
+            int id = ListConfig.Find(i => i.Name==name).Id;
+            return id;
+        }
+        /// <summary>
+        /// updates the line station in file
+        /// </summary>
+        public void UpdateConfigNumber(string name)
+        {
+            List<Config> ListID = XMLTools.LoadListFromXMLSerializer<Config>(ConfigPath);
+            Config i = ListID.Find(x => x.Name == name);
+            ListID.Remove(i);
+            i.Id++;
+            ListID.Add(i); //no need to Clone()
+            XMLTools.SaveListToXMLSerializer(ListID, ConfigPath);
+        }
+        #endregion
+
+        /// <summary>
+        /// A function that calculates the distance between two points on the map
+        /// </summary>
+        /// <param name="senderId">sender ID</param>
+        /// <param name="targetId">target ID</param>
+        /// <returns>Returns a distance between two points</returns>
+        public double GetDistanceBetweenLocationsOfParcels(int senderId, int targetId)
+        {
+            List<Station> ListStation = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
+            double minDistance = 1000000000000;
+            Customer sender = GetCustomer(senderId);
+            Customer target = GetCustomer(targetId);
+            foreach (var station in ListStation)
+            {
+                double dictance = Math.Sqrt(Math.Pow(sender.Lattitude - target.Lattitude, 2) + Math.Pow(sender.Longitude - target.Longitude, 2));
+                if (minDistance > dictance)
+                {
+                    minDistance = dictance;
+                }
+            }
+            return minDistance;
+        }
     }
 }
-

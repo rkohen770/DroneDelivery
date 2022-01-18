@@ -74,9 +74,9 @@ namespace BL
                     DroneForList dr = droneForLists.Find(d => d.DroneID == droneId);
 
                     List<DO.Parcel> parcels = dal.GetAllParcels().Where(p => p.DroneID == 0).ToList();
-                    // list parcels ordered by priority and weight
+                    // list parcels ordered by Priority and weight
                     List<DO.Parcel> orderedParcels = (from parcel in parcels
-                                                      orderby parcel.priority descending,
+                                                      orderby parcel.Priority descending,
                                                       parcel.Weight ascending,
                                                       getDistanceBetweenTwoPoints(dr.CurrentLocation.Lattitude, dr.CurrentLocation.Longitude, dal.GetCustomer(parcel.SenderID).Lattitude, dal.GetCustomer(parcel.SenderID).Longitude)
                                                       where parcel.Weight <= drone.MaxWeight
@@ -248,7 +248,7 @@ namespace BL
                     SenderOfParcel = new() { CustomerID = sender.CustomerID, CustomerName = sender.NameOfCustomer },
                     TargetToParcel = new() { CustomerID = target.CustomerID, CustomerName = target.NameOfCustomer },
                     Weight = (BO.WeightCategories)parcel.Weight,
-                    Priorities = (BO.Priorities)parcel.priority,
+                    Priorities = (BO.Priorities)parcel.Priority,
                     Requested = parcel.Requested,
                     Scheduled = parcel.Scheduled,
                     PickedUp = parcel.PickedUp,
