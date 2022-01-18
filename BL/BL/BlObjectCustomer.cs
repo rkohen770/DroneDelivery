@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using DalApi;
 using DO;
 
-namespace BO
+namespace BL
 {
     public partial class BlObject : BLApi.IBL
     {

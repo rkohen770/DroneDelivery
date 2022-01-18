@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DalApi
+namespace DL
 {
     class DataSource
     {

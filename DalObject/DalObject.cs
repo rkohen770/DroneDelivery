@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DalApi
+namespace DL
 {
     sealed partial class DalObject : IDal
     {
