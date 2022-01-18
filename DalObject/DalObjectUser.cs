@@ -11,10 +11,6 @@ namespace DL
 {
     partial class DalObject : IDal
     {
-        /// <summary>
-        /// users XElement
-        /// </summary>
-        string UseresPath = @"UseresXml.xml";
 
         /// <summary>
         /// returns user by the user name from the file
@@ -52,10 +48,10 @@ namespace DL
         /// <returns></returns>
         public IEnumerable<DO.User> GetAllUseresBy(Predicate<DO.User> predicate)
         {
-            List<User> users = Tools.LoadListFromXMLSerializer<User>(UseresPath);
-            return from u1 in users
-                   where predicate(u1) && u1.Available == true
-                   select u1;
+            return from user in DataSource.users
+                   where predicate(user)
+                   select user.Clone();
+
         }
         /// <summary>
         /// adds new user to the file
@@ -85,21 +81,23 @@ namespace DL
         /// <param name="userName"></param>
         public void DeleteUser(string userName)
         {
-            List<User> users = Tools.LoadListFromXMLSerializer<User>(UseresPath);
-
-            User? user = (from u in users
-                          where u.UserName == userName
-                          select u).FirstOrDefault();
-
-            if (user != null)
+            if (!DataSource.users.Exists(u => u.UserName == userName))
             {
-                User user1 = (User)user;
-                user1.Available = false;
-                users.Add(user1);
-                Tools.SaveListToXMLSerializer(users, UseresPath);
+                throw new BadUserNameException(userName, $"bad user name: {userName}");
             }
             else
-                throw new BadUserNameException(userName, $"bad user name: {userName}");
+            {
+                //We will go through the entire list of the drone, to find a available drone
+                for (int uIndex = 0; uIndex < DataSource.parcels.Count; uIndex++)
+                {
+                    if (DataSource.users[uIndex].UserName == userName)
+                    {
+                        User user = DataSource.users[uIndex];//Obtain an index for the location where the user is located
+                        user.Available = false;//Update the avilabl field in the drone package found
+                        DataSource.users[uIndex] = user;
+                    }
+                }
+            }
         }
         /// <summary>
         /// updates user in the file
@@ -107,20 +105,28 @@ namespace DL
         /// <param name="user"></param>
         public void UpdateUser(DO.User user)
         {
-            //List<User> users = Tools.LoadListFromXMLSerializer<User>(UseresPath);
-            List<User> users = DataSource.users;
-            User? user1 = (from u in users
-                           where u.UserName == user.UserName
-                           select u).FirstOrDefault();
-
-            if (user1 != null)
+            if (!DataSource.users.Exists(u => u.UserName == user.UserName))
             {
-                users.Remove((User)user1);
-                users.Add(user);
-                Tools.SaveListToXMLSerializer(users, UseresPath);
+                throw new BadUserNameException(user.UserName, $"bad user name: {user.UserName}");
             }
             else
-                throw new DO.BadUserNameException(user.UserName, $"bad user name: {user.UserName}");
+            {
+                //We will go through the entire list of the drone, to find a available drone
+                for (int uIndex = 0; uIndex < DataSource.parcels.Count; uIndex++)
+                {
+                    if (DataSource.users[uIndex].UserName == user.UserName)
+                    {
+                        User user1 = new()
+                        {
+                            UserName = user.UserName,
+                            Password = user.Password,
+                            Admin = user.Admin,
+                            Available = user.Available
+                        };
+                        DataSource.users[uIndex] = user1;
+                    }
+                }
+            }
         }
 
     }

@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DalApi;
-using DO;
 
 namespace BL
 {
@@ -54,7 +53,7 @@ namespace BL
             //update in BL
             try
             {
-                Station station = dal.GetBaseStation(id);
+                DO.Station station = dal.GetBaseStation(id);
                 if (nameBaseStation != 0)
                 {
                     if (totalAmountOfChargingStations != 0)
@@ -88,7 +87,7 @@ namespace BL
         {
             try
             {
-                Station station = dal.GetBaseStation(baseStationId);
+                DO.Station station = dal.GetBaseStation(baseStationId);
                 List<int> dronesIdInChrging = dal.GetDronesInChargingsAtStation(baseStationId, droneCharge => droneCharge.StationID == baseStationId).ToList();
                 List<DroneInCharging> dronesInCarging = new();
                 foreach (var droneId in dronesIdInChrging)
@@ -134,7 +133,7 @@ namespace BL
         /// Display of base stations with available charging stations
         /// </summary>
         /// <returns>list of base stations with available charging stations</returns>
-        public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging(Predicate<Station> p)
+        public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging(Predicate<DO.Station> p)
         {
             List<BaseStationForList> list = new();
             foreach (var station in dal.GetAllStationsBy(p))

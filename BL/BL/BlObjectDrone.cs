@@ -1,5 +1,4 @@
 ﻿using BO;
-using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +21,7 @@ namespace BL
             try
             {
                 //add drone fields in BL.
-                Station s = dal.GetBaseStation(stationId);
+                DO.Station s = dal.GetBaseStation(stationId);
                 DroneForList drone = new()
                 {
                     DroneID = droneId,
@@ -100,7 +99,7 @@ namespace BL
                 {
                     if (drone.DroneStatus == DroneStatus.Available)
                     {
-                        Station station = dal.GetClosestStation(drone.CurrentLocation.Lattitude, drone.CurrentLocation.Longitude, true);
+                        DO.Station station = dal.GetClosestStation(drone.CurrentLocation.Lattitude, drone.CurrentLocation.Longitude, true);
                         double minDistans = (int)getDistanceBetweenTwoPoints(drone.CurrentLocation.Lattitude, drone.CurrentLocation.Longitude, station.Lattitude, station.Longitude);
                         if (drone.DroneBattery >= minDistans * dal.PowerConsumptionRequest()[0])
                         {
@@ -169,7 +168,7 @@ namespace BL
 
                         //update in DAL 
                         //We will find the charging station by the location of the drone
-                        Station station = dal.GetAllBaseStations().
+                        DO.Station station = dal.GetAllBaseStations().
                             Where(s => s.Lattitude == drone.CurrentLocation.Lattitude && s.Longitude == drone.CurrentLocation.Longitude).
                             FirstOrDefault();
                         dal.ReleasDroneFromCharging(id, station.StationID);//sending for dal

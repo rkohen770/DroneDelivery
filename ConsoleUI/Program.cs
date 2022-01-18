@@ -26,7 +26,7 @@ namespace ConsoleUI
         internal static IDal dal;
         static void Main(string[] args)
         {
-            dal = DalFactory.GetDal("dalObject");
+            dal = DLFactory.GetDal();
             MenuMessages();
             int choice;
             while (!int.TryParse(Console.ReadLine(), out choice))
