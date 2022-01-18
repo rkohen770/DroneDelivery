@@ -188,9 +188,9 @@ namespace DL
         /// <returns>An array of the amount of power consumption of a drone for each situation</returns>
         public double[] PowerConsumptionRequest()
         {
-            double[] result = {DataSource.Config.vacant, DataSource.Config.CarriesLightWeight,
-                DataSource.Config.CarriesMediumWeight, DataSource.Config.CarriesHeavyWeight,
-                DataSource.Config.DroneChargingRate };
+            double[] result = {Config_1.vacant,Config_1.CarriesLightWeight,
+                Config_1.CarriesMediumWeight, Config_1.CarriesHeavyWeight,
+                Config_1.DroneChargingRate };
             return result;
         }
 

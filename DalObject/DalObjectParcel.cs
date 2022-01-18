@@ -34,7 +34,7 @@ namespace DL
             {
                 Parcel parcel = new Parcel
                 {
-                    ParcelID =Config.OrdinalParcelNumber++,
+                    ParcelID = Config_1.OrdinalParcelNumber++,
                     SenderID = senderId,
                     TargetID = targetId,
                     Weight = weight,

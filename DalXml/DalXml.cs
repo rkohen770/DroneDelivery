@@ -67,7 +67,7 @@ namespace DL
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public User GetUser(string userName)
+        public User GetUser(string userName,string password=null)
         {
           
             List<User> users = XMLTools.LoadListFromXMLSerializer<User>(UseresPath);
