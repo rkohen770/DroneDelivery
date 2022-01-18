@@ -1070,32 +1070,9 @@ namespace DL
                    select parcel.Clone();
         }
        
-        /// <summary>
-        /// return a list of actual customer
-        /// </summary>
-        /// <returns>list of customers</returns>
-        public IEnumerable<Customer> GetAllCustomers()
-        {
-            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
-            return from item in ListCustomer
-                   where item.Available
-                   select item;
-        }
+        
 
-        /// <summary>
-        /// return customers by predicat
-        /// </summary>
-        /// <param name="p">predicat</param>
-        /// <returns>customers by predicat</returns>
-        public IEnumerable<Customer> GetAllCustomerByPredicate(Predicate<Customer> p)
-        {
-            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
-
-            return from customer in ListCustomer
-                   where p(customer)
-                   select customer;
-        }
-
+       
         #endregion
 
 
