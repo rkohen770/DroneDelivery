@@ -57,7 +57,7 @@ namespace DL
         /// <summary>
         /// Ordinal Parcel Number XMLSerializer
         /// </summary>
-        string OrdinalParcelNumberisPath = @"OrdinalParcelNumberPath.xml";
+        string ConfigPath = @"ConfigXml.xml";
         #endregion
 
         #region User
@@ -197,10 +197,10 @@ namespace DL
         }
 
         /// <summary>
-        /// Update Base Station Model
+        /// Update Base Station name and total Amount Of Charging Stations
         /// </summary>
         /// <param name="id">Base Station id</param>
-        /// <param name="nameBaseStation">new Base Station name</param>
+        /// <param name="nameBaseStation">new Base Station name and total Amount Of Charging Stations</param>
         public void UpdateBaseStationData(int id, int nameBaseStation, int totalAmountOfChargingStations)
         {
             List<Station> ListStation = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
@@ -227,7 +227,7 @@ namespace DL
         }
 
         /// <summary>
-        /// Update Base Station Model
+        /// Update Base Station name
         /// </summary>
         /// <param name="id">Base Station id</param>
         /// <param name="nameBaseStation">new Base Station name</param>
@@ -421,7 +421,105 @@ namespace DL
         }
         #endregion
 
+        #region customer
+        /// <summary>
+        /// adds customer to the file
+        /// </summary>
+        /// <param name="id">Unique ID number</param>
+        /// <param name="name">The customer name</param>
+        /// <param name="phone">The customer phone number</param>
+        /// <param name="longitude">Longitude within the borders of the Land of Israel</param>
+        /// <param name="lattitude">Lattitude within the borders of the Land of Israel</param>
+        public void AddCustomer(int id, string name, string phone, double longitude, double lattitude)
+        {
+            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
+            var CustomerAdd = (from item in ListCustomer
+                               where item.CustomerID == id
+                               select item).FirstOrDefault();
+            if (CustomerAdd.CustomerID != 0 && CustomerAdd.Available)
+                throw new CustomerAlreadyExistException(id, name, "The customer exists");
+            if (CustomerAdd.CustomerID != 0 && !CustomerAdd.Available)
+            {
+                DeleteCustomer(id);
+            }
 
+            Customer c = new Customer
+            {
+                CustomerID = id,
+                Name = name,
+                Phone = phone,
+                Longitude = longitude,
+                Lattitude = lattitude,
+            };
+            ListCustomer.Add(c);
+            XMLTools.SaveListToXMLSerializer(ListCustomer, CustomersPath);
+        }
+
+
+
+        ///// <summary>
+        ///// Update Base Station Model
+        ///// </summary>
+        ///// <param name="id">Base Station id</param>
+        ///// <param name="nameBaseStation">new Base Station name</param>
+        //public void UpdateCustomerData(int id, string newName, string newPhone)
+        //{
+        //    List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
+        //    var CustomerAdd = (from item in ListStation
+        //                      where item.StationID == id && &item.availble
+        //                      select item).FirstOrDefault();
+        //    if (StationAdd.StationID != 0)
+        //    {
+        //        Station s = StationAdd;
+        //        s.StationName = nameBaseStation;
+        //        s.ChargeSlots = totalAmountOfChargingStations - listCharge.Count();
+
+        //        ListStation.Remove(StationAdd);
+        //        ListStation.Add(s);
+        //        XMLTools.SaveListToXMLSerializer(ListStation, StationsPath);
+        //    }
+        //    else throw new BadBaseStationIDException(id, $"The station: {id} doesn't exist");
+        //}
+
+
+        //public void UpdateBaseStationName(int id, int nameBaseStation)
+        //{
+        //    List<Station> ListStation = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
+
+        //    var StationAdd = (from item in ListStation
+        //                      where item.StationID == id
+        //                      select item).FirstOrDefault();
+
+        //    if (StationAdd.StationID != 0)
+        //    {
+        //        update(StationAdd);
+        //        XMLTools.SaveListToXMLSerializer(ListStation, StationsPath);
+        //    }
+        //    throw new DO.BadBaseStationIDException(id, $"The station doesn't exist in the system");
+        //}
+
+
+
+        /// <summary>
+        /// deletes customer by the id number from the file
+        /// </summary>
+        /// <param name="customerId"></param>
+        public void DeleteCustomer(int customerId)
+        {
+            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
+            var CustomerDelete = (from item in ListCustomer
+                                  where item.CustomerID == customerId && item.Available
+                                  select item).FirstOrDefault();
+            if (CustomerDelete.CustomerID != 0)
+            {
+                ListCustomer.Remove(CustomerDelete);
+                CustomerDelete.Available = false;
+                ListCustomer.Add(CustomerDelete);
+                XMLTools.SaveListToXMLSerializer(ListCustomer, CustomersPath);
+            }
+            else throw new BadCustomerIDException(customerId, $"The customer: {customerId} doesn't exist");
+        }
+        #endregion
 
 
 
@@ -441,7 +539,7 @@ namespace DL
                             select item).FirstOrDefault();
 
             if (DroneAdd.DroneID != 0 && DroneAdd.Available)
-                throw new DroneAlreadyExistException(id, model, "The station exists");
+                throw new DroneAlreadyExistException(id, model, "The drone alredy exists");
 
             if (DroneAdd.DroneID != 0 && !DroneAdd.Available)
             {
@@ -682,106 +780,203 @@ namespace DL
         //}
         #endregion
 
+        #region Parcel
 
-        #region customer
+        #region ADD
         /// <summary>
-        /// adds customer to the file
+        /// Receipt of package for delivery
         /// </summary>
-        /// <param name="id">Unique ID number</param>
-        /// <param name="name">The customer name</param>
-        /// <param name="phone">The customer phone number</param>
-        /// <param name="longitude">Longitude within the borders of the Land of Israel</param>
-        /// <param name="lattitude">Lattitude within the borders of the Land of Israel</param>
-        public void AddCustomer(int id, string name, string phone, double longitude, double lattitude)
+        /// <param name="senderId">Sending customer ID</param>
+        /// <param name="targetId"> Receiving customer ID</param>
+        /// <param name="weight">Weight category (light, medium, heavy)</param>
+        /// <param name="priority">Priority (Normal, fast, emergency)</param>
+        /// <returns>An array that contains all the packages</returns>
+        public int AddParcel(int senderId, int targetId, WeightCategories weight,
+            Priorities priority, int droneId = 0)
         {
+            List<Parcel> ListParcel = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
             List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
-            var CustomerAdd = (from item in ListCustomer
-                               where item.CustomerID == id
-                               select item).FirstOrDefault();
-            if (CustomerAdd.CustomerID != 0 && CustomerAdd.Available)
-                throw new CustomerAlreadyExistException(id, name, "The customer exists");
-            if (CustomerAdd.CustomerID != 0 && !CustomerAdd.Available)
+
+            var castomer= (from item in ListCustomer
+                           where item.CustomerID == senderId
+                           select item).FirstOrDefault();
+            if(castomer.CustomerID==0||!castomer.Available)
+                throw new BadCustomerIDException(senderId, "The sender not exists in the file of customers");
+
+            castomer = (from item in ListCustomer
+                        where item.CustomerID == targetId
+                        select item).FirstOrDefault();
+            if (castomer.CustomerID == 0 || !castomer.Available)
+                throw new BadCustomerIDException(targetId, "The target not exists in the file of customers");
+
+            else
             {
-                DeleteCustomer(id);
+                Parcel p = new()
+                {
+                    ParcelID = DataSource.Config.OrdinalParcelNumber++,
+                    SenderID = senderId,
+                    TargetID = targetId,
+                    Weight = weight,
+                    priority = priority,
+                    Requested = DateTime.Now,
+                    DroneID = droneId
+                };
+                ListParcel.Add(p);
+                XMLTools.SaveListToXMLSerializer(ListParcel, CustomersPath);//Adding the new parcel to the file
+                return p.ParcelID;
             }
-
-            Customer c = new Customer
-            {
-                CustomerID = id,
-                Name = name,
-                Phone = phone,
-                Longitude = longitude,
-                Lattitude = lattitude,
-            };
-            ListCustomer.Add(c);
-            XMLTools.SaveListToXMLSerializer(ListCustomer, CustomersPath);
-        }
-
-
-
-        ///// <summary>
-        ///// Update Base Station Model
-        ///// </summary>
-        ///// <param name="id">Base Station id</param>
-        ///// <param name="nameBaseStation">new Base Station name</param>
-        //public void UpdateCustomerData(int id, string newName, string newPhone)
-        //{
-        //    List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
-        //    var CustomerAdd = (from item in ListStation
-        //                      where item.StationID == id && &item.availble
-        //                      select item).FirstOrDefault();
-        //    if (StationAdd.StationID != 0)
-        //    {
-        //        Station s = StationAdd;
-        //        s.StationName = nameBaseStation;
-        //        s.ChargeSlots = totalAmountOfChargingStations - listCharge.Count();
-
-        //        ListStation.Remove(StationAdd);
-        //        ListStation.Add(s);
-        //        XMLTools.SaveListToXMLSerializer(ListStation, StationsPath);
-        //    }
-        //    else throw new BadBaseStationIDException(id, $"The station: {id} doesn't exist");
-        //}
-
-
-        //public void UpdateBaseStationName(int id, int nameBaseStation)
-        //{
-        //    List<Station> ListStation = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
-
-        //    var StationAdd = (from item in ListStation
-        //                      where item.StationID == id
-        //                      select item).FirstOrDefault();
-
-        //    if (StationAdd.StationID != 0)
-        //    {
-        //        update(StationAdd);
-        //        XMLTools.SaveListToXMLSerializer(ListStation, StationsPath);
-        //    }
-        //    throw new DO.BadBaseStationIDException(id, $"The station doesn't exist in the system");
-        //}
-
-
-
-        /// <summary>
-        /// deletes customer by the id number from the file
-        /// </summary>
-        /// <param name="customerId"></param>
-        public void DeleteCustomer(int customerId)
-        {
-            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
-            var CustomerDelete = (from item in ListCustomer
-                                  where item.CustomerID == customerId && item.Available
-                                  select item).FirstOrDefault();
-            if (CustomerDelete.CustomerID != 0)
-            {
-                ListCustomer.Remove(CustomerDelete);
-                CustomerDelete.Available = false;
-                ListCustomer.Add(CustomerDelete);
-                XMLTools.SaveListToXMLSerializer(ListCustomer, CustomersPath);
-            }
-            else throw new BadCustomerIDException(customerId, $"The customer: {customerId} doesn't exist");
         }
         #endregion
+
+        #region Uppdate
+        /// <summary>
+        /// Assigning a package to a drone
+        /// </summary>
+        /// <param name="parcelId">Package ID for association</param>
+        public void AssigningParcelToDrone(int parcelId, int droneId)
+        {
+            List<Parcel> ListParcel = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+            List<Drone> ListDrone = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
+
+            var parcel = (from item in ListParcel
+                            where item.ParcelID == parcelId
+                            select item).FirstOrDefault();
+            if (parcel.ParcelID == 0 || !parcel.Available)
+                throw new BadCustomerIDException(parcelId, "The parcel not exists in the file of parcels");
+
+            castomer = (from item in ListCustomer
+                        where item.CustomerID == targetId
+                        select item).FirstOrDefault();
+            if (castomer.CustomerID == 0 || !castomer.Available)
+                throw new BadCustomerIDException(targetId, "The target not exists in the file of customers");
+
+            if (!DataSource.parcels.Exists(parcel => parcel.ParcelID == parcelId))
+            {
+                throw new BadParcelIDException(parcelId, "the percel not exists in the list of parcels");
+            }
+            if (!DataSource.drones.Exists(drone => drone.DroneID == droneId))
+            {
+                throw new BadDroneIDException(droneId, "the drone not exists in the list of drones");
+            }
+            else
+            {
+                //We will go through the entire list of the drone, to find a available drone
+                for (int pIndex = 0; pIndex < DataSource.parcels.Count; pIndex++)
+                {
+                    if (DataSource.parcels[pIndex].ParcelID == parcelId)
+                    {
+                        Parcel parcel = DataSource.parcels[pIndex];//Obtain an index for the location where the package ID is located
+                        parcel.DroneID = droneId;//Update the droneid field in the drone package found
+                        parcel.Scheduled = DateTime.Now;//Update packet time association field to now.
+                        DataSource.parcels[pIndex] = parcel;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Package collection by drone
+        /// </summary>
+        /// <param name="parcelId">Package ID for collection</param>
+        public void PackagCollectionByDrone(int parcelId)
+        {
+            if (!DataSource.parcels.Exists(parcel => parcel.ParcelID == parcelId))
+            {
+                throw new BadParcelIDException(parcelId, "the percel not exists in the list of parcels");
+            }
+            for (int i = 0; i < DataSource.parcels.Count; i++)
+            {
+                if (DataSource.parcels[i].ParcelID == parcelId)//Obtain an index for the location where the package ID is located
+                {
+                    Parcel parcel = DataSource.parcels[i];
+                    parcel.PickedUp = DateTime.Now;//Update packet time pickeup field to now.
+                    DataSource.parcels[i] = parcel;
+                    return;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Delivery package to customer
+        /// </summary>
+        /// <param name="parcelId">Package ID for delivery</param>
+        public void DeliveryPackageToCustomer(int parcelId)
+        {
+            if (!DataSource.parcels.Exists(parcel => parcel.ParcelID == parcelId))
+            {
+                throw new BadParcelIDException(parcelId, "the percel not exists in the list of parcels");
+            }
+            for (int i = 0; i < DataSource.parcels.Count; i++)
+            {
+                if (DataSource.parcels[i].ParcelID == parcelId)//Obtain an index for the location where the package ID is located
+                {
+                    Parcel parcel = DataSource.parcels[i];
+                    parcel.Delivered = DateTime.Now;//Update packet time delivered field to now.
+                    DataSource.parcels[i] = parcel;
+                    return;
+                }
+            }
+        }
+
+
+        public void UpdateParcelData(int id, int droneID)
+        {
+            if (!DataSource.parcels.Exists(p => p.ParcelID == id))
+            {
+                throw new BadParcelIDException(id, "the parcel not exists in the system");
+            }
+            else
+            {
+                int pIndex = DataSource.parcels.FindIndex(p => p.ParcelID == id);
+                Parcel parcel = DataSource.parcels[pIndex];
+                parcel.DroneID = droneID;
+            }
+        }
+        #endregion
+
+        #region Get item
+        /// <summary>
+        /// return parcel by parcel ID to print.
+        /// </summary>
+        /// <param name="parcelId">parcel ID to print</param>
+        /// <returns>parcel to show</returns>
+        public Parcel GetParcel(int parcelId)
+        {
+            if (!DataSource.parcels.Exists(parcel => parcel.ParcelID == parcelId))
+            {
+                throw new BadParcelIDException(parcelId, "the parcel not exists in the list of parcels");
+            }
+            //find the place of the parcel in the array of parcels
+            return DataSource.parcels.Find(p => p.ParcelID == parcelId);
+        }
+        #endregion
+
+        #region Get lists
+        /// <summary>
+        /// return a list of actual parcel
+        /// </summary>
+        /// <returns>list of parcels</returns>
+        public IEnumerable<Parcel> GetAllParcels()
+        {
+            return (IEnumerable<Parcel>)DataSource.parcels;
+        }
+
+        /// <summary>
+        /// Displays a list of parcels that have not yet been assigned to the drone
+        /// </summary>
+        /// <returns>list of parcel without special dron</returns>
+        public IEnumerable<Parcel> GetAllParcelsWithoutSpecialDron(Predicate<Parcel> p)
+        {
+            //return all the parcels without special drone
+            return from parcel in DataSource.parcels
+                   where p(parcel)
+                   select parcel.Clone();
+        }
+        #endregion
+
+        #endregion
+
     }
 }
 
