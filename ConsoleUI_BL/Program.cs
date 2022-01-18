@@ -268,7 +268,7 @@ namespace ConsoleUI_BL
 
         private static void addParcel(BlObject bl)
         {
-            Console.WriteLine("Enter the parcel details: senderId, targetId, maxWeight, priority)");
+            Console.WriteLine("Enter the parcel details: senderId, targetId, maxWeight, Priority)");
             int senderId = int.Parse(Console.ReadLine());
             int targetId = int.Parse(Console.ReadLine());
             WeightCategories maxWeight = (WeightCategories)int.Parse(Console.ReadLine());

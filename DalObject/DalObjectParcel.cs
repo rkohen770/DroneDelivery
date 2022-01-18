@@ -34,11 +34,11 @@ namespace DL
             {
                 Parcel parcel = new Parcel
                 {
-                    ParcelID = DataSource.Config.OrdinalParcelNumber++,
+                    ParcelID =Config.OrdinalParcelNumber++,
                     SenderID = senderId,
                     TargetID = targetId,
                     Weight = weight,
-                    priority = priority,
+                    Priority = priority,
                     Requested = DateTime.Now,
                     DroneID = droneId
                 };

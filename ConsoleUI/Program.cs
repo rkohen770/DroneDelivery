@@ -225,7 +225,7 @@ namespace ConsoleUI
         /// <param name="dal">On this standby the functions are activated</param>
         private static void addParcel(DalApi.IDal dal)
         {
-            Console.WriteLine("Enter the parcel details: senderId, targetId, maxWeight, priority, droneId)");
+            Console.WriteLine("Enter the parcel details: senderId, targetId, maxWeight, Priority, droneId)");
             int senderId = int.Parse(Console.ReadLine());
             int targetId = int.Parse(Console.ReadLine());
             WeightCategories maxWeight = (WeightCategories)int.Parse(Console.ReadLine());
