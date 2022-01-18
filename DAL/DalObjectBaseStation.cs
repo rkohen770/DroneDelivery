@@ -200,7 +200,7 @@ namespace DalApi
         /// return base stations with available charging stations
         /// </summary>
         /// <returns>list of station with availible charge station</returns>
-        public IEnumerable<Station> GetAllStationsWithAvailableChargingStations(Predicate<Station> p)
+        public IEnumerable<Station> GetAllStationsBy(Predicate<Station> p)
         {
             return from station in DataSource.stations
                    where p(station)

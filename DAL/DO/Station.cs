@@ -14,6 +14,7 @@ namespace DO
         public double Longitude { get; set; }
         public double Lattitude { get; set; }
         public int ChargeSlots { get; set; }
+        public bool Available { get; set; }
 
         public override string ToString()
         {

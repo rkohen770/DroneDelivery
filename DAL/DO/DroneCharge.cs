@@ -11,6 +11,8 @@ namespace DO
     {
         public int DroneID { get; set; }
         public int StationID { get; set; }
+        public bool Available { get; set; }
+
 
         public override string ToString()
         {

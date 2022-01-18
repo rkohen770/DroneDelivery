@@ -12,6 +12,7 @@ namespace DO
         public int DroneID { get; set; }
         public string DroneModel { get; set; }
         public WeightCategories MaxWeight { get; set; }
+        public bool Available { get; set; }
 
 
         public override string ToString()

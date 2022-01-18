@@ -152,7 +152,7 @@ namespace ConsoleUI
                                     Console.WriteLine(temp);
                                 break;
                             case (int)ViewItemList.LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION:
-                                foreach (var temp in dal.GetAllStationsWithAvailableChargingStations(station => station.ChargeSlots > 0))
+                                foreach (var temp in dal.GetAllStationsBy(station => station.ChargeSlots > 0))
                                     Console.WriteLine(temp);
                                 break;
                             default:

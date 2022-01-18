@@ -137,7 +137,7 @@ namespace BO
         public IEnumerable<BaseStationForList> GetAllBaseStationWhithAvailibleCharging(Predicate<Station> p)
         {
             List<BaseStationForList> list = new();
-            foreach (var station in dal.GetAllStationsWithAvailableChargingStations(p))
+            foreach (var station in dal.GetAllStationsBy(p))
             {
                 BaseStationForList stationForList = cloneBaseStation(GetBaseStation(station.StationID));
                 list.Add(stationForList);

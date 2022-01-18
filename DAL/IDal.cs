@@ -232,7 +232,7 @@ namespace DalApi
         /// Display of base stations with available charging stations
         /// </summary>
         /// <returns>List of base stations with available charging stations</returns>
-        IEnumerable<Station> GetAllStationsWithAvailableChargingStations(Predicate<Station> p);
+        IEnumerable<Station> GetAllStationsBy(Predicate<Station> p);
 
         /// <summary>
         /// List of drones loaded at a specific station
