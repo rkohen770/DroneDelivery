@@ -164,10 +164,10 @@ namespace DO
     /// Represents errors during DalApi initialization
     /// </summary>
 
-    public class DLConfigException : Exception
+    public class DalConfigExeption : Exception
     {
-        public DLConfigException(string message) : base(message) { }
-        public DLConfigException(string message, Exception inner) : base(message, inner) { }
+        public DalConfigExeption(string msg) : base(msg) { }
+        public DalConfigExeption(string msg, Exception ex) : base(msg, ex) { }
     }
     #region XMLException
     public class XMLFileLoadCreateException : Exception

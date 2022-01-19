@@ -48,10 +48,6 @@ namespace DL
         /// </summary>
         string ParcelsPath = @"ParcelsXml.xml";
         /// <summary>
-        /// Sexagesimal Angle XMLSerializer
-        /// </summary>
-        string SexagesimalAnglePath = @"SexagesimalAngleXml.xml";
-        /// <summary>
         /// Station XMLSerializer
         /// </summary>
         string StationsPath = @"StationsXml.xml";

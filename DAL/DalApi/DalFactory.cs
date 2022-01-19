@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DO;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -28,7 +29,7 @@ namespace DalApi
             // bring package name (dll file name) for the dal name (above) from the list of packages in config.xml
             string dalPkg = DalConfig.DalPackages[dalType];
             if (dalPkg == null)
-                throw new DalConfig.DalConfigExeption($"Package {dalType} is not found in packages list in dal-config.xml");
+                throw new DalConfigExeption($"Package {dalType} is not found in packages list in dal-config.xml");
 
             try // Load into CLR the dal implementation assembly according to dll file name (taken above)
             {
@@ -36,7 +37,7 @@ namespace DalApi
             }
             catch (Exception)
             {
-                throw new DalConfig.DalConfigExeption($"Failed to load the dal-config.xml file");
+                throw new DalConfigExeption($"Failed to load the dal-config.xml file");
             }
 
             // Get concrete Dal implementation's class metadata object
@@ -56,7 +57,7 @@ namespace DalApi
             if (type == null)
             {
                 // If the type is not found - the implementation is not correct - it looks like the class name is wrong..
-                throw new DalConfig.DalConfigExeption($"Class {dalPkg} was not faund in the {dalPkg}.dll");
+                throw new DalConfigExeption($"Class {dalPkg} was not faund in the {dalPkg}.dll");
             }
 
 
@@ -71,7 +72,7 @@ namespace DalApi
                     BindingFlags.Public | BindingFlags.Static).GetValue(null);
                 // If the instance property is not initialized (i.e. it does not hold a real instance reference)...
                 if (dal == null)
-                    throw new DalConfig.DalConfigExeption($"Class {dalPkg} is not singeleton or wrong property name for instance");
+                    throw new DalConfigExeption($"Class {dalPkg} is not singeleton or wrong property name for instance");
                 // now it looks like we have appropriate dal implementation instance :-)
                 return dal;
             

@@ -192,7 +192,7 @@ namespace BL
                 var drone_l = droneForLists.Find(d => d.DroneID == droneId && d.DroneStatus == DroneStatus.Delivery);
                 var parcel = dal.GetAllParcelsWithoutSpecialDron(p => p.DroneID == droneId && p.Delivered==null && p.PickedUp!=null).FirstOrDefault();
                     //check if the parcel was assigned
-                if(parcel.ParcelID==null)
+                if(parcel.ParcelID==0)
                 {
                     throw new Exception("The parcel wasn't picked up yet! or the parcel delivered already");
                 }
