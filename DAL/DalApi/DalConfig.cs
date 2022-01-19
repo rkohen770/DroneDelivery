@@ -23,10 +23,6 @@ namespace DalApi
                          ).ToDictionary(p => "" + p.Name, p => p.Value);
         }
 
-        public class DalConfigExeption : Exception
-        {
-            public DalConfigExeption(string msg) : base(msg) { }
-            public DalConfigExeption(string msg,Exception ex ) : base(msg, ex) { }
-        }
+       
     }
 }
