@@ -182,17 +182,22 @@ namespace DL
         }
         #endregion
 
+
+        // [MethodImpl(MethodImplOptions.Synchronized)]
+
         /// <summary>
         /// Method of applying drone power
         /// </summary>
         /// <returns>An array of the amount of power consumption of a drone for each situation</returns>
+
         public double[] PowerConsumptionRequest()
         {
-            double[] result = {Config_1.vacant,Config_1.CarriesLightWeight,
-                Config_1.CarriesMediumWeight, Config_1.CarriesHeavyWeight,
-                Config_1.DroneChargingRate };
-            return result;
+            return new double[5] { DataSource.Config.Available,
+                                   DataSource.Config.Light,
+                                   DataSource.Config.Intermediate,
+                                   DataSource.Config.Heavy,
+                                   DataSource.Config.DroneChargingRate
+            };
         }
-
     }
 }

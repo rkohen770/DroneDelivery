@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
 using DalApi;
 using DO;
@@ -268,11 +269,16 @@ namespace DL
         /// <returns>An array of the amount of power consumption of a drone for each situation</returns>
         public double[] PowerConsumptionRequest()
         {
-            double[] result = {GetConfigNumber("vacant"), GetConfigNumber("CarriesLightWeight"),
-                GetConfigNumber("CarriesMediumWeight"), GetConfigNumber("CarriesHeavyWeight"),
-                GetConfigNumber("DroneChargingRate") };
-            return result;
+            XElement dalConfigRoot = XElement.Load(ConfigPath);
+
+            double[] Electricity = (from status in dalConfigRoot
+                                    .Element("ElectricityUseRequest")
+                                    .Elements() select XmlConvert
+                                    .ToDouble(status.Value)).ToArray();
+            dalConfigRoot.Save(ConfigPath);
+            return Electricity;
         }
+        
         #endregion
     }
 }

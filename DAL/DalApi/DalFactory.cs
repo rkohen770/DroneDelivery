@@ -52,7 +52,7 @@ namespace DalApi
 
             Type type;
             //DL.DLObject, DLObject
-            type = Type.GetType($"Dal.{dalPkg},{dalPkg}");
+            type = Type.GetType($"DL.{dalPkg},{dalPkg}");
             if (type == null)
             {
                 // If the type is not found - the implementation is not correct - it looks like the class name is wrong..

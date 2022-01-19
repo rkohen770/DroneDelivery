@@ -40,9 +40,12 @@ namespace DL
 
             else
             {
+                List<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+                XElement dalConfigRoot = XElement.Load(ConfigPath);
                 Parcel p = new()
                 {
-                    ParcelID = GetConfigNumber("OrdinalParcelNumber"),
+
+                    ParcelID = Convert.ToInt32(dalConfigRoot.Element("SerialNum").Value),
                     SenderID = senderId,
                     TargetID = targetId,
                     Weight = weight,

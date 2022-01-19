@@ -14,8 +14,21 @@ namespace DL
         internal static List<DroneCharge> droneCharges = new List<DroneCharge>(5);
         static Random rand = new();
 
-        
 
+        internal class Config
+        {
+            internal static double Light = 3.4;
+            internal static double Intermediate = 3.7;
+            internal static double Heavy = 4.3;
+            internal static double Available = 3.2;
+            internal static double DroneChargingRate = 10;
+
+            internal static int SerialNumber = 10000;
+
+            internal static Random r = new Random();
+            internal static DateTime currentDate = DateTime.Now;
+
+        }
         public static void Initialize()
         {
             #region stations
@@ -194,7 +207,7 @@ namespace DL
             {
                 new Parcel
                 {
-                   ParcelID =Config_1.OrdinalParcelNumber++, //serial number
+                   ParcelID =Config.SerialNumber++, //serial number
                    SenderID = 123456789,
                    TargetID = 987654321,
                    Weight = (WeightCategories)rand.Next(3),
@@ -208,7 +221,7 @@ namespace DL
 
                 new Parcel
                 {
-                   ParcelID = Config_1.OrdinalParcelNumber++, //serial number
+                   ParcelID = Config.SerialNumber++, //serial number
                    SenderID = 987654321,
                    TargetID = 234567891,
                    Weight = (WeightCategories)rand.Next(3),
@@ -221,7 +234,7 @@ namespace DL
 
                 new Parcel
                 {
-                  ParcelID = Config_1.OrdinalParcelNumber++, //serial number
+                  ParcelID = Config.SerialNumber++, //serial number
                   SenderID = 345678912,
                   TargetID = 456789123,
                   Weight = (WeightCategories)rand.Next(3),
@@ -235,7 +248,7 @@ namespace DL
 
                 new Parcel
                 {
-                  ParcelID = Config_1.OrdinalParcelNumber++, //serial number
+                  ParcelID = Config.SerialNumber++, //serial number
                   SenderID = 456789123,
                   TargetID = 567891234,
                   Weight = (WeightCategories)rand.Next(3),
@@ -249,7 +262,7 @@ namespace DL
 
                 new Parcel
                 {
-                  ParcelID = Config_1.OrdinalParcelNumber++, //serial number
+                  ParcelID = Config.SerialNumber++, //serial number
                   SenderID = 567891234,
                   TargetID = 678912345,
                   Weight = (WeightCategories)rand.Next(3),
@@ -263,7 +276,7 @@ namespace DL
 
                 new Parcel
                 {
-                   ParcelID = Config_1.OrdinalParcelNumber++, //serial number
+                   ParcelID = Config.SerialNumber++, //serial number
                    SenderID = 678912345,
                    TargetID = 789123456,
                    Weight = (WeightCategories)rand.Next(3),
@@ -277,7 +290,7 @@ namespace DL
 
                 new Parcel
                 {
-                   ParcelID = Config_1.OrdinalParcelNumber++, //serial number
+                   ParcelID = Config.SerialNumber++, //serial number
                    SenderID = 789123456,
                    TargetID = 123456789,
                    Weight = (WeightCategories)rand.Next(3),
@@ -291,7 +304,7 @@ namespace DL
 
                 new Parcel
                 {
-                   ParcelID = Config_1.OrdinalParcelNumber++, //serial number
+                   ParcelID = Config.SerialNumber++, //serial number
                    SenderID = 456789123,
                    TargetID = 123456789,
                    Weight = (WeightCategories)rand.Next(3),
@@ -305,7 +318,7 @@ namespace DL
 
                 new Parcel
                 {
-                  ParcelID = Config_1.OrdinalParcelNumber++, //serial number
+                  ParcelID = Config.SerialNumber++, //serial number
                   SenderID = 234567891,
                   TargetID = 891234567,
                   Weight = (WeightCategories)rand.Next(3),
@@ -319,7 +332,7 @@ namespace DL
 
                 new Parcel
                 {
-                  ParcelID = Config_1.OrdinalParcelNumber++, //serial number
+                  ParcelID = Config.SerialNumber++, //serial number
                   SenderID = 101123556,
                   TargetID = 567891234,
                   Weight = (WeightCategories)rand.Next(3),

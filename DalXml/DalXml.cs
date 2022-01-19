@@ -30,61 +30,61 @@ namespace DL
         /// <summary>
         /// users XElement
         /// </summary>
-        string UseresPath = @"UseresXml.xml";
+        string UseresPath = @"\Data\UseresXml.xml";
         /// <summary>
         /// Customers XMLSerializer
         /// </summary>
-        string CustomersPath = @"CustomersXml.xml";
+        string CustomersPath = @"\Data\CustomersXml.xml";
         /// <summary>
         /// Drones XMLSerializer
         /// </summary>
-        string DronesPath = @"DronesXml.xml";
+        string DronesPath = @"\Data\DronesXml.xml";
         /// <summary>
         /// Drone Charge XMLSerializer
         /// </summary>
-        string DroneChargePath = @"DroneChargeXml.xml";
+        string DroneChargePath = @"\Data\DroneChargeXml.xml";
         /// <summary>
         /// Parcel XMLSerializer
         /// </summary>
-        string ParcelsPath = @"ParcelsXml.xml";
+        string ParcelsPath = @"\Data\ParcelsXml.xml";
         /// <summary>
         /// Sexagesimal Angle XMLSerializer
         /// </summary>
-        string SexagesimalAnglePath = @"SexagesimalAngleXml.xml";
+        string SexagesimalAnglePath = @"\Data\SexagesimalAngleXml.xml";
         /// <summary>
         /// Station XMLSerializer
         /// </summary>
-        string StationsPath = @"StationsXml.xml";
+        string StationsPath = @"\Data\StationsXml.xml";
         /// <summary>
         /// Ordinal Parcel Number XMLSerializer
         /// </summary>
-        string ConfigPath = @"ConfigXml.xml";
+        string ConfigPath = @"\Data\ConfigXml.xml";
         #endregion
 
-        #region Config
-        /// <summary>
-        /// returns line station ID from file
-        /// </summary>
-        /// <returns></returns>
-        public int GetConfigNumber(string name)
-        {
-            List<Config> ListConfig = XMLTools.LoadListFromXMLSerializer<Config>(ConfigPath);
-            int id = ListConfig.Find(i => i.Name==name).Id;
-            return id;
-        }
-        /// <summary>
-        /// updates the line station in file
-        /// </summary>
-        public void UpdateConfigNumber(string name)
-        {
-            List<Config> ListID = XMLTools.LoadListFromXMLSerializer<Config>(ConfigPath);
-            Config i = ListID.Find(x => x.Name == name);
-            ListID.Remove(i);
-            i.Id++;
-            ListID.Add(i); //no need to Clone()
-            XMLTools.SaveListToXMLSerializer(ListID, ConfigPath);
-        }
-        #endregion
+        //#region Config
+        ///// <summary>
+        ///// returns line station ID from file
+        ///// </summary>
+        ///// <returns></returns>
+        //public int GetConfigNumber(string name)
+        //{
+        //    List<Config> ListConfig = XMLTools.LoadListFromXMLSerializer<Config>(ConfigPath);
+        //    int id = ListConfig.Find(i => i.Name==name).Id;
+        //    return id;
+        //}
+        ///// <summary>
+        ///// updates the line station in file
+        ///// </summary>
+        //public void UpdateConfigNumber(string name)
+        //{
+        //    List<Config> ListID = XMLTools.LoadListFromXMLSerializer<Config>(ConfigPath);
+        //    Config i = ListID.Find(x => x.Name == name);
+        //    ListID.Remove(i);
+        //    i.Id++;
+        //    ListID.Add(i); //no need to Clone()
+        //    XMLTools.SaveListToXMLSerializer(ListID, ConfigPath);
+        //}
+        //#endregion
 
         /// <summary>
         /// A function that calculates the distance between two points on the map

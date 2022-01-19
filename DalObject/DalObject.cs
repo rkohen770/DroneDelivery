@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace DL
 {
-    sealed partial class DalObject : IDal
+   public sealed partial class DalObject : IDal
     {
         static readonly Lazy<DalObject> lazy = new Lazy<DalObject>(() => new());
 
@@ -30,10 +30,10 @@ namespace DL
             Customer target = GetCustomer(targetId);
             foreach (var station in DataSource.stations)
             {
-                double dictance = Math.Sqrt(Math.Pow(sender.Lattitude - target.Lattitude, 2) + Math.Pow(sender.Longitude - target.Longitude, 2));
-                if (minDistance > dictance)
+                double distance = Math.Sqrt(Math.Pow(sender.Lattitude - target.Lattitude, 2) + Math.Pow(sender.Longitude - target.Longitude, 2));
+                if (minDistance > distance)
                 {
-                    minDistance = dictance;
+                    minDistance = distance;
                 }
             }
             return minDistance;

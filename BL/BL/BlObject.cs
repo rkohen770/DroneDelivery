@@ -14,7 +14,7 @@ namespace BL
 
         public static BlObject Instance { get { return lazy.Value; } }
 
-        static Random random = new ();
+        static Random random = new();
 
         List<DroneForList> droneForLists = new();
 
@@ -25,14 +25,14 @@ namespace BL
             double[] power = dal.PowerConsumptionRequest();
             List<DO.Drone> drones = dal.GetAllDrones().ToList();
 
-            initializeListOfDrone(drones);
+            initializeListOfDrone(drones, power);
 
         }
         /// <summary>
         /// List boot function of "drones to list "
         /// </summary>
         /// <param name="drones">list of DO of drones</param>
-        private void initializeListOfDrone(List<DO.Drone> drones)
+        private void initializeListOfDrone(List<DO.Drone> drones, double[] power)
         {
             //find A package that has not yet been delivered but the drone has already been associated
             List<DO.Parcel> parcelsList = dal.GetAllParcels().ToList();
@@ -67,7 +67,7 @@ namespace BL
                         };
                         minValueBattery = drone_BL.DroneBattery - getDistanceBetweenTwoPoints(senderLattitude, senderLongitude, st.Lattitude, st.Longitude)
                            + dal.GetDistanceBetweenLocationsOfParcels(parcel.SenderID, parcel.TargetID)
-                           + dal.GetDistanceBetweenLocationAndClosestBaseStation(parcel.TargetID) * dal.PowerConsumptionRequest()[0] + 1;
+                           + dal.GetDistanceBetweenLocationAndClosestBaseStation(parcel.TargetID) * power[0];
                     }
                     else if (parcel.PickedUp != null && parcel.Delivered == null)
                     {
@@ -86,19 +86,22 @@ namespace BL
                         switch (parcel.Weight)
                         {
                             case DO.WeightCategories.Easy:
-                                minValueBattery = drone_BL.DroneBattery - distance * dal.PowerConsumptionRequest()[1] + 1;
+                                minValueBattery = drone_BL.DroneBattery - power[1];
                                 break;
                             case DO.WeightCategories.Intermediate:
-                                minValueBattery = drone_BL.DroneBattery - distance * dal.PowerConsumptionRequest()[2] + 1;
+                                minValueBattery = drone_BL.DroneBattery - power[2];
                                 break;
                             case DO.WeightCategories.Liver:
-                                minValueBattery = drone_BL.DroneBattery - distance * dal.PowerConsumptionRequest()[3] + 1;
+                                minValueBattery = drone_BL.DroneBattery - power[3];
                                 break;
                             default:
                                 break;
                         }
                     }
-                    drone_BL.DroneBattery = random.Next((int)minValueBattery, 101);
+                    if (minValueBattery < 100)
+                        drone_BL.DroneBattery = random.Next((int)minValueBattery, 101);
+                    else
+                        drone_BL.DroneBattery = 100;
                 }
                 else //the drone is not in delivery
                 {
@@ -127,7 +130,10 @@ namespace BL
                         };
                         // Battery mode will be recharged between a minimal charge that will allow it to reach the station closest to charging and a full charge
                         double distance = dal.GetDistanceBetweenLocationAndClosestBaseStation(parcelsDelivered[index].TargetID);
-                        drone_BL.DroneBattery = random.Next((int)(distance * dal.PowerConsumptionRequest()[0] + 1), 101);
+                        if (distance * power[0] < 100)
+                            drone_BL.DroneBattery = random.Next((int)(distance * power[0]), 101);
+                        else
+                            drone_BL.DroneBattery = 100;
                     }
                 }
                 droneForLists.Add(drone_BL);
