@@ -41,7 +41,9 @@ namespace DL
                     //Grills values that are within the borders of the State of Israel
                     Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                     Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                    ChargeSlots = 5
+                    ChargeSlots = 5,
+                    Available=true,
+
                 },
                 new Station
                 {
@@ -50,7 +52,8 @@ namespace DL
                     //Grills values that are within the borders of the State of Israel
                     Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                     Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
-                    ChargeSlots = 3
+                    ChargeSlots = 3,
+                    Available=true,
                 }
             };
             #endregion
@@ -62,21 +65,27 @@ namespace DL
                 {
                     DroneID = 7486,
                     DroneModel = "EG-574",
-                    MaxWeight = WeightCategories.Intermediate
+                    MaxWeight = WeightCategories.Intermediate,
+                    Available=true,
+
 
                 },
                 new Drone
                 {
                     DroneID = 7686,
                     DroneModel = "EG-574",
-                    MaxWeight = WeightCategories.Easy
+                    MaxWeight = WeightCategories.Easy,
+                    Available=true,
+
 
                 },
                 new Drone
                 {
                     DroneID = 7916,
                     DroneModel = "EG-474",
-                    MaxWeight = WeightCategories.Liver
+                    MaxWeight = WeightCategories.Liver,
+                    Available=true,
+
                 },
                 new Drone
                 {
@@ -85,6 +94,7 @@ namespace DL
                     MaxWeight = (WeightCategories)rand.Next(3),
                     //Status = (DroneStatuses)rand.Next(3),
                     //Battery = 75
+                    Available=true,
                 },
                 new Drone
                 {
@@ -93,6 +103,8 @@ namespace DL
                     MaxWeight = (WeightCategories)rand.Next(3),
                     //Status = (DroneStatuses)rand.Next(3),
                     //Battery = 98.9
+                    Available=true,
+
                 }
             };
             #endregion
@@ -108,6 +120,8 @@ namespace DL
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                   Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
+                   Available=true,
+
                 },
                 new Customer
                 {
@@ -117,6 +131,8 @@ namespace DL
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                   Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
+                   Available=true,
+
                 },
 
                 new Customer
@@ -127,6 +143,8 @@ namespace DL
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                   Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
+                  Available=true,
+
                 },
 
                 new Customer
@@ -136,7 +154,9 @@ namespace DL
                   Phone = "0503344684",
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
-                  Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
+                  Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,   
+                  Available=true,
+
                 },
 
                 new Customer
@@ -146,7 +166,9 @@ namespace DL
                   Phone = "0526795861",
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
-                  Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
+                  Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3, 
+                  Available=true,
+
                 },
 
                 new Customer
@@ -157,6 +179,8 @@ namespace DL
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
                   Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
+                  Available=true,
+
                 },
 
                 new Customer
@@ -166,7 +190,9 @@ namespace DL
                    Phone = "0558724551",
                    //Grills values that are within the borders of the State of Israel
                    Longitude = rand.NextDouble() * (31 + 33.3) - 31,
-                   Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
+                   Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,  
+                   Available=true,
+
                 },
 
                 new Customer
@@ -176,7 +202,9 @@ namespace DL
                   Phone = "0518846523",
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
-                  Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
+                  Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,   
+                  Available=true,
+
                 },
 
                 new Customer
@@ -186,7 +214,8 @@ namespace DL
                   Phone = "0558742215",
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
-                  Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
+                  Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,   
+                  Available=true,
                 },
 
                 new Customer
@@ -196,7 +225,9 @@ namespace DL
                   Phone = "0589868554",
                   //Grills values that are within the borders of the State of Israel
                   Longitude = rand.NextDouble() * (31 + 33.3) - 31,
-                  Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3,
+                  Lattitude = rand.NextDouble() * (34.3 + 35.5) - 34.3, 
+                  Available=true,
+
                 }
 
             };
@@ -217,6 +248,7 @@ namespace DL
                    Scheduled = new DateTime(2021, 8, 27, 13, 39, 53),
                    PickedUp = new DateTime(2021, 8, 27, 15, 30, 26),
                    Delivered = new DateTime(2021, 8, 27, 21, 46, 11),
+                   Available=true,
                 },
 
                 new Parcel
@@ -228,7 +260,9 @@ namespace DL
                    Priority = (Priorities)rand.Next(3),
                    Requested = new DateTime(2021, 8, 25, 7, 11, 26),
                    DroneID = 7486,
-                   Scheduled = new DateTime(2021, 8, 25, 8, 30, 11),
+                   Scheduled = new DateTime(2021, 8, 25, 8, 30, 11), 
+                   Available=true,
+
 
                 },
 
@@ -244,6 +278,8 @@ namespace DL
                   Scheduled = new DateTime(2021, 8, 8, 5, 56, 54),
                   PickedUp = new DateTime(2021, 8, 8, 7, 45, 18),
                   Delivered = new DateTime(2021, 8, 8, 15, 25, 48),
+                  Available=true,
+
                 },
 
                 new Parcel
@@ -257,7 +293,9 @@ namespace DL
                   DroneID = 7686,
                   Scheduled = new DateTime(2021, 10, 15, 13, 47, 16),
                   PickedUp = new DateTime(2021, 10, 15, 16, 25, 5),
-                  Delivered = null,
+                  Delivered = null,   
+                  Available=true,
+
                 },
 
                 new Parcel
@@ -271,7 +309,9 @@ namespace DL
                   DroneID = 7686,
                   Scheduled = new DateTime(2021, 10, 2, 16, 47, 45),
                   PickedUp = new DateTime(2021, 10, 2, 21, 54, 13),
-                  Delivered = new DateTime(2021, 10, 2, 22, 47, 25),
+                  Delivered = new DateTime(2021, 10, 2, 22, 47, 25), 
+                  Available=true,
+
                 },
 
                 new Parcel
@@ -285,7 +325,9 @@ namespace DL
                    DroneID = 7916,
                    Scheduled = new DateTime(2021, 5, 4, 6, 45, 12),
                    PickedUp = new DateTime(2021, 5, 4, 8, 52, 15),
-                   Delivered = new DateTime(2021, 5, 4, 3, 36, 35),
+                   Delivered = new DateTime(2021, 5, 4, 3, 36, 35),    
+                   Available=true,
+
                 },
 
                 new Parcel
@@ -299,7 +341,9 @@ namespace DL
                    DroneID = 7916,
                    Scheduled = new DateTime(2021, 12, 21, 14, 25, 32),
                    PickedUp = new DateTime(2021, 12, 21, 16, 31, 35),
-                   Delivered = new DateTime(2021, 12, 21, 14, 56, 23),
+                   Delivered = new DateTime(2021, 12, 21, 14, 56, 23),    
+                   Available=true,
+
                 },
 
                 new Parcel
@@ -313,7 +357,9 @@ namespace DL
                    DroneID = 7216,
                    Scheduled = new DateTime(2021, 6, 29, 18, 36, 35),
                    PickedUp = new DateTime(2021, 6, 29, 19, 25, 54),
-                   Delivered = new DateTime(2021, 6, 29, 20, 12, 20),
+                   Delivered = new DateTime(2021, 6, 29, 20, 12, 20),      
+                   Available=true,
+
                 },
 
                 new Parcel
@@ -327,7 +373,9 @@ namespace DL
                   DroneID = 7216,
                   Scheduled = new DateTime(2021, 4, 21, 11, 58, 45),
                   PickedUp = new DateTime(2021, 4, 21, 14, 12, 11),
-                  Delivered = new DateTime(2021, 4, 21, 16, 10, 17),
+                  Delivered = new DateTime(2021, 4, 21, 16, 10, 17),  
+                  Available=true,
+
                 },
 
                 new Parcel
@@ -341,7 +389,9 @@ namespace DL
                   DroneID = 0,
                   Scheduled = null,
                   PickedUp = null,
-                  Delivered =null,
+                  Delivered =null,    
+                  Available=true,
+
                 }
             };
 
@@ -423,6 +473,23 @@ namespace DL
             };
             #endregion
 
+            #region DroneCharge
+            droneCharges = new List<DroneCharge>
+            {
+                new DroneCharge()
+                {
+                    DroneID=7486,
+                    StationID=11212,
+                    Available =false
+                },
+                new DroneCharge()
+                {
+                    DroneID=7686,
+                    StationID=11212,
+                    Available =false
+                },
+            };
+            #endregion
         }
     }
 }

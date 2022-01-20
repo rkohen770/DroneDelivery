@@ -38,5 +38,14 @@ namespace DL
             }
             return minDistance;
         }
+        /// <summary>
+        /// A method that returns all the drones that were in charge
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public IEnumerable<DroneCharge> GetAllDroneCharge(Predicate<DroneCharge> predicate)
+        {
+            return DataSource.droneCharges.FindAll(predicate);
+        }
     }
 }

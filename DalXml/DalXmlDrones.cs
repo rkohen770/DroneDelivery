@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
@@ -48,91 +49,91 @@ namespace DL
         #endregion
 
         #region Uppdate
-        /// <summary>
-        /// Sending a drone for charging at a base station
-        /// </summary>
-        /// <param name="droneId">Drone ID for charging</param>
-        /// <param name="stationId">Charging station ID</param>
-        public int SendingDroneForCharging(int droneId, int stationId)
-        {
-            List<Drone> ListDrone = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
-            List<Station> ListStation = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
-            List<DroneCharge> ListDroneCharges = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DroneChargePath);
+        ///// <summary>
+        ///// Sending a drone for charging at a base station
+        ///// </summary>
+        ///// <param name="droneId">Drone ID for charging</param>
+        ///// <param name="stationId">Charging station ID</param>
+        //public int SendingDroneForCharging(int droneId, int stationId)
+        //{
+        //    List<Drone> ListDrone = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
+        //    List<Station> ListStation = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
+        //    List<DroneCharge> ListDroneCharges = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DroneChargePath);
 
-            var drone = (from item in ListDrone
-                         where item.DroneID == droneId && item.Available
-                         select item).FirstOrDefault();
+        //    var drone = (from item in ListDrone
+        //                 where item.DroneID == droneId && item.Available
+        //                 select item).FirstOrDefault();
 
-            var station = (from item in ListStation
-                           where item.StationID == stationId && item.Available
-                           select item).FirstOrDefault();
+        //    var station = (from item in ListStation
+        //                   where item.StationID == stationId && item.Available
+        //                   select item).FirstOrDefault();
 
-            if (drone.DroneID != droneId)
-            {
-                throw new BadDroneIDException(droneId, "the drone not exists in the list of drones");
-            }
-            if (station.StationID != stationId)
-            {
-                throw new BadBaseStationIDException(stationId, "the base station not exists in the list of station");
-            }
+        //    if (drone.DroneID != droneId)
+        //    {
+        //        throw new BadDroneIDException(droneId, "the drone not exists in the list of drones");
+        //    }
+        //    if (station.StationID != stationId)
+        //    {
+        //        throw new BadBaseStationIDException(stationId, "the base station not exists in the list of station");
+        //    }
 
-            Station s = station;
-            s.ChargeSlots--;//We will update the number of loading locations
-            ListStation.Remove(station);
-            ListStation.Add(s);
-            XMLTools.SaveListToXMLSerializer(ListStation, StationsPath);
+        //    Station s = station;
+        //    s.ChargeSlots--;//We will update the number of loading locations
+        //    ListStation.Remove(station);
+        //    ListStation.Add(s);
+        //    XMLTools.SaveListToXMLSerializer(ListStation, StationsPath);
 
-            DroneCharge droneCharge = new DroneCharge//Add a instance of an instance loading entity
-            {
-                DroneID = droneId,
-                StationID = stationId
-            };
-            ListDroneCharges.Add(droneCharge);//Add a load of drones to file
-            XMLTools.SaveListToXMLSerializer(ListDroneCharges, DroneChargePath);
+        //    DroneCharge droneCharge = new DroneCharge//Add a instance of an instance loading entity
+        //    {
+        //        DroneID = droneId,
+        //        StationID = stationId
+        //    };
+        //    ListDroneCharges.Add(droneCharge);//Add a load of drones to file
+        //    XMLTools.SaveListToXMLSerializer(ListDroneCharges, DroneChargePath);
 
-            return stationId;
-        }
+        //    return stationId;
+        //}
 
-        /// <summary>
-        /// Release the UAV from a charge at the base station
-        /// </summary>
-        /// <param name="droneId">Drone ID for charging</param>
-        /// <param name="stationId">Charging station ID</param>
-        public void ReleasDroneFromCharging(int droneId, int stationId)
-        {
-            List<Drone> ListDrone = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
-            List<Station> ListStation = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
-            List<DroneCharge> ListDroneCharges = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DroneChargePath);
+        ///// <summary>
+        ///// Release the UAV from a charge at the base station
+        ///// </summary>
+        ///// <param name="droneId">Drone ID for charging</param>
+        ///// <param name="stationId">Charging station ID</param>
+        //public void ReleasDroneFromCharging(int droneId, int stationId)
+        //{
+        //    List<Drone> ListDrone = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
+        //    List<Station> ListStation = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
+        //    List<DroneCharge> ListDroneCharges = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DroneChargePath);
 
-            var drone = (from item in ListDrone
-                         where item.DroneID == droneId && item.Available
-                         select item).FirstOrDefault();
+        //    var drone = (from item in ListDrone
+        //                 where item.DroneID == droneId && item.Available
+        //                 select item).FirstOrDefault();
 
-            var station = (from item in ListStation
-                           where item.StationID == stationId && item.Available
-                           select item).FirstOrDefault();
+        //    var station = (from item in ListStation
+        //                   where item.StationID == stationId && item.Available
+        //                   select item).FirstOrDefault();
 
-            var charge = (from item in ListDroneCharges
-                          where item.StationID == stationId && item.DroneID == droneId && item.Available
-                          select item).FirstOrDefault();
+        //    var charge = (from item in ListDroneCharges
+        //                  where item.StationID == stationId && item.DroneID == droneId && item.Available
+        //                  select item).FirstOrDefault();
 
-            if (drone.DroneID != droneId)
-            {
-                throw new BadDroneIDException(droneId, "the drone not exists in the list of drones");
-            }
-            if (station.StationID != stationId)
-            {
-                throw new BadBaseStationIDException(stationId, "the base station not exists in the list of station");
-            }
+        //    if (drone.DroneID != droneId)
+        //    {
+        //        throw new BadDroneIDException(droneId, "the drone not exists in the list of drones");
+        //    }
+        //    if (station.StationID != stationId)
+        //    {
+        //        throw new BadBaseStationIDException(stationId, "the base station not exists in the list of station");
+        //    }
 
-            Station s = station;
-            s.ChargeSlots++;//We will update the number of loading locations
-            ListStation.Remove(station);
-            ListStation.Add(s);
-            XMLTools.SaveListToXMLSerializer(ListStation, StationsPath);
+        //    Station s = station;
+        //    s.ChargeSlots++;//We will update the number of loading locations
+        //    ListStation.Remove(station);
+        //    ListStation.Add(s);
+        //    XMLTools.SaveListToXMLSerializer(ListStation, StationsPath);
 
-            DeleteDroneGharge(charge);
-        }
+        //    DeleteDroneGharge(charge);
+        //}
 
         /// <summary>
         /// Update Drone Modle at a base station
@@ -269,13 +270,15 @@ namespace DL
         /// <returns>An array of the amount of power consumption of a drone for each situation</returns>
         public double[] PowerConsumptionRequest()
         {
-            XElement dalConfigRoot = XElement.Load(ConfigPath);
+            string dir = Directory.GetCurrentDirectory();
+
+            XElement dalConfigRoot = XElement.Load(dir+ConfigPath);
 
             double[] Electricity = (from status in dalConfigRoot
                                     .Element("ElectricityUseRequest")
                                     .Elements() select XmlConvert
                                     .ToDouble(status.Value)).ToArray();
-            dalConfigRoot.Save(ConfigPath);
+            dalConfigRoot.Save(dir+ConfigPath);
             return Electricity;
         }
         

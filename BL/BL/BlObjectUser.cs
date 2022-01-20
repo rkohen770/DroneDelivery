@@ -33,8 +33,10 @@ namespace BL
                     UserName = user.UserName,
                     Admin = (DO.Permission)user.Admin,
                     Password = user.Password,
+                    Available = true,
+
                 };
-                //Add baseStation in DAL to data source.
+                //Add user in DAL to data source.
                 dal.AddUser(user1);
             }
             catch (DO.BadUserNameException ex)

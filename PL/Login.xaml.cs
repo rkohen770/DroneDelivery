@@ -141,11 +141,11 @@ namespace PL
            x4.Serialize(file4, list4);
            file4.Close();
 
-            //List<DO.DroneCharge> list5 = new(DL.DalObject.Instance.GetDronesInChargingsAtStation(x => x.DroneId == x.DroneId));
-            //FileStream file5 = new FileStream(dir + @"\Data\DroneCharges.xml", FileMode.Create);
-            //XmlSerializer x5 = new XmlSerializer(list5.GetType());
-            //x5.Serialize(file5, list5);
-            //file5.Close();
+            List<DO.DroneCharge> list5 = new (DL.DalObject.Instance.GetAllDroneCharge(x=>x.DroneID==x.DroneID));
+            FileStream file5 = new FileStream(dir + @"\Data\DroneCharges.xml", FileMode.Create);
+            XmlSerializer x5 = new XmlSerializer(list5.GetType());
+            x5.Serialize(file5, list5);
+            file5.Close();
 
             List<DO.Parcel> list6 = new(DL.DalObject.Instance.GetAllParcels());
             FileStream file6 = new FileStream(dir + @"\Data\ParcelsXml.xml", FileMode.Create);

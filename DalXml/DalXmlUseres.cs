@@ -18,7 +18,7 @@ namespace DL
         public User GetUser(string userName, string password = null)
         {
 
-            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(UseresPath);
+            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(dir + UseresPath);
 
             User user = users.Find(u => u.UserName == userName && u.Available == true);
             if (user.UserName != null)
@@ -34,7 +34,7 @@ namespace DL
         /// <returns></returns>
         public IEnumerable<User> GetAllUseres()
         {
-            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(UseresPath);
+            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(dir + UseresPath);
             return users.AsEnumerable();
         }
         /// <summary>
@@ -44,7 +44,7 @@ namespace DL
         /// <returns></returns>
         public IEnumerable<User> GetAllUseresBy(Predicate<DO.User> predicate)
         {
-            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(UseresPath);
+            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(dir + UseresPath);
             return from u1 in users
                    where predicate(u1) && u1.Available == true
                    select u1;
@@ -57,7 +57,7 @@ namespace DL
         /// <param name="user"></param>
         public void AddUser(User user)
         {
-            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(UseresPath);
+            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(dir + UseresPath);
             DO.User user1 = (from u in users
                              where u.UserName == user.UserName
                              select u).FirstOrDefault();
@@ -74,7 +74,7 @@ namespace DL
         /// <param name="userName"></param>
         public void DeleteUser(string userName)
         {
-            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(UseresPath);
+            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(dir + UseresPath);
 
             User user = (from u in users
                          where u.UserName == userName
@@ -84,7 +84,7 @@ namespace DL
             {
                 user.Available = false;
                 users.Add(user);
-                XMLTools.SaveListToXMLSerializer(users, UseresPath);
+                XMLTools.SaveListToXMLSerializer(users,  UseresPath);
             }
             else
                 throw new BadUserNameException(userName, $"bad user name: {userName}");
@@ -95,7 +95,7 @@ namespace DL
         /// <param name="user"></param>
         public void UpdateUser(User user)
         {
-            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(UseresPath);
+            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(dir + UseresPath);
 
             User user1 = (from u in users
                           where u.UserName == user.UserName
@@ -105,7 +105,7 @@ namespace DL
             {
                 users.Remove(user1);
                 users.Add(user);
-                XMLTools.SaveListToXMLSerializer(users, UseresPath);
+                XMLTools.SaveListToXMLSerializer(users, dir + UseresPath);
             }
             else
                 throw new BadUserNameException(user.UserName, $"bad user name: {user.UserName}");

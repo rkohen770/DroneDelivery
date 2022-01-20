@@ -270,11 +270,22 @@ namespace DalApi
         /// <returns></returns>
         DO.User GetUser(string userName, string password = null);
         #endregion
+
+        #region DroneCharge
+        /// <summary>
+        /// A method that returns all the drones that were in charge
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        IEnumerable<DroneCharge> GetAllDroneCharge(Predicate <DroneCharge> predicate);
+
+        #endregion
+
         /// <summary>
         /// A method of requesting power consumption by a drone  
         /// </summary>
         /// <returns>array of numbers of double type</returns>
-       double[] PowerConsumptionRequest();
+        double[] PowerConsumptionRequest();
 
        
     }

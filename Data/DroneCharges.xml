@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ArrayOfDroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DroneCharge>
+    <DroneID>7486</DroneID>
+    <StationID>11212</StationID>
+    <Available>false</Available>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>7686</DroneID>
+    <StationID>11212</StationID>
+    <Available>false</Available>
+  </DroneCharge>
+</ArrayOfDroneCharge>

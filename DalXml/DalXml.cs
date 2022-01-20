@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using DalApi;
@@ -24,9 +25,12 @@ namespace DL
         /// the public Instance property for use. returns the instance
         /// </summary>
         public static DalXml Instance { get => instance; }// The public Instance property to use
+
         #endregion
 
         #region DS XML Files Path
+        string dir = Directory.GetCurrentDirectory();
+
         /// <summary>
         /// users XElement
         /// </summary>
@@ -90,7 +94,7 @@ namespace DL
         /// <returns>Returns a distance between two points</returns>
         public double GetDistanceBetweenLocationsOfParcels(int senderId, int targetId)
         {
-            List<Station> ListStation = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
+            List<Station> ListStation = XMLTools.LoadListFromXMLSerializer<Station>(dir + StationsPath);
             double minDistance = 1000000000000;
             Customer sender = GetCustomer(senderId);
             Customer target = GetCustomer(targetId);
@@ -103,6 +107,12 @@ namespace DL
                 }
             }
             return minDistance;
+        }
+
+        public IEnumerable<DroneCharge> GetAllDroneCharge(Predicate<DroneCharge> predicate)
+        {
+            List<DroneCharge> droneChargeList = XMLTools.LoadListFromXMLSerializer<DroneCharge>(dir + DroneChargePath);
+            return droneChargeList.FindAll(predicate);
         }
     }
 }

@@ -32,9 +32,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{8BD30766-46F
 		dal-config.xml = dal-config.xml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{86F47298-7862-47CE-8F85-9CD2E4431D11}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{1EFB4981-91AD-45B1-9F89-B6A9D0DC8D50}"
 	ProjectSection(SolutionItems) = preProject
-		Config.xml = Config.xml
+		ConfigXml.xml = ConfigXml.xml
 	EndProjectSection
 EndProject
 Global
