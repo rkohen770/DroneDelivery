@@ -23,6 +23,7 @@ namespace PL
     public partial class DroneWindow : Window
     {
         private IBL bl = BLFactory.GetBL();
+        bool flag = false;
         private DroneForList drone { get; set; }
         private MainWindow mainWindow;
 
@@ -39,7 +40,6 @@ namespace PL
         public DroneWindow(IBL bl, MainWindow mainWindow)
         {
             InitializeComponent();
-            DataContext = false;
             this.bl = bl;
             this.mainWindow = mainWindow;
             Height = 270;
@@ -58,7 +58,6 @@ namespace PL
         public DroneWindow(IBL bl, DroneForList drone, MainWindow mainWindow)
         {
             InitializeComponent();
-            DataContext = false;
             this.bl = bl;
             this.drone = drone;
             this.mainWindow = mainWindow;
@@ -122,6 +121,7 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
             mainWindow.LVListDrones.Items.Refresh();
+            flag = true;
             Close();
         }
 
@@ -132,14 +132,14 @@ namespace PL
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = true;
+            flag = true;
             Close();
         }
 
         //Bouns.
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (DataContext.Equals(false)) e.Cancel = true;
+            if (flag.Equals(false)) e.Cancel = true;
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace PL
         {
             try
             {
-                bl.UpdateReleaseDroneFromCharging(int.Parse(ID.Text), new TimeSpan(1, 0, 0));
+                bl.UpdateReleaseDroneFromCharging(int.Parse(ID.Text), new TimeSpan(0, 5, 0));
                 MessageBox.Show("Release the drone from charging was completed successfully");
                 mainWindow.LVListDrones.ItemsSource = bl.GetAllDronesBo();
                 mainWindow.LVListDrones.Items.Refresh();

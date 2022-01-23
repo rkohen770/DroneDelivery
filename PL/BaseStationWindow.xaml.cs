@@ -25,6 +25,7 @@ namespace PL
         private IBL bl;
         private BaseStationForList baseStationDetails;
         private MainWindow mainWindow;
+        bool flag = false;
 
         /// <summary>
         /// constractor for update the base station
@@ -35,7 +36,6 @@ namespace PL
         public BaseStationWindow(IBL bl, MainWindow mainWindow)
         {
             InitializeComponent();
-            DataContext = false;
             this.bl = bl;
             this.mainWindow = mainWindow;
             CurrentLocation.Visibility = Visibility.Hidden;
@@ -51,7 +51,6 @@ namespace PL
         public BaseStationWindow(IBL bl, BaseStationForList baseStationDetails, MainWindow mainWindow)
         {
             InitializeComponent();
-            DataContext = false;
             this.bl = bl;
             this.baseStationDetails = baseStationDetails;
             this.mainWindow = mainWindow;
@@ -81,7 +80,7 @@ namespace PL
         private void ShowDroneDetails_Click(object sender, MouseButtonEventArgs e)
         {
             DroneInCharging droneDetails = ((ListView)sender).SelectedItem as DroneInCharging;
-            DroneForList drone= bl.CloneDrone(bl.GetDrone(droneDetails.DroneID));
+            DroneForList drone = bl.CloneDrone(bl.GetDrone(droneDetails.DroneID));
             new DroneWindow(bl, drone, mainWindow).ShowDialog();
             LVDroneInChargings.ItemsSource = bl.GetBaseStation(baseStationDetails.BaseStationID).DroneInChargings;
             LVDroneInChargings.Items.Refresh();
@@ -94,7 +93,7 @@ namespace PL
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = true;
+            flag = true;
             Close();
         }
 
@@ -109,7 +108,7 @@ namespace PL
             {
                 if (ID.Text == null || Name.Text == null || Longttitude.Text == null || Lattitude.Text == null || NumOfAvailableChargingPositions.Text == null)
                     MessageBox.Show("Not all detalis are set");
-                else if (ID.Text.Length >5)
+                else if (ID.Text.Length > 5)
                     MessageBox.Show("Base Station ID longs then 5 letters");
                 else if (Name.Text.Length > 5)
                     MessageBox.Show("Base Station Name longs then 5 letters");
@@ -120,7 +119,7 @@ namespace PL
                         location, int.Parse(NumOfAvailableChargingPositions.Text));
                     MessageBox.Show("Adding a drone was completed successfully");
                 }
-               
+
 
             }
             catch (BadBaseStationIDException ex)
@@ -133,6 +132,7 @@ namespace PL
             }
             mainWindow.LVListBaseStations.ItemsSource = bl.GetAllBaseStationsBo();
             mainWindow.LVListBaseStations.Items.Refresh();
+            flag = true;
             Close();
         }
 
@@ -145,7 +145,7 @@ namespace PL
         {
             try
             {
-                bl.UpdateBaseStationData(int.Parse(ID.Text),int.Parse( Name.Text), int.Parse(NumOfAvailableChargingPositions.Text));
+                bl.UpdateBaseStationData(int.Parse(ID.Text), int.Parse(Name.Text), int.Parse(NumOfAvailableChargingPositions.Text));
                 MessageBox.Show("Update a Base Station was completed successfully");
                 mainWindow.LVListBaseStations.ItemsSource = bl.GetAllBaseStationsBo();
                 mainWindow.LVListBaseStations.Items.Refresh();
@@ -159,7 +159,7 @@ namespace PL
         //Bouns.
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (DataContext.Equals(false)) e.Cancel = true;
+            if (flag.Equals(false)) e.Cancel = true;
         }
     }
 }

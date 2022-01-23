@@ -135,7 +135,7 @@ namespace BL
                 //the drone collect a parcel only if the parcel has been assigned to it and haven't picked up yet
                 var drone = dal.GetDrone(droneId);
                 var drone_l = droneForLists.Find(d => d.DroneID == droneId && d.DroneStatus == DroneStatus.Delivery);
-                var parcel = dal.GetAllParcelsWithoutSpecialDron(p => p.DroneID == droneId && p.Delivered == null).FirstOrDefault();
+                var parcel = dal.GetAllParcelsByPredicat(p => p.DroneID == droneId && p.Delivered == null).FirstOrDefault();
                 
                     //check if the parcel was assigned
                     if (parcel.Scheduled == null)
@@ -190,7 +190,7 @@ namespace BL
                 //the drone collect a parcel only if the parcel has been assigned to it and hasn't been picked up yet
                 var drone = dal.GetDrone(droneId);
                 var drone_l = droneForLists.Find(d => d.DroneID == droneId && d.DroneStatus == DroneStatus.Delivery);
-                var parcel = dal.GetAllParcelsWithoutSpecialDron(p => p.DroneID == droneId && p.Delivered==null && p.PickedUp!=null).FirstOrDefault();
+                var parcel = dal.GetAllParcelsByPredicat(p => p.DroneID == droneId && p.Delivered==null && p.PickedUp!=null).FirstOrDefault();
                     //check if the parcel was assigned
                 if(parcel.ParcelID==0)
                 {
@@ -313,7 +313,7 @@ namespace BL
         public IEnumerable<ParcelForList> GetAllParcelsNotYetAssociatedWithDrone()
         {
             List<ParcelForList> list = new();
-            foreach (var parcel in dal.GetAllParcelsWithoutSpecialDron(x => x.ParcelID > 0 && x.DroneID == 0))
+            foreach (var parcel in dal.GetAllParcelsByPredicat(x => x.ParcelID > 0 && x.DroneID == 0))
             {
                 ParcelForList parcelForList = CloneParcel(GetParcel(parcel.ParcelID));
                 list.Add(parcelForList);
@@ -324,7 +324,7 @@ namespace BL
         public IEnumerable<ParcelForList> GetParcelsByPredicat(Predicate<ParcelForList> p)
         {
             List<ParcelForList> list = new();
-
+            
             foreach (var parcel in dal.GetAllParcels())
             {
                 ParcelForList parcelFor = CloneParcel(GetParcel(parcel.ParcelID));

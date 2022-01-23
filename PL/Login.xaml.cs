@@ -143,7 +143,7 @@ namespace PL
            file4.Close();
 
             List<DO.DroneCharge> list5 = new (DL.DalObject.Instance.GetAllDroneCharge(x=>x.DroneID==x.DroneID));
-            FileStream file5 = new FileStream(dir+@"DroneCharges.xml", FileMode.Create);
+            FileStream file5 = new FileStream(dir+ @"DroneChargesXml.xml", FileMode.Create);
             XmlSerializer x5 = new XmlSerializer(list5.GetType());
             x5.Serialize(file5, list5);
             file5.Close();

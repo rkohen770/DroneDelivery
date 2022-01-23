@@ -41,7 +41,6 @@ namespace DL
             else
             {
                 List<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
-                //XElement dalConfigRoot = XElement.Load(ConfigPath);
                 XElement dalConfigRoot = XMLTools.LoadListFromXMLElement(ConfigPath);
                 Parcel p = new()
                 {
@@ -56,6 +55,8 @@ namespace DL
                     Available=true,
                 };
                 ListParcel.Add(p);
+                dalConfigRoot.Element("SerialNum").Value = (p.ParcelID+1).ToString();
+                XMLTools.SaveListToXMLElement(dalConfigRoot, ConfigPath);
                 XMLTools.SaveListToXMLSerializer(ListParcel, ParcelsPath);//Adding the new parcel to the file
                 return p.ParcelID;
             }
@@ -189,11 +190,11 @@ namespace DL
         /// <summary>
         /// Displays a list of parcels that have not yet been assigned to the drone
         /// </summary>
-        /// <returns>list of parcel without special dron</returns>
-        public IEnumerable<Parcel> GetAllParcelsWithoutSpecialDron(Predicate<Parcel> p)
+        /// <returns>list of parcel by predicate</returns>
+        public IEnumerable<Parcel> GetAllParcelsByPredicat(Predicate<Parcel> p)
         {
             List<Parcel> ListParcel = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
-            //return all the parcels without special drone
+            //return all the parcels by predicate
             return from parcel in ListParcel
                    where p(parcel) && parcel.Available
                    select parcel;

@@ -46,7 +46,7 @@ namespace DL
         /// <summary>
         /// Drone Charge XMLSerializer
         /// </summary>
-        string DroneChargePath = @"DroneChargeXml.xml";
+        string DroneChargePath = @"DroneChargesXml.xml";
         /// <summary>
         /// Parcel XMLSerializer
         /// </summary>

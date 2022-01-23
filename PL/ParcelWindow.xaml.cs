@@ -199,7 +199,7 @@ namespace PL
                 client.LVListToCustomers.ItemsSource = new ObservableCollection<ParcelAtCustomer>(customerDetails.ToCustomer);
                 client.LVListToCustomers.Items.Refresh();
             }
-
+            flag = true;
             Close();
         }
 

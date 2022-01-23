@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 <ArrayOfDrone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Drone>
+    <DroneID>7486</DroneID>
+    <DroneModel>EG-574</DroneModel>
+    <MaxWeight>Intermediate</MaxWeight>
+    <Available>true</Available>
+  </Drone>
+  <Drone>
     <DroneID>7686</DroneID>
     <DroneModel>EG-574</DroneModel>
     <MaxWeight>Easy</MaxWeight>
@@ -21,13 +27,7 @@
   <Drone>
     <DroneID>7945</DroneID>
     <DroneModel>EG-474</DroneModel>
-    <MaxWeight>Liver</MaxWeight>
-    <Available>true</Available>
-  </Drone>
-  <Drone>
-    <DroneID>7486</DroneID>
-    <DroneModel>EG-574</DroneModel>
-    <MaxWeight>Intermediate</MaxWeight>
+    <MaxWeight>Easy</MaxWeight>
     <Available>true</Available>
   </Drone>
 </ArrayOfDrone>
