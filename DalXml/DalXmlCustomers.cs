@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
-using DalApi;
+using System.Runtime.CompilerServices;
 using DO;
-
 namespace DL
 {
-    public sealed partial class DalXml : IDal
+    public sealed partial class DalXml : DalApi.IDal
     {
-        #region ADD
+        #region Add
         /// <summary>
         /// adds customer to the file
         /// </summary>
@@ -20,56 +22,46 @@ namespace DL
         /// <param name="lattitude">Lattitude within the borders of the Land of Israel</param>
         public void AddCustomer(int id, string name, string phone, double longitude, double lattitude)
         {
-            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
-            var CustomerAdd = (from item in ListCustomer
-                               where item.CustomerID == id
-                               select item).FirstOrDefault();
-            if (CustomerAdd.CustomerID != 0 && CustomerAdd.Available)
-                throw new CustomerAlreadyExistException(id, name, "The customer exists");
-            if (CustomerAdd.CustomerID != 0 && !CustomerAdd.Available)
-            {
-                DeleteCustomer(id);
-            }
+          //  XElement dalCustomersRoot = XElement.Load(CustomersPath);
+            XElement dalCustomersRoot = XMLTools.LoadListFromXMLElement(CustomersPath);
 
-            Customer c = new Customer
-            {
-                CustomerID = id,
-                Name = name,
-                Phone = phone,
-                Longitude = longitude,
-                Lattitude = lattitude,
-                Available = true,
-            };
-            ListCustomer.Add(c);
-            XMLTools.SaveListToXMLSerializer(ListCustomer, CustomersPath);
+            XElement customer = new XElement("Customer",
+                                new XElement("CustomerID", id),
+                                new XElement("Name", name),
+                                new XElement("Phone", phone),
+                                new XElement("Longitude", longitude),
+                                new XElement("Lattitude", lattitude),
+                                new XElement("Available", true));
+
+            dalCustomersRoot.Add(customer);
+            XMLTools.SaveListToXMLElement(dalCustomersRoot, CustomersPath);
+
+          //  dalCustomersRoot.Save(CustomersPath);
         }
         #endregion
 
-        #region UPDATE
+        #region Update
         /// <summary>
-        /// Update Customer data
+        /// Update customer data
         /// </summary>
-        /// <param name="id">Customer id</param>
+        /// <param name="id"></param>
         /// <param name="newName"></param>
         /// <param name="newPhone"></param>
         public void UpdateCustomerData(int id, string newName, string newPhone)
         {
-            List<Customer> listCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
+            XElement dalCustomersRoot = XMLTools.LoadListFromXMLElement(CustomersPath);
 
-            var CustomerAdd = (from item in listCustomer
-                               where item.CustomerID == id && item.Available
-                               select item).FirstOrDefault();
-            if (CustomerAdd.CustomerID != 0)
-            {
-                Customer c = CustomerAdd;
-                c.Name = newName;
-                c.Phone = newPhone;
+            //XElement dalCustomersRoot = XElement.Load(CustomersPath);
 
-                listCustomer.Remove(CustomerAdd);
-                listCustomer.Add(c);
-                XMLTools.SaveListToXMLSerializer(listCustomer, CustomersPath);
-            }
-            else throw new BadCustomerIDException(id, $"The customer: {id} doesn't exist");
+            XElement dalCustomer = (from customer in dalCustomersRoot.Elements()
+                                    where customer.Element("CustomerID").Value == id.ToString()
+                                    select customer).FirstOrDefault();
+            if (dalCustomer == null) throw new BadCustomerIDException(id, $"The customer doesn't exist in the system");
+            dalCustomer.Element("Name").SetValue(newName);
+            dalCustomer.Element("Phone").SetValue(newPhone);
+            XMLTools.SaveListToXMLElement(dalCustomersRoot, CustomersPath);
+
+           // dalCustomersRoot.Save(CustomersPath);
         }
 
         /// <summary>
@@ -79,24 +71,19 @@ namespace DL
         /// <param name="newName">customer name</param>
         public void UpdateCustomerName(int id, string newName)
         {
-            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
+            XElement dalCustomersRoot = XMLTools.LoadListFromXMLElement(CustomersPath);
 
-            var CustomerAdd = (from item in ListCustomer
-                               where item.CustomerID == id && item.Available
-                               select item).FirstOrDefault();
+            //XElement dalCustomersRoot = XElement.Load(CustomersPath);
 
-            if (CustomerAdd.CustomerID != 0)
-            {
-                Customer c = CustomerAdd;
-                c.Name = newName;
+            XElement dalCustomer = (from customer in dalCustomersRoot.Elements()
+                                    where customer.Element("CustomerID").Value == id.ToString()
+                                    select customer).FirstOrDefault();
+            if (dalCustomer == null) throw new BadCustomerIDException(id, $"The customer doesn't exist in the system");
+            dalCustomer.Element("Name").SetValue(newName);
+            XMLTools.SaveListToXMLElement(dalCustomersRoot, CustomersPath);
 
-                ListCustomer.Remove(CustomerAdd);
-                ListCustomer.Add(c);
-                XMLTools.SaveListToXMLSerializer(ListCustomer, CustomersPath);
-            }
-            throw new BadCustomerIDException(id, $"The customer doesn't exist in the system");
+           // dalCustomersRoot.Save(CustomersPath);
         }
-
         /// <summary>
         /// customer phone
         /// </summary>
@@ -104,54 +91,72 @@ namespace DL
         /// <param name="newPhone">customer name</param>
         public void UpdateCustomerPhone(int id, string newPhone)
         {
-            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
+            XElement dalCustomersRoot = XMLTools.LoadListFromXMLElement(CustomersPath);
 
-            var CustomerAdd = (from item in ListCustomer
-                               where item.CustomerID == id && item.Available
-                               select item).FirstOrDefault();
+            //XElement dalCustomersRoot = XElement.Load(CustomersPath);
 
-            if (CustomerAdd.CustomerID != 0)
-            {
-                Customer c = CustomerAdd;
-                c.Phone = newPhone;
+            XElement dalCustomer = (from customer in dalCustomersRoot.Elements()
+                                    where customer.Element("CustomerID").Value == id.ToString()
+                                    select customer).FirstOrDefault();
+            if (dalCustomer == null) throw new BadCustomerIDException(id, $"The customer doesn't exist in the system");
+            dalCustomer.Element("Phone").SetValue(newPhone);
+            XMLTools.SaveListToXMLElement(dalCustomersRoot, CustomersPath);
 
-                ListCustomer.Remove(CustomerAdd);
-                ListCustomer.Add(c);
-                XMLTools.SaveListToXMLSerializer(ListCustomer, CustomersPath);
-            }
-            throw new BadCustomerIDException(id, $"The customer doesn't exist in the system");
+          //  dalCustomersRoot.Save(CustomersPath);
         }
         #endregion
 
-        #region Get item
+        #region GEt
         /// <summary>
-        /// return customer by customer id 
+        /// Finds Customer by specific Id.
         /// </summary>
-        /// <param name="customerId">customer id</param>
-        /// <returns>get customer</returns>
+        /// <param name="customerId"> Customer Id </param>
+        /// <returns> Customer object </returns>
         public Customer GetCustomer(int customerId)
         {
-            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
-            var c = (from item in ListCustomer
-                     where item.CustomerID == customerId && item.Available
-                     select item).FirstOrDefault();
-            if (c.CustomerID == 0)
-                throw new BadCustomerIDException(customerId, "the customer does'nt exists in customer's list");
-            return c;
+            //XElement dalCustomersRoot = XElement.Load(CustomersPath);
+            XElement dalCustomersRoot = XMLTools.LoadListFromXMLElement(CustomersPath);
+
+            Customer dalCustomer = (from customer in dalCustomersRoot.Elements()
+                                    where customer.Element("CustomerID").Value == customerId.ToString()
+                                    select new Customer
+                                    {
+                                        CustomerID = customerId,
+                                        Name = customer.Element("Name").Value,
+                                        Phone = customer.Element("Phone").Value,
+                                        Longitude = double.Parse(customer.Element("Longitude").Value),
+                                        Lattitude = double.Parse(customer.Element("Lattitude").Value),
+                                        Available = bool.Parse(customer.Element("Available").Value)
+                                    }).FirstOrDefault();
+
+            //dalCustomersRoot.Save(CustomersPath);
+            XMLTools.SaveListToXMLElement(dalCustomersRoot, CustomersPath);
+            return dalCustomer.CustomerID != customerId || dalCustomer.Available == false ? throw new BadCustomerIDException(customerId, $"The customer doesn't exist in the system") : dalCustomer;
         }
         #endregion
 
         #region Get lists
         /// <summary>
-        /// return a list of actual customer
+        /// Return List of Customers.
         /// </summary>
-        /// <returns>list of customers</returns>
+        /// <returns> List of Customers </returns>
         public IEnumerable<Customer> GetAllCustomers()
         {
-            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
-            return from item in ListCustomer
-                   where item.Available
-                   select item;
+            XElement dalCustomersRoot = XMLTools.LoadListFromXMLElement(CustomersPath);
+
+            //XElement dalCustomersRoot = XElement.Load(CustomersPath);
+
+            return from customer in dalCustomersRoot.Elements()
+                   where XmlConvert.ToBoolean(customer.Element("Available").Value)
+                   select new Customer
+                   {
+                       CustomerID = XmlConvert.ToInt32(customer.Element("CustomerID").Value),
+                       Name = customer.Element("Name").Value,
+                       Phone = customer.Element("Phone").Value,
+                       Longitude = XmlConvert.ToDouble(customer.Element("Longitude").Value),
+                       Lattitude = XmlConvert.ToDouble(customer.Element("Lattitude").Value),
+                       Available = XmlConvert.ToBoolean(customer.Element("Available").Value)
+                   };
         }
 
         /// <summary>
@@ -161,6 +166,7 @@ namespace DL
         /// <returns>customers by predicat</returns>
         public IEnumerable<Customer> GetAllCustomerByPredicate(Predicate<Customer> p)
         {
+
             List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
 
             return from customer in ListCustomer
@@ -176,20 +182,18 @@ namespace DL
         /// <param name="customerId">customer id</param>
         public void DeleteCustomer(int customerId)
         {
-            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustomersPath);
-            var CustomerDelete = (from item in ListCustomer
-                                  where item.CustomerID == customerId && item.Available
-                                  select item).FirstOrDefault();
-            if (CustomerDelete.CustomerID != 0)
-            {
-                ListCustomer.Remove(CustomerDelete);
-                CustomerDelete.Available = false;
-                ListCustomer.Add(CustomerDelete);
-                XMLTools.SaveListToXMLSerializer(ListCustomer, CustomersPath);
-            }
-            else throw new BadCustomerIDException(customerId, $"The customer: {customerId} doesn't exist");
+            XElement dalCustomersRoot = XMLTools.LoadListFromXMLElement(CustomersPath);
+
+            //XElement dalCustomersRoot = XElement.Load(CustomersPath);
+
+            XElement dalCustomer = (from customer in dalCustomersRoot.Elements()
+                                    where customer.Element("CustomerID").Value == customerId.ToString()
+                                    select customer).FirstOrDefault();
+            dalCustomer.Element("Available").SetValue(false);
+           // dalCustomersRoot.Save(CustomersPath);
+             XMLTools.SaveListToXMLElement(dalCustomersRoot, CustomersPath);
+
         }
         #endregion
-
     }
 }

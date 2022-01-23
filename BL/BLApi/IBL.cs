@@ -189,23 +189,23 @@ namespace BLApi
         /// adds a new BO.user instance
         /// </summary>
         /// <param name="user"></param>
-        void AddUser(BO.User user);
+        public void AddUser(BO.User user);
         /// <summary>
         /// updates an exist BO.user instance
         /// </summary>
         /// <param name="user"></param>
-        void UpdateUser(BO.User user);
+        public void UpdateUser(BO.User user);
         /// <summary>
         /// deletes an exist BO.user instance by the user name
         /// </summary>
         /// <param name="userName"></param>
-        void DeleteUser(string userName);
+        public void DeleteUser(string userName);
         /// <summary>
         /// returns an exist BO.user instance by the user name
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        BO.User GetUser(string userName, string password);
+        public BO.User GetUser(string userName, string password);
         #endregion
 
         #region Clone

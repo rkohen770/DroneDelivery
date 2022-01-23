@@ -27,19 +27,6 @@
     <Available>true</Available>
   </Parcel>
   <Parcel>
-    <ParcelID>10000</ParcelID>
-    <SenderID>123456789</SenderID>
-    <TargetID>987654321</TargetID>
-    <Weight>Easy</Weight>
-    <Priority>Emergency</Priority>
-    <DroneID>7486</DroneID>
-    <Requested>2021-08-27T08:30:11</Requested>
-    <Scheduled>2021-08-27T13:39:53</Scheduled>
-    <PickedUp>2021-08-27T15:30:26</PickedUp>
-    <Delivered>2021-08-27T21:46:11</Delivered>
-    <Available>true</Available>
-  </Parcel>
-  <Parcel>
     <ParcelID>10001</ParcelID>
     <SenderID>987654321</SenderID>
     <TargetID>234567891</TargetID>
@@ -141,6 +128,19 @@
     <Scheduled>2021-04-21T11:58:45</Scheduled>
     <PickedUp>2021-04-21T14:12:11</PickedUp>
     <Delivered>2021-04-21T16:10:17</Delivered>
+    <Available>true</Available>
+  </Parcel>
+  <Parcel>
+    <ParcelID>10000</ParcelID>
+    <SenderID>123456789</SenderID>
+    <TargetID>987654321</TargetID>
+    <Weight>Easy</Weight>
+    <Priority>Emergency</Priority>
+    <DroneID>7486</DroneID>
+    <Requested>2021-08-27T08:30:11</Requested>
+    <Scheduled>2021-08-27T13:39:53</Scheduled>
+    <PickedUp>2021-08-27T15:30:26</PickedUp>
+    <Delivered>2021-08-27T21:46:11</Delivered>
     <Available>true</Available>
   </Parcel>
 </ArrayOfParcel>

@@ -40,7 +40,7 @@ namespace ConsoleUI_BL
                         switch (choice)
                         {
                             case (int)Add.ADD_BASE_STATION:
-                                addStation(bl);
+                                AddStation(bl);
                                 break;
 
                             case (int)Add.ADD_DRONE:
@@ -232,7 +232,7 @@ namespace ConsoleUI_BL
         /// Receives input and activates the functions of the bl layer
         /// </summary>
         /// <param name="bl">On this standby the functions are activated</param>
-        private static void addStation(BlObject bl)
+        public static void AddStation(BlObject bl)
         {
             Console.WriteLine("Enter the station details: id, name, location, charging ");
             int id = int.Parse(Console.ReadLine());

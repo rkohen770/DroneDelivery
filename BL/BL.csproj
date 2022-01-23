@@ -11,8 +11,4 @@
     <ProjectReference Include="..\DAL\DalFacade.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BO\" />
-  </ItemGroup>
-
 </Project>

@@ -26,8 +26,8 @@
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="241*"/>
-                <ColumnDefinition Width="459*"/>
+                <ColumnDefinition Width="249*"/>
+                <ColumnDefinition Width="451*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Customer ID:" Grid.Row="0" HorizontalAlignment="Left" 
                 Height="28" Margin="100,25,0,0" VerticalAlignment="Top" Width="121" 

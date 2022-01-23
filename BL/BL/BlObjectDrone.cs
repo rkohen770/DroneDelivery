@@ -16,7 +16,7 @@ namespace BL
         /// <param name="model">Drone model</param>
         /// <param name="maxWeight">Maximum weight</param>
         /// <param name="stationId">Number of stations to put the drone for initial charging</param>
-        public void AddDroneBo(int droneId, string model, BO.WeightCategories maxWeight, int stationId)
+        public void AddDroneBo(int droneId, string model, WeightCategories maxWeight, int stationId)
         {
             try
             {
@@ -42,15 +42,15 @@ namespace BL
             }
             catch (DO.DroneAlreadyExistException e)
             {
-                throw new BO.DroneAlreadyExistException(e.ID, e.Model, e.Message, e.InnerException);
+                throw new DroneAlreadyExistException(e.ID, e.Model, e.Message, e.InnerException);
             }
             catch (DO.BadDroneIDException e)
             {
-                throw new BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
             catch (DO.BadBaseStationIDException e)
             {
-                throw new BO.BadBaseStationIDException(e.ID, e.Message, e.InnerException);
+                throw new BadBaseStationIDException(e.ID, e.Message, e.InnerException);
             }
         }
         #endregion
@@ -80,7 +80,7 @@ namespace BL
             }
             catch (DO.BadDroneIDException e)
             {
-                throw new BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
         }
 
@@ -128,16 +128,16 @@ namespace BL
                 }
                 else
                 {
-                    throw new BO.BadDroneIDException(id, "the drone not exists in the list of drones");
+                    throw new BadDroneIDException(id, "the drone not exists in the list of drones");
                 }
             }
             catch (DO.BadBaseStationIDException e)
             {
-                throw new BO.BadBaseStationIDException(e.ID, e.Message, e.InnerException);
+                throw new BadBaseStationIDException(e.ID, e.Message, e.InnerException);
             }
             catch (DO.BadDroneIDException e)
             {
-                throw new BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
 
         }
@@ -180,16 +180,16 @@ namespace BL
                 }
                 else
                 {
-                    throw new BO.BadDroneIDException(id, "the drone not exists in the system");
+                    throw new BadDroneIDException(id, "the drone not exists in the system");
                 }
             }
             catch (DO.BadDroneIDException e)
             {
-                throw new BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
             catch (DO.BadBaseStationIDException e)
             {
-                throw new BO.BadBaseStationIDException(e.ID, e.Message, e.InnerException);
+                throw new BadBaseStationIDException(e.ID, e.Message, e.InnerException);
             }
         }
 
@@ -216,8 +216,8 @@ namespace BL
                     ParcelInTransfer parcelInTransfer = new ParcelInTransfer()
                     {
                         ParcelID = parcel.ParcelID,
-                        Priorities = (BO.Priorities)parcel.Priority,
-                        Weight = (BO.WeightCategories)parcel.Weight,
+                        Priorities = (Priorities)parcel.Priority,
+                        Weight = (WeightCategories)parcel.Weight,
                         SenderOfParcel = new() { CustomerID = customer_sender.CustomerID, CustomerName = customer_sender.Name },
                         TargetToParcel = new() { CustomerID = customer_target.CustomerID, CustomerName = customer_target.Name },
                         Collection = new() { Lattitude = customer_sender.Lattitude, Longitude = customer_sender.Longitude },
@@ -257,11 +257,11 @@ namespace BL
             }
             catch (DO.BadDroneIDException e)
             {
-                throw new BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
             catch (DO.BadCustomerIDException e)
             {
-                throw new BO.BadCustomerIDException(e.ID, e.Message, e.InnerException);
+                throw new BadCustomerIDException(e.ID, e.Message, e.InnerException);
             }
         }
         #endregion
@@ -290,7 +290,7 @@ namespace BL
             }
             catch (DO.BadDroneIDException e)
             {
-                throw new BO.BadDroneIDException(e.ID, e.Message, e.InnerException);
+                throw new BadDroneIDException(e.ID, e.Message, e.InnerException);
             }
         }
 
@@ -317,13 +317,13 @@ namespace BL
         /// </summary>
         /// <param name="drone">drone</param>
         /// <returns>drone for list</returns>
-        public DroneForList CloneDrone(BO.Drone drone)
+        public DroneForList CloneDrone(Drone drone)
         {
             return new DroneForList
             {
                 DroneID = drone.DroneID,
                 DroneModel = drone.DroneModel,
-                MaxWeight = (BO.WeightCategories)drone.Weight,
+                MaxWeight = (WeightCategories)drone.Weight,
                 DroneBattery = drone.DroneBattery,
                 DroneStatus = drone.DroneStatus,
                 CurrentLocation = drone.CurrentLocation
