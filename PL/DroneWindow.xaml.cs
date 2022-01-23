@@ -26,6 +26,11 @@ namespace PL
         private DroneForList drone { get; set; }
         private MainWindow mainWindow;
 
+        public DroneWindow()
+        {
+            DialogResult = true;
+            InitializeComponent();
+        }
         /// <summary>
         /// This constractor is for adding a drone
         /// </summary>
@@ -35,7 +40,6 @@ namespace PL
         {
             InitializeComponent();
             DataContext = false;
-
             this.bl = bl;
             this.mainWindow = mainWindow;
             Height = 270;
@@ -55,7 +59,6 @@ namespace PL
         {
             InitializeComponent();
             DataContext = false;
-
             this.bl = bl;
             this.drone = drone;
             this.mainWindow = mainWindow;
@@ -130,8 +133,13 @@ namespace PL
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             DataContext = true;
-
             Close();
+        }
+
+        //Bouns.
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (DataContext.Equals(false)) e.Cancel = true;
         }
 
         /// <summary>
@@ -283,11 +291,6 @@ namespace PL
                 ParcelForList parcelDetails = bl.CloneParcel(bl.GetParcel(int.Parse(parcel_Num_Is_Transferred.Text)));
                 new ParcelWindow(bl, parcelDetails, mainWindow).ShowDialog();
             }
-        }
-        //Bouns.
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (DataContext.Equals(false)) e.Cancel = true;
         }
     }
 }
