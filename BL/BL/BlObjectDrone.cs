@@ -281,7 +281,7 @@ namespace BL
                     DroneForList droneFor = CloneDrone(GetDrone(drone_l.DroneID));
                     if (drone_l.DroneStatus == DroneStatus.Delivery)
                     {
-                        droneFor.ParcelNumIsTransferred = dal.GetAllParcelsWithoutSpecialDron(p => p.DroneID == drone_l.DroneID)
+                        droneFor.ParcelNumIsTransferred = dal.GetAllParcelsByPredicat(p => p.DroneID == drone_l.DroneID)
                             .FirstOrDefault().ParcelID;
                     }
                     list.Add(droneFor);
@@ -303,7 +303,7 @@ namespace BL
                 DroneForList droneFor = CloneDrone(GetDrone(drone.DroneID));
                 if (drone.DroneStatus == DroneStatus.Delivery)
                 {
-                    droneFor.ParcelNumIsTransferred = dal.GetAllParcelsWithoutSpecialDron(p => p.DroneID == drone.DroneID)
+                    droneFor.ParcelNumIsTransferred = dal.GetAllParcelsByPredicat(p => p.DroneID == drone.DroneID)
                         .FirstOrDefault().ParcelID;
                 }
                 list.Add(droneFor);

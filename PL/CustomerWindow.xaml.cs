@@ -26,6 +26,7 @@ namespace PL
         private IBL bl = BLFactory.GetBL();
         private CustomerForList customer { get; set; }
         private MainWindow mainWindow;
+        bool flag = false;
         /// <summary>
         /// collection of parcel that customers send
         /// </summary>
@@ -44,7 +45,6 @@ namespace PL
         public CustomerWindow(IBL bl, MainWindow mainWindow)
         {
             InitializeComponent();
-            DataContext = false;
 
             this.bl = bl;
             this.mainWindow = mainWindow;
@@ -66,7 +66,6 @@ namespace PL
         public CustomerWindow(IBL bl, CustomerForList customerDetails, MainWindow mainWindow)
         {
             InitializeComponent();
-            DataContext = false;
 
             this.bl = bl;
             this.customer = customerDetails;
@@ -123,6 +122,7 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
             mainWindow.LVListCustomers.Items.Refresh();
+            flag = true;
             Close();
         }
 
@@ -133,7 +133,7 @@ namespace PL
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = true;
+            flag = true;
 
             Close();
         }
@@ -172,7 +172,7 @@ namespace PL
         //Bouns.
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (DataContext.Equals(false)) e.Cancel = true;
+            if (flag.Equals(false)) e.Cancel = true;
         }
     }
 }

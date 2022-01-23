@@ -23,6 +23,7 @@ namespace PL
     {
         private IBL bl;
         private ParcelForList parcelDetails;
+        bool flag = false;
         /// <summary>
         /// constractor for dysplay a parcel
         /// </summary>
@@ -32,7 +33,6 @@ namespace PL
         {
 
             InitializeComponent();
-            DataContext = false;
 
             this.bl = bl;
             this.parcelDetails = parcelDetails;
@@ -69,14 +69,14 @@ namespace PL
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = true;
+            flag = true;
 
             Close();
         }
         //Bouns.
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (DataContext.Equals(false)) e.Cancel = true;
+            if (flag.Equals(false)) e.Cancel = true;
         }
     }
 }

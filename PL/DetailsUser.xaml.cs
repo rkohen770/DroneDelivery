@@ -23,11 +23,10 @@ namespace PL
     public partial class DetailsUser : Window
     {
         private IBL bl = BLFactory.GetBL();
+        bool flag = false;
         public DetailsUser(User user)
         {
             InitializeComponent();
-            DataContext = false;
-
             CustomersName.Text = user.UserName;
         }
 
@@ -66,6 +65,7 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
+            flag = true;
             Close();
         }
 
@@ -76,16 +76,15 @@ namespace PL
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = true;
-
+            flag = true;
             Close();
         }
+
         //Bouns.
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (DataContext.Equals(false)) e.Cancel = true;
+            if (flag.Equals(false)) e.Cancel = true;
         }
 
-    } 
-    
+    }
 }

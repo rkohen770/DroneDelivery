@@ -138,6 +138,10 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
-       
+        //Bouns.
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (DataContext.Equals(false)) e.Cancel = true;
+        }
     }
 }

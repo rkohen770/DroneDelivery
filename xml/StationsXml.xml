@@ -3,16 +3,16 @@
   <Station>
     <StationID>11212</StationID>
     <StationName>11</StationName>
-    <Longitude>5.073583944781483</Longitude>
-    <Lattitude>23.55395548038834</Lattitude>
+    <Longitude>-3.8923012299427313</Longitude>
+    <Lattitude>1.348318237181907</Lattitude>
     <ChargeSlots>5</ChargeSlots>
     <Available>true</Available>
   </Station>
   <Station>
     <StationID>22212</StationID>
     <StationName>22</StationName>
-    <Longitude>15.250755515438854</Longitude>
-    <Lattitude>-0.7736974563792813</Lattitude>
+    <Longitude>-13.524942779133536</Longitude>
+    <Lattitude>22.61678955681473</Lattitude>
     <ChargeSlots>3</ChargeSlots>
     <Available>true</Available>
   </Station>

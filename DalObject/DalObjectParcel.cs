@@ -171,7 +171,7 @@ namespace DL
         /// Displays a list of parcels that have not yet been assigned to the drone
         /// </summary>
         /// <returns>list of parcel without special dron</returns>
-        public IEnumerable<Parcel> GetAllParcelsWithoutSpecialDron(Predicate<Parcel> p)
+        public IEnumerable<Parcel> GetAllParcelsByPredicat(Predicate<Parcel> p)
         {
             //return all the parcels without special drone
             return from parcel in DataSource.parcels

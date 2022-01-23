@@ -148,7 +148,7 @@ namespace ConsoleUI
                                 break;
 
                             case (int)ViewItemList.ListOfParcelWithoutSpecificDrone:
-                                foreach (var temp in dal.GetAllParcelsWithoutSpecialDron(parcel=>parcel.ParcelID > 0 && parcel.DroneID == 0))
+                                foreach (var temp in dal.GetAllParcelsByPredicat(parcel=>parcel.ParcelID > 0 && parcel.DroneID == 0))
                                     Console.WriteLine(temp);
                                 break;
                             case (int)ViewItemList.ListOfStationWithAvailibleChargingStation:
