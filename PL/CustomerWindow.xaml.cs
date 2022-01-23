@@ -36,10 +36,6 @@ namespace PL
         ObservableCollection<ParcelAtCustomer> listToCustomers;
 
 
-        public CustomerWindow()
-        {
-            InitializeComponent();
-        }
         /// <summary>
         /// this constractor is for adding a customer
         /// </summary>
@@ -48,6 +44,8 @@ namespace PL
         public CustomerWindow(IBL bl, MainWindow mainWindow)
         {
             InitializeComponent();
+            DataContext = false;
+
             this.bl = bl;
             this.mainWindow = mainWindow;
             CustomersLocation.Visibility = Visibility.Hidden;
@@ -68,6 +66,8 @@ namespace PL
         public CustomerWindow(IBL bl, CustomerForList customerDetails, MainWindow mainWindow)
         {
             InitializeComponent();
+            DataContext = false;
+
             this.bl = bl;
             this.customer = customerDetails;
             this.mainWindow = mainWindow;
@@ -133,6 +133,8 @@ namespace PL
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
+            DataContext = true;
+
             Close();
         }
 
@@ -166,6 +168,11 @@ namespace PL
             LVListForCustomers.Items.Refresh();
             LVListToCustomers.ItemsSource = c.ToCustomer;
             LVListToCustomers.Items.Refresh();
+        }
+        //Bouns.
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (DataContext.Equals(false)) e.Cancel = true;
         }
     }
 }

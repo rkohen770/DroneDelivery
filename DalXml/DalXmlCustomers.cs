@@ -38,6 +38,7 @@ namespace DL
                 Phone = phone,
                 Longitude = longitude,
                 Lattitude = lattitude,
+                Available = true,
             };
             ListCustomer.Add(c);
             XMLTools.SaveListToXMLSerializer(ListCustomer, CustomersPath);
@@ -135,7 +136,7 @@ namespace DL
                      where item.CustomerID == customerId && item.Available
                      select item).FirstOrDefault();
             if (c.CustomerID == 0)
-                throw new BadCustomerIDException(customerId, "the customer not exists in the list of customers");
+                throw new BadCustomerIDException(customerId, "the customer does'nt exists in customer's list");
             return c;
         }
         #endregion

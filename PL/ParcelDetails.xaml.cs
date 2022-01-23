@@ -32,6 +32,8 @@ namespace PL
         {
 
             InitializeComponent();
+            DataContext = false;
+
             this.bl = bl;
             this.parcelDetails = parcelDetails;
             DataContext = bl.GetParcel(parcelDetails.ParcelID);
@@ -67,7 +69,14 @@ namespace PL
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
+            DataContext = true;
+
             Close();
+        }
+        //Bouns.
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (DataContext.Equals(false)) e.Cancel = true;
         }
     }
 }

@@ -10,7 +10,7 @@
         TextElement.FontWeight="Regular" TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto" 
-        FontFamily="David" FontSize="14">
+        FontFamily="David" FontSize="14" >
     <Window.Resources>
         <local:DroneStatusToImage x:Key="DroneStatusConvert"/>
         <local:DroneStatusConvert x:Key="DroneStatusConverter"/>
@@ -154,7 +154,7 @@
                                 <GridViewColumn Header="Max Weight"  >
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            
+
                                             <Grid>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="3*"/>
@@ -162,9 +162,9 @@
                                                 </Grid.RowDefinitions>
                                                 <Label Grid.Row="1" Content="{Binding Path=MaxWeight, Converter={StaticResource WeightCategoriesConverter},UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  
                                                        HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Canvas.Left="-25" Width="80" Height="24" Canvas.Top="1" Foreground="#FF4362AC" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
-                                                 <Image Grid.Row="0" Width="30" Height="30" Source="{Binding Path=MaxWeight, Converter={StaticResource DroneWeightConvert},
+                                                <Image Grid.Row="0" Width="30" Height="30" Source="{Binding Path=MaxWeight, Converter={StaticResource DroneWeightConvert},
                                                  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                                
+
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
@@ -196,7 +196,7 @@
                                                 <Image Grid.Row="0" Width="30" Height="30" Source="{Binding Path=DroneStatus, Converter={StaticResource DroneStatusConvert},
                                                  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                             </Grid>
-                                        </DataTemplate>
+                                       </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
                                 <GridViewColumn Header="Current Location" DisplayMemberBinding="{Binding Path=CurrentLocation, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
@@ -336,8 +336,8 @@
                     </Grid.RowDefinitions>
 
                     <Button x:Name="Add_Customer_Button" Grid.Row="1"
-                                Click="AddCustomerButton_Click" Width="100" 
-                                Height="70" Canvas.Top="25" Canvas.Left="262" Margin="453,18,453,-18">
+                                Click="AddCustomerButton_Click" 
+                                Height="70" Canvas.Top="25" Canvas.Left="262" Margin="453,18,432,-18">
                         <Button.BorderBrush>
                             <SolidColorBrush Color="#FF707070" Opacity="0" />
                         </Button.BorderBrush>
@@ -475,7 +475,7 @@
                         </Button>
                     </Canvas>
 
-                   
+
                     <Label Content="Parcel Priorities" Foreground="#FF4362AC"
                            HorizontalAlignment="Left" Margin="71,23,0,0" 
                            RenderTransformOrigin="-11.049,0.494" FontSize="22" FontFamily="Bodoni MT"

@@ -92,7 +92,6 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
-
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
@@ -397,6 +396,6 @@ namespace PL
 
         #endregion
 
-
+      
     }
 }

@@ -10,7 +10,7 @@
         TextElement.FontWeight="Regular" TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto" 
-        FontFamily="David" FontSize="14">
+        FontFamily="David" FontSize="14" >
     <Window.Resources>
         <local:WeightCategoriesConvert x:Key="WeightCategoriesConvert"/>
         <local:PrioritiesConvert x:Key="ParcelAtCustomerPrioritiestConvert"/>
@@ -245,7 +245,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!--#region ID -->
-                <Label Content="Customer ID" 
+                <Label Content="Customer ID:" 
                        HorizontalAlignment="Left" Height="28" 
                        Margin="30,75,0,0" Width="100"
                        VerticalAlignment="Top" FontSize="14"
@@ -261,7 +261,7 @@
                 <!--#endregion-->
 
                 <!--#region Name -->
-                <Label Content="Name" Grid.Row="0" 
+                <Label Content="Name:" Grid.Row="0" 
                        HorizontalAlignment="Left" 
                        Height="28"  Width="100"
                        Margin="30,115,0,0" 
@@ -278,7 +278,7 @@
                 <!--#endregion-->
 
                 <!--#region Phone -->
-                <Label Content="Phone" Grid.Row="0" 
+                <Label Content="Phone:" Grid.Row="0" 
                        HorizontalAlignment="Left" 
                        Height="28" Width="100" Margin="30,155,0,0"
                        VerticalAlignment="Top"
@@ -296,7 +296,7 @@
 
 
                 <Label x:Name="Location" 
-                       Content="Location" FontSize="14"
+                       Content="Location:" FontSize="14"
                        HorizontalAlignment="Left" 
                        Height="28" Width="100"  Margin="30,196,0,0" 
                        VerticalAlignment="Top" FontWeight="Bold" Grid.ColumnSpan="2" />

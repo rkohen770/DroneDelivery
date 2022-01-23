@@ -40,6 +40,7 @@ namespace DL
                 Longitude = longitude,
                 Lattitude = lattitude,
                 ChargeSlots = chargeSlots,
+                Available=true,
             };
             ListStation.Add(s);
             XMLTools.SaveListToXMLSerializer(ListStation, StationsPath);

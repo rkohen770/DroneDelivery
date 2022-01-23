@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="DetailsUser" Height="360" Width="400"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Closing="Window_Closing">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="107*"/>
@@ -14,12 +14,12 @@
         </Grid.ColumnDefinitions>
 
         <!--#region ID -->
-        <Label Content="Customer ID" 
+        <Label Content="Customer ID:" 
                        HorizontalAlignment="Left" Height="28" 
                        Margin="30,44,0,0" Width="100"
                        VerticalAlignment="Top" FontSize="14"
                        FontWeight="Bold" />
-        <TextBox x:Name="ID" Grid.Row="0" Grid.Column="1" 
+        <TextBox x:Name="ID" PreviewTextInput="CustomerIdTextBox_PreviewTextInput" Grid.Row="0" Grid.Column="1" 
                          HorizontalAlignment="Left" MaxLength="9" 
                          Height="31" Width="125" 
                          Margin="10,41,0,0" TextWrapping="Wrap"
@@ -30,7 +30,7 @@
         <!--#endregion-->
 
         <!--#region Name -->
-        <Label Content="Name" Grid.Row="0" 
+        <Label Content="Name:" Grid.Row="0" 
                    HorizontalAlignment="Left" 
                    Height="28"  Width="100"
                    Margin="30,84,0,0" 
@@ -46,13 +46,13 @@
         <!--#endregion-->
 
         <!--#region Phone -->
-        <Label Content="Phone" Grid.Row="0" 
+        <Label Content="Phone:" Grid.Row="0" 
                    HorizontalAlignment="Left" 
                    Height="28" Width="100" Margin="30,124,0,0"
                    VerticalAlignment="Top"
                    FontSize="14" FontWeight="Bold" />
         <TextBox x:Name="CustomersPhone" 
-                     Grid.Row="0" Grid.Column="1" 
+                     PreviewTextInput="CustomerIdTextBox_PreviewTextInput" Grid.Row="0" Grid.Column="1" 
                      HorizontalAlignment="Left"
                      Height="31" Width="125" Margin="10,121,0,0" 
                      TextWrapping="Wrap" MaxLength="10"
@@ -63,7 +63,7 @@
 
         <!--#region Location -->
         <Label x:Name="Location" 
-                       Content="Location" FontSize="14"
+                       Content="Location:" FontSize="14"
                        HorizontalAlignment="Left" 
                        Height="28" Width="100"  Margin="30,165,0,0" 
                        VerticalAlignment="Top" FontWeight="Bold" />
@@ -117,9 +117,9 @@
             </Canvas>
         </Button>
 
-        <Button  x:Name="Close" Click="CloseButton_Click" Height="50"  Width="50"
-                 HorizontalContentAlignment="Center" Visibility="Hidden"
-                    VerticalContentAlignment="Top" Margin="0,0,0,50" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom"   >
+        <Button  x:Name="Close" Click="CloseButton_Click" Height="50"  Width="75"
+                 HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Top" Margin="44,0,0,50" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom"   >
             <Button.BorderBrush>
                 <SolidColorBrush Color="#FF707070" Opacity="0"/>
             </Button.BorderBrush>

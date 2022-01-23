@@ -26,6 +26,8 @@ namespace PL
         public DetailsUser(User user)
         {
             InitializeComponent();
+            DataContext = false;
+
             CustomersName.Text = user.UserName;
         }
 
@@ -74,8 +76,16 @@ namespace PL
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
+            DataContext = true;
+
             Close();
         }
+        //Bouns.
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (DataContext.Equals(false)) e.Cancel = true;
+        }
 
-    }
+    } 
+    
 }

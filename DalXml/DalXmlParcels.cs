@@ -41,7 +41,8 @@ namespace DL
             else
             {
                 List<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
-                XElement dalConfigRoot = XElement.Load(ConfigPath);
+                //XElement dalConfigRoot = XElement.Load(ConfigPath);
+                XElement dalConfigRoot = XMLTools.LoadListFromXMLElement(ConfigPath);
                 Parcel p = new()
                 {
 
@@ -51,10 +52,11 @@ namespace DL
                     Weight = weight,
                     Priority = priority,
                     Requested = DateTime.Now,
-                    DroneID = droneId
+                    DroneID = droneId,
+                    Available=true,
                 };
                 ListParcel.Add(p);
-                XMLTools.SaveListToXMLSerializer(ListParcel, CustomersPath);//Adding the new parcel to the file
+                XMLTools.SaveListToXMLSerializer(ListParcel, ParcelsPath);//Adding the new parcel to the file
                 return p.ParcelID;
             }
         }

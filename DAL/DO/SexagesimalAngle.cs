@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace DO
 {
+    //------------------------ BONUS CLASS ---------------------------//
+
     public class SexagesimalAngle
     {
         public bool IsNegative { get; set; }

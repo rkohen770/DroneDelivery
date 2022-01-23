@@ -1,11 +1,37 @@
 <?xml version="1.0"?>
 <ArrayOfParcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Parcel>
+    <ParcelID>10009</ParcelID>
+    <SenderID>101123556</SenderID>
+    <TargetID>567891234</TargetID>
+    <Weight>Easy</Weight>
+    <Priority>Normal</Priority>
+    <DroneID>0</DroneID>
+    <Requested>2021-02-02T19:52:21</Requested>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <Available>true</Available>
+  </Parcel>
+  <Parcel>
+    <ParcelID>10010</ParcelID>
+    <SenderID>123456789</SenderID>
+    <TargetID>987654321</TargetID>
+    <Weight>Easy</Weight>
+    <Priority>Normal</Priority>
+    <DroneID>0</DroneID>
+    <Requested>2022-01-23T01:59:45.8559029+02:00</Requested>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <Available>true</Available>
+  </Parcel>
+  <Parcel>
     <ParcelID>10000</ParcelID>
     <SenderID>123456789</SenderID>
     <TargetID>987654321</TargetID>
-    <Weight>Intermediate</Weight>
-    <Priority>Fast</Priority>
+    <Weight>Easy</Weight>
+    <Priority>Emergency</Priority>
     <DroneID>7486</DroneID>
     <Requested>2021-08-27T08:30:11</Requested>
     <Scheduled>2021-08-27T13:39:53</Scheduled>
@@ -17,8 +43,8 @@
     <ParcelID>10001</ParcelID>
     <SenderID>987654321</SenderID>
     <TargetID>234567891</TargetID>
-    <Weight>Intermediate</Weight>
-    <Priority>Fast</Priority>
+    <Weight>Easy</Weight>
+    <Priority>Emergency</Priority>
     <DroneID>7486</DroneID>
     <Requested>2021-08-25T07:11:26</Requested>
     <Scheduled>2021-08-25T08:30:11</Scheduled>
@@ -30,7 +56,7 @@
     <ParcelID>10002</ParcelID>
     <SenderID>345678912</SenderID>
     <TargetID>456789123</TargetID>
-    <Weight>Intermediate</Weight>
+    <Weight>Liver</Weight>
     <Priority>Fast</Priority>
     <DroneID>7686</DroneID>
     <Requested>2021-08-08T05:30:11</Requested>
@@ -43,8 +69,8 @@
     <ParcelID>10003</ParcelID>
     <SenderID>456789123</SenderID>
     <TargetID>567891234</TargetID>
-    <Weight>Easy</Weight>
-    <Priority>Normal</Priority>
+    <Weight>Liver</Weight>
+    <Priority>Fast</Priority>
     <DroneID>7686</DroneID>
     <Requested>2021-10-15T12:28:36</Requested>
     <Scheduled>2021-10-15T13:47:16</Scheduled>
@@ -56,7 +82,7 @@
     <ParcelID>10004</ParcelID>
     <SenderID>567891234</SenderID>
     <TargetID>678912345</TargetID>
-    <Weight>Easy</Weight>
+    <Weight>Liver</Weight>
     <Priority>Normal</Priority>
     <DroneID>7686</DroneID>
     <Requested>2021-10-02T15:26:16</Requested>
@@ -69,8 +95,8 @@
     <ParcelID>10005</ParcelID>
     <SenderID>678912345</SenderID>
     <TargetID>789123456</TargetID>
-    <Weight>Easy</Weight>
-    <Priority>Fast</Priority>
+    <Weight>Intermediate</Weight>
+    <Priority>Normal</Priority>
     <DroneID>7916</DroneID>
     <Requested>2021-05-04T03:36:35</Requested>
     <Scheduled>2021-05-04T06:45:12</Scheduled>
@@ -82,8 +108,8 @@
     <ParcelID>10006</ParcelID>
     <SenderID>789123456</SenderID>
     <TargetID>123456789</TargetID>
-    <Weight>Intermediate</Weight>
-    <Priority>Emergency</Priority>
+    <Weight>Easy</Weight>
+    <Priority>Normal</Priority>
     <DroneID>7916</DroneID>
     <Requested>2021-12-21T12:25:35</Requested>
     <Scheduled>2021-12-21T14:25:32</Scheduled>
@@ -115,19 +141,6 @@
     <Scheduled>2021-04-21T11:58:45</Scheduled>
     <PickedUp>2021-04-21T14:12:11</PickedUp>
     <Delivered>2021-04-21T16:10:17</Delivered>
-    <Available>true</Available>
-  </Parcel>
-  <Parcel>
-    <ParcelID>10009</ParcelID>
-    <SenderID>101123556</SenderID>
-    <TargetID>567891234</TargetID>
-    <Weight>Easy</Weight>
-    <Priority>Normal</Priority>
-    <DroneID>0</DroneID>
-    <Requested>2021-02-02T19:52:21</Requested>
-    <Scheduled xsi:nil="true" />
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
     <Available>true</Available>
   </Parcel>
 </ArrayOfParcel>

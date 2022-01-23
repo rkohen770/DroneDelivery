@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="BaseStationWindow" Height="450" Width="400"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Closing="Window_Closing">
     <Window.Resources>
         <local:NotBooleanToVisibilityConverter x:Key="notBooleanToVisibilityConverter" />
         <local:DroneBattery x:Key="DroneBatteryConvert"/>
@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Base Station ID" Grid.Row="0" Grid.Column="0"
+            <Label Content="Base Station ID:" Grid.Row="0" Grid.Column="0"
                HorizontalAlignment="Left" VerticalAlignment="Top"
                Height="28" Width="121" Margin="27,25,0,0" 
                RenderTransformOrigin="0.326,0.754"  FontSize="14" FontWeight="Bold" />
@@ -35,7 +35,7 @@
                  PreviewTextInput="StationIdTextBox_PreviewTextInput" 
                  HorizontalContentAlignment="Center"
                  VerticalContentAlignment="Center" />
-            <Label Content="Name" Grid.Row="0" Grid.Column="0" 
+            <Label Content="Name:" Grid.Row="0" Grid.Column="0" 
                HorizontalAlignment="Left" Height="28" 
                Margin="27,65,0,0" VerticalAlignment="Top" 
                Width="121" RenderTransformOrigin="0.326,0.754" 
@@ -47,7 +47,7 @@
                  HorizontalContentAlignment="Center" 
                  VerticalContentAlignment="Center"
                  Text="{Binding Path=Name,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  />
-            <Label x:Name="currentLocation" Content="Current Location" 
+            <Label x:Name="currentLocation" Content="Current Location:" 
                HorizontalAlignment="Left" Height="28" Grid.Column="0"
                Margin="27,105,0,0" VerticalAlignment="Top" 
                Width="121" RenderTransformOrigin="0.326,0.754" 
@@ -83,14 +83,14 @@
                FontSize="10" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" />
             <TextBox x:Name="Lattitude" 
                  Grid.Row="0" Grid.Column="1"
-                 HorizontalAlignment="Right" Height="20"
+                 HorizontalAlignment="Left" Height="20"
                  Margin="0,116,19,0" 
                  TextWrapping="Wrap"   
                  Visibility="{Binding Path=IsVisible, ElementName=CurrentLocation, Converter={StaticResource notBooleanToVisibilityConverter} }"
                  VerticalAlignment="Top" Width="70" 
-                 HorizontalContentAlignment="Right" 
+                 HorizontalContentAlignment="Center" 
                  VerticalContentAlignment="Top" />
-            <Label Content="Num Available Charging" Grid.Row="0" Grid.Column="0"
+            <Label Content="Num Available Charging:" Grid.Row="0" Grid.Column="0"
                HorizontalAlignment="Left" Height="28" Margin="27,145,0,0" 
                VerticalAlignment="Top" Width="170" RenderTransformOrigin="0.326,0.754"
                FontSize="14" FontWeight="Bold" />

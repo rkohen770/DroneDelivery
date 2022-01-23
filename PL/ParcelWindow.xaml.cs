@@ -28,10 +28,7 @@ namespace PL
         private MainWindow mainWindow;
         private Client client;
         private Customer customerDetails;
-        public ParcelWindow()
-        {
-            InitializeComponent();
-        }
+    
         /// <summary>
         /// constractor for Add the parcels
         /// </summary>
@@ -40,6 +37,8 @@ namespace PL
         public ParcelWindow(IBL bl, MainWindow mainWindow)
         {
             InitializeComponent();
+            DataContext = false;
+
             this.bl = bl;
             this.mainWindow = mainWindow;
             Weight_Selector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
@@ -58,6 +57,8 @@ namespace PL
         public ParcelWindow(IBL bl, ParcelForList parcelDetails, MainWindow mainWindow)
         {
             InitializeComponent();
+            DataContext = false;
+
             this.bl = bl;
             this.parcelDetails = parcelDetails;
             this.mainWindow = mainWindow;
@@ -115,6 +116,8 @@ namespace PL
         public ParcelWindow(IBL bl, Customer customer, Client client)
         {
             InitializeComponent();
+            DataContext = false;
+
             this.bl = bl;
             this.client = client;
             this.customerDetails = customer;
@@ -150,6 +153,8 @@ namespace PL
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
+            DataContext = true;
+
             Close();
         }
 
@@ -249,6 +254,11 @@ namespace PL
             {
                 MessageBox.Show(ex.ID.ToString(), ex.Message);
             }
+        }
+        //Bouns.
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (DataContext.Equals(false)) e.Cancel = true;
         }
     }
 }

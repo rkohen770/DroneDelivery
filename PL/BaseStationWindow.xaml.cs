@@ -26,11 +26,6 @@ namespace PL
         private BaseStationForList baseStationDetails;
         private MainWindow mainWindow;
 
-        public BaseStationWindow()
-        {
-            InitializeComponent();
-        }
-
         /// <summary>
         /// constractor for update the base station
         /// </summary>
@@ -40,6 +35,7 @@ namespace PL
         public BaseStationWindow(IBL bl, MainWindow mainWindow)
         {
             InitializeComponent();
+            DataContext = false;
             this.bl = bl;
             this.mainWindow = mainWindow;
             CurrentLocation.Visibility = Visibility.Hidden;
@@ -55,6 +51,7 @@ namespace PL
         public BaseStationWindow(IBL bl, BaseStationForList baseStationDetails, MainWindow mainWindow)
         {
             InitializeComponent();
+            DataContext = false;
             this.bl = bl;
             this.baseStationDetails = baseStationDetails;
             this.mainWindow = mainWindow;
@@ -97,6 +94,7 @@ namespace PL
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
+            DataContext = true;
             Close();
         }
 
@@ -157,6 +155,11 @@ namespace PL
             {
                 MessageBox.Show(ex.ID.ToString(), ex.Message);
             }
+        }
+        //Bouns.
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (DataContext.Equals(false)) e.Cancel = true;
         }
     }
 }

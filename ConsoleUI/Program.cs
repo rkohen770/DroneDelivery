@@ -8,18 +8,18 @@ namespace ConsoleUI
     class Program
     {
         #region enum
-        public enum Menu { EXIT, ADD, UPDATE, DISPLAY, VIEW_ITEM_LIST }
-        public enum Add { ADD_STATION, ADD_DRONE, ADD_CUSTOMER, ADD_PARCEL }
+        public enum Menu { Exit, Add, Update, Display, ViewItemList }
+        public enum Add { AddStation, AddDrone, AddCustomer, AddParcel }
         public enum Update
         {
-            ASSIGNING_PARCEL_TO_DRONE, PARCEL_COLLECTION_BY_DRONE, DELIVERY_PARCEL_TO_CUSTOM,
-            SENDING_DRONE_FOR_CHARGING, RELEAS_DRONE_FROME_CHARGING
+            AssigningParcelToDrone, ParcelCollectionByDrone, DeliveryParcelToCustomer,
+            SendingDroneForCharging, ReleasDroneFromCharging
         }
-        public enum Display { DISPLAY_STATION, DISPLAY_DRONE, DISPLAY_CUSTOMER, DISPLAY_PARCEL }
+        public enum Display { DisplayStation, DisplayDrone, DisplayCustomer, DisplayParcel }
         public enum ViewItemList
         {
-            LIST_OF_BASE_STATIONS, LIST_OF_DRONE_VIEW, LIST_OF_CUSTOMER_VIEW, LIST_OF_PARCEL_VIEW,
-            LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE, LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION
+            BaseStationList, DroneList, CustomerList, ParcelList,
+            ListOfParcelWithoutSpecificDrone, ListOfStationWithAvailibleChargingStation
         }
         #endregion
 
@@ -27,7 +27,7 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             dal = DalFactory.GetDal();
-            MenuMessages();
+            menuMessages();
             int choice;
             while (!int.TryParse(Console.ReadLine(), out choice))
                 Console.Write("ERROR, please enter a number again");
@@ -36,24 +36,24 @@ namespace ConsoleUI
                 switch ((Menu)choice)
                 {
                     #region add
-                    case Menu.ADD:
-                        MenuAdd();
+                    case Menu.Add:
+                        menuAdd();
                         choice = int.Parse(Console.ReadLine());
                         switch (choice)
                         {
-                            case (int)Add.ADD_STATION:
+                            case (int)Add.AddStation:
                                 addStation(dal);
                                 break;
 
-                            case (int)Add.ADD_DRONE:
+                            case (int)Add.AddDrone:
                                 addDrone(dal);
                                 break;
 
-                            case (int)Add.ADD_CUSTOMER:
+                            case (int)Add.AddCustomer:
                                 addCustomer(dal);
                                 break;
 
-                            case (int)Add.ADD_PARCEL:
+                            case (int)Add.AddParcel:
                                 addParcel(dal);
                                 break;
                             default:
@@ -64,28 +64,28 @@ namespace ConsoleUI
                     #endregion
 
                     #region update
-                    case Menu.UPDATE:
-                        MenuUpdate();
+                    case Menu.Update:
+                        menuUpdate();
                         choice = int.Parse(Console.ReadLine());
                         switch (choice)
                         {
-                            case (int)Update.ASSIGNING_PARCEL_TO_DRONE:
+                            case (int)Update.AssigningParcelToDrone:
                                 assigningParcelToDrone(dal);
                                 break;
 
-                            case (int)Update.PARCEL_COLLECTION_BY_DRONE:
+                            case (int)Update.ParcelCollectionByDrone:
                                 parcelCollectionByDrone(dal);
                                 break;
 
-                            case (int)Update.DELIVERY_PARCEL_TO_CUSTOM:
+                            case (int)Update.DeliveryParcelToCustomer:
                                 deliveryPackageToCustomer(dal);
                                 break;
 
-                            case (int)Update.SENDING_DRONE_FOR_CHARGING:
+                            case (int)Update.SendingDroneForCharging:
                                 sendingDroneForCharging(dal);
                                 break;
 
-                            case (int)Update.RELEAS_DRONE_FROME_CHARGING:
+                            case (int)Update.ReleasDroneFromCharging:
                                 releasDroneFromCharging(dal);
                                 break;
                             default:
@@ -95,25 +95,25 @@ namespace ConsoleUI
                     #endregion
 
                     #region display
-                    case Menu.DISPLAY:
-                        MenuDisplay();
+                    case Menu.Display:
+                        menuDisplay();
                         choice = int.Parse(Console.ReadLine());
                         switch (choice)
                         {
-                            case (int)Display.DISPLAY_STATION:
+                            case (int)Display.DisplayStation:
                                 displayStation(dal);
                                 break;
 
-                            case (int)Display.DISPLAY_DRONE:
+                            case (int)Display.DisplayDrone:
                                 displayDrone(dal);
                                 break;
 
-                            case (int)Display.DISPLAY_CUSTOMER:
+                            case (int)Display.DisplayCustomer:
 
                                 displayCustomer(dal);
                                 break;
 
-                            case (int)Display.DISPLAY_PARCEL:
+                            case (int)Display.DisplayParcel:
                                 displayParcel(dal);
                                 break;
                             default:
@@ -123,35 +123,35 @@ namespace ConsoleUI
                     #endregion
 
                     #region viewItemList
-                    case Menu.VIEW_ITEM_LIST:
-                        MenuViewItemList();
+                    case Menu.ViewItemList:
+                        menuViewItemList();
                         choice = int.Parse(Console.ReadLine());
                         switch (choice)
                         {
-                            case (int)ViewItemList.LIST_OF_BASE_STATIONS:
+                            case (int)ViewItemList.BaseStationList:
                                 foreach (var temp in dal.GetAllBaseStations())
                                     Console.WriteLine(temp);
                                 break;
 
-                            case (int)ViewItemList.LIST_OF_DRONE_VIEW:
+                            case (int)ViewItemList.DroneList:
                                 foreach (var temp in dal.GetAllDrones())
                                     Console.WriteLine(temp);
                                 break;
 
-                            case (int)ViewItemList.LIST_OF_CUSTOMER_VIEW:
+                            case (int)ViewItemList.CustomerList:
                                 foreach (var temp in dal.GetAllCustomers())
                                     Console.WriteLine(temp);
                                 break;
-                            case (int)ViewItemList.LIST_OF_PARCEL_VIEW:
+                            case (int)ViewItemList.ParcelList:
                                 foreach (var temp in dal.GetAllParcels())
                                     Console.WriteLine(temp);
                                 break;
 
-                            case (int)ViewItemList.LIST_OF_PARCEL_WITHOUT_SPECIAL_DRONE:
+                            case (int)ViewItemList.ListOfParcelWithoutSpecificDrone:
                                 foreach (var temp in dal.GetAllParcelsWithoutSpecialDron(parcel=>parcel.ParcelID > 0 && parcel.DroneID == 0))
                                     Console.WriteLine(temp);
                                 break;
-                            case (int)ViewItemList.LIST_OF_STATION_WITH_AVAILIBLE_CHARGING_STATION:
+                            case (int)ViewItemList.ListOfStationWithAvailibleChargingStation:
                                 foreach (var temp in dal.GetAllStationsBy(station => station.ChargeSlots > 0))
                                     Console.WriteLine(temp);
                                 break;
@@ -162,7 +162,7 @@ namespace ConsoleUI
                         #endregion
 
                 }
-                MenuMessages();
+                menuMessages();
                 while (!int.TryParse(Console.ReadLine(), out choice))
                     Console.Write("ERROR, please enter a number again");
             }
@@ -173,7 +173,7 @@ namespace ConsoleUI
         /// <summary>
         /// User messages
         /// </summary>
-        private static void MenuMessages()
+        private static void menuMessages()
         {
             Console.WriteLine("Enter 1 for add");
             Console.WriteLine("Enter 2 for update ");
@@ -182,7 +182,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter 0 for exit");
         }
 
-        private static void MenuAdd()
+        private static void menuAdd()
         {
             Console.WriteLine("Enter 0 for add a base station to the list of stations");
             Console.WriteLine("Enter 1 for add a drone to the list of existing drone");
@@ -190,7 +190,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter 3 for receipt of package for shipment");
         }
 
-        private static void MenuUpdate()
+        private static void menuUpdate()
         {
             Console.WriteLine("Enter 0 for assign a package to a drone");
             Console.WriteLine("Enter 1 for collection of a package by drone");
@@ -199,7 +199,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter 4 for release drone from charging at base station");
         }
 
-        private static void MenuDisplay()
+        private static void menuDisplay()
         {
             Console.WriteLine("Enter 0 for base Station View");
             Console.WriteLine("Enter 1 for drone view");
@@ -207,7 +207,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter 3 for parcel view");
         }
 
-        private static void MenuViewItemList()
+        private static void menuViewItemList()
         {
             Console.WriteLine("Enter 0 for displays a list of base stations");
             Console.WriteLine("Enter 1 for displays a list of drones");

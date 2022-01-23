@@ -47,7 +47,9 @@ namespace DL
             DroneCharge droneCharge = new DroneCharge//Add a instance of an instance loading entity
             {
                 DroneID = droneId,
-                StationID = stationId
+                StationID = stationId,
+                Available=true,
+                
             };
             ListDroneCharges.Add(droneCharge);//Add a load of drones to file
             XMLTools.SaveListToXMLSerializer(ListDroneCharges, DroneChargePath);

@@ -49,92 +49,6 @@ namespace DL
         #endregion
 
         #region Uppdate
-        ///// <summary>
-        ///// Sending a drone for charging at a base station
-        ///// </summary>
-        ///// <param name="droneId">Drone ID for charging</param>
-        ///// <param name="stationId">Charging station ID</param>
-        //public int SendingDroneForCharging(int droneId, int stationId)
-        //{
-        //    List<Drone> ListDrone = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
-        //    List<Station> ListStation = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
-        //    List<DroneCharge> ListDroneCharges = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DroneChargePath);
-
-        //    var drone = (from item in ListDrone
-        //                 where item.DroneID == droneId && item.Available
-        //                 select item).FirstOrDefault();
-
-        //    var station = (from item in ListStation
-        //                   where item.StationID == stationId && item.Available
-        //                   select item).FirstOrDefault();
-
-        //    if (drone.DroneID != droneId)
-        //    {
-        //        throw new BadDroneIDException(droneId, "the drone not exists in the list of drones");
-        //    }
-        //    if (station.StationID != stationId)
-        //    {
-        //        throw new BadBaseStationIDException(stationId, "the base station not exists in the list of station");
-        //    }
-
-        //    Station s = station;
-        //    s.ChargeSlots--;//We will update the number of loading locations
-        //    ListStation.Remove(station);
-        //    ListStation.Add(s);
-        //    XMLTools.SaveListToXMLSerializer(ListStation, StationsPath);
-
-        //    DroneCharge droneCharge = new DroneCharge//Add a instance of an instance loading entity
-        //    {
-        //        DroneID = droneId,
-        //        StationID = stationId
-        //    };
-        //    ListDroneCharges.Add(droneCharge);//Add a load of drones to file
-        //    XMLTools.SaveListToXMLSerializer(ListDroneCharges, DroneChargePath);
-
-        //    return stationId;
-        //}
-
-        ///// <summary>
-        ///// Release the UAV from a charge at the base station
-        ///// </summary>
-        ///// <param name="droneId">Drone ID for charging</param>
-        ///// <param name="stationId">Charging station ID</param>
-        //public void ReleasDroneFromCharging(int droneId, int stationId)
-        //{
-        //    List<Drone> ListDrone = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
-        //    List<Station> ListStation = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
-        //    List<DroneCharge> ListDroneCharges = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DroneChargePath);
-
-        //    var drone = (from item in ListDrone
-        //                 where item.DroneID == droneId && item.Available
-        //                 select item).FirstOrDefault();
-
-        //    var station = (from item in ListStation
-        //                   where item.StationID == stationId && item.Available
-        //                   select item).FirstOrDefault();
-
-        //    var charge = (from item in ListDroneCharges
-        //                  where item.StationID == stationId && item.DroneID == droneId && item.Available
-        //                  select item).FirstOrDefault();
-
-        //    if (drone.DroneID != droneId)
-        //    {
-        //        throw new BadDroneIDException(droneId, "the drone not exists in the list of drones");
-        //    }
-        //    if (station.StationID != stationId)
-        //    {
-        //        throw new BadBaseStationIDException(stationId, "the base station not exists in the list of station");
-        //    }
-
-        //    Station s = station;
-        //    s.ChargeSlots++;//We will update the number of loading locations
-        //    ListStation.Remove(station);
-        //    ListStation.Add(s);
-        //    XMLTools.SaveListToXMLSerializer(ListStation, StationsPath);
-
-        //    DeleteDroneGharge(charge);
-        //}
-
         /// <summary>
         /// Update Drone Modle at a base station
         /// </summary>
@@ -270,7 +184,7 @@ namespace DL
         /// <returns>An array of the amount of power consumption of a drone for each situation</returns>
         public double[] PowerConsumptionRequest()
         {
-            string dir = Directory.GetCurrentDirectory();
+            string dir = @"xml/";
 
             XElement dalConfigRoot = XElement.Load(dir+ConfigPath);
 
