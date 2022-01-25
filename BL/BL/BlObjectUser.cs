@@ -15,13 +15,13 @@ namespace BL
         DO.User UserBoDoAdapter(User userBO)
         {
             DO.User userDO = new DO.User();
-            userBO.CopyPropertiesTo(userDO);
+            userBO.CopyPropertiesTo(ref userDO);
             return userDO;
         }
         User UserDoBoAdapter(DO.User userDO)
         {
             User userBO = new User();
-            userDO.CopyPropertiesTo(userBO);
+            userDO.CopyPropertiesTo(ref userBO);
             return userBO;
         }
         public void AddUser(User user)
@@ -53,7 +53,7 @@ namespace BL
             }
             catch (DO.BadUserNameException ex)
             {
-                throw new BadUserNameException(ex.Message, ex);
+                //throw new BadUserNameException(ex.Message, ex);
             }
         }
         public void DeleteUser(string userName)

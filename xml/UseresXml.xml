@@ -60,4 +60,10 @@
     <Password>8888</Password>
     <Available>true</Available>
   </User>
+  <User>
+    <UserName>Dani</UserName>
+    <Admin>Client</Admin>
+    <Password>111</Password>
+    <Available>false</Available>
+  </User>
 </ArrayOfUser>

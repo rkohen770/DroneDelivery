@@ -30,4 +30,10 @@
     <MaxWeight>Easy</MaxWeight>
     <Available>true</Available>
   </Drone>
+  <Drone>
+    <DroneID>4567</DroneID>
+    <DroneModel>VG-444</DroneModel>
+    <MaxWeight>Liver</MaxWeight>
+    <Available>true</Available>
+  </Drone>
 </ArrayOfDrone>

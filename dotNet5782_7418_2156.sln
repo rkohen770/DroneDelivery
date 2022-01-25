@@ -30,7 +30,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalObject", "DalObject\DalO
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{8BD30766-46F0-4E92-A94C-42B662B88BB6}"
 	ProjectSection(SolutionItems) = preProject
+		xml\ConfigXml.xml = xml\ConfigXml.xml
+		xml\CustomersXml.xml = xml\CustomersXml.xml
 		dal-config.xml = dal-config.xml
+		xml\DroneChargesXml.xml = xml\DroneChargesXml.xml
+		xml\DronesXml.xml = xml\DronesXml.xml
+		xml\ParcelsXml.xml = xml\ParcelsXml.xml
+		xml\StationsXml.xml = xml\StationsXml.xml
+		xml\UseresXml.xml = xml\UseresXml.xml
 	EndProjectSection
 EndProject
 Global

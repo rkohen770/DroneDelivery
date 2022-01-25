@@ -88,4 +88,12 @@
     <Lattitude>25.2521</Lattitude>
     <Available>true</Available>
   </Customer>
+  <Customer>
+    <CustomerID>306240995</CustomerID>
+    <Name>Dani</Name>
+    <Phone>0508503456</Phone>
+    <Longitude>35.082984</Longitude>
+    <Lattitude>32.170928</Lattitude>
+    <Available>true</Available>
+  </Customer>
 </ArrayOfCustomer>

@@ -34,8 +34,9 @@ namespace BO
         }
 
 
-        public static void CopyPropertiesTo<T, S>(this S from, T to)
+        public static void CopyPropertiesTo<T, S>(this S from, ref T to)
         {
+            object boxed = to;
             foreach (PropertyInfo propTo in to.GetType().GetProperties())
             {
                 PropertyInfo propFrom = typeof(S).GetProperty(propTo.Name);
@@ -43,13 +44,14 @@ namespace BO
                     continue;
                 var value = propFrom.GetValue(from, null);
                 if (value is ValueType || value is string)
-                    propTo.SetValue(to, value);
+                    propTo.SetValue(boxed, value);
             }
+            to = (T)boxed;
         }
         public static object CopyPropertiesToNew<S>(this S from, Type type)
         {
             object to = Activator.CreateInstance(type); // new object of Type
-            from.CopyPropertiesTo(to);
+            from.CopyPropertiesTo(ref to);
             return to;
         }
 

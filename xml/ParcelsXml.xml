@@ -195,4 +195,17 @@
     <Delivered>2021-08-27T21:46:11</Delivered>
     <Available>true</Available>
   </Parcel>
+  <Parcel>
+    <ParcelID>10015</ParcelID>
+    <SenderID>101123556</SenderID>
+    <TargetID>123456789</TargetID>
+    <Weight>Liver</Weight>
+    <Priority>Emergency</Priority>
+    <DroneID>7916</DroneID>
+    <Requested>2022-01-23T17:00:40.5141579+02:00</Requested>
+    <Scheduled>2022-01-23T17:08:54.2423801+02:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+    <Available>true</Available>
+  </Parcel>
 </ArrayOfParcel>

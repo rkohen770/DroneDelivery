@@ -10,4 +10,14 @@
     <StationID>11212</StationID>
     <Available>false</Available>
   </DroneCharge>
+  <DroneCharge>
+    <DroneID>0</DroneID>
+    <StationID>0</StationID>
+    <Available>false</Available>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>4567</DroneID>
+    <StationID>11212</StationID>
+    <Available>true</Available>
+  </DroneCharge>
 </ArrayOfDroneCharge>
